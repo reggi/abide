@@ -1,0 +1,25 @@
+0 silly input [ './journey' ]
+1 silly flags { _: [ 'import' ],
+1 silly flags   'reject-cycles': false,
+1 silly flags   rejectCycles: false,
+1 silly flags   pathToRepo: './journey' }
+2 verbose rootPath /Users/thomas/Desktop/abide
+3 info version 2.9.0
+4 silly isInitialized
+5 silly isInitialized true
+6 silly existsSync /Users/thomas/Desktop/abide/VERSION
+7 silly initialize attempt
+8 silly statSync /Users/thomas/Desktop/abide/journey
+9 silly getWorkspaceRoot
+10 verbose getWorkspaceRoot /Users/thomas/Desktop/abide
+11 silly existsSync /Users/thomas/Desktop/abide/packages/journey
+12 silly getCurrentSHA
+13 error initialize caught error
+14 error Error: fatal: ambiguous argument 'HEAD': unknown revision or path not in the working tree.
+14 error Use '--' to separate paths from revisions, like this:
+14 error 'git <command> [<revision>...] -- [<file>...]'
+14 error
+14 error     at Function.module.exports.sync (/Users/thomas/.nvm/versions/node/v9.5.0/lib/node_modules/lerna/node_modules/execa/index.js:303:26)
+14 error     at Function.execSync (/Users/thomas/.nvm/versions/node/v9.5.0/lib/node_modules/lerna/lib/ChildProcessUtilities.js:59:30)
+14 error     at Function.getCurrentSHA (/Users/thomas/.nvm/versions/node/v9.5.0/lib/node_modules/lerna/lib/GitUtilities.js:213:49)
+14 error     at ImportCommand.initialize (/Users/thomas/.nvm/versions/node/v9.5.0/lib/node_modules/lerna/lib/commands/ImportCommand.js:155:51)
