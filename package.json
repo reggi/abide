@@ -4,12 +4,40 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "rm-package-locks": "lerna exec -- rm -rf ./package-lock.json",
+    "bootstrap": "npm i packages/* && lerna bootstrap --hoist"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "json": "^9.0.6",
     "lerna": "^2.9.0"
+  },
+  "dependencies": {
+    "@reggi/journey": "file:packages/journey",
+    "@reggi/journey.coerce-to-array": "file:packages/journey.coerce-to-array",
+    "@reggi/journey.coerce-to-plain-object": "file:packages/journey.coerce-to-plain-object",
+    "@reggi/journey.fn-free": "file:packages/journey.fn-free",
+    "@reggi/journey.fn-reduce": "file:packages/journey.fn-reduce",
+    "@reggi/journey.is-promise": "file:packages/journey.is-promise",
+    "@reggi/journey.pass-thru": "file:packages/journey.pass-thru",
+    "@reggi/pkg": "file:packages/pkg",
+    "@reggi/pkg-cli": "file:packages/pkg-cli",
+    "@reggi/pkg-plugin-babel-6-to-node-4": "file:packages/pkg-plugin-babel-6-to-node-4",
+    "@reggi/pkg-plugin-babel-7-to-node-4": "file:packages/pkg-plugin-babel-7-to-node-4",
+    "@reggi/pkg-plugin-cobalt": "file:packages/pkg-plugin-cobalt",
+    "@reggi/pkg-plugin-jest": "file:packages/pkg-plugin-jest",
+    "@reggi/pkg-plugin-name-dir": "file:packages/pkg-plugin-name-dir",
+    "@reggi/pkg-plugin-name-scope": "file:packages/pkg-plugin-name-scope",
+    "@reggi/pkg-plugin-prop": "file:packages/pkg-plugin-prop",
+    "@reggi/pkg-plugin-sort": "file:packages/pkg-plugin-sort",
+    "@reggi/pkg-plugin-standard": "file:packages/pkg-plugin-standard",
+    "@reggi/pkg.fs": "file:packages/pkg.fs",
+    "@reggi/pkg.fs-file-exists": "file:packages/pkg.fs-file-exists",
+    "@reggi/pkg.is-local-module": "file:packages/pkg.is-local-module",
+    "@reggi/pkg.json-parse": "file:packages/pkg.json-parse",
+    "@reggi/pkg.read-json": "file:packages/pkg.read-json",
+    "@reggi/pkg.throw-error": "file:packages/pkg.throw-error"
   }
 }

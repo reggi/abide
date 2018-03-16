@@ -37,11 +37,11 @@
     ]
   },
   "dependencies": {
+    "@reggi/journey": "file:../journey",
+    "@reggi/journey.coerce-to-array": "file:../journey.coerce-to-array",
+    "@reggi/pkg.is-local-module": "file:../pkg.is-local-module",
+    "@reggi/pkg.read-json": "file:../pkg.read-json",
     "bluebird": "^3.5.1",
-    "lodash": "^4.17.5",
-    "@reggi/journey": "1.0.0",
-    "@reggi/pkg.is-local-module": "1.0.0",
-    "@reggi/pkg.read-json": "1.0.0",
-    "@reggi/journey.coerce-to-array": "1.0.0"
+    "lodash": "^4.17.5"
   }
 }

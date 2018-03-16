@@ -11,6 +11,7 @@
   },
   "babel": {
     "plugins": [
+      "transform-runtime",
       "transform-object-rest-spread"
     ],
     "presets": [
@@ -39,6 +40,6 @@
     ]
   },
   "dependencies": {
-    "@reggi/pkg": "1.0.0"
+    "@reggi/pkg": "file:../pkg"
   }
 }

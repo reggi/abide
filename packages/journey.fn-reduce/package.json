@@ -22,11 +22,6 @@
       ]
     ]
   },
-  "dependencies": {
-    "@reggi/journey.coerce-to-plain-object": "1.0.0",
-    "@reggi/journey.is-promise": "1.0.0",
-    "@reggi/journey.pass-thru": "1.0.0"
-  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-jest": "^22.4.1",
@@ -40,5 +35,10 @@
       "expect",
       "test"
     ]
+  },
+  "dependencies": {
+    "@reggi/journey.coerce-to-plain-object": "file:../journey.coerce-to-plain-object",
+    "@reggi/journey.is-promise": "file:../journey.is-promise",
+    "@reggi/journey.pass-thru": "file:../journey.pass-thru"
   }
 }

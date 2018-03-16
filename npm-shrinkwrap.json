@@ -20,6 +20,136 @@
         "js-tokens": "3.0.2"
       }
     },
+    "@reggi/journey": {
+      "version": "file:packages/journey",
+      "requires": {
+        "@reggi/journey.coerce-to-array": "file:packages/journey.coerce-to-array",
+        "@reggi/journey.fn-free": "file:packages/journey.fn-free",
+        "@reggi/journey.fn-reduce": "file:packages/journey.fn-reduce"
+      }
+    },
+    "@reggi/journey.coerce-to-array": {
+      "version": "file:packages/journey.coerce-to-array"
+    },
+    "@reggi/journey.coerce-to-plain-object": {
+      "version": "file:packages/journey.coerce-to-plain-object"
+    },
+    "@reggi/journey.fn-free": {
+      "version": "file:packages/journey.fn-free",
+      "requires": {
+        "@reggi/journey.is-promise": "file:packages/journey.is-promise",
+        "babel-runtime": "6.26.0"
+      }
+    },
+    "@reggi/journey.fn-reduce": {
+      "version": "file:packages/journey.fn-reduce",
+      "requires": {
+        "@reggi/journey.coerce-to-plain-object": "file:packages/journey.coerce-to-plain-object",
+        "@reggi/journey.is-promise": "file:packages/journey.is-promise",
+        "@reggi/journey.pass-thru": "file:packages/journey.pass-thru"
+      }
+    },
+    "@reggi/journey.is-promise": {
+      "version": "file:packages/journey.is-promise"
+    },
+    "@reggi/journey.pass-thru": {
+      "version": "file:packages/journey.pass-thru",
+      "requires": {
+        "@reggi/journey.is-promise": "file:packages/journey.is-promise",
+        "sort-package-json": "1.11.0"
+      }
+    },
+    "@reggi/pkg": {
+      "version": "file:packages/pkg",
+      "requires": {
+        "@reggi/journey": "file:packages/journey",
+        "@reggi/journey.coerce-to-array": "file:packages/journey.coerce-to-array",
+        "@reggi/pkg.is-local-module": "file:packages/pkg.is-local-module",
+        "@reggi/pkg.read-json": "file:packages/pkg.read-json"
+      }
+    },
+    "@reggi/pkg-cli": {
+      "version": "file:packages/pkg-cli",
+      "requires": {
+        "@reggi/pkg": "file:packages/pkg"
+      }
+    },
+    "@reggi/pkg-plugin-babel-6-to-node-4": {
+      "version": "file:packages/pkg-plugin-babel-6-to-node-4"
+    },
+    "@reggi/pkg-plugin-babel-7-to-node-4": {
+      "version": "file:packages/pkg-plugin-babel-7-to-node-4"
+    },
+    "@reggi/pkg-plugin-cobalt": {
+      "version": "file:packages/pkg-plugin-cobalt",
+      "requires": {
+        "@reggi/pkg-plugin-babel-6-to-node-4": "file:packages/pkg-plugin-babel-6-to-node-4",
+        "@reggi/pkg-plugin-jest": "file:packages/pkg-plugin-jest",
+        "@reggi/pkg-plugin-name-dir": "file:packages/pkg-plugin-name-dir",
+        "@reggi/pkg-plugin-prop": "file:packages/pkg-plugin-prop",
+        "@reggi/pkg-plugin-sort": "file:packages/pkg-plugin-sort",
+        "@reggi/pkg-plugin-standard": "file:packages/pkg-plugin-standard"
+      }
+    },
+    "@reggi/pkg-plugin-jest": {
+      "version": "file:packages/pkg-plugin-jest"
+    },
+    "@reggi/pkg-plugin-name-dir": {
+      "version": "file:packages/pkg-plugin-name-dir",
+      "requires": {
+        "lodash": "4.17.5"
+      }
+    },
+    "@reggi/pkg-plugin-name-scope": {
+      "version": "file:packages/pkg-plugin-name-scope"
+    },
+    "@reggi/pkg-plugin-prop": {
+      "version": "file:packages/pkg-plugin-prop"
+    },
+    "@reggi/pkg-plugin-sort": {
+      "version": "file:packages/pkg-plugin-sort",
+      "requires": {
+        "sort-package-json": "1.11.0"
+      }
+    },
+    "@reggi/pkg-plugin-standard": {
+      "version": "file:packages/pkg-plugin-standard",
+      "requires": {
+        "lodash": "4.17.5"
+      }
+    },
+    "@reggi/pkg.fs": {
+      "version": "file:packages/pkg.fs",
+      "requires": {
+        "bluebird": "3.5.1"
+      }
+    },
+    "@reggi/pkg.fs-file-exists": {
+      "version": "file:packages/pkg.fs-file-exists",
+      "requires": {
+        "@reggi/pkg.fs": "file:packages/pkg.fs",
+        "babel-runtime": "6.26.0"
+      }
+    },
+    "@reggi/pkg.is-local-module": {
+      "version": "file:packages/pkg.is-local-module"
+    },
+    "@reggi/pkg.json-parse": {
+      "version": "file:packages/pkg.json-parse"
+    },
+    "@reggi/pkg.read-json": {
+      "version": "file:packages/pkg.read-json",
+      "requires": {
+        "@reggi/journey": "file:packages/journey",
+        "@reggi/pkg.fs": "file:packages/pkg.fs",
+        "@reggi/pkg.fs-file-exists": "file:packages/pkg.fs-file-exists",
+        "@reggi/pkg.json-parse": "file:packages/pkg.json-parse",
+        "@reggi/pkg.throw-error": "file:packages/pkg.throw-error"
+      }
+    },
+    "@reggi/pkg.throw-error": {
+      "version": "file:packages/pkg.throw-error"
+    },
     "JSONStream": {
       "version": "1.3.2",
       "resolved": "https://registry.npmjs.org/JSONStream/-/JSONStream-1.3.2.tgz",
@@ -840,6 +970,14 @@
       "integrity": "sha1-4HA2lvveJ/Cj78rPi03KL3s6jy8=",
       "requires": {
         "regenerator-transform": "0.10.1"
+      }
+    },
+    "babel-plugin-transform-runtime": {
+      "version": "6.23.0",
+      "resolved": "https://registry.npmjs.org/babel-plugin-transform-runtime/-/babel-plugin-transform-runtime-6.23.0.tgz",
+      "integrity": "sha1-iEkNRGUC6puOfvsP4J7E2ZR5se4=",
+      "requires": {
+        "babel-runtime": "6.26.0"
       }
     },
     "babel-plugin-transform-strict-mode": {
@@ -5097,6 +5235,11 @@
       "version": "1.3.0",
       "resolved": "https://registry.npmjs.org/jsesc/-/jsesc-1.3.0.tgz",
       "integrity": "sha1-RsP+yMGJKxKwgz25vHYiF226s0s="
+    },
+    "json": {
+      "version": "9.0.6",
+      "resolved": "https://registry.npmjs.org/json/-/json-9.0.6.tgz",
+      "integrity": "sha1-eXLCpaSKQmeNsnMMfCxO5uTiRYU="
     },
     "json-parse-better-errors": {
       "version": "1.0.1",

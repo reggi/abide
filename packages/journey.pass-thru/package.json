@@ -23,7 +23,7 @@
     ]
   },
   "dependencies": {
-    "@reggi/journey.is-promise": "1.0.0",
+    "@reggi/journey.is-promise": "file:../journey.is-promise",
     "sort-package-json": "^1.11.0"
   },
   "devDependencies": {
