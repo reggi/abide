@@ -2,7 +2,9 @@
   "name": "@reggi/pkg-cli",
   "version": "1.0.0",
   "author": "Thomas Reggi",
-  "main": "./index.build.js",
+  "bin": {
+    "pkg": "./index.build.js"
+  },
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
     "test": "jest --coverage"
