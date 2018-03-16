@@ -1,4 +1,5 @@
 import prop from '@reggi/pkg-plugin-prop'
+import nameScope from '@reggi/pkg-plugin-name-scope'
 import nameDir from '@reggi/pkg-plugin-name-dir'
 import babel from '@reggi/pkg-plugin-babel-6-to-node-4'
 import jest from '@reggi/pkg-plugin-jest'
@@ -12,6 +13,7 @@ export default [
     'version': '1.0.0'
   }],
   nameDir,
+  [nameScope, '@reggi'],
   babel,
   [jest, {'addBabelJest': true, 'hunderedPercent': true}],
   [standard, {'addJestGlobal': true}],

@@ -2,6 +2,7 @@
   "name": "@reggi/pkg-cli",
   "version": "1.0.0",
   "author": "Thomas Reggi",
+  "main": "./index.build.js",
   "bin": {
     "pkg": "./index.build.js"
   },
@@ -11,7 +12,6 @@
   },
   "babel": {
     "plugins": [
-      "transform-runtime",
       "transform-object-rest-spread"
     ],
     "presets": [
@@ -24,6 +24,19 @@
         }
       ]
     ]
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  },
+  "dependencies": {
+    "@reggi/pkg": "file:../pkg"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -38,8 +51,5 @@
       "expect",
       "test"
     ]
-  },
-  "dependencies": {
-    "@reggi/pkg": "file:../pkg"
   }
 }

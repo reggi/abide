@@ -23,13 +23,14 @@
     ]
   },
   "dependencies": {
-    "@reggi/pkg-plugin-prop": "1.0.0",
-    "@reggi/pkg-plugin-name-dir": "1.0.0",
     "@reggi/pkg-plugin-babel-6-to-node-4": "1.0.0",
     "@reggi/pkg-plugin-jest": "1.0.0",
-    "@reggi/pkg-plugin-standard": "1.0.0",
-    "@reggi/pkg-plugin-sort": "1.0.0"
-  }, 
+    "@reggi/pkg-plugin-name-dir": "1.0.0",
+    "@reggi/pkg-plugin-name-scope": "file:../pkg-plugin-name-scope",
+    "@reggi/pkg-plugin-prop": "1.0.0",
+    "@reggi/pkg-plugin-sort": "1.0.0",
+    "@reggi/pkg-plugin-standard": "1.0.0"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-jest": "^22.4.1",
