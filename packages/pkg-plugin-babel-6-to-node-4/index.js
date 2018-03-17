@@ -36,7 +36,8 @@ module.exports = ({pkg}) => {
     ...pkg,
     scripts: {
       ...pkg.scripts,
-      'babel': babelScriptBasedOnMain || babelScriptbasedOnBin
+      'babel': babelScriptBasedOnMain || babelScriptbasedOnBin,
+      'babel:watch': 'npm run babel -- --watch'
     },
     devDependencies: {
       ...pkg.devDependencies,

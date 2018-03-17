@@ -5,6 +5,7 @@
   "main": "./index.build.js",
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
+    "babel:watch": "npm run babel -- --watch",
     "test": "jest --coverage"
   },
   "babel": {
@@ -23,11 +24,30 @@
       ]
     ]
   },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  },
+  "dependencies": {
+    "@reggi/journey": "file:../journey",
+    "@reggi/journey.coerce-to-array": "file:../journey.coerce-to-array",
+    "@reggi/pkg.is-local-module": "file:../pkg.is-local-module",
+    "@reggi/pkg.read-json": "file:../pkg.read-json",
+    "babel-runtime": "^6.26.0",
+    "bluebird": "^3.5.1",
+    "lodash": "^4.17.5"
+  },
   "devDependencies": {
-    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-cli": "^6.26.0",
     "babel-jest": "^22.4.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "jest": "^22.4.2",
     "standard": "^11.0.0"
@@ -37,14 +57,5 @@
       "expect",
       "test"
     ]
-  },
-  "dependencies": {
-    "babel-runtime": "^6.26.0",
-    "@reggi/journey": "file:../journey",
-    "@reggi/journey.coerce-to-array": "file:../journey.coerce-to-array",
-    "@reggi/pkg.is-local-module": "file:../pkg.is-local-module",
-    "@reggi/pkg.read-json": "file:../pkg.read-json",
-    "bluebird": "^3.5.1",
-    "lodash": "^4.17.5"
   }
 }

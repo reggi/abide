@@ -8,6 +8,7 @@
   },
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
+    "babel:watch": "npm run babel -- --watch",
     "test": "jest --coverage"
   },
   "babel": {

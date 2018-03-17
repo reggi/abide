@@ -32,8 +32,9 @@ export const mapPlugins = (workingDir, plugins) => flattenDeep(resolvePlugins(wo
 
 export const pkgrc = journey(({workingDir, argv}) => [
   () => ({workingDir, argv}),
-  async ({workingDir}) => bluebird.props({
-    pkgrc: readJson({workingDir, fileName: '.pkgrc', existsRequired, validJsonRequired}),
+  ({argv}) => ({pkgrcRequired: !argv.plugin}),
+  async ({workingDir, pkgrcRequired}) => bluebird.props({
+    pkgrc: readJson({workingDir, fileName: '.pkgrc', existsRequired: pkgrcRequired, validJsonRequired: pkgrcRequired}),
     pkg: readJson({workingDir, fileName: 'package.json', validJsonRequired})
   }),
   ({pkgrc, argv}) => (

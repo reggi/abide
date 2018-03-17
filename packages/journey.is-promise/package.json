@@ -5,6 +5,7 @@
   "main": "./index.build.js",
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
+    "babel:watch": "npm run babel -- --watch",
     "test": "jest --coverage"
   },
   "babel": {
@@ -21,6 +22,16 @@
         }
       ]
     ]
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

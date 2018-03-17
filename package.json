@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "rm-package-locks": "lerna exec -- rm -rf ./package-lock.json",
+    "babel-watch-all": "lerna run --parallel babel:watch",
+    "package-cobalt-update": "lerna exec -- pkg --plugin=../pkg-plugin-cobalt -w",
+    "link-pkg-cli": "cd ../packages/pkg-cli && npm link",
     "bootstrap": "npm i packages/* && lerna bootstrap --hoist"
   },
   "keywords": [],
@@ -12,7 +15,13 @@
   "license": "ISC",
   "devDependencies": {
     "json": "^9.0.6",
-    "lerna": "^2.9.0"
+    "lerna": "^2.9.0",
+    "babel-cli": "^6.26.0",
+    "babel-jest": "^22.4.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "jest": "^22.4.2",
+    "standard": "^11.0.0"
   },
   "dependencies": {
     "@reggi/journey": "file:packages/journey",
