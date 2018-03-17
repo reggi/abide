@@ -6,21 +6,25 @@
   "scripts": {
     "rm-package-locks": "lerna exec -- rm -rf ./package-lock.json",
     "babel-watch-all": "lerna run --parallel babel:watch",
+    "babel-all": "lerna run --parallel babel",
     "package-cobalt-update": "lerna exec -- pkg --plugin=../pkg-plugin-cobalt -w",
     "link-pkg-cli": "cd ../packages/pkg-cli && npm link",
-    "bootstrap": "npm i packages/* && lerna bootstrap --hoist"
+    "bootstrap": "npm i packages/* && lerna bootstrap --hoist &>/dev/null || true",
+    "test-results": "lerna run --parallel --loglevel=silent test:result -- --silent",
+    "standard": "standard"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "json": "^9.0.6",
-    "lerna": "^2.9.0",
     "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.2",
     "babel-jest": "^22.4.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "jest": "^22.4.2",
+    "json": "^9.0.6",
+    "lerna": "^2.9.0",
     "standard": "^11.0.0"
   },
   "dependencies": {
@@ -42,11 +46,25 @@
     "@reggi/pkg-plugin-prop": "file:packages/pkg-plugin-prop",
     "@reggi/pkg-plugin-sort": "file:packages/pkg-plugin-sort",
     "@reggi/pkg-plugin-standard": "file:packages/pkg-plugin-standard",
+    "@reggi/pkg.file-exists": "file:packages/pkg.file-exists",
     "@reggi/pkg.fs": "file:packages/pkg.fs",
-    "@reggi/pkg.fs-file-exists": "file:packages/pkg.fs-file-exists",
     "@reggi/pkg.is-local-module": "file:packages/pkg.is-local-module",
     "@reggi/pkg.json-parse": "file:packages/pkg.json-parse",
+    "@reggi/pkg.pretty-json": "file:packages/pkg.pretty-json",
     "@reggi/pkg.read-json": "file:packages/pkg.read-json",
     "@reggi/pkg.throw-error": "file:packages/pkg.throw-error"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "coverage",
+      "index.build.js"
+    ],
+    "globals": [
+      "expect",
+      "test",
+      "beforeEach",
+      "afterEach"
+    ]
   }
 }

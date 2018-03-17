@@ -1,4 +1,4 @@
-import isPromise from "./"
+import isPromise from './'
 
 test('isPromise', () => {
   const promA = async () => true

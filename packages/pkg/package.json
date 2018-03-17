@@ -6,7 +6,8 @@
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "test:result": "npm run test --silent &>/dev/null || echo $?"
   },
   "babel": {
     "plugins": [
@@ -38,6 +39,7 @@
     "@reggi/journey": "file:../journey",
     "@reggi/journey.coerce-to-array": "file:../journey.coerce-to-array",
     "@reggi/pkg.is-local-module": "file:../pkg.is-local-module",
+    "@reggi/pkg.pretty-json": "file:../pkg.pretty-json",
     "@reggi/pkg.read-json": "file:../pkg.read-json",
     "babel-runtime": "^6.26.0",
     "bluebird": "^3.5.1",

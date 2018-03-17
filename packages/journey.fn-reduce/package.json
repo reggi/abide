@@ -4,9 +4,56 @@
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {
-    "babel": "babel ./index.js --out-file ./index.build.js",
-    "babel:watch": "npm run babel -- --watch",
-    "test": "jest --coverage"
+    "author": "Thomas Reggi",
+    "babel": {
+      "plugins": [
+        "transform-object-rest-spread"
+      ],
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "node": "4"
+            }
+          }
+        ]
+      ]
+    },
+    "dependencies": {
+      "@reggi/journey.coerce-to-plain-object": "file:../journey.coerce-to-plain-object",
+      "@reggi/journey.is-promise": "file:../journey.is-promise",
+      "@reggi/journey.pass-thru": "file:../journey.pass-thru"
+    },
+    "devDependencies": {
+      "babel-jest": "^22.4.1",
+      "jest": "^22.4.2",
+      "babel-cli": "^6.26.0",
+      "babel-eslint": "^8.2.2",
+      "babel-plugin-transform-object-rest-spread": "^6.26.0",
+      "babel-preset-env": "^1.6.1",
+      "standard": "^11.0.0"
+    },
+    "jest": {
+      "coverageThreshold": {
+        "global": {
+          "branches": 100,
+          "functions": 100,
+          "lines": 100,
+          "statements": 100
+        }
+      }
+    },
+    "main": "./index.build.js",
+    "name": "@reggi/journey.fn-reduce",
+    "scripts": {
+      "test": "jest --coverage",
+      "test:result": "npm run test --silent &>/dev/null || echo $?",
+      "babel": "babel ./index.js --out-file ./index.build.js",
+      "babel:watch": "npm run babel -- --watch"
+    },
+    "standard": "standard",
+    "version": "1.0.0"
   },
   "babel": {
     "plugins": [
@@ -40,6 +87,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.2",
     "babel-jest": "^22.4.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
@@ -47,9 +95,15 @@
     "standard": "^11.0.0"
   },
   "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "index.build.js"
+    ],
     "globals": [
       "expect",
-      "test"
+      "test",
+      "beforeEach",
+      "afterEach"
     ]
   }
 }

@@ -6,7 +6,8 @@
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "test:result": "npm run test --silent &>/dev/null || echo $?"
   },
   "babel": {
     "plugins": [
@@ -37,7 +38,7 @@
   "dependencies": {
     "@reggi/journey": "file:../journey",
     "@reggi/pkg.fs": "file:../pkg.fs",
-    "@reggi/pkg.fs-file-exists": "file:../pkg.fs-file-exists",
+    "@reggi/pkg.file-exists": "file:../pkg.file-exists",
     "@reggi/pkg.json-parse": "file:../pkg.json-parse",
     "@reggi/pkg.throw-error": "file:../pkg.throw-error",
     "babel-runtime": "^6.26.0"
@@ -49,6 +50,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "jest": "^22.4.2",
+    "mock-fs": "^4.4.2",
     "standard": "^11.0.0"
   },
   "standard": {

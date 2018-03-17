@@ -1,6 +1,6 @@
 import path from 'path'
 import {journey} from '@reggi/journey'
-import fsExistsAsFile from '@reggi/pkg.fs-file-exists'
+import fsExistsAsFile from '@reggi/pkg.file-exists'
 import fs from '@reggi/pkg.fs'
 import throwNewError from '@reggi/pkg.throw-error'
 import jsonParseForgive from '@reggi/pkg.json-parse'

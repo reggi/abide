@@ -14,6 +14,7 @@ export default ({pkgrc, pkg, opt}) => {
     ...pkg,
     scripts: {
       'test': 'jest --coverage',
+      'test:result': 'npm run test --silent &>/dev/null || echo $?',
       ...pkg.scripts
     },
     devDependencies: {
