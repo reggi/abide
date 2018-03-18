@@ -1,4 +1,9 @@
-export const hunderedPercent = {
+import {get} from 'lodash'
+import coerceToArray from '@reggi/journey.coerce-to-array'
+import propOverwrite from '@reggi/pkg.prop-overwrite'
+
+export const hunderedPercent = () => ({
+  'collectCoverage': true,
   'coverageThreshold': {
     'global': {
       'branches': 100,
@@ -7,24 +12,22 @@ export const hunderedPercent = {
       'statements': 100
     }
   }
-}
+})
 
-export default ({pkgrc, pkg, opt}) => {
+export default ({pkgrc, overwrite, pkg, opt}) => {
   return {
     ...pkg,
-    scripts: {
+    scripts: sustain(overwrite, get(pkg, 'scripts', {}), {
       'test': 'jest --coverage',
       'test:result': 'npm run test --silent &>/dev/null || echo $?',
-      ...pkg.scripts
-    },
-    devDependencies: {
+    }),
+    devDependencies: sustain(overwrite, get(pkg, 'devDependencies', {}), {
       ...(opt.addBabelJest) ? {'babel-jest': '^22.4.1'} : {},
-      'jest': '^22.4.2',
-      ...pkg.devDependencies
-    },
-    jest: {
-      ...pkg.jest || {},
-      ...(opt.hunderedPercent) ? hunderedPercent : {}
-    }
+      'jest': '^22.4.2'
+    }),
+    jest: sustain(overwrite, get(pkg, 'jest', {}), {
+      ...(opt.hunderedPercent) ? hunderedPercent(opt.forceCoverageMatch) : {},
+      ...(opt.forceCoverageMatch) ? {'forceCoverageMatch': [...get(pkg, 'jest.forceCoverageMatch', {}), ...coerceToArray(opt.forceCoverageMatch)]} : {}
+    })
   }
 }

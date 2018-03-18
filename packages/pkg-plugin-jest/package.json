@@ -47,5 +47,10 @@
       "expect",
       "test"
     ]
+  },
+  "dependencies": {
+    "@reggi/journey.coerce-to-array": "file:../journey.coerce-to-array",
+    "@reggi/pkg.prop-overwrite": "file:../pkg.prop-overwrite",
+    "lodash": "^4.17.5"
   }
 }

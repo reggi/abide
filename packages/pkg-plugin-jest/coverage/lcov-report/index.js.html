@@ -22,22 +22,22 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>28/28</span>
+        <span class='fraction'>6/6</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>11/11</span>
+        <span class='fraction'>10/10</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>4/4</span>
+        <span class='fraction'>3/3</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>26/26</span>
+        <span class='fraction'>5/5</span>
       </div>
     </div>
     <p class="quiet">
@@ -90,92 +90,92 @@
 <a name='L42'></a><a href='#L42'>42</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">20x</span>
-<span class="cline-any cline-yes">20x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {clone, get, mapValues, zipObject} from 'lodash'
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {get} from 'lodash'
 import coerceToArray from '@reggi/journey.coerce-to-array'
-import fnFree from '@reggi/journey.fn-free'
-import fnReduce from '@reggi/journey.fn-reduce'
 &nbsp;
-export const journey = (fnOfFns, opts = {}) =&gt; {
-  let resolve
-  if (typeof opts === 'function') {
-    resolve = opts
-    opts = {}
-    opts.resolve = resolve
+const sustain = (overwrite, existing, incoming) =&gt; {
+  console.log(overwrite, existing, incoming)
+  return {
+    ...(overwrite) ? existing : {},
+    ...incoming,
+    ...(!overwrite) ? existing : {}
   }
-  opts.hook = get(opts, 'hook', false)
-  opts.resolve = get(opts, 'resolve', false)
-  opts.return = get(opts, 'return', false)
-  opts.exports = get(opts, 'exports', false)
-  if (opts.exports) {
-    opts.exports = coerceToArray(opts.exports)
-    const e = zipObject(opts.exports, opts.exports)
-    return mapValues(e, exp =&gt; {
-      const _opts = clone(opts)
-      _opts.exports = null
-      _opts.return = exp
-      return journey(fnOfFns, _opts)
-    })
-  }
-  if (!opts.resolve) {
-    resolve = (v) =&gt; {
-      if (typeof opts.return === 'string') return get(v, opts.return)
-      if (opts.return) return get(v, 'return')
-      return v
-    }
-  }
-  const fn = (...args) =&gt; {
-    const fns = fnOfFns.apply(null, args)
-    return fnReduce(fns, {}, opts.hook)
-  }
-  return fnFree(fn, resolve, ['journey', 'results', 'data', 'flow', 'core', 'fall'])
 }
 &nbsp;
-export default journey
+export const hunderedPercent = () =&gt; ({
+  'collectCoverage': true,
+  'coverageThreshold': {
+    'global': {
+      'branches': 100,
+      'functions': 100,
+      'lines': 100,
+      'statements': 100
+    }
+  }
+})
+&nbsp;
+export default ({pkgrc, overwrite, pkg, opt}) =&gt; {
+  return {
+    ...pkg,
+    scripts: sustain(overwrite, get(pkg, 'scripts', {}), {
+      'test': 'jest --coverage',
+      'test:result': 'npm run test --silent &amp;&gt;/dev/null || echo $?',
+    }),
+    devDependencies: sustain(overwrite, get(pkg, 'devDependencies', {}), {
+      ...(opt.addBabelJest) ? {'babel-jest': '^22.4.1'} : {},
+      'jest': '^22.4.2'
+    }),
+    jest: sustain(overwrite, get(pkg, 'jest', {}), {
+      ...(opt.hunderedPercent) ? hunderedPercent(opt.forceCoverageMatch) : {},
+      ...(opt.forceCoverageMatch) ? {'forceCoverageMatch': [...get(pkg, 'jest.forceCoverageMatch', {}), ...coerceToArray(opt.forceCoverageMatch)]} : {}
+    })
+  }
+}
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Mar 17 2018 03:43:04 GMT-0400 (EDT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Mar 17 2018 04:03:56 GMT-0400 (EDT)
 </div>
 </div>
 <script src="prettify.js"></script>
