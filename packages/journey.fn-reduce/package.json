@@ -5,21 +5,8 @@
   "main": "./index.build.js",
   "scripts": {
     "author": "Thomas Reggi",
-    "babel": {
-      "plugins": [
-        "transform-object-rest-spread"
-      ],
-      "presets": [
-        [
-          "env",
-          {
-            "targets": {
-              "node": "4"
-            }
-          }
-        ]
-      ]
-    },
+    "babel": "babel ./index.js --out-file ./index.build.js",
+    "babel:watch": "npm run babel -- --watch",
     "dependencies": {
       "@reggi/journey.coerce-to-plain-object": "file:../journey.coerce-to-plain-object",
       "@reggi/journey.is-promise": "file:../journey.is-promise",
@@ -53,6 +40,8 @@
       "babel:watch": "npm run babel -- --watch"
     },
     "standard": "standard",
+    "test": "jest --coverage",
+    "test:result": "npm run test --silent &>/dev/null || echo $?",
     "version": "1.0.0"
   },
   "babel": {
@@ -71,6 +60,7 @@
     ]
   },
   "jest": {
+    "collectCoverage": true,
     "coverageThreshold": {
       "global": {
         "branches": 100,
@@ -93,6 +83,9 @@
     "babel-preset-env": "^1.6.1",
     "jest": "^22.4.2",
     "standard": "^11.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "standard": {
     "parser": "babel-eslint",

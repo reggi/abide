@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1521355258929" clover="3.2.0">
-  <project timestamp="1521355258930" name="All files">
+<coverage generated="1521367184625" clover="3.2.0">
+  <project timestamp="1521367184632" name="All files">
     <metrics statements="4" coveredstatements="4" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1" elements="9" coveredelements="9" complexity="0" loc="4" ncloc="4" packages="1" files="1" classes="1">
       <file name="index.build.js" path="/Users/thomas/Desktop/abide/packages/journey.is-promise/index.build.js">
         <metrics statements="4" coveredstatements="4" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>

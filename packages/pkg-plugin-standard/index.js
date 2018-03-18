@@ -10,7 +10,7 @@ const jestGlobals = [
 export default ({pkg, opt}) => ({
   ...pkg,
   scripts: {
-    ...pkg,
+    ...pkg.scripts,
     standard: 'standard'
   },
   devDependencies: {

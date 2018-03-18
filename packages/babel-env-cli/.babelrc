@@ -9,5 +9,8 @@
         "shippedProposals": true
       }
     ]
+  ],
+  "plugins": [
+    "@babel/plugin-transform-runtime"
   ]
 }

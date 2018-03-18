@@ -1,8 +1,11 @@
 {
-  "name": "@reggi/pkg-plugin-standard",
+  "name": "@reggi/npm-run-cli",
   "version": "1.0.0",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
+  "bin": {
+    "npm-run": "./index.build.js"
+  },
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
@@ -12,6 +15,7 @@
   },
   "babel": {
     "plugins": [
+      "transform-runtime",
       "transform-object-rest-spread"
     ],
     "presets": [
@@ -37,6 +41,10 @@
     }
   },
   "dependencies": {
+    "@reggi/journey": "file:../journey",
+    "@reggi/pkg.read-json": "file:../pkg.read-json",
+    "@reggi/pkg.throw-error": "file:../pkg.throw-error",
+    "babel-runtime": "^6.26.0",
     "lodash": "^4.17.5"
   },
   "devDependencies": {
@@ -52,15 +60,15 @@
     "access": "public"
   },
   "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "index.build.js"
+    ],
     "globals": [
       "expect",
       "test",
       "beforeEach",
       "afterEach"
-    ],
-    "parser": "babel-eslint",
-    "ignore": [
-      "index.build.js"
     ]
   }
 }

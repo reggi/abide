@@ -10,7 +10,10 @@ export default [
   [prop, {
     'author': 'Thomas Reggi',
     'main': './index.build.js',
-    'version': '1.0.0'
+    'version': '1.0.0',
+    'publishConfig': {
+      'access': 'public'
+    }
   }],
   nameDir,
   [nameScope, '@reggi'],

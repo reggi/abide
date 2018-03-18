@@ -1,5 +1,5 @@
 {
-  "name": "@reggi/pkg-plugin-standard",
+  "name": "@reggi/replace-cli",
   "version": "1.0.0",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
@@ -36,9 +36,6 @@
       }
     }
   },
-  "dependencies": {
-    "lodash": "^4.17.5"
-  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.2",
@@ -52,15 +49,15 @@
     "access": "public"
   },
   "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "index.build.js"
+    ],
     "globals": [
       "expect",
       "test",
       "beforeEach",
       "afterEach"
-    ],
-    "parser": "babel-eslint",
-    "ignore": [
-      "index.build.js"
     ]
   }
 }
