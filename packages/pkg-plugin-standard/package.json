@@ -37,6 +37,7 @@
     }
   },
   "dependencies": {
+    "@reggi/pkg.prop-overwrite": "file:../pkg.prop-overwrite",
     "lodash": "^4.17.5"
   },
   "devDependencies": {

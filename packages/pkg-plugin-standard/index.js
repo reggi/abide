@@ -1,4 +1,5 @@
-import {get} from 'lodash'
+import {get, size} from 'lodash'
+import propOverwrite from '@reggi/pkg.prop-overwrite'
 
 const jestGlobals = [
   'expect',
@@ -7,24 +8,26 @@ const jestGlobals = [
   'afterEach'
 ]
 
-export default ({pkg, opt}) => ({
+export const ifLengthAddProp = (prop, item) => (size(item)) ? {[prop]: item} : {}
+
+export default ({pkg = {}, overwrite = false, opt = {}} = {}) => ({
   ...pkg,
-  scripts: {
-    ...pkg.scripts,
+  scripts: propOverwrite(overwrite, get(pkg, 'scripts', {}), {
     standard: 'standard'
-  },
-  devDependencies: {
+  }),
+  devDependencies: propOverwrite(overwrite, get(pkg, 'devDependencies', {}), {
     'standard': '^11.0.0',
-    'babel-eslint': '^8.2.2',
-    ...get(pkg, 'devDependencies', {})
-  },
-  standard: {
-    ...get(pkg, 'standard', {}),
-    'parser': 'babel-eslint',
-    'ignore': ['index.build.js'],
-    globals: [
-      ...get(pkg, 'standard.global', {}),
-      ...(opt.addJestGlobal) ? jestGlobals : []
-    ]
-  }
+    ...(opt.addEsLint) ? {'babel-eslint': '^8.2.2'} : {}
+  }),
+  ...ifLengthAddProp('standard', propOverwrite(overwrite, get(pkg, 'standard', {}), {
+    ...(opt.addEsLint) ? {'parser': 'babel-eslint'} : {},
+    ...ifLengthAddProp('ignore', [
+      ...get(pkg, 'standard.ignore', []),
+      ...get(pkg, 'opt.ignore', [])
+    ]),
+    ...ifLengthAddProp('globals', [
+      ...get(pkg, 'standard.global', []),
+      ...(opt.addJest || opt.addJestGlobal || opt.addJestGlobals) ? jestGlobals : []
+    ])
+  }))
 })
