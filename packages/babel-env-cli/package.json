@@ -1,0 +1,12 @@
+{
+  "name": "@reggi/babel-env-cli",
+  "bin": {
+    "babel-env": "./index.js"
+  },
+  "version": "1.0.0",
+  "dependencies": {
+    "@babel/cli": "^7.0.0-beta.42",
+    "@babel/core": "^7.0.0-beta.42",
+    "@babel/preset-env": "^7.0.0-beta.42"
+  }
+}

@@ -17,15 +17,15 @@ export const hunderedPercent = () => ({
 export default ({pkgrc, overwrite, pkg, opt}) => {
   return {
     ...pkg,
-    scripts: sustain(overwrite, get(pkg, 'scripts', {}), {
+    scripts: propOverwrite(overwrite, get(pkg, 'scripts', {}), {
       'test': 'jest --coverage',
-      'test:result': 'npm run test --silent &>/dev/null || echo $?',
+      'test:result': 'npm run test --silent &>/dev/null || echo $?'
     }),
-    devDependencies: sustain(overwrite, get(pkg, 'devDependencies', {}), {
+    devDependencies: propOverwrite(overwrite, get(pkg, 'devDependencies', {}), {
       ...(opt.addBabelJest) ? {'babel-jest': '^22.4.1'} : {},
       'jest': '^22.4.2'
     }),
-    jest: sustain(overwrite, get(pkg, 'jest', {}), {
+    jest: propOverwrite(overwrite, get(pkg, 'jest', {}), {
       ...(opt.hunderedPercent) ? hunderedPercent(opt.forceCoverageMatch) : {},
       ...(opt.forceCoverageMatch) ? {'forceCoverageMatch': [...get(pkg, 'jest.forceCoverageMatch', {}), ...coerceToArray(opt.forceCoverageMatch)]} : {}
     })

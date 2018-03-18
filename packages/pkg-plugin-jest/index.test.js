@@ -79,7 +79,6 @@ test('pluginJest: addBabelJest, hunderedPercent, forceCoverageMatch', () => {
 })
 
 test('pluginJest: with overwrite', () => {
-
   const pkg = {
     'scripts': {
       'test': 'original example'
@@ -126,9 +125,7 @@ test('pluginJest: with overwrite', () => {
 })
 
 test('pluginJest: without overwrite', () => {
-
   const pkg = {
-    'custom': true,
     'scripts': {
       'test': 'original example'
     }
