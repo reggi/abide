@@ -22,7 +22,7 @@ export default ({pkgrc, overwrite, pkg, opt}) => {
       'test:result': 'npm run test --silent &>/dev/null || echo $?'
     }),
     devDependencies: propOverwrite(overwrite, get(pkg, 'devDependencies', {}), {
-      ...(opt.addBabelJest) ? {'babel-jest': '^22.4.1'} : {},
+      ...(opt.babel) ? {'babel-jest': '^22.4.1'} : {},
       'jest': '^22.4.2'
     }),
     jest: propOverwrite(overwrite, get(pkg, 'jest', {}), {

@@ -20,8 +20,8 @@ test('pluginStandard: default', () => {
   expect(v).toEqual(expectation)
 })
 
-test('pluginStandard: addEsLint', () => {
-  const v = pluginStandard({opt: {addEsLint: true}})
+test('pluginStandard: babel', () => {
+  const v = pluginStandard({opt: {babel: true}})
   const expectation = {
     scripts: {
       standard: 'standard'
@@ -37,20 +37,8 @@ test('pluginStandard: addEsLint', () => {
   expect(v).toEqual(expectation)
 })
 
-test('pluginStandard: addJestGlobals', () => {
-  const v = pluginStandard({opt: {addJestGlobals: true}})
-  const expectation = {scripts: {standard: 'standard'}, devDependencies: {standard: '^11.0.0'}, standard: {globals: ['expect', 'test', 'beforeEach', 'afterEach']}}
-  expect(v).toEqual(expectation)
-})
-
-test('pluginStandard: addJestGlobal', () => {
-  const v = pluginStandard({opt: {addJestGlobal: true}})
-  const expectation = {scripts: {standard: 'standard'}, devDependencies: {standard: '^11.0.0'}, standard: {globals: ['expect', 'test', 'beforeEach', 'afterEach']}}
-  expect(v).toEqual(expectation)
-})
-
-test('pluginStandard: addJest', () => {
-  const v = pluginStandard({opt: {addJest: true}})
+test('pluginStandard: jest', () => {
+  const v = pluginStandard({opt: {jest: true}})
   const expectation = {scripts: {standard: 'standard'}, devDependencies: {standard: '^11.0.0'}, standard: {globals: ['expect', 'test', 'beforeEach', 'afterEach']}}
   expect(v).toEqual(expectation)
 })

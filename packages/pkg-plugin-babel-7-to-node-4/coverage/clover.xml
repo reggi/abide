@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1521370769943" clover="3.2.0">
-  <project timestamp="1521370769944" name="All files">
-    <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0" elements="0" coveredelements="0" complexity="0" loc="0" ncloc="0" packages="0" files="0" classes="0">
+<coverage generated="1521376710287" clover="3.2.0">
+  <project timestamp="1521376710287" name="All files">
+    <metrics statements="6" coveredstatements="6" conditionals="17" coveredconditionals="17" methods="1" coveredmethods="1" elements="24" coveredelements="24" complexity="0" loc="6" ncloc="6" packages="1" files="1" classes="1">
+      <file name="index.js" path="/Users/thomas/Desktop/abide/packages/pkg-plugin-babel-7-to-node-4/index.js">
+        <metrics statements="6" coveredstatements="6" conditionals="17" coveredconditionals="17" methods="1" coveredmethods="1"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="10" count="4" type="cond" truecount="5" falsecount="0"/>
+        <line num="11" count="4" type="cond" truecount="4" falsecount="0"/>
+        <line num="12" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="13" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="14" count="3" type="stmt"/>
+      </file>
     </metrics>
   </project>
 </coverage>

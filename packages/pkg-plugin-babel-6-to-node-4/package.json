@@ -59,5 +59,8 @@
     "ignore": [
       "index.build.js"
     ]
+  },
+  "dependencies": {
+    "@reggi/pkg.prop-overwrite": "file:../pkg.prop-overwrite"
   }
 }

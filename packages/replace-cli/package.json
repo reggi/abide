@@ -42,6 +42,8 @@
     "babel-jest": "^22.4.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "decache": "^4.4.0",
+    "execa": "^0.10.0",
     "jest": "^22.4.2",
     "standard": "^11.0.0"
   },
@@ -59,5 +61,14 @@
       "beforeEach",
       "afterEach"
     ]
+  },
+  "dependencies": {
+    "@reggi/cli-test": "file:../cli-test",
+    "bdd-stdin": "^0.2.0",
+    "get-stdin": "^6.0.0",
+    "intercept-stdout": "^0.1.2",
+    "mock-cli": "^0.1.2",
+    "mock-stdin": "^0.3.1",
+    "stdio-mock": "^1.1.0"
   }
 }

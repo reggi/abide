@@ -1,9 +1,14 @@
-#!/usr/bin/env node
+// #!/usr/bin/env node
+const getStdin = require('get-stdin')
 const args = process.argv.slice(2)
-var readline = require('readline')
-var rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  terminal: false
+
+getStdin().then(str => {
+  try {
+    if (str === '') return process.exit(0)
+    const pattern = new RegExp(args[0], 'gm')
+    process.stdout.write(str.replace(pattern, args[1]))
+    return process.exit(0)
+  } catch (e) {
+    return process.exit(1)
+  }
 })
-rl.on('line', (line) => process.stdout.write(line.replace(args[0], args[1]) + '\n'))

@@ -19,6 +19,6 @@ export default [
   [nameScope, '@reggi'],
   babel,
   [jest, {'addBabelJest': true, 'hunderedPercent': true}],
-  [standard, {'addJestGlobal': true}],
+  [standard, {'jest': true}],
   sort
 ]

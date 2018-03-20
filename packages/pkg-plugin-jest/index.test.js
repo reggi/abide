@@ -15,8 +15,8 @@ test('pluginJest', () => {
   expect(result).toEqual(expectation)
 })
 
-test('pluginJest: addBabelJest, hunderedPercent', () => {
-  const result = pluginJest({pkgrc: [], pkg: {}, opt: {addBabelJest: true, hunderedPercent: true}})
+test('pluginJest: babel, hunderedPercent', () => {
+  const result = pluginJest({pkgrc: [], pkg: {}, opt: {babel: true, hunderedPercent: true}})
   const expectation = {
     'devDependencies': {
       'jest': '^22.4.2',
@@ -41,12 +41,12 @@ test('pluginJest: addBabelJest, hunderedPercent', () => {
   expect(result).toEqual(expectation)
 })
 
-test('pluginJest: addBabelJest, hunderedPercent, forceCoverageMatch', () => {
+test('pluginJest: babel, hunderedPercent, forceCoverageMatch', () => {
   const result = pluginJest({
     pkgrc: [],
     pkg: {},
     opt: {
-      addBabelJest: true,
+      babel: true,
       hunderedPercent: true,
       forceCoverageMatch: 'index.js'
     }
@@ -90,7 +90,7 @@ test('pluginJest: with overwrite', () => {
     pkgrc: [],
     pkg: pkg,
     opt: {
-      addBabelJest: true,
+      babel: true,
       hunderedPercent: true,
       forceCoverageMatch: 'index.js'
     }
@@ -136,7 +136,7 @@ test('pluginJest: without overwrite', () => {
     pkgrc: [],
     pkg: pkg,
     opt: {
-      addBabelJest: true,
+      babel: true,
       hunderedPercent: true,
       forceCoverageMatch: 'index.js'
     }

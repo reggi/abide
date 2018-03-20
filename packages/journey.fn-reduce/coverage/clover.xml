@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1521370781114" clover="3.2.0">
-  <project timestamp="1521370781115" name="All files">
+<coverage generated="1521376709987" clover="3.2.0">
+  <project timestamp="1521376709988" name="All files">
     <metrics statements="14" coveredstatements="14" conditionals="5" coveredconditionals="5" methods="9" coveredmethods="9" elements="28" coveredelements="28" complexity="0" loc="14" ncloc="14" packages="1" files="1" classes="1">
       <file name="index.js" path="/Users/thomas/Desktop/abide/packages/journey.fn-reduce/index.js">
         <metrics statements="14" coveredstatements="14" conditionals="5" coveredconditionals="5" methods="9" coveredmethods="9"/>

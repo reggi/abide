@@ -17,17 +17,17 @@ export default ({pkg = {}, overwrite = false, opt = {}} = {}) => ({
   }),
   devDependencies: propOverwrite(overwrite, get(pkg, 'devDependencies', {}), {
     'standard': '^11.0.0',
-    ...(opt.addEsLint) ? {'babel-eslint': '^8.2.2'} : {}
+    ...(opt.babel) ? {'babel-eslint': '^8.2.2'} : {}
   }),
   ...ifLengthAddProp('standard', propOverwrite(overwrite, get(pkg, 'standard', {}), {
-    ...(opt.addEsLint) ? {'parser': 'babel-eslint'} : {},
+    ...(opt.babel) ? {'parser': 'babel-eslint'} : {},
     ...ifLengthAddProp('ignore', [
       ...get(pkg, 'standard.ignore', []),
       ...get(pkg, 'opt.ignore', [])
     ]),
     ...ifLengthAddProp('globals', [
       ...get(pkg, 'standard.global', []),
-      ...(opt.addJest || opt.addJestGlobal || opt.addJestGlobals) ? jestGlobals : []
+      ...(opt.jest) ? jestGlobals : []
     ])
   }))
 })
