@@ -53,5 +53,8 @@
       "beforeEach",
       "afterEach"
     ]
+  },
+  "dependencies": {
+    "sinon": "^4.4.8"
   }
 }

@@ -1,56 +1,10 @@
-import Stdio from './stdio'
-import sinon from 'sinon'
-// import stdio from '@reggi/stdio'
+import {
+  processPreserve,
+  processReset,
+  processOverwrite
+} from '@reggi/process-mock'
 
-function replaceProperty (obj, prop, value) {
-  var prevDescriptor = Object.getOwnPropertyDescriptor(obj, prop)
-  Object.defineProperty(obj, prop, {
-    configurable: true,
-    enumerable: prevDescriptor.enumerable,
-    writable: prevDescriptor.writable || Boolean(prevDescriptor.set),
-    value: value
-  })
-  return prevDescriptor
-}
-
-const mockStdinRead = (message) => {
-  const gen = function * () {
-    yield message
-  }
-  const it = gen()
-  const callerFn = (bool) => {
-    if (bool === 0) return null
-    const called = it.next().value
-    return called || null
-  }
-  return callerFn
-}
-
-const processPreserve = () => {
-  const {stdin, stdout, exit, argv} = process
-  return {stdin, stdout, exit, argv}
-}
-
-const processReset = ({stdin, stdout, exit, argv}) => {
-  replaceProperty(process, 'stdin', stdin)
-  replaceProperty(process, 'stdout', stdout)
-  process.argv = argv
-  process.exit = exit
-}
-
-const processOverwrite = (_stdin, argv) => {
-  replaceProperty(process, 'stdin', new Stdio().stdin)
-  process.stdin.read = mockStdinRead(_stdin)
-  process.argv = ['node', './index', ...argv]
-  process.exit = sinon.spy()
-  process.stdout.write = sinon.spy()
-  return process
-}
-
-const write = process.stdout.write
-const log = (arg) => {
-  write(JSON.stringify(arg) + '\n')
-}
+/* eslint-disable no-global-assign */
 
 const preserve = processPreserve()
 

@@ -1,3 +1,4 @@
+import util from 'util'
 import sinon from 'sinon'
 import Stdio from './stdio'
 
@@ -57,4 +58,10 @@ export const processMock = (_stdin, argv, filename = './index.js') => {
     exit: sinon.spy(),
     stdout: {write: sinon.spy()}
   }
+}
+
+export const write = process.stdout.write
+
+export const log = (...args) => {
+  write(util.format.apply(null, args) + '\n')
 }
