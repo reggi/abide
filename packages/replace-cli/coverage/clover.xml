@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1522007742307" clover="3.2.0">
-  <project timestamp="1522007742308" name="All files">
+<coverage generated="1522008295280" clover="3.2.0">
+  <project timestamp="1522008295280" name="All files">
     <metrics statements="20" coveredstatements="20" conditionals="4" coveredconditionals="4" methods="3" coveredmethods="3" elements="27" coveredelements="27" complexity="0" loc="20" ncloc="20" packages="1" files="1" classes="1">
       <file name="index.js" path="/Users/thomas/Desktop/abide/packages/replace-cli/index.js">
         <metrics statements="20" coveredstatements="20" conditionals="4" coveredconditionals="4" methods="3" coveredmethods="3"/>
