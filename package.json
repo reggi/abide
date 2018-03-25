@@ -70,7 +70,8 @@
       "expect",
       "test",
       "beforeEach",
-      "afterEach"
+      "afterEach",
+      "jest"
     ]
   }
 }
