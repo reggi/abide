@@ -1,8 +1,10 @@
 {
-  "name": "@reggi/replace-cli",
+  "name": "replace-cli",
   "version": "1.0.0",
   "author": "Thomas Reggi",
-  "main": "./index.build.js",
+  "bin": {
+    "replace": "./index.build.js"
+  },
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
