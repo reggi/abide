@@ -40,7 +40,7 @@ export const processReset = ({stdin, stdout, exit, argv}) => {
   process.exit = exit
 }
 
-export const processOverwrite = (_stdin, argv) => {
+export const processOverwrite = (argv, _stdin) => {
   replaceProperty(process, 'stdin', new Stdio().stdin)
   process.stdin.read = mockStdinRead(_stdin)
   process.argv = ['node', './index', ...argv]
@@ -49,7 +49,7 @@ export const processOverwrite = (_stdin, argv) => {
   return process
 }
 
-export const processMock = (_stdin, argv, filename = './index.js') => {
+export const processMock = (argv, _stdin, filename = './index.js') => {
   const {stdin} = new Stdio()
   stdin.read = mockStdinRead(_stdin)
   return {

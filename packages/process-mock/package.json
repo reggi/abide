@@ -41,6 +41,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "jest": "^22.4.2",
+    "sinon": "^4.4.8",
     "standard": "^11.0.0"
   },
   "publishConfig": {
@@ -54,7 +55,5 @@
       "afterEach"
     ]
   },
-  "dependencies": {
-    "sinon": "^4.4.8"
-  }
+  "dependencies": {}
 }

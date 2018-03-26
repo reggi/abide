@@ -16,8 +16,7 @@
     "env": {
       "plugins": [
         "istanbul",
-        "rewire",
-        "transform-define"
+        "rewire"
       ]
     },
     "plugins": [
@@ -27,6 +26,10 @@
       [
         "env",
         {
+          "includes": [
+            "es7.array.includes"
+          ],
+          "useBuiltIns": true,
           "targets": {
             "node": "4"
           }
@@ -53,6 +56,7 @@
     "babel-plugin-istanbul": "^4.1.5",
     "babel-plugin-rewire": "^1.1.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "jest": "^22.4.2",
     "nyc": "^11.6.0",
@@ -96,5 +100,9 @@
         }
       }
     }
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0-beta.42",
+    "babel-polyfill": "^6.26.0"
   }
 }
