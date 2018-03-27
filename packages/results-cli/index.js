@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const {basename} = require('path')
 const program = require('commander')
 const colors = require('colors/safe')
 const hasFlag = require('has-flag')
@@ -17,7 +18,8 @@ program
   .option('-n, --no-color', 'remove color')
   .option('-i, --inherit', 'inherit stdin')
   .option('-c, --command-show', 'prints command evaluted')
-  .option('-p, --path-show', 'prints current working directory')
+  .option('-p, --path-show', 'prints current working path')
+  .option('-d, --dir-show', 'prints current working directory')
   .option('-e, --exit-show', 'shows the Exit code')
   .option('-z, --zero', 'overwrites passed exit code with 0')
   .option('-v, --version', 'output the version number')
@@ -46,6 +48,7 @@ if (!help && !version && command) {
     const values = [status]
     if (program.commandShow) values.push(`(executed ${command})`)
     if (program.pathShow) values.push(`(path ${cwd})`)
+    if (program.dirShow) values.push(`(directory /${basename(cwd)})`)
     if (program.exitShow) values.push(`(code ${code})`)
     console.log(values.join(' '))
     const theCode = (program.zero) ? 0 : code
