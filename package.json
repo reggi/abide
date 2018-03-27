@@ -60,7 +60,10 @@
     "@reggi/pkg.read-json": "file:packages/pkg.read-json",
     "@reggi/pkg.throw-error": "file:packages/pkg.throw-error",
     "@reggi/replace-cli": "file:packages/replace-cli",
-    "lodash": "^4.17.5"
+    "colors": "^1.2.1",
+    "has-flag": "^3.0.0",
+    "lodash": "^4.17.5",
+    "minimist": "^1.2.0"
   },
   "standard": {
     "parser": "babel-eslint",

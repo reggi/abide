@@ -1,9 +1,9 @@
 {
-  "name": "replace-cli",
-  "version": "1.0.1",
+  "name": "results-cli",
+  "version": "0.0.2",
   "author": "Thomas Reggi",
   "bin": {
-    "replace": "./index.build.js"
+    "results": "./index.build.js"
   },
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
@@ -13,12 +13,6 @@
     "test:result": "npm run test --silent &>/dev/null || echo $?"
   },
   "babel": {
-    "env": {
-      "plugins": [
-        "istanbul",
-        "rewire"
-      ]
-    },
     "plugins": [
       "transform-object-rest-spread"
     ],
@@ -45,27 +39,16 @@
     }
   },
   "devDependencies": {
-    "@reggi/process-mock": "file:../process-mock",
     "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.2.2",
-    "babel-jest": "^22.4.1",
-    "babel-plugin-istanbul": "^4.1.5",
-    "babel-plugin-rewire": "^1.1.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "jest": "^22.4.2",
-    "nyc": "^11.6.0",
     "standard": "^11.0.0"
   },
   "publishConfig": {
     "access": "public"
   },
   "standard": {
-    "parser": "babel-eslint",
-    "ignore": [
-      "index.build.js"
-    ],
     "globals": [
       "expect",
       "test",
@@ -73,32 +56,9 @@
       "afterEach"
     ]
   },
-  "nyc": {
-    "reporter": [
-      "lcov",
-      "html"
-    ],
-    "check-coverage": true,
-    "per-file": true,
-    "lines": 99,
-    "statements": 99,
-    "functions": 99,
-    "branches": 99,
-    "babel": {
-      "presets": [
-        "env"
-      ],
-      "env": {
-        "test": {
-          "plugins": [
-            "istanbul"
-          ]
-        }
-      }
-    }
-  },
   "dependencies": {
-    "@babel/polyfill": "^7.0.0-beta.42",
-    "babel-polyfill": "^6.26.0"
+    "colors": "^1.2.1",
+    "commander": "^2.15.1",
+    "has-flag": "^3.0.0"
   }
 }
