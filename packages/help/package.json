@@ -1,10 +1,8 @@
 {
-  "name": "results-cli",
-  "version": "0.0.3",
+  "name": "@reggi/help",
+  "version": "1.0.0",
   "author": "Thomas Reggi",
-  "bin": {
-    "results": "./index.build.js"
-  },
+  "main": "./index.build.js",
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
@@ -39,7 +37,6 @@
     }
   },
   "devDependencies": {
-    "@reggi/process-mock": "file:../process-mock",
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
@@ -58,8 +55,6 @@
     ]
   },
   "dependencies": {
-    "colors": "^1.2.1",
-    "commander": "^2.15.1",
-    "has-flag": "^3.0.0"
+    "@reggi/journey": "file:../journey"
   }
 }

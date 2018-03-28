@@ -22,7 +22,8 @@ program
   .option('-d, --dir-show', 'prints current working directory')
   .option('-e, --exit-show', 'shows the Exit code')
   .option('-z, --zero', 'overwrites passed exit code with 0')
-  .option('-v, --version', 'output the version number')
+  .option('-v, -V, --version', 'output the version number')
+  .option('-h, -H, --help', 'output the')
   .parse(process.argv)
 
 if (!help && !version && command) {
@@ -50,12 +51,13 @@ if (!help && !version && command) {
     if (program.pathShow) values.push(`(path ${cwd})`)
     if (program.dirShow) values.push(`(directory /${basename(cwd)})`)
     if (program.exitShow) values.push(`(code ${code})`)
-    console.log(values.join(' '))
+    process.stdout.write(values.join(' ') + '\n')
     const theCode = (program.zero) ? 0 : code
     process.exit(theCode)
   })
 } else if ((help || !command) && !version) {
-  program.help()
+  program.outputHelp()
 } else if (version) {
-  console.log(theVersion)
+  process.stdout.write(theVersion + '\n')
+  process.exit(0)
 }
