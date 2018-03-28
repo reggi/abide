@@ -1,5 +1,5 @@
 import {journey} from '@reggi/journey'
-import {keys, flattenDeep, get, zipObject, uniq, mapValues, groupBy, flatten, map, values, extend, fromPairs, filter, isArray, isPlainObject, range, merge, without} from 'lodash'
+import {pick, defaults, keys, flattenDeep, get, zipObject, uniq, mapValues, groupBy, flatten, map, values, extend, fromPairs, filter, isArray, isPlainObject, range, merge, without} from 'lodash'
 
 const parseFlagOption = journey((flagsOption) => [
   () => ({flagsOption}),
@@ -11,7 +11,8 @@ const parseFlagOption = journey((flagsOption) => [
   ({flagsOption}) => ({optional: get(flagsOption.match(/\[.+\]/g), 0, false)}),
   ({flagsString}) => ({flags: flagsString.split(' ')}),
   ({flags, required, optional}) => ({return: {flags, required, optional}})
-], {return: true, hook: (acq, res) => console.log(res)})
+], {return: true})
+// ], {return: true, hook: (acq, res) => console.log(res)})
 
 class Undefined {}
 const coerceToString = (val) => (isArray(val) && val.length === 1) ? val[0] : val
@@ -64,11 +65,19 @@ const parseArgv = journey((argv, opts) => [
   ({parseArgvTouchObj}) => ({flattenDeep: flattenDeep(parseArgvTouchObj)}),
   ({flattenDeep}) => ({without: without(flattenDeep, false)}),
   ({without}) => ({mergeProperties: mergeProperties.apply(null, without)})
-], {return: 'mergeProperties', hook: (acq, res) => console.log(res)})
+], {return: 'mergeProperties'})
+// ], {return: 'mergeProperties', hook: (acq, res) => console.log(res)})
 
-parseArgv('hello world -max --m --a alpha --x'.split(' '))
+const results = parseArgv('hello -max'.split(' '))
 
-// parseFlagOption('-h, --help [req]')
+const pickDefaults = (obj, props, d = false) => defaults(pick(obj, props), zipObject(props, range(props.length).map(v => d)))
+
+const x = pickDefaults(results, parseFlagOption('-h, -max, --help [req]').flags)
+console.log(values(x))
+
+// program
+  // .options('-h, --help', {resolveTo: 'help', useAll: true, useFirst: true, useLast: true})
+
 
 // // export const option = (flags, description) => {
 // //   const parsedFlags = parseFlagOption(flags)  
