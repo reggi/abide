@@ -22,8 +22,8 @@ program
   .option('-d, --dir-show', 'prints current working directory')
   .option('-e, --exit-show', 'shows the Exit code')
   .option('-z, --zero', 'overwrites passed exit code with 0')
-  .option('-v, -V, --version', 'output the version number')
-  .option('-h, -H, --help', 'output the')
+  .option('-v, --version', 'output the version number')
+  .option('-h, --help', 'output the')
   .parse(process.argv)
 
 if (!help && !version && command) {

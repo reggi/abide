@@ -1,7 +1,17 @@
 import {journey} from '@reggi/journey'
-import {pick, defaults, keys, flattenDeep, get, zipObject, uniq, mapValues, groupBy, flatten, map, values, extend, fromPairs, filter, isArray, isPlainObject, range, merge, without} from 'lodash'
+import {
+  chain,
+  set,
+  get,
+  merge,
+  range,
+  isArray,
+  filter,
+  keys,
+  map
+} from 'lodash'
 
-const parseFlagOption = journey((flagsOption) => [
+export const parseFlagOption = journey((flagsOption) => [
   () => ({flagsOption}),
   ({flagsOption}) => ({flagsString: flagsOption.replace(/<.+>|\[.+\]/g, '')}),
   ({flagsString}) => ({flagsString: flagsString.replace(/,/g, ' ')}),
@@ -12,41 +22,38 @@ const parseFlagOption = journey((flagsOption) => [
   ({flagsString}) => ({flags: flagsString.split(' ')}),
   ({flags, required, optional}) => ({return: {flags, required, optional}})
 ], {return: true})
-// ], {return: true, hook: (acq, res) => console.log(res)})
 
-class Undefined {}
-const coerceToString = (val) => (isArray(val) && val.length === 1) ? val[0] : val
-const isSingleFlag = (value) => (value) ? Boolean(value.match(/^-\w\w+/)) : false
-const isFlag = (value) => (value) ? Boolean(value.match(/^-/)) : false
-const touchObj = (arr) => merge(arr.map(v => ({value: v})), range(arr.length).map(() => ({touched: false})))
+export const touchObj = (arr) => merge(arr.map(v => ({value: v})), range(arr.length).map(() => ({touched: false})))
+export class Undefined {}
+export const coerceToString = (val) => (isArray(val) && val.length === 1) ? val[0] : val
+export const isGroupedSingleFlag = (value) => (value) ? Boolean(value.match(/^-\w\w+/)) : false
+export const hasEqual = (value) => (value) ? Boolean(value.match(/=/)) : false
+export const isFlag = (value) => (value) ? Boolean(value.match(/^-/)) : false
 
-const mergeProperties = (...objs) => {
-  const allKeys = uniq(flatten(map(objs, keys)))
-  const mergedObj = zipObject(allKeys)
-  return mapValues(mergedObj, (value, key) => {
-    const values = map(objs, obj => get(obj, key, new Undefined()))
-    const valuesWithoutUndefined = filter(values, (value) => !(value instanceof Undefined))
-    return coerceToString(flatten(valuesWithoutUndefined))
-  })
-}
-
-const parseArgvTouchObj = (touchObj, {groupedSingleFlags = true} = {}) => {
-  return touchObj.map(({value, touched}, key) => {
+export const parseArgvTouchObj = (touchObj, {
+  groupedSingleFlagsNoValue = false,
+  groupedSingleFlagsSpread = true,
+  flagTypes = {}
+} = {}) => {
+  return chain(touchObj).map(({value, touched}, key) => {
     if (touched) return false
     const combos = []
     const nextValue = get(touchObj, `${key + 1}.value`)
-    const thisIsSingleFlag = isSingleFlag(value)
+    const thisIsGroupedSingleFlag = isGroupedSingleFlag(value)
     const thisValueIsFlag = isFlag(value)
     const nextValueIsFlag = isFlag(nextValue)
     touchObj[key].touched = true
-    if (groupedSingleFlags) {
-      if (thisIsSingleFlag) {
+    if (groupedSingleFlagsSpread) {
+      if (thisIsGroupedSingleFlag) {
         const content = value.replace(/-/g, '').split('')
         const contentFlags = content.map(flag => ({[`-${flag}`]: true}))
-        combos.push(contentFlags)
+        combos.concat(contentFlags)
       }
     }
-    if (!thisValueIsFlag) {
+    if (hasEqual(value)) {
+      const valueSplit = value.split('=')
+      combos.push({[valueSplit[0]]: valueSplit[1]})
+    } else if (!thisValueIsFlag) {
       combos.push({_: value})
     } else if (thisValueIsFlag && (nextValueIsFlag || !nextValue)) {
       combos.push({[value]: true})
@@ -54,26 +61,48 @@ const parseArgvTouchObj = (touchObj, {groupedSingleFlags = true} = {}) => {
       touchObj[key + 1].touched = true
       combos.push({[value]: touchObj[key + 1].value})
     }
+    if (groupedSingleFlagsNoValue) {
+      return filter(combos, combo => {
+        const flag = keys(combo)[0]
+        return thisIsGroupedSingleFlag(flag)
+      })
+    }
     return combos
   })
+  .flattenDeep()
+  .value()
 }
 
-const parseArgv = journey((argv, opts) => [
-  () => ({argv, opts}),
-  ({argv}) => ({touchObj: touchObj(argv)}),
-  ({touchObj, groupedSingleFlags}) => ({parseArgvTouchObj: parseArgvTouchObj(touchObj, opts)}),
-  ({parseArgvTouchObj}) => ({flattenDeep: flattenDeep(parseArgvTouchObj)}),
-  ({flattenDeep}) => ({without: without(flattenDeep, false)}),
-  ({without}) => ({mergeProperties: mergeProperties.apply(null, without)})
-], {return: 'mergeProperties'})
-// ], {return: 'mergeProperties', hook: (acq, res) => console.log(res)})
+// const mergeProperties = (...objs) => {
+//   const allKeys = uniq(flatten(map(objs, keys)))
+//   const mergedObj = zipObject(allKeys)
+//   return mapValues(mergedObj, (value, key) => {
+//     const values = map(objs, obj => get(obj, key, new Undefined()))
+//     const valuesWithoutUndefined = filter(values, (value) => !(value instanceof Undefined))
+//     return coerceToString(flatten(valuesWithoutUndefined))
+//   })
+// }
 
-const results = parseArgv('hello -max'.split(' '))
+// const parseArgv = journey((argv, opts) => [
+//   () => ({argv, opts}),
+//   ({argv}) => ({touchObj: touchObj(argv)}),
+//   ({touchObj, groupedSingleFlags}) => ({parseArgvTouchObj: parseArgvTouchObj(touchObj, opts)}),
+//   ({parseArgvTouchObj}) => ({flattenDeep: flattenDeep(parseArgvTouchObj)}),
+//   ({flattenDeep}) => ({without: without(flattenDeep, false)}),
+//   ({without}) => ({mergeProperties: mergeProperties.apply(null, without)})
+// ], {return: 'mergeProperties'})
+// // ], {return: 'mergeProperties', hook: (acq, res) => console.log(res)})
 
-const pickDefaults = (obj, props, d = false) => defaults(pick(obj, props), zipObject(props, range(props.length).map(v => d)))
 
-const x = pickDefaults(results, parseFlagOption('-h, -max, --help [req]').flags)
-console.log(values(x))
+
+// const results = parseArgv('hello -max'.split(' '))
+
+// const pickDefaults = (obj, props, d = false) => defaults(pick(obj, props), zipObject(props, range(props.length).map(v => d)))
+
+// results['-h'] || results['--help']
+
+// const x = pickDefaults(results, parseFlagOption('-h, -max, --help [req]').flags)
+// console.log(values(x))
 
 // program
   // .options('-h, --help', {resolveTo: 'help', useAll: true, useFirst: true, useLast: true})
@@ -143,3 +172,41 @@ console.log(values(x))
 
 
 
+
+// import {pick, defaults, keys, flattenDeep, get, zipObject, uniq, mapValues, groupBy, flatten, map, values, extend, fromPairs, filter, isArray, isPlainObject, range, merge, without} from 'lodash'
+
+
+
+// journey((argv, {
+//   groupedSingleFlagsNoValue = false,
+//   groupedSingleFlagsSpread = true,
+//   flagTypes = {}
+// }) => [
+//   () => ({argv}),
+//   ({argv}) => ({touchObj: touchObj(argv)}),
+//   ({touchObj}) => ({parsedTouchObj: map(touchObj, journey(({value, touched, thisKey}) => [
+//     () => ({
+//       touchObj,
+//       thisValue: value,
+//       touched,
+//       thisKey,
+//       groupedSingleFlagsNoValue,
+//       groupedSingleFlagsSpread,
+//       flagTypes
+//     }),
+//     ({thisKey}) => ({nextKey: thisKey + 1}),
+//     ({touchObj, nextKey}) => ({nextValue: get(touchObj, `${nextKey}.value`)}),
+//     ({touched}) => (touched) ? ({return: false}) : false,
+//     ({thisValue}) => ({thisValueIsGroupedSingleFlag: isGroupedSingleFlag(value)}),
+//     ({thisValue}) => ({thisValueIsFlag: isFlag(thisValue)}),
+//     ({nextValue}) => ({nextValueIsFlag: isFlag(nextValue)}),
+//     () => set(touchObj, `${thisKey}.touched`, true),
+//     (d) => ({spreadFlags: (d.groupedSingleFlagsSpread && d.thisIsGroupedSingleFlag)}),
+//     ({spreadFlags, thisValue}) => conditional(spreadflags, journey(() => [
+//       () => ({indivFlag: thisValue.replace(/-/g, '').split('')}),
+
+//       contentFlags = content.map(flag => ({[`-${flag}`]: true}))
+//       combos.concat(contentFlags)
+//     ]))
+//   ]))})
+// ])

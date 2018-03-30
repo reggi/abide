@@ -40,8 +40,10 @@
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "execa": "^0.10.0",
     "jest": "^22.4.2",
-    "standard": "^11.0.0"
+    "standard": "^11.0.0",
+    "string-argv": "0.0.2"
   },
   "publishConfig": {
     "access": "public"
