@@ -1,9 +1,27 @@
-import {cloneDeep, isArray, get, zipObject, keys, mapValues, uniq, flatten, map, last, filter, slice, merge, range, chain, each, set} from 'lodash'
+import {
+  cloneDeep,
+  isArray,
+  get,
+  zipObject,
+  keys,
+  mapValues,
+  uniq,
+  flatten,
+  map,
+  last,
+  filter,
+  slice,
+  merge,
+  range,
+  chain,
+  each,
+  set } from 'lodash'
 
 export const dash = /^-(\w+)/
 export const multiDash = /^-(\w\w+)/
 export const doubleDash = /^--([\w|-]+)/
 export const onlyDash = /^-(\w)$|^-(\w)=/
+export const anyDash = /^-+([\w|-]+)$|^-+([\w|-]+)=.+$/
 
 export const matchCheck = (patternString, statement) => {
   const match = statement.match(patternString)
@@ -15,7 +33,7 @@ export const matchCheck = (patternString, statement) => {
   return match
 }
 
-export const isFlag = (statement) => (statement) ? Boolean(statement.match(/^-/)) : false
+export const isAnyDash = (statement) => matchCheck(anyDash, statement)
 export const isDashFlag = (statement) => matchCheck(dash, statement)
 export const isOnlyDashFlag = (statement) => matchCheck(onlyDash, statement)
 export const isMulitDashFlag = (statement) => matchCheck(multiDash, statement)
@@ -45,7 +63,7 @@ const assignNext = (criteria) => (argvTouch) => (item, key) => {
   if (!validCase) return false
   if (!argvTouch[key + 1]) return false
   const next = argvTouch[key + 1]
-  if (isFlag(next.value)) return false
+  if (isAnyDash(next.value)) return false
   argvTouch[key].touched = true
   argvTouch[key + 1].touched = true
   return {[validCase[0]]: next.value}
@@ -70,7 +88,7 @@ const assignUntil = (criteria) => (argvTouch) => (item, key) => {
   if (!validCase) return false
   if (argvTouch.length === key + 1) return false
   const values = slice(argvTouch, key + 1)
-  const validValues = filterUntil(values, (item) => isFlag(item.value))
+  const validValues = filterUntil(values, (item) => isAnyDash(item.value))
   if (!validValues.length) return false
   const value = validValues.map(i => i.value).join(' ')
   argvTouch[key].touched = true
@@ -89,6 +107,10 @@ const setObjProps = (obj) => {
 }
 
 const _modifiers = {
+  'anyDash.bool': assignBoolean(isAnyDash),
+  'anyDash.equal': assignEqual(isAnyDash),
+  'anyDash.next': assignNext(isAnyDash),
+  'anyDash.until': assignUntil(isAnyDash),
   'onlyDash.bool': assignBoolean(isOnlyDashFlag),
   'onlyDash.equal': assignEqual(isOnlyDashFlag),
   'onlyDash.next': assignNext(isOnlyDashFlag),
@@ -212,23 +234,20 @@ export const mergeProperties = (arrOfObjects) => {
   })
 }
 
-const defaultOpts = {
-  modifiers: [
-    modifiers.child.rest,
-    modifiers.doubleDash.no,
-    modifiers.doubleDash.equal,
-    modifiers.doubleDash.next,
-    modifiers.doubleDash.bool,
-    modifiers.onlyDash.bool,
-    modifiers.multiDash.spread
-  ],
-  specifiers: {}
-}
+export const defaultModifiers = [
+  modifiers.child.rest,
+  modifiers.doubleDash.no,
+  modifiers.doubleDash.equal,
+  modifiers.doubleDash.next,
+  modifiers.doubleDash.bool,
+  modifiers.onlyDash.bool,
+  modifiers.multiDash.spread
+]
 
-export const parseArgv = (argv, {modifiers, specifiers} = defaultOpts) => {
+export const parseArgv = (argv, {modifiers = defaultModifiers, specifiers = false} = {}) => {
   const argvTouch = touchObj(argv)
-  const specifiersRes = applySpecifier(specifiers, argv, argvTouch)
-  const generalRes = applyGeneral(modifiers, argv, argvTouch)
+  const specifiersRes = (specifiers) ? applySpecifier(specifiers, argv, argvTouch) : []
+  const generalRes = (modifiers) ? applyGeneral(modifiers, argv, argvTouch) : []
   return chain([specifiersRes, generalRes, {_: untouched(argvTouch)}])
     .flattenDeep()
     .thru(mergeProperties)
@@ -236,5 +255,7 @@ export const parseArgv = (argv, {modifiers, specifiers} = defaultOpts) => {
 }
 
 // console.log(parseArgv(['-G', '-max', '--cake', 'chocolate', 'walnut', '--', '--meow', 'hello', 'mom', 'love', '--dolphin'], [
-const res = parseArgv(['-g', '-no-g', '--g'])
-console.log(res)
+// const res = parseArgv(['--hello', '-g'], {modifiers: [
+//   modifiers.anyDash.bool
+// ]})
+// console.log(res)
