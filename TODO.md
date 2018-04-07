@@ -19,6 +19,89 @@
 * [ ] Create `is-set-cli` (ex. `is-set $VARIABLE`)
 * [ ] Create `tjr-cli` (ex. `tjr system --darwin && tjr is-set $NODE_ && tjr meet-stdout `node -v` "6.8.0\n"`)
 
+## Help options
 
+given "--exec npm run start --hello echo hi"
 
+### Specify Booleans (Without split _)
 
+```js
+{
+  "--exec": true,
+  "--hello": true,
+  _:[
+    "npm run start",
+    "echo hi"
+  ]
+}
+```
+
+Alt with split _
+
+```js
+{
+  "--exec": true,
+  "--hello": true,
+  _:[
+    "npm",
+    "run",
+    "start",
+    "echo",
+    "hi"
+  ]
+}
+```
+
+### Specify One Space (Without split _)
+
+```js
+{
+  "--exec": 'npm',
+  "--hello": 'echo',
+  _:[
+    "run start",
+    "hi"
+  ]
+}
+```
+
+Alt with split _
+
+```js
+{
+  "--exec": true,
+  "--hello": true,
+  _:[
+    "run",
+    "hi"
+  ]
+}
+```
+
+### Specify Until next flag
+
+```js
+{
+  "--exec": 'npm run start',
+  "--hello": 'echo hi'
+}
+```
+
+### `flattenLoose` flag
+
+For splitting `_` perhaps this is a better default syntax 
+
+```js
+{
+  _:[
+    ["npm", "run", "start"],
+    ["echo", "hi"]
+  ]
+}
+```
+
+Then It can be `flattend` if desired
+
+```js
+{'flattenLoose': true}
+```

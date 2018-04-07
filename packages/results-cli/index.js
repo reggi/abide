@@ -15,6 +15,7 @@ const version = hasFlag('v') || hasFlag('V') || hasFlag('version')
 program
   .usage('[options] [-- <args>...]')
   .description('print clear exit code from command')
+  .option('-n, --hello', 'remove color')
   .option('-n, --no-color', 'remove color')
   .option('-i, --inherit', 'inherit stdin')
   .option('-c, --command-show', 'prints command evaluted')

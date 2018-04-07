@@ -1,212 +1,240 @@
-import {journey} from '@reggi/journey'
-import {
-  chain,
-  set,
-  get,
-  merge,
-  range,
-  isArray,
-  filter,
-  keys,
-  map
-} from 'lodash'
+import {cloneDeep, isArray, get, zipObject, keys, mapValues, uniq, flatten, map, last, filter, slice, merge, range, chain, each, set} from 'lodash'
 
-export const parseFlagOption = journey((flagsOption) => [
-  () => ({flagsOption}),
-  ({flagsOption}) => ({flagsString: flagsOption.replace(/<.+>|\[.+\]/g, '')}),
-  ({flagsString}) => ({flagsString: flagsString.replace(/,/g, ' ')}),
-  ({flagsString}) => ({flagsString: flagsString.replace(/\s+/g, ' ')}),
-  ({flagsString}) => ({flagsString: flagsString.trim()}),
-  ({flagsOption}) => ({required: get(flagsOption.match(/<.+>/g), 0, false)}),
-  ({flagsOption}) => ({optional: get(flagsOption.match(/\[.+\]/g), 0, false)}),
-  ({flagsString}) => ({flags: flagsString.split(' ')}),
-  ({flags, required, optional}) => ({return: {flags, required, optional}})
-], {return: true})
+export const dash = /^-(\w+)/
+export const multiDash = /^-(\w\w+)/
+export const doubleDash = /^--([\w|-]+)/
+export const onlyDash = /^-(\w)$|^-(\w)=/
 
-export const touchObj = (arr) => merge(arr.map(v => ({value: v})), range(arr.length).map(() => ({touched: false})))
-export class Undefined {}
-export const coerceToString = (val) => (isArray(val) && val.length === 1) ? val[0] : val
-export const isGroupedSingleFlag = (value) => (value) ? Boolean(value.match(/^-\w\w+/)) : false
-export const hasEqual = (value) => (value) ? Boolean(value.match(/=/)) : false
-export const isFlag = (value) => (value) ? Boolean(value.match(/^-/)) : false
-
-export const parseArgvTouchObj = (touchObj, {
-  groupedSingleFlagsNoValue = false,
-  groupedSingleFlagsSpread = true,
-  flagTypes = {}
-} = {}) => {
-  return chain(touchObj).map(({value, touched}, key) => {
-    if (touched) return false
-    const combos = []
-    const nextValue = get(touchObj, `${key + 1}.value`)
-    const thisIsGroupedSingleFlag = isGroupedSingleFlag(value)
-    const thisValueIsFlag = isFlag(value)
-    const nextValueIsFlag = isFlag(nextValue)
-    touchObj[key].touched = true
-    if (groupedSingleFlagsSpread) {
-      if (thisIsGroupedSingleFlag) {
-        const content = value.replace(/-/g, '').split('')
-        const contentFlags = content.map(flag => ({[`-${flag}`]: true}))
-        combos.concat(contentFlags)
-      }
-    }
-    if (hasEqual(value)) {
-      const valueSplit = value.split('=')
-      combos.push({[valueSplit[0]]: valueSplit[1]})
-    } else if (!thisValueIsFlag) {
-      combos.push({_: value})
-    } else if (thisValueIsFlag && (nextValueIsFlag || !nextValue)) {
-      combos.push({[value]: true})
-    } else if (thisValueIsFlag && !nextValueIsFlag) {
-      touchObj[key + 1].touched = true
-      combos.push({[value]: touchObj[key + 1].value})
-    }
-    if (groupedSingleFlagsNoValue) {
-      return filter(combos, combo => {
-        const flag = keys(combo)[0]
-        return thisIsGroupedSingleFlag(flag)
-      })
-    }
-    return combos
-  })
-  .flattenDeep()
-  .value()
+export const matchCheck = (patternString, statement) => {
+  const match = statement.match(patternString)
+  const hasGroupOne = (match && match[1] && match[1] !== '') ? match[1] : false
+  const hasGroupTwo = (match && match[2] && match[2] !== '') ? match[2] : false
+  const group = hasGroupOne || hasGroupTwo
+  if (!group) return false
+  match.group = group
+  return match
 }
 
-// const mergeProperties = (...objs) => {
-//   const allKeys = uniq(flatten(map(objs, keys)))
-//   const mergedObj = zipObject(allKeys)
-//   return mapValues(mergedObj, (value, key) => {
-//     const values = map(objs, obj => get(obj, key, new Undefined()))
-//     const valuesWithoutUndefined = filter(values, (value) => !(value instanceof Undefined))
-//     return coerceToString(flatten(valuesWithoutUndefined))
-//   })
-// }
+export const isFlag = (statement) => (statement) ? Boolean(statement.match(/^-/)) : false
+export const isDashFlag = (statement) => matchCheck(dash, statement)
+export const isOnlyDashFlag = (statement) => matchCheck(onlyDash, statement)
+export const isMulitDashFlag = (statement) => matchCheck(multiDash, statement)
+export const isDoubleDashFlag = (statement) => matchCheck(doubleDash, statement)
 
-// const parseArgv = journey((argv, opts) => [
-//   () => ({argv, opts}),
-//   ({argv}) => ({touchObj: touchObj(argv)}),
-//   ({touchObj, groupedSingleFlags}) => ({parseArgvTouchObj: parseArgvTouchObj(touchObj, opts)}),
-//   ({parseArgvTouchObj}) => ({flattenDeep: flattenDeep(parseArgvTouchObj)}),
-//   ({flattenDeep}) => ({without: without(flattenDeep, false)}),
-//   ({without}) => ({mergeProperties: mergeProperties.apply(null, without)})
-// ], {return: 'mergeProperties'})
-// // ], {return: 'mergeProperties', hook: (acq, res) => console.log(res)})
+const assignBoolean = (criteria) => (argvTouch) => (item, key) => {
+  if (argvTouch[key].touched) return false
+  const validCase = criteria(item)
+  if (!validCase) return false
+  argvTouch[key].touched = true
+  return {[validCase[0]]: true}
+}
 
+const assignEqual = (criteria) => (argvTouch) => (item, key) => {
+  if (argvTouch[key].touched) return false
+  const validCase = criteria(item)
+  if (!validCase) return false
+  const split = item.split('=')
+  if (split.length === 1) return false
+  argvTouch[key].touched = true
+  return {[split[0]]: split[1]}
+}
 
+const assignNext = (criteria) => (argvTouch) => (item, key) => {
+  if (argvTouch[key].touched) return false
+  const validCase = criteria(item)
+  if (!validCase) return false
+  if (!argvTouch[key + 1]) return false
+  const next = argvTouch[key + 1]
+  if (isFlag(next.value)) return false
+  argvTouch[key].touched = true
+  argvTouch[key + 1].touched = true
+  return {[validCase[0]]: next.value}
+}
 
-// const results = parseArgv('hello -max'.split(' '))
+const filterUntil = (arr, matchFn) => {
+  var match = false
+  return filter(arr, (item) => {
+    if (match) return false
+    const isMatch = matchFn(item)
+    if (isMatch) match = true
+    if (match) return false
+    return true
+  })
+}
 
-// const pickDefaults = (obj, props, d = false) => defaults(pick(obj, props), zipObject(props, range(props.length).map(v => d)))
+// console.log(filterUntil(['ants', 'donkey', 'fish', 'seal'], (item) => item === 'fish'))
 
-// results['-h'] || results['--help']
+const assignUntil = (criteria) => (argvTouch) => (item, key) => {
+  if (argvTouch[key].touched) return false
+  const validCase = criteria(item)
+  if (!validCase) return false
+  if (argvTouch.length === key + 1) return false
+  const values = slice(argvTouch, key + 1)
+  const validValues = filterUntil(values, (item) => isFlag(item.value))
+  if (!validValues.length) return false
+  const value = validValues.map(i => i.value).join(' ')
+  argvTouch[key].touched = true
+  each(validValues, i => {
+    argvTouch[i.key].touched = true
+  })
+  return {[validCase[0]]: value}
+}
 
-// const x = pickDefaults(results, parseFlagOption('-h, -max, --help [req]').flags)
-// console.log(values(x))
+const setObjProps = (obj) => {
+  const newObj = {}
+  each(obj, (value, key) => {
+    set(newObj, key, value)
+  })
+  return newObj
+}
 
-// program
-  // .options('-h, --help', {resolveTo: 'help', useAll: true, useFirst: true, useLast: true})
+const _modifiers = {
+  'onlyDash.bool': assignBoolean(isOnlyDashFlag),
+  'onlyDash.equal': assignEqual(isOnlyDashFlag),
+  'onlyDash.next': assignNext(isOnlyDashFlag),
+  'onlyDash.until': assignUntil(isOnlyDashFlag),
+  'multiDash.bool': assignBoolean(isMulitDashFlag),
+  'multiDash.equal': assignEqual(isMulitDashFlag),
+  'multiDash.next': assignNext(isMulitDashFlag),
+  'multiDash.until': assignUntil(isMulitDashFlag),
+  'multiDash.spread': (argvTouch) => (item, key) => {
+    if (argvTouch[key].touched) return false
+    const validCase = isMulitDashFlag(item)
+    if (!validCase) return false
+    argvTouch[key].touched = true
+    return validCase[1].split('').map(flag => ({[`-${flag}`]: true}))
+  },
+  'dash.bool': assignBoolean(isDashFlag),
+  'dash.equal': assignEqual(isDashFlag),
+  'dash.next': assignNext(isDashFlag),
+  'dash.until': assignUntil(isDashFlag),
+  'doubleDash.bool': assignBoolean(isDoubleDashFlag),
+  'doubleDash.equal': assignEqual(isDoubleDashFlag),
+  'doubleDash.next': assignNext(isDoubleDashFlag),
+  'doubleDash.until': assignUntil(isDoubleDashFlag),
+  'doubleDash.no': (argvTouch) => (item, key) => {
+    if (argvTouch[key].touched) return false
+    const criteria = item.match(/--no-(\w+)/)
+    if (!criteria || !criteria[1]) return false
+    argvTouch[key].touched = true
+    return {[`--${criteria[1]}`]: false}
+  },
+  'child.rest': (argvTouch) => (item, key) => {
+    if (argvTouch[key].touched) return false
+    if (!item.match(/^--$/)) return false
+    if (argvTouch.length === key + 1) return false
+    const validValues = slice(argvTouch, key + 1)
+    if (!validValues.length) return false
+    const value = validValues.map(i => i.value).join(' ')
+    argvTouch[key].touched = true
+    each(validValues, i => {
+      argvTouch[i.key].touched = true
+    })
+    return {'--': value}
+  }
+}
 
+export const modifiers = setObjProps(_modifiers)
+export const touchObj = (arr) => merge(arr.map((value, key) => ({value, key})), range(arr.length).map(() => ({touched: false})))
+export class Undefined {}
+export const coerceToString = (val) => (isArray(val) && val.length === 1) ? val[0] : val
 
-// // export const option = (flags, description) => {
-// //   const parsedFlags = parseFlagOption(flags)  
-// // }
+export const applySpecifier = (specifiers, argv, argvTouch) => {
+  return chain(specifiers)
+    .map((fn, pattern) => {
+      return chain(argv)
+        .map((item, key) => {
+          if (item.match(new RegExp(pattern))) {
+            return fn(argvTouch)(item, key)
+          }
+          return false
+        })
+        .without(false)
+        .value()
+    })
+    .value()
+}
 
-// // const p = require('commander')
+export const applyGeneral = (fns, argv, argvTouch) => {
+  return chain(fns)
+    .flattenDeep()
+    .reduce((acq, fn) => {
+      const result = chain(argvTouch)
+        .mapValues((obj, key) => {
+          const _obj = cloneDeep(obj)
+          _obj.result = fn(argvTouch)(_obj.value, key)
+          return _obj
+        })
+        .filter(obj => {
+          return (obj.result !== false)
+        })
+        .value()
+      return [acq, result]
+    }, [])
+    .flattenDeep()
+    .sortBy('key')
+    .map(obj => obj.result)
+    .value()
+}
 
-// // function collect(val, memo) {
-// //   memo.push(val);
-// //   return memo;
-// // }
+export function groupByIncrementingProp (collection, prop = 'key') {
+  const results = []
+  var bundle = []
+  each(collection, (obj, key) => {
+    if (!bundle.length || (obj[prop] - 1) !== last(bundle)[prop]) {
+      bundle = []
+      bundle.push(obj)
+    } else if (obj[prop] - 1 === last(bundle)[prop]) {
+      bundle.push(obj)
+    }
+    if (!collection[key + 1] || obj[prop] + 1 !== collection[key + 1][prop]) {
+      results.push(bundle)
+    }
+  })
+  return results
+}
 
-// const support = {
-//   '-s -size --size ---size <size>': {flags: ['-s', '--size'], type: 'required'},
-//   '-d --drink [drink]': {flags: ['-d', '--drink'], type: 'optional'},
-//   '-c, --collect [value]': true,
-//   '-c, --cheese [type]': true
-// }
+export const untouched = (argvTouch) => {
+  return chain(argvTouch)
+    .filter((obj) => !obj.touched)
+    .thru(groupByIncrementingProp)
+    .map(group => map(group, i => i.value))
+    .value()
+}
 
-// const {args} = program
-//   .option('-s')
+export const mergeProperties = (arrOfObjects) => {
+  const allKeys = uniq(flatten(map(arrOfObjects, keys)))
+  const mergedObj = zipObject(allKeys)
+  return mapValues(mergedObj, (value, key) => {
+    const values = map(arrOfObjects, obj => get(obj, key, new Undefined()))
+    const valuesWithoutUndefined = filter(values, (value) => !(value instanceof Undefined))
+    return coerceToString(uniq(flatten(valuesWithoutUndefined)))
+  })
+}
 
-// args['---s'] // true
+const defaultOpts = {
+  modifiers: [
+    modifiers.child.rest,
+    modifiers.doubleDash.no,
+    modifiers.doubleDash.equal,
+    modifiers.doubleDash.next,
+    modifiers.doubleDash.bool,
+    modifiers.onlyDash.bool,
+    modifiers.multiDash.spread
+  ],
+  specifiers: {}
+}
 
-// const reggiMinimist = (argv) => {
-//   return journey((argv) => {
-//     () => ({argv}),
-//     ({argv}) => argv.join(' ')
-//   })
-// }
+export const parseArgv = (argv, {modifiers, specifiers} = defaultOpts) => {
+  const argvTouch = touchObj(argv)
+  const specifiersRes = applySpecifier(specifiers, argv, argvTouch)
+  const generalRes = applyGeneral(modifiers, argv, argvTouch)
+  return chain([specifiersRes, generalRes, {_: untouched(argvTouch)}])
+    .flattenDeep()
+    .thru(mergeProperties)
+    .value()
+}
 
-// > minimist(['-h="hello"', '--h="meow"'])
-// { _: [], h: [ '"hello"', '"meow"' ] }
-// > minimist(['--h="meow"'])
-// { _: [], h: '"meow"' }
-// > minimist(['--h', 'meow"'])
-// { _: [], h: 'meow"' }
-// > minimist(['meow"'])
-// { _: [ 'meow"' ] }
-// > minimist(['meow"'])
-
-// > minimist(['-h="hello"', '--h="meow"'])
-
-// {_: [], '-h': 'hello', '--h': 'meow'})
-
-
-// ['-s', '-size', '--size', '---size'] 
-
-// minimist([
-//   'hello',
-//   '--example',
-//   "meow",
-//   "meow"
-// ])
-
-
-
-
-
-
-// console.log(mergeStrToArr({'cat': 'missy'}, {'dogs': true, 'cat': 'felix'}))
-
-
-
-
-
-// import {pick, defaults, keys, flattenDeep, get, zipObject, uniq, mapValues, groupBy, flatten, map, values, extend, fromPairs, filter, isArray, isPlainObject, range, merge, without} from 'lodash'
-
-
-
-// journey((argv, {
-//   groupedSingleFlagsNoValue = false,
-//   groupedSingleFlagsSpread = true,
-//   flagTypes = {}
-// }) => [
-//   () => ({argv}),
-//   ({argv}) => ({touchObj: touchObj(argv)}),
-//   ({touchObj}) => ({parsedTouchObj: map(touchObj, journey(({value, touched, thisKey}) => [
-//     () => ({
-//       touchObj,
-//       thisValue: value,
-//       touched,
-//       thisKey,
-//       groupedSingleFlagsNoValue,
-//       groupedSingleFlagsSpread,
-//       flagTypes
-//     }),
-//     ({thisKey}) => ({nextKey: thisKey + 1}),
-//     ({touchObj, nextKey}) => ({nextValue: get(touchObj, `${nextKey}.value`)}),
-//     ({touched}) => (touched) ? ({return: false}) : false,
-//     ({thisValue}) => ({thisValueIsGroupedSingleFlag: isGroupedSingleFlag(value)}),
-//     ({thisValue}) => ({thisValueIsFlag: isFlag(thisValue)}),
-//     ({nextValue}) => ({nextValueIsFlag: isFlag(nextValue)}),
-//     () => set(touchObj, `${thisKey}.touched`, true),
-//     (d) => ({spreadFlags: (d.groupedSingleFlagsSpread && d.thisIsGroupedSingleFlag)}),
-//     ({spreadFlags, thisValue}) => conditional(spreadflags, journey(() => [
-//       () => ({indivFlag: thisValue.replace(/-/g, '').split('')}),
-
-//       contentFlags = content.map(flag => ({[`-${flag}`]: true}))
-//       combos.concat(contentFlags)
-//     ]))
-//   ]))})
-// ])
+// console.log(parseArgv(['-G', '-max', '--cake', 'chocolate', 'walnut', '--', '--meow', 'hello', 'mom', 'love', '--dolphin'], [
+const res = parseArgv(['-g', '-no-g', '--g'])
+console.log(res)

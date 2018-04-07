@@ -57,6 +57,7 @@
     ]
   },
   "dependencies": {
-    "@reggi/journey": "file:../journey"
+    "@reggi/journey": "file:../journey",
+    "@reggi/journey.return-error": "file:../journey.return-error"
   }
 }
