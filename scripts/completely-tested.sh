@@ -16,7 +16,7 @@ echo 'Testing "pkg" suite...'
 # results -c -- npm --prefix ./packages/pkg-cli run test
 results -c -- npm --prefix ./packages/pkg-plugin-babel-6-to-node-4 run test
 results -c -- npm --prefix ./packages/pkg-plugin-babel-7-to-node-4 run test
-# results -c -- npm --prefix ./packages/pkg-plugin-cobalt run test
+results -c -- npm --prefix ./packages/pkg-plugin-cobalt run test
 results -c -- npm --prefix ./packages/pkg-plugin-jest run test
 results -c -- npm --prefix ./packages/pkg-plugin-name-dir run test
 results -c -- npm --prefix ./packages/pkg-plugin-name-scope run test
