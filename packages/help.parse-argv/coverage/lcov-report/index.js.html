@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">80.98% </span>
+        <span class="strong">85.33% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>149/184</span>
+        <span class='fraction'>157/184</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">76.92% </span>
@@ -30,14 +30,14 @@
         <span class='fraction'>60/78</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">72.41% </span>
+        <span class="strong">81.03% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>42/58</span>
+        <span class='fraction'>47/58</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">75.57% </span>
+        <span class="strong">81.68% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>99/131</span>
+        <span class='fraction'>107/131</span>
       </div>
     </div>
     <p class="quiet">
@@ -294,16 +294,16 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">65x</span>
-<span class="cline-any cline-yes">65x</span>
-<span class="cline-any cline-yes">65x</span>
-<span class="cline-any cline-yes">65x</span>
-<span class="cline-any cline-yes">65x</span>
-<span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-yes">31x</span>
+<span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">7x</span>
@@ -312,11 +312,11 @@
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">9x</span>
@@ -435,24 +435,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -667,25 +667,25 @@ export const applySpecifier = (specifiers, argv, argvTouch) =&gt; {
     .value()
 }
 &nbsp;
-export const applyGeneral = <span class="fstat-no" title="function not covered" >(f</span>ns, argv, argvTouch) =&gt; {
-<span class="cstat-no" title="statement not covered" >  return chain(fns)</span>
+export const applyGeneral = (fns, argv, argvTouch) =&gt; {
+  return chain(fns)
     .flattenDeep()
-    .reduce(<span class="fstat-no" title="function not covered" >(a</span>cq, fn) =&gt; {
-      const result = <span class="cstat-no" title="statement not covered" >chain(argvTouch)</span>
-        .mapValues(<span class="fstat-no" title="function not covered" >(o</span>bj, key) =&gt; {
-          const _obj = <span class="cstat-no" title="statement not covered" >cloneDeep(obj)</span>
-<span class="cstat-no" title="statement not covered" >          _obj.result = fn(argvTouch)(_obj.value, key)</span>
-<span class="cstat-no" title="statement not covered" >          return _obj</span>
+    .reduce((acq, fn) =&gt; {
+      const result = chain(argvTouch)
+        .mapValues((obj, key) =&gt; {
+          const _obj = cloneDeep(obj)
+          _obj.result = fn(argvTouch)(_obj.value, key)
+          return _obj
         })
-        .filter(<span class="fstat-no" title="function not covered" >ob</span>j =&gt; {
-<span class="cstat-no" title="statement not covered" >          return (obj.result !== false)</span>
+        .filter(obj =&gt; {
+          return (obj.result !== false)
         })
         .value()
-<span class="cstat-no" title="statement not covered" >      return [acq, result]</span>
+      return [acq, result]
     }, [])
     .flattenDeep()
     .sortBy('key')
-    .map(<span class="fstat-no" title="function not covered" >ob</span>j =&gt; <span class="cstat-no" title="statement not covered" >obj.result)</span>
+    .map(obj =&gt; obj.result)
     .value()
 }
 &nbsp;
@@ -751,7 +751,7 @@ export default parseArgv
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Apr 11 2018 00:21:48 GMT-0400 (EDT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Apr 11 2018 00:27:31 GMT-0400 (EDT)
 </div>
 </div>
 <script src="prettify.js"></script>

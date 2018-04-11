@@ -20,7 +20,8 @@ import {
   modifiers,
   touchObj,
   coerceToString,
-  applySpecifier
+  applySpecifier,
+  applyGeneral
 } from './index'
 
 test('isChild', () => {
@@ -301,6 +302,20 @@ test('applySpecifier: should return nothing', () => {
   const result = applySpecifier(specifiers, argv, argvTouch)
   expect(argvTouch[0].touched).toEqual(false)
   expect(result).toEqual([[]])
+})
+
+test('applyGeneral: empty args', () => {
+  const result = applyGeneral()
+  expect(result).toEqual([])
+})
+
+test('applyGeneral: should world', () => {
+  const fns = [modifiers.anyDash.bool]
+  const argv = ['--example']
+  const argvTouch = [{ value: '--example', key: 0, touched: false }]
+  const result = applyGeneral(fns, argv, argvTouch)
+  expect(argvTouch[0].touched).toEqual(true)
+  expect(result).toEqual([{'--example': true}])
 })
 
 // const cases = [
