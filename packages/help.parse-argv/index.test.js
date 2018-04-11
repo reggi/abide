@@ -21,7 +21,10 @@ import {
   touchObj,
   coerceToString,
   applySpecifier,
-  applyGeneral
+  applyGeneral,
+  groupByIncProp,
+  untouched,
+  mergeProperties
 } from './index'
 
 test('isChild', () => {
@@ -318,177 +321,70 @@ test('applyGeneral: should world', () => {
   expect(result).toEqual([{'--example': true}])
 })
 
-// const cases = [
-//   {'-h': {'-h': true, '_': []}},
-//   {'-max': {'-m': true, '-a': true, '-x': true, '_': []}},
-//   {'-max=thomas': {'-m': true, '-a': true, '-x': true, '_': []}},
-//   {'dolphin -max': {'-m': true, '-a': true, '-x': true, '_': ['dolphin']}},
-//   {'dolphin -max=thomas': {'-m': true, '-a': true, '-x': true, '_': ['dolphin']}},
-//   {'dolphin -max thomas': {'-m': true, '-a': true, '-x': true, '_': [['dolphin'], ['thomas']]}},
-//   // {'-h=thomas': {'-h': true, '_': []}} // broken
-// ]
+// groupByIncProp
 
-// test('parseArgv', async () => {
-//   return bluebird.map(cases, async (c) => {
-//     const argvString = Object.keys(c)[0]
-//     const expected = Object.values(c)[0]
-//     const argv = await stringArgv(argvString)
-//     const results = parseArgv(argv)
-//     expect(results).toEqual(expected)
-//   })
-// })
+test('groupByIncProp', () => {
+  const value = [{key: 1}, {key: 2}, {key: 3}, {key: 15}, {key: 16}, {key: 21}]
+  expect(groupByIncProp(value)).toEqual([
+    [{key: 1}, {key: 2}, {key: 3}],
+    [{key: 15}, {key: 16}],
+    [{key: 21}]
+  ])
+})
 
-// import {
-//   parseFlagOption,
-//   touchObj,
-//   Undefined,
-//   coerceToString,
-//   isGroupedSingleFlag,
-//   isFlag,
-//   mergeProperties,
-//   parseArgv,
-//   parseArgvPieceMeal,
-//   groupedSingleFlagsSpreadBool
-// } from './index'
+// untouched
 
-// test('parseFlags', () => {
-//   expect(parseFlagOption('-h,--help')).toEqual({'flags': ['-h', '--help'], 'optional': false, 'required': false})
-//   expect(parseFlagOption('-h    --help')).toEqual({'flags': ['-h', '--help'], 'optional': false, 'required': false})
-//   expect(parseFlagOption('  -h,    --help')).toEqual({'flags': ['-h', '--help'], 'optional': false, 'required': false})
-//   expect(parseFlagOption('  -h --help ')).toEqual({'flags': ['-h', '--help'], 'optional': false, 'required': false})
-// })
+test('untouched', () => {
+  const argvTouch = [
+    { value: 'example', key: 0, touched: false },
+    { value: '--', key: 1, touched: true },
+    { value: 'hello', key: 2, touched: false },
+    { value: 'world', key: 3, touched: true }
+  ]
+  expect(untouched(argvTouch)).toEqual([['example'], ['hello']])
+})
 
-// test('touchObj', () => {
-//   expect(touchObj(['alpha'])).toEqual([{value: 'alpha', touched: false}])
-// })
+// mergeProperties
 
-// test('Undefined', () => {
-//   const u = new Undefined()
-//   expect(u instanceof Undefined).toEqual(true)
-// })
+test('mergeProperties', () => {
+  const results = mergeProperties([
+    {'--a': 'a'},
+    {'--a': 'b'},
+    {'--example': 'thomas'}
+  ])
+  expect(results).toEqual({
+    '--a': ['a', 'b'],
+    '--example': 'thomas'
+  })
+})
 
-// test('coerceToString', () => {
-//   expect(coerceToString(['hello'])).toEqual('hello')
-//   expect(coerceToString(['hello', 'thomas'])).toEqual(['hello', 'thomas'])
-// })
+const cases = [
+  {'-h': {'-h': true, '_': []}},
+  {'-max': {'-m': true, '-a': true, '-x': true, '_': []}},
+  {'-max=thomas': {'-m': true, '-a': true, '-x': true, '_': []}},
+  {'dolphin -max': {'-m': true, '-a': true, '-x': true, '_': ['dolphin']}},
+  {'dolphin -max=thomas': {'-m': true, '-a': true, '-x': true, '_': ['dolphin']}},
+  {'dolphin -max thomas': {'-m': true, '-a': true, '-x': true, '_': [['dolphin'], ['thomas']]}},
+  {'-h=thomas': {'-h': true, '_': []}}
+]
 
-// test('mergeProperties', () => {
-//   expect(mergeProperties([
-//     {'--help': true},
-//     {'--help': false}
-//   ])).toEqual({'--help': [true, false]})
-// })
+test('parseArgv', async () => {
+  return bluebird.map(cases, async (c) => {
+    const argvString = Object.keys(c)[0]
+    const expected = Object.values(c)[0]
+    const argv = await stringArgv(argvString)
+    const results = parseArgv(argv)
+    expect(results).toEqual(expected)
+  })
+})
 
-// test('parseArgvPieceMeal: groupedSingleFlagsSpreadBool', async () => {
-//   const argv = await stringArgv('dolphin -max=thomas')
-//   const results = parseArgvPieceMeal(argv, [groupedSingleFlagsSpreadBool])
-//   expect(results).toEqual({'-m': true, '-a': true, '-x': true})
-// })
-
-// // const start = '-h'
-// // const start = ['-h', 'true']
-// // const end = {'h': true}
-
-// // const x = {
-// //   keyValue: (key, match) => match(key.match([/^-+/])),
-// //   keyReplace: (key) => key.replace(/^-+/, '')
-// // }
-
-// // import parseArgv, {groupedSingleFlagsSpread} from '@reggi/help'
-
-// // parseArgv(process.argv, {groupedSingleFlagsSpread})
-
-// // test('parseArgv: single flag', async () => {
-// //   const argv = await stringArgv('-h')
-// //   const results = parseArgv(argv)
-// //   expect(results).toEqual({
-// //     '-h': true
-// //   })
-// // })
-
-// // test('parseArgv: single flag eq value / space after', async () => {
-// //   const argv = await stringArgv('-h=thomas example')
-// //   const results = parseArgv(argv)
-// //   expect(results).toEqual({
-// //     '-h': 'thomas',
-// //     '_': ['example']
-// //   })
-// // })
-
-// // test('parseArgv: single flag space value', async () => {
-// //   const argv = await stringArgv('-h thomas example')
-// //   const results = parseArgv(argv)
-// //   expect(results).toEqual({
-// //     '-h': 'thomas',
-// //     '_': ['example']
-// //   })
-// // })
-
-// // test('parseArgv: double flag', async () => {
-// //   const argv = await stringArgv('--hello')
-// //   const results = parseArgv(argv)
-// //   expect(results).toEqual({
-// //     '--hello': true
-// //   })
-// // })
-
-// // test('parseArgv: double flag eq value', async () => {
-// //   const argv = await stringArgv('--hello=thomas')
-// //   const results = parseArgv(argv)
-// //   expect(results).toEqual({
-// //     '--hello': 'thomas'
-// //   })
-// // })
-
-// // test('parseArgv: double flag space value', async () => {
-// //   const argv = await stringArgv('--hello thomas')
-// //   const results = parseArgv(argv)
-// //   expect(results).toEqual({
-// //     '--hello': 'thomas'
-// //   })
-// // })
-
-// // test('parseArgv', async () => {
-// //   const argv = await stringArgv('a b c --exec npm run start --hello echo hi')
-// //   const results = parseArgv(argv, {
-// //     flagEqBool: true
-// //   })
-// //   expect(results).toEqual({
-// //     '--exec': true,
-// //     '--hello': true,
-// //     '_': ['a b c', 'npm run start', 'hi']
-// //   })
-// // })
-
-// // test('parseArgv', async () => {
-// //   const argv = await stringArgv('a b c --exec npm run start --hello echo hi')
-// //   const results = parseArgv(argv, {
-// //     flagEqUntilNextFlag: true
-// //   })
-// //   expect(results).toEqual({
-// //     '--exec': 'npm run start',
-// //     '--hello': 'echo hi',
-// //     '_': ['a b c']
-// //   })
-// // })
-
-// // test('parseArgv', async () => {
-// //   const argv = await stringArgv('a b c --exec npm run start --hello echo hi')
-// //   const results = parseArgv(argv, {
-// //     flagEqFirst: true
-// //   })
-// //   expect(results).toEqual({
-// //     '--exec': 'npm',
-// //     '--hello': 'echo',
-// //     '_': ['a b c', 'run start', 'hi']
-// //   })
-// // })
-
-//
-
-
-// console.log(parseArgv(['-G', '-max', '--cake', 'chocolate', 'walnut', '--', '--meow', 'hello', 'mom', 'love', '--dolphin'], [
-// const res = parseArgv(['--hello', '-g'], {modifiers: [
-//   modifiers.anyDash.bool
-// ]})
-// console.log(res)
+test('parseArgv: with specifier', async () => {
+  return bluebird.map(cases, async (c) => {
+    const argv = await stringArgv('-h')
+    const results = parseArgv(argv, {
+      modifiers: false,
+      specifiers: {'-h': modifiers.anyDash.bool}
+    })
+    expect(results).toEqual({'-h': true, '_': []})
+  })
+})

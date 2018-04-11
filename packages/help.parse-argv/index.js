@@ -6,7 +6,7 @@ export const dash = /^-(\w+)/
 export const multiDash = /^-(\w\w+)/
 export const doubleDash = /^--([\w|-]+)/
 export const doubleDashNo = /^--no-(\w+)/
-export const onlyDash = /^-(\w)$|^-(\w)=/
+export const onlyDash = /^-(\w)$|^-(\w)(?==)/
 export const anyDash = /^-+([\w|-]+)$|^-+([\w|-]+)=.+$/
 export const child = /^(--)$/
 export const childKey = '--'
@@ -175,14 +175,15 @@ export const applyGeneral = (fns, argv, argvTouch) => {
     .value()
 }
 
-export function groupByIncrementingProp (collection, prop = 'key') {
+export function groupByIncProp (collection, prop = 'key') {
   const results = []
   var bundle = []
   each(collection, (obj, key) => {
     if (!bundle.length || (obj[prop] - 1) !== last(bundle)[prop]) {
       bundle = []
       bundle.push(obj)
-    } else if (obj[prop] - 1 === last(bundle)[prop]) {
+    }
+    if (obj[prop] - 1 === last(bundle)[prop]) {
       bundle.push(obj)
     }
     if (!collection[key + 1] || obj[prop] + 1 !== collection[key + 1][prop]) {
@@ -195,7 +196,7 @@ export function groupByIncrementingProp (collection, prop = 'key') {
 export const untouched = (argvTouch) => {
   return chain(argvTouch)
     .filter((obj) => !obj.touched)
-    .thru(groupByIncrementingProp)
+    .thru(groupByIncProp)
     .map(group => map(group, i => i.value))
     .value()
 }
