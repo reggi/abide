@@ -1,0 +1,60 @@
+{
+  "name": "@reggi/help.string-argv",
+  "version": "1.0.0",
+  "author": "Thomas Reggi",
+  "main": "./index.build.js",
+  "scripts": {
+    "babel": "babel ./index.js --out-file ./index.build.js",
+    "babel:watch": "npm run babel -- --watch",
+    "standard": "standard",
+    "test": "jest --coverage",
+    "test:result": "npm run test --silent &>/dev/null || echo $?"
+  },
+  "babel": {
+    "plugins": [
+      "transform-object-rest-spread"
+    ],
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "4"
+          }
+        }
+      ]
+    ]
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "jest": "^22.4.2",
+    "standard": "^11.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "standard": {
+    "globals": [
+      "expect",
+      "test",
+      "beforeEach",
+      "afterEach"
+    ]
+  },
+  "dependencies": {
+    "execa": "^0.10.0"
+  }
+}

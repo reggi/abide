@@ -1,27 +1,16 @@
-import {
-  cloneDeep,
-  isArray,
-  get,
-  zipObject,
-  keys,
-  mapValues,
-  uniq,
-  flatten,
-  map,
-  last,
-  filter,
-  slice,
-  merge,
-  range,
-  chain,
-  each,
-  set } from 'lodash'
+import { each, cloneDeep, isArray, get, zipObject, keys, mapValues, uniq, flatten, map, last, filter, slice, merge, range, chain } from 'lodash'
+import filterUntil from '@reggi/help.filter-until'
+import setEntire from '@reggi/help.set-entire'
 
 export const dash = /^-(\w+)/
 export const multiDash = /^-(\w\w+)/
 export const doubleDash = /^--([\w|-]+)/
+export const doubleDashNo = /^--no-(\w+)/
 export const onlyDash = /^-(\w)$|^-(\w)=/
 export const anyDash = /^-+([\w|-]+)$|^-+([\w|-]+)=.+$/
+export const child = /^(--)$/
+export const childKey = '--'
+export const doubleDashNoKeyPrefix = '--'
 
 export const matchCheck = (patternString, statement) => {
   const match = statement.match(patternString)
@@ -36,10 +25,12 @@ export const matchCheck = (patternString, statement) => {
 export const isAnyDash = (statement) => matchCheck(anyDash, statement)
 export const isDashFlag = (statement) => matchCheck(dash, statement)
 export const isOnlyDashFlag = (statement) => matchCheck(onlyDash, statement)
-export const isMulitDashFlag = (statement) => matchCheck(multiDash, statement)
+export const isMultiDashFlag = (statement) => matchCheck(multiDash, statement)
 export const isDoubleDashFlag = (statement) => matchCheck(doubleDash, statement)
+export const isDoubleDashNoFlag = (statement) => matchCheck(doubleDashNo, statement)
+export const isChild = (statement) => matchCheck(child, statement)
 
-const assignBoolean = (criteria) => (argvTouch) => (item, key) => {
+export const assignBoolean = (criteria) => (argvTouch) => (item, key) => {
   if (argvTouch[key].touched) return false
   const validCase = criteria(item)
   if (!validCase) return false
@@ -47,7 +38,7 @@ const assignBoolean = (criteria) => (argvTouch) => (item, key) => {
   return {[validCase[0]]: true}
 }
 
-const assignEqual = (criteria) => (argvTouch) => (item, key) => {
+export const assignEqual = (criteria) => (argvTouch) => (item, key) => {
   if (argvTouch[key].touched) return false
   const validCase = criteria(item)
   if (!validCase) return false
@@ -57,7 +48,7 @@ const assignEqual = (criteria) => (argvTouch) => (item, key) => {
   return {[split[0]]: split[1]}
 }
 
-const assignNext = (criteria) => (argvTouch) => (item, key) => {
+export const assignNext = (criteria) => (argvTouch) => (item, key) => {
   if (argvTouch[key].touched) return false
   const validCase = criteria(item)
   if (!validCase) return false
@@ -69,20 +60,7 @@ const assignNext = (criteria) => (argvTouch) => (item, key) => {
   return {[validCase[0]]: next.value}
 }
 
-const filterUntil = (arr, matchFn) => {
-  var match = false
-  return filter(arr, (item) => {
-    if (match) return false
-    const isMatch = matchFn(item)
-    if (isMatch) match = true
-    if (match) return false
-    return true
-  })
-}
-
-// console.log(filterUntil(['ants', 'donkey', 'fish', 'seal'], (item) => item === 'fish'))
-
-const assignUntil = (criteria) => (argvTouch) => (item, key) => {
+export const assignUntil = (criteria) => (argvTouch) => (item, key) => {
   if (argvTouch[key].touched) return false
   const validCase = criteria(item)
   if (!validCase) return false
@@ -98,15 +76,37 @@ const assignUntil = (criteria) => (argvTouch) => (item, key) => {
   return {[validCase[0]]: value}
 }
 
-const setObjProps = (obj) => {
-  const newObj = {}
-  each(obj, (value, key) => {
-    set(newObj, key, value)
-  })
-  return newObj
+export const assignSpread = (criteria) => (argvTouch) => (item, key) => {
+  if (argvTouch[key].touched) return false
+  const validCase = criteria(item)
+  if (!validCase) return false
+  argvTouch[key].touched = true
+  return validCase[1].split('').map(flag => ({[`-${flag}`]: true}))
 }
 
-const _modifiers = {
+export const assignNo = (criteria, criteriaKeyPrefix) => (argvTouch) => (item, key) => {
+  if (argvTouch[key].touched) return false
+  const validCase = criteria(item)
+  if (!validCase) return false
+  argvTouch[key].touched = true
+  return {[`${criteriaKeyPrefix}${validCase[1]}`]: false}
+}
+
+export const assignRest = (criteria, criteriaKey) => (argvTouch) => (item, key) => {
+  if (argvTouch[key].touched) return false
+  const validCase = criteria(item)
+  if (!validCase) return false
+  const validValues = slice(argvTouch, key + 1)
+  if (!validValues.length) return false
+  const value = validValues.map(i => i.value).join(' ')
+  argvTouch[key].touched = true
+  each(validValues, i => {
+    argvTouch[i.key].touched = true
+  })
+  return {[criteriaKey]: value}
+}
+
+export const _modifiers = {
   'anyDash.bool': assignBoolean(isAnyDash),
   'anyDash.equal': assignEqual(isAnyDash),
   'anyDash.next': assignNext(isAnyDash),
@@ -115,17 +115,11 @@ const _modifiers = {
   'onlyDash.equal': assignEqual(isOnlyDashFlag),
   'onlyDash.next': assignNext(isOnlyDashFlag),
   'onlyDash.until': assignUntil(isOnlyDashFlag),
-  'multiDash.bool': assignBoolean(isMulitDashFlag),
-  'multiDash.equal': assignEqual(isMulitDashFlag),
-  'multiDash.next': assignNext(isMulitDashFlag),
-  'multiDash.until': assignUntil(isMulitDashFlag),
-  'multiDash.spread': (argvTouch) => (item, key) => {
-    if (argvTouch[key].touched) return false
-    const validCase = isMulitDashFlag(item)
-    if (!validCase) return false
-    argvTouch[key].touched = true
-    return validCase[1].split('').map(flag => ({[`-${flag}`]: true}))
-  },
+  'multiDash.bool': assignBoolean(isMultiDashFlag),
+  'multiDash.equal': assignEqual(isMultiDashFlag),
+  'multiDash.next': assignNext(isMultiDashFlag),
+  'multiDash.until': assignUntil(isMultiDashFlag),
+  'multiDash.spread': assignSpread(isMultiDashFlag),
   'dash.bool': assignBoolean(isDashFlag),
   'dash.equal': assignEqual(isDashFlag),
   'dash.next': assignNext(isDashFlag),
@@ -134,29 +128,11 @@ const _modifiers = {
   'doubleDash.equal': assignEqual(isDoubleDashFlag),
   'doubleDash.next': assignNext(isDoubleDashFlag),
   'doubleDash.until': assignUntil(isDoubleDashFlag),
-  'doubleDash.no': (argvTouch) => (item, key) => {
-    if (argvTouch[key].touched) return false
-    const criteria = item.match(/--no-(\w+)/)
-    if (!criteria || !criteria[1]) return false
-    argvTouch[key].touched = true
-    return {[`--${criteria[1]}`]: false}
-  },
-  'child.rest': (argvTouch) => (item, key) => {
-    if (argvTouch[key].touched) return false
-    if (!item.match(/^--$/)) return false
-    if (argvTouch.length === key + 1) return false
-    const validValues = slice(argvTouch, key + 1)
-    if (!validValues.length) return false
-    const value = validValues.map(i => i.value).join(' ')
-    argvTouch[key].touched = true
-    each(validValues, i => {
-      argvTouch[i.key].touched = true
-    })
-    return {'--': value}
-  }
+  'doubleDash.no': assignNo(isDoubleDashNoFlag, doubleDashNoKeyPrefix),
+  'child.rest': assignRest(isChild, childKey)
 }
 
-export const modifiers = setObjProps(_modifiers)
+export const modifiers = setEntire(_modifiers)
 export const touchObj = (arr) => merge(arr.map((value, key) => ({value, key})), range(arr.length).map(() => ({touched: false})))
 export class Undefined {}
 export const coerceToString = (val) => (isArray(val) && val.length === 1) ? val[0] : val
@@ -254,8 +230,4 @@ export const parseArgv = (argv, {modifiers = defaultModifiers, specifiers = fals
     .value()
 }
 
-// console.log(parseArgv(['-G', '-max', '--cake', 'chocolate', 'walnut', '--', '--meow', 'hello', 'mom', 'love', '--dolphin'], [
-// const res = parseArgv(['--hello', '-g'], {modifiers: [
-//   modifiers.anyDash.bool
-// ]})
-// console.log(res)
+export default parseArgv
