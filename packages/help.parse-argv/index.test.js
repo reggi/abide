@@ -16,7 +16,11 @@ import {
   assignUntil,
   assignSpread,
   assignNo,
-  assignRest
+  assignRest,
+  modifiers,
+  touchObj,
+  coerceToString,
+  applySpecifier
 } from './index'
 
 test('isChild', () => {
@@ -258,6 +262,45 @@ test('assignRest: should work as expected', () => {
   expect(argvTouch[1].touched).toEqual(true)
   expect(argvTouch[2].touched).toEqual(true)
   expect(argvTouch[3].touched).toEqual(true)
+})
+
+// touchObj
+
+test('touchObj', () => {
+  const result = touchObj(['hello'])
+  expect(result).toEqual([{'key': 0, 'touched': false, 'value': 'hello'}])
+})
+
+// coerceToString
+
+test('coerceToString', () => {
+  expect(coerceToString(['hello'])).toEqual('hello')
+  expect(coerceToString(['a', 'b'])).toEqual(['a', 'b'])
+})
+
+// applySpecifier
+
+test('applySpecifier: empty args', () => {
+  const result = applySpecifier()
+  expect(result).toEqual([])
+})
+
+test('applySpecifier: should world', () => {
+  const specifiers = {'--example': modifiers.doubleDash.bool}
+  const argv = ['--example']
+  const argvTouch = [{ value: '--example', key: 0, touched: false }]
+  const result = applySpecifier(specifiers, argv, argvTouch)
+  expect(argvTouch[0].touched).toEqual(true)
+  expect(result).toEqual([[{'--example': true}]])
+})
+
+test('applySpecifier: should return nothing', () => {
+  const specifiers = {'--example': modifiers.doubleDash.bool}
+  const argv = ['./index.js']
+  const argvTouch = [{ value: './index.js', key: 0, touched: false }]
+  const result = applySpecifier(specifiers, argv, argvTouch)
+  expect(argvTouch[0].touched).toEqual(false)
+  expect(result).toEqual([[]])
 })
 
 // const cases = [
