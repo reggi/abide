@@ -1,4 +1,3 @@
-import assert from 'assert'
 import bluebird from 'bluebird'
 import stringArgv from '@reggi/help.string-argv'
 import {

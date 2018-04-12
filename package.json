@@ -32,6 +32,8 @@
   },
   "dependencies": {
     "@reggi/help.filter-until": "file:packages/help.filter-until",
+    "@reggi/help.set-entire": "file:packages/help.set-entire",
+    "@reggi/help.string-argv": "file:packages/help.string-argv",
     "results-cli": "file:packages/results-cli"
   },
   "standard": {
