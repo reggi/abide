@@ -1,5 +1,5 @@
 {
-  "name": "@reggi/process-mock",
+  "name": "@reggi/process.mock",
   "version": "1.0.0",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
@@ -36,6 +36,7 @@
       }
     }
   },
+  "dependencies": {},
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -54,6 +55,5 @@
       "beforeEach",
       "afterEach"
     ]
-  },
-  "dependencies": {}
+  }
 }

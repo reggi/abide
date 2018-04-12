@@ -1,0 +1,1 @@
+import processMock from './index'
