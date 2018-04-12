@@ -1,0 +1,76 @@
+{
+  "name": "@reggi/babel-node-env-cli",
+  "version": "1.0.0",
+  "author": "Thomas Reggi",
+  "main": "./index.build.js",
+  "bin": {
+    "babel-node-env": "./index.js"
+  },
+  "scripts": {
+    "babel": "babel ./index.js --out-file ./index.build.js",
+    "babel:watch": "npm run babel -- --watch",
+    "postinstall": "npm run patch:patch-original",
+    "patch:copy-original": "cp ./node_modules/@babel/node/lib/_babel-node.js ./_babel-node.js",
+    "patch:create-patch": "diff -u ./node_modules/@babel/node/lib/_babel-node.js ./_babel-node.js > _babel-node.patch",
+    "patch:patch-here": "patch --forward ./_babel-node.js  ./_babel-node.patch",
+    "patch:patch-original": "patch --forward ./node_modules/@babel/node/lib/_babel-node.js  ./_babel-node.patch || true",
+    "standard": "standard",
+    "test": "jest --coverage",
+    "test:result": "npm run test --silent &>/dev/null || echo $?"
+  },
+  "babel": {
+    "plugins": [
+      "transform-object-rest-spread"
+    ],
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "4"
+          }
+        }
+      ]
+    ]
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  },
+  "dependencies": {
+    "@babel/core": "^7.0.0-beta.42",
+    "@babel/node": "^7.0.0-beta.42",
+    "@babel/preset-env": "^7.0.0-beta.42"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.2",
+    "babel-jest": "^22.4.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "jest": "^22.4.2",
+    "standard": "^11.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "index.build.js"
+    ],
+    "globals": [
+      "expect",
+      "test",
+      "beforeEach",
+      "afterEach"
+    ]
+  }
+}

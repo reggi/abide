@@ -1,0 +1,28 @@
+--- ./node_modules/@babel/node/lib/_babel-node.js	2018-03-15 16:46:15.000000000 -0400
++++ ./_babel-node.js	2018-03-18 05:21:42.000000000 -0400
+@@ -47,7 +47,17 @@
+   ignore: program.ignore,
+   only: program.only,
+   plugins: program.plugins,
+-  presets: program.presets
++  presets: [
++    [
++      "@babel/preset-env",
++      {
++        "targets": {
++          "node": "4.0.0"
++        },
++        "shippedProposals": true
++      }
++    ]
++  ]
+ });
+ 
+ var replPlugin = function replPlugin(_ref) {
+@@ -168,4 +178,4 @@
+   }
+ 
+   callback(err, result);
+-}
+\ No newline at end of file
++}
