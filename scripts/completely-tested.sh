@@ -1,17 +1,17 @@
 results='./node_modules/.bin/results'
 echo 'Testing "help" suite...'
-results -ci -- npm --prefix ./packages/help.filter-until run test
-results -ci -- npm --prefix ./packages/help.parse-argv run test
-results -ci -- npm --prefix ./packages/help.set-entire run test
-results -ci -- npm --prefix ./packages/help.string-argv run test
-# echo 'Testing "journey" suite...'
-# results -c -- npm --prefix ./packages/journey run test
-# results -c -- npm --prefix ./packages/journey.coerce-to-array run test
-# results -c -- npm --prefix ./packages/journey.coerce-to-plain-object run test
-# results -c -- npm --prefix ./packages/journey.fn-free run test
-# results -c -- npm --prefix ./packages/journey.fn-reduce run test
-# results -c -- npm --prefix ./packages/journey.is-promise run test
-# results -c -- npm --prefix ./packages/journey.pass-thru run test
+results -c -- npm --prefix ./packages/help.filter-until run test
+results -c -- npm --prefix ./packages/help.parse-argv run test
+results -c -- npm --prefix ./packages/help.set-entire run test
+results -c -- npm --prefix ./packages/help.string-argv run test
+echo 'Testing "journey" suite...'
+results -c -- npm --prefix ./packages/journey run test
+results -c -- npm --prefix ./packages/journey.coerce-to-array run test
+results -c -- npm --prefix ./packages/journey.coerce-to-plain-object run test
+results -c -- npm --prefix ./packages/journey.fn-free run test
+results -c -- npm --prefix ./packages/journey.fn-reduce run test
+results -c -- npm --prefix ./packages/journey.is-promise run test
+results -c -- npm --prefix ./packages/journey.pass-thru run test
 # echo 'Testing "pkg" suite...'
 # # results -c -- npm --prefix ./packages/pkg run test
 # # results -c -- npm --prefix ./packages/pkg-cli run test
