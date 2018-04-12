@@ -12,7 +12,7 @@
     "bootstrap": "npm i packages/* && lerna bootstrap --hoist &>/dev/null || true",
     "test-results": "lerna run --parallel --loglevel=silent test:result -- --silent",
     "fully-tested": "sh ./scripts/completely-tested.sh",
-    "jenkins": "npm run fully-tested",
+    "jenkins": "npm --prefix ./packages/results-cli/ run babel && npm run fully-tested",
     "standard": "standard"
   },
   "keywords": [],
