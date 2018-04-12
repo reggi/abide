@@ -1,5 +1,5 @@
 echo 'Testing "help" suite...'
-results -c -- npm --prefix ./packages/help.filter-until run test
+./node_modules/.bin/results -c -- npm --prefix ./packages/help.filter-until run test
 # results -c -- npm --prefix ./packages/help.parse-argv run test
 # results -c -- npm --prefix ./packages/help.set-entire run test
 # results -c -- npm --prefix ./packages/help.string-argv run test

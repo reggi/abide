@@ -31,7 +31,8 @@
     "standard": "^11.0.0"
   },
   "dependencies": {
-    "@reggi/help.filter-until": "file:packages/help.filter-until"
+    "@reggi/help.filter-until": "file:packages/help.filter-until",
+    "results-cli": "file:packages/results-cli"
   },
   "standard": {
     "parser": "babel-eslint",
