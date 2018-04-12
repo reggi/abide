@@ -11,8 +11,9 @@
     "link-pkg-cli": "cd ../packages/pkg-cli && npm link",
     "bootstrap": "npm i packages/* && lerna bootstrap --hoist &>/dev/null || true",
     "test-results": "lerna run --parallel --loglevel=silent test:result -- --silent",
-    "fully-tested": "sh ./scripts/completely-tested.sh",
-    "jenkins": "npm --prefix ./packages/results-cli/ run babel && npm run fully-tested",
+    "fully-tested": "sh -e ./scripts/completely-tested.sh",
+    "lerna:boostrap:hoist": "lerna bootstrap --hoist &>/dev/null",
+    "jenkins": "npm --prefix ./packages/results-cli/ run babel &&  npm run lerna:boostrap:hoist && npm run fully-tested",
     "standard": "standard"
   },
   "keywords": [],

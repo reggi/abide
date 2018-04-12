@@ -1,9 +1,9 @@
 results='./node_modules/.bin/results'
 echo 'Testing "help" suite...'
-results -c -- npm --prefix ./packages/help.filter-until run test &
-results -c -- npm --prefix ./packages/help.parse-argv run test &
-results -c -- npm --prefix ./packages/help.set-entire run test &
-results -c -- npm --prefix ./packages/help.string-argv run test
+results -ci -- npm --prefix ./packages/help.filter-until run test
+results -ci -- npm --prefix ./packages/help.parse-argv run test
+results -ci -- npm --prefix ./packages/help.set-entire run test
+results -ci -- npm --prefix ./packages/help.string-argv run test
 # echo 'Testing "journey" suite...'
 # results -c -- npm --prefix ./packages/journey run test
 # results -c -- npm --prefix ./packages/journey.coerce-to-array run test
