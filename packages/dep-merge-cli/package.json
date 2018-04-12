@@ -1,8 +1,10 @@
 {
-  "name": "@reggi/pkg",
+  "name": "@reggi/dep-merge-cli",
   "version": "1.0.0",
   "author": "Thomas Reggi",
-  "main": "./index.build.js",
+  "bin": {
+    "dep-merge": "./index.build.js"
+  },
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
@@ -12,8 +14,8 @@
   },
   "babel": {
     "plugins": [
-      "transform-runtime",
-      "transform-object-rest-spread"
+      "transform-object-rest-spread",
+      "transform-runtime"
     ],
     "presets": [
       [
@@ -37,20 +39,8 @@
       }
     }
   },
-  "dependencies": {
-    "@reggi/journey": "file:../journey",
-    "@reggi/journey.coerce-to-array": "file:../journey.coerce-to-array",
-    "@reggi/pkg.is-local-module": "file:../pkg.is-local-module",
-    "@reggi/pkg.pretty-json": "file:../pkg.pretty-json",
-    "@reggi/pkg.read-json": "file:../pkg.read-json",
-    "babel-runtime": "^6.26.0",
-    "bluebird": "^3.5.1",
-    "lodash": "^4.17.5"
-  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.2.2",
-    "babel-jest": "^22.4.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
@@ -66,10 +56,11 @@
       "test",
       "beforeEach",
       "afterEach"
-    ],
-    "parser": "babel-eslint",
-    "ignore": [
-      "index.build.js"
     ]
+  },
+  "dependencies": {
+    "@reggi/journey": "file:../journey",
+    "@reggi/pkg.json-parse": "file:../pkg.json-parse",
+    "has-flag": "^3.0.0"
   }
 }
