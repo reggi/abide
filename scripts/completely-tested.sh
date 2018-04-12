@@ -12,7 +12,7 @@ results -c -- npm --prefix ./packages/journey.fn-free run test
 results -c -- npm --prefix ./packages/journey.fn-reduce run test
 results -c -- npm --prefix ./packages/journey.is-promise run test
 results -c -- npm --prefix ./packages/journey.pass-thru run test
-# echo 'Testing "pkg" suite...'
+echo 'Testing "pkg" suite...'
 # results -c -- npm --prefix ./packages/pkg run test
 # results -c -- npm --prefix ./packages/pkg-cli run test
 results -c -- npm --prefix ./packages/pkg-plugin-babel-6-to-node-4 run test
