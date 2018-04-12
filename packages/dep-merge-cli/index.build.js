@@ -201,9 +201,7 @@ var depMerge = exports.depMerge = (0, _journey2.default)(function (dirPath) {
       };
     }()]);
   }];
-}, { hook: function hook(acq, res) {
-    return console.log(res);
-  } });
+});
 
 var unMerge = exports.unMerge = (0, _journey2.default)(function (dirPath) {
   return [function () {
@@ -367,9 +365,7 @@ var unMerge = exports.unMerge = (0, _journey2.default)(function (dirPath) {
       };
     }()]);
   }];
-}, { hook: function hook(acq, res) {
-    return console.log(res);
-  } });
+});
 
 if ((0, _hasFlag2.default)('--unmerge')) {
   unMerge(process.argv.slice(2)[0]);
