@@ -13,3 +13,4 @@ fi
 echo "ensure-installed: resolved command $1 to $cmd"
 unhyphenated_name=$(echo $1 | tr '-' '_')
 declare "${unhyphenated_name}"="$cmd"
+export ${unhyphenated_name}
