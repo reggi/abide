@@ -1,3 +1,4 @@
-npm i lerna
-npm i ./packages/dep-merge-cli
-./node_modules/.bin/lerna exec -- ../../node_modules/.bin/dep-merge ./
+. ./scripts/ensure-installed.sh dep-merge ./packages/dep-merge-cli
+. ./scripts/ensure-installed.sh lerna lerna
+echo 'post-install: dep-merge merging'
+$lerna exec -- $dep_merge ./
