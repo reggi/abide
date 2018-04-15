@@ -13,8 +13,8 @@
     "test-results": "lerna run --parallel --loglevel=silent test:result -- --silent",
     "fully-tested": "sh -e ./scripts/completely-tested.sh",
     "lerna:boostrap:hoist": "lerna bootstrap --hoist &>/dev/null || true",
-    "preinstall": "sh -e ./scripts/preinstall.sh",
-    "postinstall": "sh -e ./scripts/postinstall.sh",
+    "preinstall": "bash -e ./scripts/preinstall.sh",
+    "postinstall": "bash -e ./scripts/postinstall.sh",
     "jenkins": "npm --prefix ./packages/results-cli/ run babel && npm run fully-tested",
     "standard": "standard",
     "bootstrap": "sh -e ./scripts/bootstrap.sh"
