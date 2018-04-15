@@ -13,8 +13,10 @@
     "test-results": "lerna run --parallel --loglevel=silent test:result -- --silent",
     "fully-tested": "sh -e ./scripts/completely-tested.sh",
     "lerna:boostrap:hoist": "lerna bootstrap --hoist &>/dev/null || true",
-    "preinstall": "bash -e ./scripts/preinstall.sh",
-    "postinstall": "bash -e ./scripts/postinstall.sh",
+    "dep-merge:preinstall": "bash -e ./scripts/preinstall.sh",
+    "dep-merge:postinstall": "bash -e ./scripts/postinstall.sh",
+    "preinstall": "npm run dep-merge:preinstall",
+    "postinstall": "npm run dep-merge:postinstall && npm run link-parent-bin",
     "jenkins": "npm --prefix ./packages/results-cli/ run babel && npm run fully-tested",
     "standard": "standard",
     "bootstrap": "sh -e ./scripts/bootstrap.sh"
@@ -32,6 +34,7 @@
     "jest": "^22.4.2",
     "json": "^9.0.6",
     "lerna": "^2.10.1",
+    "link-parent-bin": "^0.1.3",
     "standard": "^11.0.0"
   },
   "dependencies": {
