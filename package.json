@@ -16,7 +16,7 @@
     "dep-merge:preinstall": "bash -e ./scripts/preinstall.sh",
     "dep-merge:postinstall": "bash -e ./scripts/postinstall.sh",
     "preinstall": "npm run dep-merge:preinstall",
-    "postinstall": "npm run dep-merge:postinstall && npm run link-parent-bin",
+    "postinstall": "npm run dep-merge:postinstall && link-parent-bin",
     "jenkins": "npm --prefix ./packages/results-cli/ run babel && npm run fully-tested",
     "standard": "standard",
     "bootstrap": "sh -e ./scripts/bootstrap.sh"
