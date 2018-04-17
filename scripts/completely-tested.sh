@@ -1,5 +1,6 @@
 results='./node_modules/.bin/results'
 echo 'Testing "help" suite...'
+results -c -- npm --prefix ./packages/help run test
 results -c -- npm --prefix ./packages/help.filter-until run test
 results -c -- npm --prefix ./packages/help.parse-argv run test
 results -c -- npm --prefix ./packages/help.set-entire run test

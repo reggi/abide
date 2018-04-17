@@ -154,13 +154,13 @@ var Program = function () {
             required = _parseFlagOption.required,
             optional = _parseFlagOption.optional;
 
-        if (!required && !optional) {
-          return flags.map(function (flag) {
-            return { [flag]: { type: 'bool', required, optional, desc, modifier } };
-          });
-        } else if (required || optional) {
+        if (required || optional) {
           return flags.map(function (flag) {
             return { [flag]: { type: 'next', required, optional, desc, modifier } };
+          });
+        } else {
+          return flags.map(function (flag) {
+            return { [flag]: { type: 'bool', required, optional, desc, modifier } };
           });
         }
       }).flattenDeep().thru(function (arr) {
@@ -170,8 +170,8 @@ var Program = function () {
       var specifiers = (0, _lodash.mapValues)(flagTypes, function (_ref15) {
         var type = _ref15.type;
 
-        if (type === 'bool') return _help.modifiers.anyDash.bool;
         if (type === 'next') return _help.modifiers.anyDash.next;
+        return _help.modifiers.anyDash.bool;
       });
       var flags = (0, _help.parseArgv)(argv, { specifiers });
 
@@ -192,7 +192,6 @@ var Program = function () {
             desc = _ref17.desc;
 
         var value = flags[flag] || false;
-        if (!modifier) return false;
         if (typeof modifier === 'string') {
           return { [modifier]: value };
         } else if (typeof modifier === 'function') {
@@ -202,6 +201,7 @@ var Program = function () {
             return _extends({}, acq, fn({ value, flag, required, optional, desc }));
           }, {});
         }
+        return false;
       }).without(true).without(false).thru(function (v) {
         return _lodash.extend.apply(null, v);
       }).value();

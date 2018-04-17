@@ -67,13 +67,13 @@ export class Program {
     const flagTypes = chain(this.options)
       .map(({flagString, desc, modifier}) => {
         const {flags, required, optional} = parseFlagOption(flagString)
-        if (!required && !optional) {
-          return flags.map(flag => {
-            return {[flag]: {type: 'bool', required, optional, desc, modifier}}
-          })
-        } else if (required || optional) {
+        if (required || optional) {
           return flags.map(flag => {
             return {[flag]: {type: 'next', required, optional, desc, modifier}}
+          })
+        } else {
+          return flags.map(flag => {
+            return {[flag]: {type: 'bool', required, optional, desc, modifier}}
           })
         }
       })
@@ -82,8 +82,8 @@ export class Program {
       .value()
 
     const specifiers = mapValues(flagTypes, ({type}) => {
-      if (type === 'bool') return modifiers.anyDash.bool
       if (type === 'next') return modifiers.anyDash.next
+      return modifiers.anyDash.bool
     })
     const flags = parseArgv(argv, {specifiers})
 
@@ -96,7 +96,6 @@ export class Program {
     const additions = chain(flagTypes)
       .map(({modifier, required, optional, desc}, flag) => {
         const value = flags[flag] || false
-        if (!modifier) return false
         if (typeof modifier === 'string') {
           return {[modifier]: value}
         } else if (typeof modifier === 'function') {
@@ -106,6 +105,7 @@ export class Program {
             return {...acq, ...fn({value, flag, required, optional, desc})}
           }, {})
         }
+        return false
       })
       .without(true)
       .without(false)
