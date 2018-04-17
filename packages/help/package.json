@@ -1,6 +1,6 @@
 {
   "name": "@reggi/help",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {
@@ -55,8 +55,8 @@
     ]
   },
   "dependencies": {
-    "@reggi/help.parse-argv": "file:../help.parse-argv",
-    "@reggi/journey": "file:../journey",
+    "@reggi/help.parse-argv": "0.0.2",
+    "@reggi/journey": "1.0.0",
     "lodash": "^4.17.5"
   }
 }

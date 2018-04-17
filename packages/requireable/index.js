@@ -80,6 +80,6 @@ export const requireable = journey(({modPath, nodeBin, inherit}) => [
   // should run this even if there are errors
   async ({tmpFullDir}) => ({resultClean: await fs.remove(tmpFullDir)})
   // returns core
-], {results: 'core', hook: hook('requireable')})
+], {return: 'core', hook: hook('requireable')})
 
 export default requireable

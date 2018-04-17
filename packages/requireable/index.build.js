@@ -444,6 +444,6 @@ var requireable = exports.requireable = (0, _journey.journey)(function (_ref24) 
   }()
   // returns core
   ];
-}, { results: 'core', hook: hook('requireable') });
+}, { return: 'core', hook: hook('requireable') });
 
 exports.default = requireable;

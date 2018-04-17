@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import help from '@reggi/help'
 import {get, flattenDeep} from 'lodash'
 

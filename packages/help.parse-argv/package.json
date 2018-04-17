@@ -1,6 +1,6 @@
 {
   "name": "@reggi/help.parse-argv",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {
@@ -37,7 +37,7 @@
     }
   },
   "devDependencies": {
-    "@reggi/help.string-argv": "file:../help.string-argv",
+    "@reggi/help.string-argv": "0.0.1",
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
@@ -59,8 +59,8 @@
     ]
   },
   "dependencies": {
-    "@reggi/help.filter-until": "file:../help.filter-until",
-    "@reggi/help.set-entire": "file:../help.set-entire",
-    "@reggi/journey": "file:../journey"
+    "@reggi/help.filter-until": "0.0.1",
+    "@reggi/help.set-entire": "0.0.1",
+    "@reggi/journey": "1.0.0"
   }
 }
