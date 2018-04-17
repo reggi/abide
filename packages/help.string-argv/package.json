@@ -1,6 +1,6 @@
 {
   "name": "@reggi/help.string-argv",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {
