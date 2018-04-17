@@ -78,7 +78,7 @@ export const requireable = journey(({modPath, nodeBin, inherit}) => [
   // runs core code (catches errors)
   async ({modPath, tmpFullDir}) => ({core: await requireableCoreWrapped({modPath, tmpFullDir, nodeBin, inherit})}),
   // should run this even if there are errors
-  async ({tmpFullDir}) => ({resultClean: await fs.remove(tmpFullDir,)})
+  async ({tmpFullDir}) => ({resultClean: await fs.remove(tmpFullDir)})
   // returns core
 ], {results: 'core', hook: hook('requireable')})
 
