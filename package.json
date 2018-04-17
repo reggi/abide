@@ -39,8 +39,9 @@
   },
   "dependencies": {
     "@reggi/dep-merge-cli": "file:packages/dep-merge-cli",
-    "@reggi/help": "file:packages/help.parse-argv",
+    "@reggi/help": "file:packages/help",
     "@reggi/help.filter-until": "file:packages/help.filter-until",
+    "@reggi/help.parse-argv": "file:packages/help.parse-argv",
     "@reggi/help.set-entire": "file:packages/help.set-entire",
     "@reggi/help.string-argv": "file:packages/help.string-argv",
     "@reggi/journey": "file:packages/journey",
