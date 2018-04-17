@@ -9,4 +9,6 @@ var throwNewError = exports.throwNewError = function throwNewError(message) {
   throw new ErrorObj(message);
 };
 
+var throwError = exports.throwError = throwNewError;
+
 exports.default = throwNewError;

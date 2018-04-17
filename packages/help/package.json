@@ -1,5 +1,5 @@
 {
-  "name": "@reggi/help.parse-argv",
+  "name": "@reggi/help",
   "version": "1.0.0",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
@@ -37,15 +37,11 @@
     }
   },
   "devDependencies": {
-    "@reggi/help.string-argv": "file:../help.string-argv",
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "bluebird": "^3.5.1",
-    "execa": "^0.10.0",
     "jest": "^22.4.2",
-    "standard": "^11.0.0",
-    "string-argv": "0.0.2"
+    "standard": "^11.0.0"
   },
   "publishConfig": {
     "access": "public"
@@ -59,8 +55,8 @@
     ]
   },
   "dependencies": {
-    "@reggi/help.filter-until": "file:../help.filter-until",
-    "@reggi/help.set-entire": "file:../help.set-entire",
-    "@reggi/journey": "file:../journey"
+    "@reggi/help.parse-argv": "file:../help.parse-argv",
+    "@reggi/journey": "file:../journey",
+    "lodash": "^4.17.5"
   }
 }
