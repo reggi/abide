@@ -1,6 +1,6 @@
 {
   "name": "@reggi/requireable-cli",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {
@@ -58,9 +58,9 @@
   },
   "dependencies": {
     "@reggi/help": "file:../help",
+    "@reggi/requireable": "file:../requireable",
     "babel-runtime": "^6.26.0",
     "debug": "^3.1.0",
-    "lodash": "^4.17.5",
-    "requireable": "file:../requireable"
+    "lodash": "^4.17.5"
   }
 }

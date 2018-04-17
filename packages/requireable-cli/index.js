@@ -25,7 +25,7 @@ if (verbose) {
   process.env['DEBUG'] = 'requireable-cli,requireable:*'
 }
 
-const requireable = require('requireable').default
+const requireable = require('@reggi/requireable').default
 const d = require('debug')('requireable-cli')
 
 d({modPath, nodeBin, verbose, version, silent, needsHelp})
