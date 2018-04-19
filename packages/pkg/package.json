@@ -66,10 +66,14 @@
   },
   "standard": {
     "globals": [
+      "beforeAll",
+      "afterAll",
       "expect",
       "test",
       "beforeEach",
-      "afterEach"
+      "afterEach",
+      "it",
+      "jest"
     ],
     "parser": "babel-eslint",
     "ignore": [
