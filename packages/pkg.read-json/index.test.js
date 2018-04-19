@@ -7,6 +7,7 @@ const invalidJson = '{hello: world}'
 beforeEach(async () => {
   mock({
     'dir': {
+      '.valid': JSON.stringify(validJson),
       'valid.json': JSON.stringify(validJson),
       'invalid.json': invalidJson
     }
@@ -15,6 +16,14 @@ beforeEach(async () => {
 
 afterEach(async () => {
   mock.restore()
+})
+
+test('readJson: .valid example', async () => {
+  const workingDir = 'dir'
+  const existsRequired = true
+  const validJsonRequired = true
+  const result = await readJson({workingDir, fileName: '.valid', existsRequired, validJsonRequired})
+  expect(result).toEqual(validJson)
 })
 
 test('readJson: valid, true existsRequired, true validJsonRequired', async () => {

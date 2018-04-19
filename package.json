@@ -80,10 +80,13 @@
       "index.build.js"
     ],
     "globals": [
+      "beforeAll",
+      "afterAll",
       "expect",
       "test",
       "beforeEach",
       "afterEach",
+      "it",
       "jest"
     ]
   }
