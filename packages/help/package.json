@@ -47,6 +47,9 @@
     "access": "public"
   },
   "standard": {
+    "ignore": [
+      "*.build.js"
+    ],
     "globals": [
       "expect",
       "test",

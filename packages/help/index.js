@@ -1,5 +1,5 @@
-import {max, reduce, isArray, includes, each, mapValues, extend, chain, get} from 'lodash'
-import {parseArgv, modifiers} from '@reggi/help.parse-argv'
+import {omitBy, isUndefined, find, map, max, reduce, isArray, includes, each, chain, get} from 'lodash'
+import {parseArgv, modifiers, mergeProperties} from '@reggi/help.parse-argv'
 import {journey} from '@reggi/journey'
 
 export const parseFlagOption = journey((flagsOption) => [
@@ -21,8 +21,8 @@ export const choices = (...choices) => ({value, flag, required}) => {
   return false
 }
 
-export const rename = (name, defaultValue = false) => ({value, flag}) => {
-  const _value = (value === false) ? defaultValue : value
+export const rename = (name, defaultValue) => ({value, flag}) => {
+  const _value = defaultValue || value
   return {[name]: _value}
 }
 
@@ -64,38 +64,36 @@ export class Program {
     return this
   }
   parse (argv) {
-    const flagTypes = chain(this.options)
-      .map(({flagString, desc, modifier}) => {
-        const {flags, required, optional} = parseFlagOption(flagString)
-        if (required || optional) {
-          return flags.map(flag => {
-            return {[flag]: {type: 'next', required, optional, desc, modifier}}
-          })
-        } else {
-          return flags.map(flag => {
-            return {[flag]: {type: 'bool', required, optional, desc, modifier}}
-          })
-        }
-      })
-      .flattenDeep()
-      .thru((arr) => extend.apply(null, arr))
+    // get options in shape for specifiers
+    const defaultSpecifier = ({required, optional}) => {
+      if (required || optional) return {specifier: modifiers.anyDash.next, specifierType: 'next'}
+      return {specifier: modifiers.anyDash.bool, specifierType: 'bool'}
+    }
+    let options = this.options
+    options = map(options, option => ({...option, ...parseFlagOption(option.flagString)}))
+    options = map(options, option => ({...option, ...defaultSpecifier(option)}))
+    // get specifiers in shape for parseArgv
+    const specifiers = chain(options)
+      .map(option => map(option.flags, flag => [flag, option.specifier]))
+      .flatten()
+      .fromPairs()
       .value()
-
-    const specifiers = mapValues(flagTypes, ({type}) => {
-      if (type === 'next') return modifiers.anyDash.next
-      return modifiers.anyDash.bool
-    })
+    // provides flag values
     const flags = parseArgv(argv, {specifiers})
-
-    each(flagTypes, ({type, required, optional}, flag) => {
-      if (typeof flags[flag] === 'boolean' && type !== 'bool' && required) {
-        throw new Error(`${flag}: missing required value ${required}`)
+    // throws error for required fields
+    each(flags, (value, flag) => {
+      const option = find(options, option => includes(option.flags, flag))
+      if (option && typeof value === 'boolean' && option.specifierType !== 'bool' && option.required) {
+        throw new Error(`${flag}: missing required value ${option.required}`)
       }
     })
-
-    const additions = chain(flagTypes)
-      .map(({modifier, required, optional, desc}, flag) => {
-        const value = flags[flag] || false
+    // apply modifiers
+    const modifierValues = chain(options)
+      .map((option) => map(option.flags, flag => ({flag, ...option})))
+      .flatten()
+      .map(option => ({...option, value: get(flags, option.flag, undefined)}))
+      .map((option) => {
+        const {modifier, required, optional, desc, value, flag} = option
         if (typeof modifier === 'string') {
           return {[modifier]: value}
         } else if (typeof modifier === 'function') {
@@ -107,11 +105,14 @@ export class Program {
         }
         return false
       })
-      .without(true)
       .without(false)
-      .thru(v => extend.apply(null, v))
+      .without(true)
+      .map(values => omitBy(values, isUndefined))
+      .thru(mergeProperties)
       .value()
-    this.flags = {...flags, ...additions}
+    this.parsed = flags
+    this.modifiers = modifierValues
+    this.flags = {...flags, ...modifierValues}
     return this
   }
 }

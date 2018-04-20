@@ -23,9 +23,9 @@ test('should be general case', () => {
     .option('-b, --bbq-sauce', 'Add bbq sauce')
     .option('-c, --cheese [type]', 'Add the specified type of cheese [marble]')
     .parse([])
-  expect(tool.flags.help).toEqual(false)
+  expect(tool.flags.help).toEqual(undefined)
   expect(tool.flags.size).toEqual('small')
-  expect(tool.flags.meat).toEqual(false)
+  expect(tool.flags.meat).toEqual(undefined)
   expect(typeof tool.help()).toEqual('string')
 })
 
@@ -38,7 +38,7 @@ test('should meat to be false', () => {
       rename('meat')
     ])
     .parse([])
-  expect(tool.flags.meat).toEqual(false)
+  expect(tool.flags.meat).toEqual(undefined)
 })
 
 test('should meat value be required', () => {
@@ -86,6 +86,24 @@ test('should meat value valid required', () => {
     ])
     .parse(['--meat', 'sausage'])
   expect(tool.flags.meat).toEqual('sausage')
+})
+
+test('should have pineapple with --pineapple', () => {
+  const tool = help()
+    .name('pizza-cli')
+    .description('The best pizza command-line-interface.')
+    .option('-p, --pineapple', 'add pineapple', 'pineapple')
+    .parse(['--pineapple'])
+  expect(tool.flags.pineapple).toEqual(true)
+})
+
+test('should have pineapple with -p', () => {
+  const tool = help()
+    .name('pizza-cli')
+    .description('The best pizza command-line-interface.')
+    .option('-p, --pineapple', 'add pineapple', 'pineapple')
+    .parse(['-p'])
+  expect(tool.flags.pineapple).toEqual(true)
 })
 
 test('parseFlagOption', () => {
