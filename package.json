@@ -39,6 +39,7 @@
     "standard": "^11.0.0"
   },
   "dependencies": {
+    "@reggi/dep-merge": "file:packages/dep-merge",
     "@reggi/dep-merge-cli": "file:packages/dep-merge-cli",
     "@reggi/help": "file:packages/help",
     "@reggi/help.filter-until": "file:packages/help.filter-until",
