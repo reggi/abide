@@ -73,6 +73,7 @@
     "@reggi/pkg.read-json": "file:packages/pkg.read-json",
     "@reggi/pkg.throw-error": "file:packages/pkg.throw-error",
     "@reggi/process.mock": "file:packages/process.mock",
+    "@reggi/process.stdio": "file:packages/process.stdio",
     "results-cli": "file:packages/results-cli"
   },
   "standard": {
