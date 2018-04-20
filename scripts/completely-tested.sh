@@ -1,4 +1,8 @@
 results='./node_modules/.bin/results'
+echo 'Testing "housekeeping" suite...'
+results -c -- npm --prefix ./packages/command run test
+results -c -- npm --prefix ./packages/dep-merge run test
+results -c -- npm --prefix ./packages/dep-merge-cli run test
 echo 'Testing "help" suite...'
 results -c -- npm --prefix ./packages/help run test
 results -c -- npm --prefix ./packages/help.filter-until run test
@@ -33,3 +37,6 @@ results -c -- npm --prefix ./packages/pkg.pretty-json run test
 results -c -- npm --prefix ./packages/pkg.prop-overwrite run test
 results -c -- npm --prefix ./packages/pkg.read-json run test
 results -c -- npm --prefix ./packages/pkg.throw-error run test
+echo 'Testing "process" suite...'
+results -c -- npm --prefix ./packages/process.mock run test
+results -c -- npm --prefix ./packages/process.stdio run test

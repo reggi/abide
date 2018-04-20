@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`dep-merge passing in dir 1`] = `
+Object {
+  "dirPath": "/my-module",
+  "endsInPackageJson": null,
+  "fileExists": true,
+  "moveOg": undefined,
+  "mvPath": "/my-module/original_package.json",
+  "newPackageJson": Object {
+    "dependencies": Object {
+      "a": "*",
+      "b": "*",
+      "c": "*",
+      "doe": "*",
+      "mi": "*",
+      "rae": "*",
+    },
+    "devDependencies": Object {
+      "a": "*",
+      "b": "*",
+      "c": "*",
+    },
+    "temporary-file:deletion-prevention": "temporary-file:deletion-prevention",
+  },
+  "outputJson": undefined,
+  "packageContent": Object {
+    "dependencies": Object {
+      "doe": "*",
+      "mi": "*",
+      "rae": "*",
+    },
+    "devDependencies": Object {
+      "a": "*",
+      "b": "*",
+      "c": "*",
+    },
+  },
+  "pkgPath": "/my-module/package.json",
+}
+`;
+
+exports[`dep-merge passing in dir 2`] = `
+Object {
+  "dirPath": "/my-module",
+  "endsInPackageJson": null,
+  "moveOg": undefined,
+  "mvPath": "/my-module/original_package.json",
+  "newExists": true,
+  "originalExists": true,
+  "packageJsonContent": Object {
+    "dependencies": Object {
+      "a": "*",
+      "b": "*",
+      "c": "*",
+      "doe": "*",
+      "mi": "*",
+      "rae": "*",
+    },
+    "devDependencies": Object {
+      "a": "*",
+      "b": "*",
+      "c": "*",
+    },
+    "temporary-file:deletion-prevention": "temporary-file:deletion-prevention",
+  },
+  "pkgPath": "/my-module/package.json",
+  "remove": undefined,
+  "worthy": true,
+}
+`;
+
+exports[`dep-merge passing in pkg 1`] = `
+Object {
+  "dirPath": "/my-module/package.json",
+  "endsInPackageJson": Array [
+    "package.json",
+  ],
+  "fileExists": true,
+  "moveOg": undefined,
+  "mvPath": "/my-module/original_package.json",
+  "newPackageJson": Object {
+    "dependencies": Object {
+      "a": "*",
+      "b": "*",
+      "c": "*",
+      "doe": "*",
+      "mi": "*",
+      "rae": "*",
+    },
+    "devDependencies": Object {
+      "a": "*",
+      "b": "*",
+      "c": "*",
+    },
+    "temporary-file:deletion-prevention": "temporary-file:deletion-prevention",
+  },
+  "outputJson": undefined,
+  "packageContent": Object {
+    "dependencies": Object {
+      "doe": "*",
+      "mi": "*",
+      "rae": "*",
+    },
+    "devDependencies": Object {
+      "a": "*",
+      "b": "*",
+      "c": "*",
+    },
+  },
+  "pkgPath": "/my-module/package.json",
+}
+`;
+
+exports[`dep-merge passing in pkg 2`] = `
+Object {
+  "dirPath": "/my-module/package.json",
+  "endsInPackageJson": Array [
+    "package.json",
+  ],
+  "moveOg": undefined,
+  "mvPath": "/my-module/original_package.json",
+  "newExists": true,
+  "originalExists": true,
+  "packageJsonContent": Object {
+    "dependencies": Object {
+      "a": "*",
+      "b": "*",
+      "c": "*",
+      "doe": "*",
+      "mi": "*",
+      "rae": "*",
+    },
+    "devDependencies": Object {
+      "a": "*",
+      "b": "*",
+      "c": "*",
+    },
+    "temporary-file:deletion-prevention": "temporary-file:deletion-prevention",
+  },
+  "pkgPath": "/my-module/package.json",
+  "remove": undefined,
+  "worthy": true,
+}
+`;

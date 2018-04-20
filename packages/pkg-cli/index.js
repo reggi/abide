@@ -13,8 +13,6 @@ const design = help()
   .option('--dir, -C <path>', 'path to use as working directory', 'workingDir')
   .parse(process.argv.slice(2))
 
-console.log(design.flags)
-
 const workingDir = design.flags.workingDir || process.cwd()
 const plugin = design.flags.plugin
 const output = design.flags.output

@@ -18,8 +18,8 @@ export default ({pkgrc, overwrite, pkg, opt}) => {
   return {
     ...pkg,
     scripts: propOverwrite(overwrite, get(pkg, 'scripts', {}), {
-      'test': 'jest --coverage',
-      'test:result': 'npm run test --silent &>/dev/null || echo $?'
+      'jest': 'jest',
+      'jest:coverage': 'jest --coverage'
     }),
     devDependencies: propOverwrite(overwrite, get(pkg, 'devDependencies', {}), {
       ...(opt.babel) ? {'babel-jest': '^22.4.1'} : {},

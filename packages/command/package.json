@@ -1,0 +1,47 @@
+{
+  "name": "@reggi/command",
+  "version": "0.0.1",
+  "author": "Thomas Reggi",
+  "main": "./index.js",
+  "scripts": {
+    "build": "npm run babel",
+    "jest": "jest",
+    "jest:coverage": "jest --coverage",
+    "standard": "standard",
+    "test": "npm run standard && npm run jest"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  },
+  "devDependencies": {
+    "jest": "^22.4.2",
+    "sinon": "^4.5.0",
+    "standard": "^11.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "standard": {
+    "ignore": [
+      "*.build.js"
+    ],
+    "globals": [
+      "beforeAll",
+      "afterAll",
+      "expect",
+      "test",
+      "beforeEach",
+      "afterEach",
+      "it",
+      "jest"
+    ]
+  }
+}

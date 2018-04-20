@@ -20,12 +20,17 @@ export default ({pkg = {}, overwrite = false, opt = {}} = {}) => {
     devDependencies: propOverwrite(overwrite, get(pkg, 'devDependencies', {}), {
       'babel-cli': '^6.26.0',
       'babel-plugin-transform-object-rest-spread': '^6.26.0',
+      'babel-plugin-transform-runtime': '^6.23.0',
       'babel-preset-env': '^1.6.1'
+    }),
+    dependencies: propOverwrite(overwrite, get(pkg, 'dependencies', {}), {
+      'babel-runtime': '^6.26.0'
     }),
     babel: propOverwrite(overwrite, get(pkg, 'babel', {}), {
       'plugins': [
         ...get(pkg, 'plugins', []),
-        'transform-object-rest-spread'
+        'transform-object-rest-spread',
+        'transform-runtime'
       ],
       'presets': [
         ...get(pkg, 'presets', []),

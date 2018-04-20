@@ -1,6 +1,6 @@
 import util from 'util'
 import sinon from 'sinon'
-import Stdio from './stdio'
+import Stdio from '@reggi/process.stdio'
 
 export {Stdio}
 
@@ -21,7 +21,7 @@ export const mockStdinRead = (message) => {
   }
   const it = gen()
   const callerFn = (bool) => {
-    if (bool === 0) return null
+    // if (bool === 0) return null
     const called = it.next().value
     return called || null
   }

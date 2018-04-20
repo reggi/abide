@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.pkgrc = exports.mapPlugins = exports.resolvePlugins = exports.validJsonRequired = exports.existsRequired = undefined;
+exports.pkgCore = exports.hook = exports.mapPlugins = exports.resolvePlugins = exports.validJsonRequired = exports.existsRequired = undefined;
 
 var _regenerator = require('babel-runtime/regenerator');
 
@@ -12,6 +12,10 @@ var _regenerator2 = _interopRequireDefault(_regenerator);
 var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+var _stringify = require('babel-runtime/core-js/json/stringify');
+
+var _stringify2 = _interopRequireDefault(_stringify);
 
 var _bluebird = require('bluebird');
 
@@ -47,13 +51,17 @@ var _pkg7 = require('@reggi/pkg.fs');
 
 var _pkg8 = _interopRequireDefault(_pkg7);
 
+var _debug = require('debug');
+
+var _debug2 = _interopRequireDefault(_debug);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var existsRequired = exports.existsRequired = true;
 var validJsonRequired = exports.validJsonRequired = true;
 
 var resolvePlugins = exports.resolvePlugins = function resolvePlugins(workingDir, plugins) {
-  return plugins.map(function (plugin) {
+  return (0, _lodash.map)(plugins, function (plugin) {
     plugin = (0, _journey4.default)(plugin);
     var mod = plugin[0];
     var opt = plugin.length === 1 ? false : plugin[1];
@@ -74,13 +82,20 @@ var resolvePlugins = exports.resolvePlugins = function resolvePlugins(workingDir
 var mapPlugins = exports.mapPlugins = function mapPlugins(workingDir, plugins) {
   return (0, _lodash.flattenDeep)(resolvePlugins(workingDir, plugins));
 };
+var hook = exports.hook = function hook(journeyName) {
+  return function (acq, res) {
+    return (0, _debug2.default)(`pkg:${journeyName}`)((0, _stringify2.default)(res));
+  };
+};
 
-var pkgrc = exports.pkgrc = (0, _journey2.default)(function (_ref) {
-  var workingDir = _ref.workingDir,
+var pkgCore = exports.pkgCore = (0, _journey2.default)(function () {
+  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      workingDir = _ref.workingDir,
       write = _ref.write,
       plugin = _ref.plugin,
       stdout = _ref.stdout,
       argv = _ref.argv;
+
   return [function () {
     return { workingDir, write, stdout, plugin, argv };
   }, function (_ref2) {
@@ -107,13 +122,13 @@ var pkgrc = exports.pkgrc = (0, _journey2.default)(function (_ref) {
       }, _callee, undefined);
     }));
 
-    return function (_x) {
+    return function (_x2) {
       return _ref4.apply(this, arguments);
     };
   }(), function (_ref5) {
     var pkgrc = _ref5.pkgrc,
-        argv = _ref5.argv;
-    return plugin ? { plugins: mapPlugins(workingDir, [argv.plugin]) } : { plugins: mapPlugins(workingDir, pkgrc) };
+        plugin = _ref5.plugin;
+    return plugin ? { plugins: mapPlugins(workingDir, [plugin]) } : { plugins: mapPlugins(workingDir, pkgrc) };
   }, function () {
     var _ref7 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(_ref6) {
       var pkgrc = _ref6.pkgrc,
@@ -148,7 +163,7 @@ var pkgrc = exports.pkgrc = (0, _journey2.default)(function (_ref) {
       }, _callee2, undefined);
     }));
 
-    return function (_x2) {
+    return function (_x3) {
       return _ref7.apply(this, arguments);
     };
   }(), function (_ref9) {
@@ -167,7 +182,7 @@ var pkgrc = exports.pkgrc = (0, _journey2.default)(function (_ref) {
           switch (_context3.prev = _context3.next) {
             case 0:
               if (!write) {
-                _context3.next = 7;
+                _context3.next = 10;
                 break;
               }
 
@@ -176,19 +191,29 @@ var pkgrc = exports.pkgrc = (0, _journey2.default)(function (_ref) {
 
             case 3:
               _context3.t1 = _context3.sent;
+
+              if (_context3.t1) {
+                _context3.next = 6;
+                break;
+              }
+
+              _context3.t1 = true;
+
+            case 6:
+              _context3.t2 = _context3.t1;
               _context3.t0 = {
-                writeFileResult: _context3.t1
+                writeFileResult: _context3.t2
               };
-              _context3.next = 8;
+              _context3.next = 11;
               break;
 
-            case 7:
+            case 10:
               _context3.t0 = {};
 
-            case 8:
+            case 11:
               return _context3.abrupt('return', _context3.t0);
 
-            case 9:
+            case 12:
             case 'end':
               return _context3.stop();
           }
@@ -196,14 +221,10 @@ var pkgrc = exports.pkgrc = (0, _journey2.default)(function (_ref) {
       }, _callee3, undefined);
     }));
 
-    return function (_x3) {
+    return function (_x4) {
       return _ref12.apply(this, arguments);
     };
-  }(), function (_ref13) {
-    var stdout = _ref13.stdout,
-        writeFileContent = _ref13.writeFileContent;
-    return stdout ? { stoutResult: process.stdout.write(writeFileContent + '\n') } : {};
-  }];
-}, { return: 'newContent' });
+  }()];
+}, { hook: hook('pkgCore') });
 
-exports.default = pkgrc;
+exports.default = pkgCore;

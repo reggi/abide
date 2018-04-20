@@ -1,11 +1,16 @@
 import {get, size} from 'lodash'
 import propOverwrite from '@reggi/pkg.prop-overwrite'
+import coreceToArray from '@reggi/journey.coerce-to-array'
 
 const jestGlobals = [
+  'beforeAll',
+  'afterAll',
   'expect',
   'test',
   'beforeEach',
-  'afterEach'
+  'afterEach',
+  'it',
+  'jest'
 ]
 
 export const ifLengthAddProp = (prop, item) => (size(item)) ? {[prop]: item} : {}
@@ -23,7 +28,7 @@ export default ({pkg = {}, overwrite = false, opt = {}} = {}) => ({
     ...(opt.babel) ? {'parser': 'babel-eslint'} : {},
     ...ifLengthAddProp('ignore', [
       ...get(pkg, 'standard.ignore', []),
-      ...get(pkg, 'opt.ignore', [])
+      ...coreceToArray(get(opt, 'ignore', []))
     ]),
     ...ifLengthAddProp('globals', [
       ...get(pkg, 'standard.global', []),

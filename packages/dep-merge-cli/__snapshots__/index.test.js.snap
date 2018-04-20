@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`dep-merge-cli: help 1`] = `
+Array [
+  "
+Usage: dep-merge [options]
+
+  Tool for merging devDependencies into dependencies
+
+  Options:
+
+    --merge                merges devDependencies into dependencies
+    --unmerge              unmerges devDependencies from dependencies
+    --path, -C <path>      path to node module directory
+    --help, -h             generate this output
+    --version, -v          show version number
+    --silent, -s           log no output
+
+",
+]
+`;

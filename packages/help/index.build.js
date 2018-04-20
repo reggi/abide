@@ -66,13 +66,12 @@ var choices = exports.choices = function choices() {
   };
 };
 
-var rename = exports.rename = function rename(name) {
-  var defaultValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+var rename = exports.rename = function rename(name, defaultValue) {
   return function (_ref10) {
     var value = _ref10.value,
         flag = _ref10.flag;
 
-    var _value = value === false ? defaultValue : value;
+    var _value = defaultValue || value;
     return { [name]: _value };
   };
 };
@@ -83,12 +82,13 @@ var pad = exports.pad = function pad(str, width) {
 };
 
 var template = exports.template = function template(_ref11) {
-  var program = _ref11.program,
+  var name = _ref11.name,
+      usage = _ref11.usage,
       description = _ref11.description,
       options = _ref11.options,
       padLength = _ref11.padLength;
   return `
-Usage: ${program} [options]
+Usage: ${name} ${usage}
 
   ${description}
 
@@ -107,32 +107,42 @@ var Program = function () {
     _classCallCheck(this, Program);
 
     this.options = [];
+    this._usage = '';
+    this._description = '';
+    this._name = '';
     return this;
   }
 
   _createClass(Program, [{
     key: 'help',
     value: function help() {
-      var program = this.program,
-          description = this.description,
+      var _name = this._name,
+          _description = this._description,
+          _usage = this._usage,
           options = this.options;
 
       var padLength = (0, _lodash.max)(options.map(function (_ref13) {
         var flagString = _ref13.flagString;
         return flagString;
       })).length + 10;
-      return template({ program, description, options, padLength });
+      return template({ name: _name, usage: _usage, description: _description, options, padLength });
     }
   }, {
     key: 'name',
-    value: function name(program) {
-      this.program = program;
+    value: function name(_name2) {
+      this._name = _name2;
       return this;
     }
   }, {
     key: 'description',
-    value: function description(_description) {
-      this.description = _description;
+    value: function description(_description2) {
+      this._description = _description2;
+      return this;
+    }
+  }, {
+    key: 'usage',
+    value: function usage(_usage2) {
+      this._usage = _usage2;
       return this;
     }
   }, {
@@ -144,54 +154,53 @@ var Program = function () {
   }, {
     key: 'parse',
     value: function parse(argv) {
-      var flagTypes = (0, _lodash.chain)(this.options).map(function (_ref14) {
-        var flagString = _ref14.flagString,
-            desc = _ref14.desc,
-            modifier = _ref14.modifier;
+      // get options in shape for specifiers
+      var defaultSpecifier = function defaultSpecifier(_ref14) {
+        var required = _ref14.required,
+            optional = _ref14.optional;
 
-        var _parseFlagOption = parseFlagOption(flagString),
-            flags = _parseFlagOption.flags,
-            required = _parseFlagOption.required,
-            optional = _parseFlagOption.optional;
-
-        if (required || optional) {
-          return flags.map(function (flag) {
-            return { [flag]: { type: 'next', required, optional, desc, modifier } };
-          });
-        } else {
-          return flags.map(function (flag) {
-            return { [flag]: { type: 'bool', required, optional, desc, modifier } };
-          });
-        }
-      }).flattenDeep().thru(function (arr) {
-        return _lodash.extend.apply(null, arr);
-      }).value();
-
-      var specifiers = (0, _lodash.mapValues)(flagTypes, function (_ref15) {
-        var type = _ref15.type;
-
-        if (type === 'next') return _help.modifiers.anyDash.next;
-        return _help.modifiers.anyDash.bool;
+        if (required || optional) return { specifier: _help.modifiers.anyDash.next, specifierType: 'next' };
+        return { specifier: _help.modifiers.anyDash.bool, specifierType: 'bool' };
+      };
+      var options = this.options;
+      options = (0, _lodash.map)(options, function (option) {
+        return _extends({}, option, parseFlagOption(option.flagString));
       });
+      options = (0, _lodash.map)(options, function (option) {
+        return _extends({}, option, defaultSpecifier(option));
+      });
+      // get specifiers in shape for parseArgv
+      var specifiers = (0, _lodash.chain)(options).map(function (option) {
+        return (0, _lodash.map)(option.flags, function (flag) {
+          return [flag, option.specifier];
+        });
+      }).flatten().fromPairs().value();
+      // provides flag values
       var flags = (0, _help.parseArgv)(argv, { specifiers });
-
-      (0, _lodash.each)(flagTypes, function (_ref16, flag) {
-        var type = _ref16.type,
-            required = _ref16.required,
-            optional = _ref16.optional;
-
-        if (typeof flags[flag] === 'boolean' && type !== 'bool' && required) {
-          throw new Error(`${flag}: missing required value ${required}`);
+      // throws error for required fields
+      (0, _lodash.each)(flags, function (value, flag) {
+        var option = (0, _lodash.find)(options, function (option) {
+          return (0, _lodash.includes)(option.flags, flag);
+        });
+        if (option && typeof value === 'boolean' && option.specifierType !== 'bool' && option.required) {
+          throw new Error(`${flag}: missing required value ${option.required}`);
         }
       });
+      // apply modifiers
+      var modifierValues = (0, _lodash.chain)(options).map(function (option) {
+        return (0, _lodash.map)(option.flags, function (flag) {
+          return _extends({ flag }, option);
+        });
+      }).flatten().map(function (option) {
+        return _extends({}, option, { value: (0, _lodash.get)(flags, option.flag, undefined) });
+      }).map(function (option) {
+        var modifier = option.modifier,
+            required = option.required,
+            optional = option.optional,
+            desc = option.desc,
+            value = option.value,
+            flag = option.flag;
 
-      var additions = (0, _lodash.chain)(flagTypes).map(function (_ref17, flag) {
-        var modifier = _ref17.modifier,
-            required = _ref17.required,
-            optional = _ref17.optional,
-            desc = _ref17.desc;
-
-        var value = flags[flag] || false;
         if (typeof modifier === 'string') {
           return { [modifier]: value };
         } else if (typeof modifier === 'function') {
@@ -202,10 +211,12 @@ var Program = function () {
           }, {});
         }
         return false;
-      }).without(true).without(false).thru(function (v) {
-        return _lodash.extend.apply(null, v);
-      }).value();
-      this.flags = _extends({}, flags, additions);
+      }).without(false).without(true).map(function (values) {
+        return (0, _lodash.omitBy)(values, _lodash.isUndefined);
+      }).thru(_help.mergeProperties).value();
+      this.parsed = flags;
+      this.modifiers = modifierValues;
+      this.flags = _extends({}, flags, modifierValues);
       return this;
     }
   }]);

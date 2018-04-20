@@ -13,8 +13,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var design = (0, _help2.default)().name('pkg').description('Generate a package.json based on plugins').option('--write, -w', 'writes output to package.json file', 'write').option('--output, -o', 'writes output to stdout', 'output').option('--plugin <module>', 'path to pkg plugin', 'plugin').option('--version, -v', 'shows the version', 'version').option('--help, -h', 'shows this usage output', 'help').option('--dir, -C <path>', 'path to use as working directory', 'workingDir').parse(process.argv.slice(2));
 
-console.log(design.flags);
-
 var workingDir = design.flags.workingDir || process.cwd();
 var plugin = design.flags.plugin;
 var output = design.flags.output;

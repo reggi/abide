@@ -43,8 +43,8 @@ exports.default = function (_ref) {
 
   return _extends({}, pkg, {
     scripts: (0, _pkg2.default)(overwrite, (0, _lodash.get)(pkg, 'scripts', {}), {
-      'test': 'jest --coverage',
-      'test:result': 'npm run test --silent &>/dev/null || echo $?'
+      'jest': 'jest',
+      'jest:coverage': 'jest --coverage'
     }),
     devDependencies: (0, _pkg2.default)(overwrite, (0, _lodash.get)(pkg, 'devDependencies', {}), _extends({}, opt.babel ? { 'babel-jest': '^22.4.1' } : {}, {
       'jest': '^22.4.2'

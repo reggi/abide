@@ -1,6 +1,6 @@
 {
   "name": "@reggi/dep-merge-cli",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "author": "Thomas Reggi",
   "bin": {
     "dep-merge": "./index.build.js"
@@ -8,11 +8,20 @@
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
+    "build": "npm run babel",
+    "jest": "BABEL_ENV=test jest --coverage --forceExit",
+    "jest:coverage": "jest --coverage",
     "standard": "standard",
-    "test": "jest --coverage",
-    "test:result": "npm run test --silent &>/dev/null || echo $?"
+    "test": "npm run standard && npm run jest"
   },
   "babel": {
+    "env": {
+      "test": {
+        "plugins": [
+          "rewire"
+        ]
+      }
+    },
     "plugins": [
       "transform-object-rest-spread",
       "transform-runtime"
@@ -39,28 +48,42 @@
       }
     }
   },
+  "dependencies": {
+    "@reggi/command": "file:../command",
+    "@reggi/dep-merge": "file:../dep-merge",
+    "babel-runtime": "^6.26.0",
+    "debug": "^3.1.0"
+  },
   "devDependencies": {
+    "sinon": "^4.5.0",
     "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.2",
+    "babel-plugin-rewire": "^1.1.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "jest": "^22.4.2",
+    "mock-fs": "^4.4.2",
+    "mz": "^2.7.0",
     "standard": "^11.0.0"
   },
   "publishConfig": {
     "access": "public"
   },
   "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "*.build.js"
+    ],
     "globals": [
+      "beforeAll",
+      "afterAll",
       "expect",
       "test",
       "beforeEach",
-      "afterEach"
+      "afterEach",
+      "it",
+      "jest"
     ]
-  },
-  "dependencies": {
-    "@reggi/journey": "file:../journey",
-    "@reggi/pkg.json-parse": "file:../pkg.json-parse",
-    "has-flag": "^3.0.0"
   }
 }

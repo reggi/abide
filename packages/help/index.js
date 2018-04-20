@@ -31,8 +31,8 @@ export const pad = (str, width) => {
   return str + Array(len + 1).join(' ')
 }
 
-export const template = ({program, description, options, padLength}) => `
-Usage: ${program} [options]
+export const template = ({name, usage, description, options, padLength}) => `
+Usage: ${name} ${usage}
 
   ${description}
 
@@ -44,19 +44,26 @@ ${options.map(({flagString, desc}) => `    ${pad(flagString, padLength)}${desc}`
 export class Program {
   constructor () {
     this.options = []
+    this._usage = ''
+    this._description = ''
+    this._name = ''
     return this
   }
   help () {
-    const {program, description, options} = this
+    const {_name, _description, _usage, options} = this
     const padLength = max(options.map(({flagString}) => flagString)).length + 10
-    return template({program, description, options, padLength})
+    return template({name: _name, usage: _usage, description: _description, options, padLength})
   }
-  name (program) {
-    this.program = program
+  name (name) {
+    this._name = name
     return this
   }
   description (description) {
-    this.description = description
+    this._description = description
+    return this
+  }
+  usage (usage) {
+    this._usage = usage
     return this
   }
   option (flagString, desc, modifier) {

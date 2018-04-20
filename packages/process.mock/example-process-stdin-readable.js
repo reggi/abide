@@ -1,15 +1,31 @@
+#!/usr/bin/env node
+import {includes} from 'lodash'
+const {stdin, stdout, exit, argv} = process
+
+// constants
+const args = argv.slice(2)
+const invalid = ['', '\n']
 let ret = ''
-process.stdin.setEncoding('utf8')
-process.stdin.on('readable', () => {
+stdin.setEncoding('utf8')
+stdin.on('readable', () => {
   let chunk
-  while ((chunk = process.stdin.read())) {
+  while ((chunk = stdin.read())) {
     ret += chunk
   }
 })
-process.stdin.on('error', (error) => {
-  console.log('error')
-  if (error) throw error
-})
-process.stdin.on('end', () => {
-  console.log({ret})
+stdin.on('end', () => {
+  try {
+    if (args.length !== 2) {
+      return exit(1)
+    }
+    if (includes(invalid, ret.trim())) {
+      return exit(1)
+    }
+    const pattern = new RegExp(args[0], 'gm')
+    const result = ret.replace(pattern, args[1])
+    stdout.write(result)
+    return exit(0)
+  } catch (e) {
+    return exit(1)
+  }
 })

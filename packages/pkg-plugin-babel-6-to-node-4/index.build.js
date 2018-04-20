@@ -42,10 +42,14 @@ exports.default = function () {
     devDependencies: (0, _pkg2.default)(overwrite, (0, _lodash.get)(pkg, 'devDependencies', {}), {
       'babel-cli': '^6.26.0',
       'babel-plugin-transform-object-rest-spread': '^6.26.0',
+      'babel-plugin-transform-runtime': '^6.23.0',
       'babel-preset-env': '^1.6.1'
     }),
+    dependencies: (0, _pkg2.default)(overwrite, (0, _lodash.get)(pkg, 'dependencies', {}), {
+      'babel-runtime': '^6.26.0'
+    }),
     babel: (0, _pkg2.default)(overwrite, (0, _lodash.get)(pkg, 'babel', {}), {
-      'plugins': [].concat(_toConsumableArray((0, _lodash.get)(pkg, 'plugins', [])), ['transform-object-rest-spread']),
+      'plugins': [].concat(_toConsumableArray((0, _lodash.get)(pkg, 'plugins', [])), ['transform-object-rest-spread', 'transform-runtime']),
       'presets': [].concat(_toConsumableArray((0, _lodash.get)(pkg, 'presets', [])), [['env', {
         'targets': {
           'node': '4'

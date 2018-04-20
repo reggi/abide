@@ -1,64 +1,71 @@
 #!/usr/bin/env node
-const {basename} = require('path')
-const program = require('commander')
-const colors = require('colors/safe')
-const hasFlag = require('has-flag')
-const {spawn} = require('child_process')
-const argvStr = process.argv.join(' ')
-const commandMatch = argvStr.match(/-- (.+)$/)
-const command = (commandMatch && commandMatch[1]) ? commandMatch[1] : false
-const theVersion = require('./package.json').version
+import execa from 'execa'
+import help, {rename} from '@reggi/help'
+import command from '@reggi/command'
+import {basename} from 'path'
+import colors from 'colors/safe'
+import debug from 'debug'
 
-const help = hasFlag('h') || hasFlag('H') || hasFlag('help')
-const version = hasFlag('v') || hasFlag('V') || hasFlag('version')
+const d = debug('results-cli')
 
-program
-  .usage('[options] [-- <args>...]')
+const getDesign = (argv) => help()
+  .name('results')
+  .usage('[-- <args>...]')
   .description('print clear exit code from command')
-  .option('-n, --hello', 'remove color')
-  .option('-n, --no-color', 'remove color')
-  .option('-i, --inherit', 'inherit stdin')
-  .option('-c, --command-show', 'prints command evaluted')
-  .option('-p, --path-show', 'prints current working path')
-  .option('-d, --dir-show', 'prints current working directory')
-  .option('-e, --exit-show', 'shows the Exit code')
-  .option('-z, --zero', 'overwrites passed exit code with 0')
-  .option('-v, --version', 'output the version number')
-  .option('-h, --help', 'output the')
-  .parse(process.argv)
+  .option('-u, --color', 'use color', rename('color', true))
+  .option('-i, --inherit', 'inherit stdin', 'inherit')
+  .option('-C, --dir <path>', 'working directory to use', 'workingDir')
+  .option('-c, --command-show', 'prints command evaluted', 'showCommand')
+  .option('-p, --path-show', 'prints current working path', 'showPath')
+  .option('-d, --dir-show', 'prints current working directory', 'showDir')
+  .option('-e, --exit-show', 'shows the Exit code', 'showExit')
+  .option('-z, --zero', 'overwrites passed exit code with 0', 'zero')
+  .option('-v, --version', 'output the version number', 'version')
+  .option('-h, --help', 'show this output', 'help')
+  .parse(argv.slice(2))
 
-if (!help && !version && command) {
-  const isWindows = process.platform === 'win32'
-  var sh = 'sh'
-  var shFlag = '-c'
-  if (isWindows) {
-    sh = 'cmd'
-    shFlag = '/c'
+const status = ({code, color}) => {
+  const green = (message) => (color) ? colors.green(message) : message
+  const red = (message) => (color) ? colors.red(message) : message
+  let status
+  if (code === 0) {
+    status = green('success')
+  } else if (code !== 0) {
+    status = red('failure')
   }
-  const green = (message) => (program.color) ? colors.green(message) : message
-  const red = (message) => (program.color) ? colors.red(message) : message
-  const options = (program.inherit) ? {stdio: 'inherit'} : {}
-  const cwd = process.cwd()
-  const child = spawn(sh, [shFlag, command], options)
-  child.on('exit', (code) => {
-    let status
-    if (code === 0) {
-      status = green('success')
-    } else if (code !== 0) {
-      status = red('failure')
-    }
-    const values = [status]
-    if (program.commandShow) values.push(`(executed ${command})`)
-    if (program.pathShow) values.push(`(path ${cwd})`)
-    if (program.dirShow) values.push(`(directory /${basename(cwd)})`)
-    if (program.exitShow) values.push(`(code ${code})`)
-    process.stdout.write(values.join(' ') + '\n')
-    const theCode = (program.zero) ? 0 : code
-    process.exit(theCode)
-  })
-} else if ((help || !command) && !version) {
-  program.outputHelp()
-} else if (version) {
-  process.stdout.write(theVersion + '\n')
-  process.exit(0)
+  return status
 }
+
+export default command(module, async ({argv, stdout, exit, cwd}) => {
+  const design = getDesign(argv)
+  console.log(design)
+  d('design fetched')
+  if (design.flags.help) {
+    d('help hit')
+    stdout.write(design.help() + '\n')
+    return exit(0)
+  } else if (design.flags.version) {
+    d('version hit')
+    const pkg = require('./package.json')
+    stdout.write(pkg.version + '\n')
+    return exit(0)
+  } else if (design.flags['--']) {
+    d('running main')
+    const cmd = design.flags['--']
+    const workingDir = design.flags.workingDir || cwd()
+    const stdio = (design.flags.inherit) ? 'inherit' : 'pipe'
+    const {code} = await execa.shell(cmd, {cwd: workingDir, stdio})
+    const exitCode = (design.flags.zero) ? 0 : code
+    const values = [status({code, color: design.flags.color})]
+    if (design.flags.showCommand) values.push(`(executed ${cmd})`)
+    if (design.flags.showPath) values.push(`(path ${cwd})`)
+    if (design.flags.showDir) values.push(`(directory /${basename(cwd)})`)
+    if (design.flags.showExit) values.push(`(code ${code})`)
+    stdout.write(values.join(' ') + '\n')
+    process.exit(exitCode)
+  } else {
+    d('else case')
+    if (!design.flags.silent) stdout.write('invalid arguments')
+    return exit(1)
+  }
+})

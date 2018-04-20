@@ -37,8 +37,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = [[_pkgPluginProp2.default, {
   'author': 'Thomas Reggi',
   'main': './index.build.js',
-  'version': '1.0.0',
+  'version': '0.0.1',
   'publishConfig': {
     'access': 'public'
   }
-}], _pkgPluginNameDir2.default, [_pkgPluginNameScope2.default, '@reggi'], _pkgPluginBabel6ToNode2.default, [_pkgPluginJest2.default, { 'addBabelJest': true, 'hunderedPercent': true }], [_pkgPluginStandard2.default, { 'jest': true }], _pkgPluginSort2.default];
+}], _pkgPluginNameDir2.default, [_pkgPluginNameScope2.default, '@reggi'], _pkgPluginBabel6ToNode2.default, [_pkgPluginJest2.default, { 'addBabelJest': true, 'hunderedPercent': true }], [_pkgPluginStandard2.default, { 'jest': true, 'babel': true, 'ignore': '*.build.js' }], [_pkgPluginProp2.default, { 'scripts.test': 'npm run standard && npm run jest' }], [_pkgPluginProp2.default, { 'scripts.build': 'npm run babel' }], _pkgPluginSort2.default];

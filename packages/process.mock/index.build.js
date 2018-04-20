@@ -14,15 +14,15 @@ var _sinon = require('sinon');
 
 var _sinon2 = _interopRequireDefault(_sinon);
 
-var _stdio = require('./stdio');
+var _process2 = require('@reggi/process.stdio');
 
-var _stdio2 = _interopRequireDefault(_stdio);
+var _process3 = _interopRequireDefault(_process2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-exports.Stdio = _stdio2.default;
+exports.Stdio = _process3.default;
 function replaceProperty(obj, prop, value) {
   var prevDescriptor = Object.getOwnPropertyDescriptor(obj, prop);
   Object.defineProperty(obj, prop, {
@@ -52,7 +52,7 @@ var mockStdinRead = exports.mockStdinRead = function mockStdinRead(message) {
   });
   var it = gen();
   var callerFn = function callerFn(bool) {
-    if (bool === 0) return null;
+    // if (bool === 0) return null
     var called = it.next().value;
     return called || null;
   };
@@ -82,7 +82,7 @@ var processReset = exports.processReset = function processReset(_ref) {
 };
 
 var processOverwrite = exports.processOverwrite = function processOverwrite(argv, _stdin) {
-  replaceProperty(process, 'stdin', new _stdio2.default().stdin);
+  replaceProperty(process, 'stdin', new _process3.default().stdin);
   process.stdin.read = mockStdinRead(_stdin);
   process.argv = ['node', './index'].concat(_toConsumableArray(argv));
   process.exit = _sinon2.default.spy();
@@ -93,7 +93,7 @@ var processOverwrite = exports.processOverwrite = function processOverwrite(argv
 var processMock = exports.processMock = function processMock(argv, _stdin) {
   var filename = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : './index.js';
 
-  var _ref2 = new _stdio2.default(),
+  var _ref2 = new _process3.default(),
       stdin = _ref2.stdin;
 
   stdin.read = mockStdinRead(_stdin);

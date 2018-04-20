@@ -10,7 +10,7 @@ export default [
   [prop, {
     'author': 'Thomas Reggi',
     'main': './index.build.js',
-    'version': '1.0.0',
+    'version': '0.0.1',
     'publishConfig': {
       'access': 'public'
     }
@@ -19,6 +19,8 @@ export default [
   [nameScope, '@reggi'],
   babel,
   [jest, {'addBabelJest': true, 'hunderedPercent': true}],
-  [standard, {'jest': true}],
+  [standard, {'jest': true, 'babel': true, 'ignore': '*.build.js'}],
+  [prop, {'scripts.test': 'npm run standard && npm run jest'}],
+  [prop, {'scripts.build': 'npm run babel'}],
   sort
 ]

@@ -19,7 +19,8 @@
     "postinstall": "npm run dep-merge:postinstall && link-parent-bin",
     "jenkins": "npm --prefix ./packages/results-cli/ run babel && npm run fully-tested",
     "standard": "standard",
-    "bootstrap": "sh -e ./scripts/bootstrap.sh"
+    "bootstrap": "sh -e ./scripts/bootstrap.sh",
+    "link-parent-bin": "link-parent-bin"
   },
   "keywords": [],
   "author": "",

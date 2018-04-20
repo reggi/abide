@@ -13,11 +13,15 @@ var _pkg = require('@reggi/pkg.prop-overwrite');
 
 var _pkg2 = _interopRequireDefault(_pkg);
 
+var _journey = require('@reggi/journey.coerce-to-array');
+
+var _journey2 = _interopRequireDefault(_journey);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-var jestGlobals = ['expect', 'test', 'beforeEach', 'afterEach'];
+var jestGlobals = ['beforeAll', 'afterAll', 'expect', 'test', 'beforeEach', 'afterEach', 'it', 'jest'];
 
 var ifLengthAddProp = exports.ifLengthAddProp = function ifLengthAddProp(prop, item) {
   return (0, _lodash.size)(item) ? { [prop]: item } : {};
@@ -39,5 +43,5 @@ exports.default = function () {
     devDependencies: (0, _pkg2.default)(overwrite, (0, _lodash.get)(pkg, 'devDependencies', {}), _extends({
       'standard': '^11.0.0'
     }, opt.babel ? { 'babel-eslint': '^8.2.2' } : {}))
-  }, ifLengthAddProp('standard', (0, _pkg2.default)(overwrite, (0, _lodash.get)(pkg, 'standard', {}), _extends({}, opt.babel ? { 'parser': 'babel-eslint' } : {}, ifLengthAddProp('ignore', [].concat(_toConsumableArray((0, _lodash.get)(pkg, 'standard.ignore', [])), _toConsumableArray((0, _lodash.get)(pkg, 'opt.ignore', [])))), ifLengthAddProp('globals', [].concat(_toConsumableArray((0, _lodash.get)(pkg, 'standard.global', [])), _toConsumableArray(opt.jest ? jestGlobals : [])))))));
+  }, ifLengthAddProp('standard', (0, _pkg2.default)(overwrite, (0, _lodash.get)(pkg, 'standard', {}), _extends({}, opt.babel ? { 'parser': 'babel-eslint' } : {}, ifLengthAddProp('ignore', [].concat(_toConsumableArray((0, _lodash.get)(pkg, 'standard.ignore', [])), _toConsumableArray((0, _journey2.default)((0, _lodash.get)(opt, 'ignore', []))))), ifLengthAddProp('globals', [].concat(_toConsumableArray((0, _lodash.get)(pkg, 'standard.global', [])), _toConsumableArray(opt.jest ? jestGlobals : [])))))));
 };
