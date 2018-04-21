@@ -19,7 +19,7 @@ results -c -- npm --prefix ./packages/journey.is-promise run test
 results -c -- npm --prefix ./packages/journey.pass-thru run test
 echo 'Testing "pkg" suite...'
 results -c -- npm --prefix ./packages/pkg run test
-# results -c -- npm --prefix ./packages/pkg-cli run test
+results -c -- npm --prefix ./packages/pkg-cli run test
 results -c -- npm --prefix ./packages/pkg-plugin-babel-6-to-node-4 run test
 results -c -- npm --prefix ./packages/pkg-plugin-babel-7-to-node-4 run test
 results -c -- npm --prefix ./packages/pkg-plugin-cobalt run test
@@ -40,3 +40,4 @@ results -c -- npm --prefix ./packages/pkg.throw-error run test
 echo 'Testing "process" suite...'
 results -c -- npm --prefix ./packages/process.mock run test
 results -c -- npm --prefix ./packages/process.stdio run test
+results -c -- npm --prefix ./packages/results-cli run test

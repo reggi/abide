@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.program = exports.Program = exports.template = exports.pad = exports.rename = exports.choices = exports.parseFlagOption = undefined;
+exports.program = exports.Program = exports.defaultSpecifier = exports.template = exports.pad = exports.rename = exports.assign = exports.choices = exports.parseFlagOption = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -66,15 +66,17 @@ var choices = exports.choices = function choices() {
   };
 };
 
-var rename = exports.rename = function rename(name, defaultValue) {
+var assign = exports.assign = function assign(name, defaultValue) {
   return function (_ref10) {
     var value = _ref10.value,
         flag = _ref10.flag;
 
-    var _value = defaultValue || value;
+    var _value = typeof value === 'undefined' ? defaultValue : value;
     return { [name]: _value };
   };
 };
+
+var rename = exports.rename = assign;
 
 var pad = exports.pad = function pad(str, width) {
   var len = Math.max(0, width - str.length);
@@ -102,6 +104,27 @@ ${options.map(function (_ref12) {
 `;
 };
 
+var getSpecifier = function getSpecifier(criteria, type) {
+  return { specifier: _help.modifiers[criteria][type], specifierType: type };
+};
+
+var defaultSpecifier = exports.defaultSpecifier = function defaultSpecifier(_ref13) {
+  var flag = _ref13.flag,
+      required = _ref13.required,
+      optional = _ref13.optional;
+
+  var dashFlag = (0, _help.isDashFlag)(flag);
+  var doubleDashFlag = (0, _help.isDoubleDashFlag)(flag);
+  var doubleDashNoFlag = (0, _help.isDoubleDashNoFlag)(flag);
+  var next = required || optional;
+  if (doubleDashNoFlag) return getSpecifier('doubleDash', 'no');
+  if (next && dashFlag) return getSpecifier('onlyDash', 'next');
+  if (!next && dashFlag) return getSpecifier('onlyDash', 'bool');
+  if (next && doubleDashFlag) return getSpecifier('doubleDash', 'next');
+  if (!next && doubleDashFlag) return getSpecifier('doubleDash', 'bool');
+  return {};
+};
+
 var Program = function () {
   function Program() {
     _classCallCheck(this, Program);
@@ -121,8 +144,8 @@ var Program = function () {
           _usage = this._usage,
           options = this.options;
 
-      var padLength = (0, _lodash.max)(options.map(function (_ref13) {
-        var flagString = _ref13.flagString;
+      var padLength = (0, _lodash.max)(options.map(function (_ref14) {
+        var flagString = _ref14.flagString;
         return flagString;
       })).length + 10;
       return template({ name: _name, usage: _usage, description: _description, options, padLength });
@@ -155,28 +178,27 @@ var Program = function () {
     key: 'parse',
     value: function parse(argv) {
       // get options in shape for specifiers
-      var defaultSpecifier = function defaultSpecifier(_ref14) {
-        var required = _ref14.required,
-            optional = _ref14.optional;
-
-        if (required || optional) return { specifier: _help.modifiers.anyDash.next, specifierType: 'next' };
-        return { specifier: _help.modifiers.anyDash.bool, specifierType: 'bool' };
-      };
       var options = this.options;
       options = (0, _lodash.map)(options, function (option) {
         return _extends({}, option, parseFlagOption(option.flagString));
       });
+      options = (0, _lodash.flattenDeep)((0, _lodash.map)(options, function (option) {
+        return (0, _lodash.map)(option.flags, function (flag) {
+          return _extends({ flag }, option);
+        });
+      }));
       options = (0, _lodash.map)(options, function (option) {
         return _extends({}, option, defaultSpecifier(option));
       });
-      // get specifiers in shape for parseArgv
-      var specifiers = (0, _lodash.chain)(options).map(function (option) {
-        return (0, _lodash.map)(option.flags, function (flag) {
-          return [flag, option.specifier];
-        });
-      }).flatten().fromPairs().value();
-      // provides flag values
+
+      var specifiers = (0, _lodash.chain)(options).filter(function (option) {
+        return option.specifier;
+      }).map(function (option) {
+        return [option.flag, option.specifier];
+      }).fromPairs().value();
+
       var flags = (0, _help.parseArgv)(argv, { specifiers });
+
       // throws error for required fields
       (0, _lodash.each)(flags, function (value, flag) {
         var option = (0, _lodash.find)(options, function (option) {
@@ -186,12 +208,9 @@ var Program = function () {
           throw new Error(`${flag}: missing required value ${option.required}`);
         }
       });
+
       // apply modifiers
       var modifierValues = (0, _lodash.chain)(options).map(function (option) {
-        return (0, _lodash.map)(option.flags, function (flag) {
-          return _extends({ flag }, option);
-        });
-      }).flatten().map(function (option) {
         return _extends({}, option, { value: (0, _lodash.get)(flags, option.flag, undefined) });
       }).map(function (option) {
         var modifier = option.modifier,

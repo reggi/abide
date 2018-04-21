@@ -1,5 +1,5 @@
-import {omitBy, isUndefined, find, map, max, reduce, isArray, includes, each, chain, get} from 'lodash'
-import {parseArgv, modifiers, mergeProperties} from '@reggi/help.parse-argv'
+import {flattenDeep, omitBy, isUndefined, find, map, max, reduce, isArray, includes, each, chain, get} from 'lodash'
+import {parseArgv, modifiers, mergeProperties, isDashFlag, isDoubleDashFlag, isDoubleDashNoFlag} from '@reggi/help.parse-argv'
 import {journey} from '@reggi/journey'
 
 export const parseFlagOption = journey((flagsOption) => [
@@ -21,10 +21,12 @@ export const choices = (...choices) => ({value, flag, required}) => {
   return false
 }
 
-export const rename = (name, defaultValue) => ({value, flag}) => {
-  const _value = defaultValue || value
+export const assign = (name, defaultValue) => ({value, flag}) => {
+  const _value = (typeof value === 'undefined') ? defaultValue : value
   return {[name]: _value}
 }
+
+export const rename = assign
 
 export const pad = (str, width) => {
   const len = Math.max(0, width - str.length)
@@ -40,6 +42,23 @@ Usage: ${name} ${usage}
 
 ${options.map(({flagString, desc}) => `    ${pad(flagString, padLength)}${desc}`).join('\n')}
 `
+
+const getSpecifier = (criteria, type) => {
+  return {specifier: modifiers[criteria][type], specifierType: type}
+}
+
+export const defaultSpecifier = ({flag, required, optional}) => {
+  const dashFlag = isDashFlag(flag)
+  const doubleDashFlag = isDoubleDashFlag(flag)
+  const doubleDashNoFlag = isDoubleDashNoFlag(flag)
+  const next = (required || optional)
+  if (doubleDashNoFlag) return getSpecifier('doubleDash', 'no')
+  if (next && dashFlag) return getSpecifier('onlyDash', 'next')
+  if (!next && dashFlag) return getSpecifier('onlyDash', 'bool')
+  if (next && doubleDashFlag) return getSpecifier('doubleDash', 'next')
+  if (!next && doubleDashFlag) return getSpecifier('doubleDash', 'bool')
+  return {}
+}
 
 export class Program {
   constructor () {
@@ -72,21 +91,19 @@ export class Program {
   }
   parse (argv) {
     // get options in shape for specifiers
-    const defaultSpecifier = ({required, optional}) => {
-      if (required || optional) return {specifier: modifiers.anyDash.next, specifierType: 'next'}
-      return {specifier: modifiers.anyDash.bool, specifierType: 'bool'}
-    }
     let options = this.options
     options = map(options, option => ({...option, ...parseFlagOption(option.flagString)}))
-    options = map(options, option => ({...option, ...defaultSpecifier(option)}))
-    // get specifiers in shape for parseArgv
+    options = flattenDeep(map(options, (option) => map(option.flags, flag => ({flag, ...option}))))
+    options = map(options, (option) => ({...option, ...defaultSpecifier(option)}))
+
     const specifiers = chain(options)
-      .map(option => map(option.flags, flag => [flag, option.specifier]))
-      .flatten()
+      .filter(option => option.specifier)
+      .map(option => [option.flag, option.specifier])
       .fromPairs()
       .value()
-    // provides flag values
+
     const flags = parseArgv(argv, {specifiers})
+
     // throws error for required fields
     each(flags, (value, flag) => {
       const option = find(options, option => includes(option.flags, flag))
@@ -94,10 +111,9 @@ export class Program {
         throw new Error(`${flag}: missing required value ${option.required}`)
       }
     })
+
     // apply modifiers
     const modifierValues = chain(options)
-      .map((option) => map(option.flags, flag => ({flag, ...option})))
-      .flatten()
       .map(option => ({...option, value: get(flags, option.flag, undefined)}))
       .map((option) => {
         const {modifier, required, optional, desc, value, flag} = option

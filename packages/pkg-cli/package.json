@@ -10,12 +10,13 @@
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
     "standard": "standard",
-    "test": "jest --coverage",
-    "test:result": "npm run test --silent &>/dev/null || echo $?"
+    "jest": "jest --coverage",
+    "test": "npm run standard && npm run jest"
   },
   "babel": {
     "plugins": [
-      "transform-object-rest-spread"
+      "transform-object-rest-spread",
+      "transform-runtime"
     ],
     "presets": [
       [
@@ -40,16 +41,21 @@
     }
   },
   "dependencies": {
+    "@reggi/command": "file:../command",
     "@reggi/help": "file:../help",
-    "@reggi/pkg": "file:../pkg"
+    "@reggi/pkg": "file:../pkg",
+    "babel-runtime": "^6.26.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.2",
     "babel-jest": "^22.4.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "jest": "^22.4.2",
+    "mock-fs": "^4.4.2",
+    "sinon": "^4.5.0",
     "standard": "^11.0.0"
   },
   "publishConfig": {

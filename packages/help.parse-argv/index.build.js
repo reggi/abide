@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.parseArgv = exports.defaultModifiers = exports.mergeProperties = exports.untouched = exports.applyGeneral = exports.applySpecifier = exports.coerceToString = exports.Undefined = exports.touchObj = exports.modifiers = exports._modifiers = exports.assignRest = exports.assignNo = exports.assignSpread = exports.assignUntil = exports.assignNext = exports.assignEqual = exports.assignBoolean = exports.isChild = exports.isDoubleDashNoFlag = exports.isDoubleDashFlag = exports.isMultiDashFlag = exports.isOnlyDashFlag = exports.isDashFlag = exports.isAnyDash = exports.matchCheck = exports.doubleDashNoKeyPrefix = exports.childKey = exports.child = exports.anyDash = exports.onlyDash = exports.doubleDashNo = exports.doubleDash = exports.multiDash = exports.dash = undefined;
+exports.parseArgv = exports.defaultModifiers = exports.mergeProperties = exports.untouched = exports.applyModifiers = exports.applySpecifier = exports.coerceToString = exports.Undefined = exports.touchObj = exports.modifiers = exports._modifiers = exports.assignRest = exports.assignNo = exports.assignSpread = exports.assignUntil = exports.assignNext = exports.assignEqual = exports.assignBoolean = exports.isChild = exports.isDoubleDashNoFlag = exports.isDoubleDashFlag = exports.isMultiDashFlag = exports.isOnlyDashFlag = exports.isDashFlag = exports.isAnyDash = exports.matchCheck = exports.doubleDashNoKeyPrefix = exports.childKey = exports.child = exports.anyDash = exports.onlyDash = exports.doubleDashNo = exports.doubleDash = exports.multiDash = exports.dash = undefined;
 exports.groupByIncProp = groupByIncProp;
 
 var _lodash = require('lodash');
@@ -22,7 +22,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var dash = exports.dash = /^-(\w+)/;
 var multiDash = exports.multiDash = /^-(\w\w+)/;
-var doubleDash = exports.doubleDash = /^--([\w|-]+)/;
+var doubleDash = exports.doubleDash = /^--(\w[-\w]*)/;
 var doubleDashNo = exports.doubleDashNo = /^--no-(\w+)/;
 var onlyDash = exports.onlyDash = /^-(\w)$|^-(\w)(?==)/;
 var anyDash = exports.anyDash = /^-+([\w|-]+)$|^-+([\w|-]+)=.+$/;
@@ -228,11 +228,11 @@ var applySpecifier = exports.applySpecifier = function applySpecifier(specifiers
   }).value();
 };
 
-var applyGeneral = exports.applyGeneral = function applyGeneral(fns, argv, argvTouch) {
-  return (0, _lodash.chain)(fns).flattenDeep().reduce(function (acq, fn) {
-    var result = (0, _lodash.chain)(argvTouch).mapValues(function (obj, key) {
+var applyModifiers = exports.applyModifiers = function applyModifiers(modifiers, argv, argvTouch) {
+  return (0, _lodash.chain)(modifiers).flattenDeep().reduce(function (acq, modifier) {
+    var result = (0, _lodash.chain)(argvTouch).mapValues(function (obj) {
       var _obj = (0, _lodash.cloneDeep)(obj);
-      _obj.result = fn(argvTouch)(_obj.value, key);
+      _obj.result = modifier(argvTouch)(_obj.value, _obj.key);
       return _obj;
     }).filter(function (obj) {
       return obj.result !== false;
@@ -298,8 +298,8 @@ var parseArgv = exports.parseArgv = function parseArgv(argv) {
 
   var argvTouch = touchObj(argv);
   var specifiersRes = specifiers ? applySpecifier(specifiers, argv, argvTouch) : [];
-  var generalRes = modifiers ? applyGeneral(modifiers, argv, argvTouch) : [];
-  return (0, _lodash.chain)([specifiersRes, generalRes, { _: untouched(argvTouch) }]).flattenDeep().thru(mergeProperties).value();
+  var modifiersRes = modifiers ? applyModifiers(modifiers, argv, argvTouch) : [];
+  return (0, _lodash.chain)([specifiersRes, modifiersRes, { _: untouched(argvTouch) }]).flattenDeep().thru(mergeProperties).value();
 };
 
 exports.default = parseArgv;

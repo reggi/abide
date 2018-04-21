@@ -1,65 +1,90 @@
-import {
-  processPreserve,
-  processReset,
-  processOverwrite,
-  log
-} from '@reggi/process-mock'
-import pkg from './package.json'
+import sinon from 'sinon'
+import resultCli from './index'
 
-const version = pkg.version
-const preserve = processPreserve()
-
-const help = `
-  Usage: index [options] [-- <args>...]
-
-  print clear exit code from command
-
-  Options:
-
-    -n, --no-color      remove color
-    -i, --inherit       inherit stdin
-    -c, --command-show  prints command evaluted
-    -p, --path-show     prints current working path
-    -d, --dir-show      prints current working directory
-    -e, --exit-show     shows the Exit code
-    -z, --zero          overwrites passed exit code with 0
-    -v, --version       output the version number
-    -h, --help          output usage information
-`
-
-afterEach(() => {
-  jest.resetAllMocks()
-  jest.resetModules()
-  processReset(preserve)
+const getArgs = (argv) => ({
+  argv: ['node', './index.js', ...argv],
+  stdout: {write: sinon.spy()},
+  exit: sinon.spy(),
+  cwd: sinon.spy(() => '/Users/thomas/Desktop/abide-master/packages/results-cli')
 })
 
-test('results-cli: display help (--help)', () => {
-  process = processOverwrite(['--help'])
-  require('./index')
-  expect(process.exit.called).toEqual(true)
-  expect(process.exit.args[0][0]).toEqual(0)
-  expect(process.stdout.write.called).toEqual(true)
-  expect(process.stdout.write.args.slice(-1)[0][0]).toEqual(help)
-  log(process.stdout.write.args.length)
-  log(process.stdout.write.args)
+test('resultCli: else', async () => {
+  const args = getArgs([])
+  await resultCli(args)
+  expect(args.stdout.write.called).toBe(true)
+  expect(args.exit.called).toBe(true)
+  expect(args.exit.args[0][0]).toBe(1)
 })
 
-// test('results-cli: display help (--help) reguardless', () => {
-//   process = processOverwrite(['--help', '--', 'echo', 'hello'])
-//   require('./index')
-//   expect(process.exit.called).toEqual(true)
-//   expect(process.exit.args[0][0]).toEqual(0)
-//   expect(process.stdout.write.called).toEqual(true)
-//   expect(process.stdout.write.args.slice(-1)[0][0]).toEqual(help)
-//   logs.push(process.stdout.write.args)
-// })
+test('resultCli: silent else', async () => {
+  const args = getArgs(['-s'])
+  await resultCli(args)
+  expect(args.stdout.write.called).toBe(false)
+  expect(args.exit.called).toBe(true)
+  expect(args.exit.args[0][0]).toBe(1)
+})
 
-// test('results-cli: display version', () => {
-//   process = processOverwrite(['--version'])
-//   require('./index')
-//   expect(process.exit.called).toEqual(true)
-//   expect(process.exit.args[0][0]).toEqual(0)
-//   expect(process.stdout.write.called).toEqual(true)
-//   expect(process.stdout.write.args.slice(-1)[0][0]).toEqual(`${version}\n`)
-//   logs.push(process.stdout.write.args)
-// })
+test('resultCli: help', async () => {
+  const args = getArgs(['--help'])
+  await resultCli(args)
+  expect(args.stdout.write.called).toBe(true)
+  expect(args.exit.called).toBe(true)
+  expect(args.exit.args[0][0]).toBe(0)
+})
+
+test('resultCli: version', async () => {
+  const args = getArgs(['--version'])
+  await resultCli(args)
+  expect(args.stdout.write.called).toBe(true)
+  expect(args.exit.called).toBe(true)
+  expect(args.exit.args[0][0]).toBe(0)
+})
+
+test('resultCli: main', async () => {
+  const args = getArgs(['--', 'echo', 'hello world'])
+  await resultCli(args)
+  expect(args.exit.called).toBe(true)
+  expect(args.exit.args[0][0]).toBe(0)
+})
+
+test('resultCli: with options', async () => {
+  const args = getArgs(['-cpedi', '--', 'echo', 'hello world'])
+  await resultCli(args)
+  expect(args.exit.called).toBe(true)
+  expect(args.exit.args[0][0]).toBe(0)
+})
+
+test('resultCli: with failure exit case', async () => {
+  const args = getArgs(['--', 'exit', '1'])
+  await resultCli(args)
+  expect(args.exit.called).toBe(true)
+  expect(args.exit.args[0][0]).toBe(1)
+})
+
+test('resultCli: with failure exit case', async () => {
+  const args = getArgs(['-zu', '--', 'exit', '1'])
+  await resultCli(args)
+  expect(args.exit.called).toBe(true)
+  expect(args.exit.args[0][0]).toBe(0)
+})
+
+test('resultCli: with failure no color', async () => {
+  const args = getArgs(['--no-color', '--', 'exit', '1'])
+  await resultCli(args)
+  expect(args.exit.called).toBe(true)
+  expect(args.exit.args[0][0]).toBe(1)
+})
+
+test('resultCli: main with color', async () => {
+  const args = getArgs(['--color', '--', 'echo', 'hello world'])
+  await resultCli(args)
+  expect(args.exit.called).toBe(true)
+  expect(args.exit.args[0][0]).toBe(0)
+})
+
+test('resultCli: main without color -u', async () => {
+  const args = getArgs(['-u', '--', 'echo', 'hello world'])
+  await resultCli(args)
+  expect(args.exit.called).toBe(true)
+  expect(args.exit.args[0][0]).toBe(0)
+})

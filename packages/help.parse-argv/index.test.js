@@ -20,7 +20,7 @@ import {
   touchObj,
   coerceToString,
   applySpecifier,
-  applyGeneral,
+  applyModifiers,
   groupByIncProp,
   untouched,
   mergeProperties
@@ -306,16 +306,16 @@ test('applySpecifier: should return nothing', () => {
   expect(result).toEqual([[]])
 })
 
-test('applyGeneral: empty args', () => {
-  const result = applyGeneral()
+test('applyModifiers: empty args', () => {
+  const result = applyModifiers()
   expect(result).toEqual([])
 })
 
-test('applyGeneral: should world', () => {
+test('applyModifiers: should world', () => {
   const fns = [modifiers.anyDash.bool]
   const argv = ['--example']
   const argvTouch = [{ value: '--example', key: 0, touched: false }]
-  const result = applyGeneral(fns, argv, argvTouch)
+  const result = applyModifiers(fns, argv, argvTouch)
   expect(argvTouch[0].touched).toEqual(true)
   expect(result).toEqual([{'--example': true}])
 })
@@ -364,7 +364,10 @@ const cases = [
   {'dolphin -max': {'-m': true, '-a': true, '-x': true, '_': ['dolphin']}},
   {'dolphin -max=thomas': {'-m': true, '-a': true, '-x': true, '_': ['dolphin']}},
   {'dolphin -max thomas': {'-m': true, '-a': true, '-x': true, '_': [['dolphin'], ['thomas']]}},
-  {'-h=thomas': {'-h': true, '_': []}}
+  {'-h=thomas': {'-h': true, '_': []}},
+  {'-- echo "hello world"': {'_': [], '--': 'echo hello world'}},
+  {'--example -- echo "hello world"': {'--example': true, '_': [], '--': 'echo hello world'}},
+  {'-cpde -- echo "hello world"': {'-c': true, '-p': true, '-d': true, '-e': true, '--': 'echo hello world', _: []}}
 ]
 
 test('parseArgv', async () => {

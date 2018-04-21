@@ -100,6 +100,7 @@ test('should have pineapple with --pineapple', () => {
 test('should have pineapple with -p', () => {
   const tool = help()
     .name('pizza-cli')
+    .usage('[options]')
     .description('The best pizza command-line-interface.')
     .option('-p, --pineapple', 'add pineapple', 'pineapple')
     .parse(['-p'])
@@ -111,4 +112,13 @@ test('parseFlagOption', () => {
   expect(parseFlagOption('-h    --help')).toEqual({'flags': ['-h', '--help'], 'optional': false, 'required': false})
   expect(parseFlagOption('  -h,    --help')).toEqual({'flags': ['-h', '--help'], 'optional': false, 'required': false})
   expect(parseFlagOption('  -h --help ')).toEqual({'flags': ['-h', '--help'], 'optional': false, 'required': false})
+})
+
+test('should have pineapple with -p', () => {
+  const tool = help()
+    .name('pizza-cli')
+    .description('The best pizza command-line-interface.')
+    .option('---x', 'add pineapple', 'pineapple')
+    .parse(['---x', 'hello'])
+  expect(tool.flags).toEqual({ _: [ '---x', 'hello' ] })
 })

@@ -4,7 +4,7 @@ import setEntire from '@reggi/help.set-entire'
 
 export const dash = /^-(\w+)/
 export const multiDash = /^-(\w\w+)/
-export const doubleDash = /^--([\w|-]+)/
+export const doubleDash = /^--(\w[-\w]*)/
 export const doubleDashNo = /^--no-(\w+)/
 export const onlyDash = /^-(\w)$|^-(\w)(?==)/
 export const anyDash = /^-+([\w|-]+)$|^-+([\w|-]+)=.+$/
@@ -153,14 +153,14 @@ export const applySpecifier = (specifiers, argv, argvTouch) => {
     .value()
 }
 
-export const applyGeneral = (fns, argv, argvTouch) => {
-  return chain(fns)
+export const applyModifiers = (modifiers, argv, argvTouch) => {
+  return chain(modifiers)
     .flattenDeep()
-    .reduce((acq, fn) => {
+    .reduce((acq, modifier) => {
       const result = chain(argvTouch)
-        .mapValues((obj, key) => {
+        .mapValues((obj) => {
           const _obj = cloneDeep(obj)
-          _obj.result = fn(argvTouch)(_obj.value, key)
+          _obj.result = modifier(argvTouch)(_obj.value, _obj.key)
           return _obj
         })
         .filter(obj => {
@@ -224,8 +224,8 @@ export const defaultModifiers = [
 export const parseArgv = (argv, {modifiers = defaultModifiers, specifiers = false} = {}) => {
   const argvTouch = touchObj(argv)
   const specifiersRes = (specifiers) ? applySpecifier(specifiers, argv, argvTouch) : []
-  const generalRes = (modifiers) ? applyGeneral(modifiers, argv, argvTouch) : []
-  return chain([specifiersRes, generalRes, {_: untouched(argvTouch)}])
+  const modifiersRes = (modifiers) ? applyModifiers(modifiers, argv, argvTouch) : []
+  return chain([specifiersRes, modifiersRes, {_: untouched(argvTouch)}])
     .flattenDeep()
     .thru(mergeProperties)
     .value()

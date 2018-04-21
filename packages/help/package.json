@@ -39,7 +39,7 @@
     }
   },
   "dependencies": {
-    "@reggi/help.parse-argv": "0.0.2",
+    "@reggi/help.parse-argv": "file:../help.parse-argv",
     "@reggi/journey": "1.0.0",
     "babel-runtime": "^6.26.0",
     "lodash": "^4.17.5"
