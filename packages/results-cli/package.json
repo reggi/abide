@@ -51,7 +51,6 @@
     "has-flag": "^3.0.0"
   },
   "devDependencies": {
-    "@reggi/process.mock": "file:../process.mock",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",

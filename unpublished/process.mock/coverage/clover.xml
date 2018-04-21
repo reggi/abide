@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1524204607907" clover="3.2.0">
-  <project timestamp="1524204607908" name="All files">
+<coverage generated="1524291633642" clover="3.2.0">
+  <project timestamp="1524291633642" name="All files">
     <metrics statements="70" coveredstatements="70" conditionals="13" coveredconditionals="13" methods="13" coveredmethods="13" elements="96" coveredelements="96" complexity="0" loc="70" ncloc="70" packages="1" files="3" classes="3">
       <file name="example-process-stdin-data.js" path="/Users/thomas/Desktop/abide-master/packages/process.mock/example-process-stdin-data.js">
         <metrics statements="18" coveredstatements="18" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>

@@ -122,3 +122,12 @@ test('should have pineapple with -p', () => {
     .parse(['---x', 'hello'])
   expect(tool.flags).toEqual({ _: [ '---x', 'hello' ] })
 })
+
+test('should have no-pineapple ', () => {
+  const tool = help()
+    .name('pizza-cli')
+    .description('The best pizza command-line-interface.')
+    .option('--no-pineapple', 'add pineapple', 'pineapple')
+    .parse(['--no-pineapple'])
+  expect(tool.flags).toEqual({'--pineapple': false, _: []})
+})

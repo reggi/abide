@@ -13,7 +13,7 @@ export function getStdout () {
     er = er || new Error('ERR_STDOUT_CLOSE')
     cb(er)
   }
-  process.on('SIGWINCH', () => stdout._refreshSize())
+  // process.on('SIGWINCH', () => stdout._refreshSize())
   return stdout
 }
 
@@ -53,31 +53,12 @@ export function getStdin () {
 }
 
 export function setupStdio () {
-  var stdio = {}
-
-  Object.defineProperty(stdio, 'stdout', {
-    configurable: true,
-    enumerable: true,
-    get: getStdout
-  })
-
-  Object.defineProperty(stdio, 'stderr', {
-    configurable: true,
-    enumerable: true,
-    get: getStderr
-  })
-
-  Object.defineProperty(stdio, 'stdin', {
-    configurable: true,
-    enumerable: true,
-    get: getStdin
-  })
-
-  return stdio
-}
-
-export default class Stdio {
-  constructor () {
-    return setupStdio()
+  return {
+    stdout: getStdout(),
+    stderr: getStderr(),
+    getStdin: getStdin()
   }
 }
+
+export const stdio = setupStdio
+export default stdio

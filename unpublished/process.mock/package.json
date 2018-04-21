@@ -1,5 +1,5 @@
 {
-  "name": "@reggi/process.stdio",
+  "name": "@reggi/process.mock",
   "version": "0.0.1",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
@@ -7,8 +7,7 @@
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
     "build": "npm run babel",
-    "jest": "jest",
-    "jest:coverage": "jest --coverage",
+    "jest": "jest --coverage --forceExit",
     "standard": "standard",
     "test": "npm run standard && npm run jest"
   },
@@ -39,7 +38,9 @@
     }
   },
   "dependencies": {
-    "babel-runtime": "^6.26.0"
+    "@reggi/process.stdio": "file:../process.stdio",
+    "babel-runtime": "^6.26.0",
+    "sinon": "^4.4.8"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -48,7 +49,6 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "jest": "^22.4.2",
-    "sinon": "^4.5.0",
     "standard": "^11.0.0"
   },
   "publishConfig": {

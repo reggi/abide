@@ -8,62 +8,34 @@ test('ifLengthAddProp', () => {
 })
 
 test('pluginStandard: default', () => {
-  const v = pluginStandard()
-  const expectation = {
-    scripts: {
-      standard: 'standard'
-    },
-    devDependencies: {
-      standard: '^11.0.0'
-    }
-  }
-  expect(v).toEqual(expectation)
+  const results = pluginStandard()
+  expect(results).toMatchSnapshot()
 })
 
 test('pluginStandard: babel', () => {
-  const v = pluginStandard({opt: {babel: true}})
-  const expectation = {
-    scripts: {
-      standard: 'standard'
-    },
-    devDependencies: {
-      'babel-eslint': '^8.2.2',
-      standard: '^11.0.0'
-    },
-    standard: {
-      parser: 'babel-eslint'
-    }
-  }
-  expect(v).toEqual(expectation)
+  const args = {opt: {babel: true}}
+  const results = pluginStandard(args)
+  expect(results).toMatchSnapshot()
 })
 
 test('pluginStandard: jest', () => {
-  const v = pluginStandard({opt: {jest: true}})
-  const expectation = {scripts: {standard: 'standard'}, devDependencies: {standard: '^11.0.0'}, standard: {globals: ['expect', 'test', 'beforeEach', 'afterEach']}}
-  expect(v).toEqual(expectation)
+  const args = {opt: {jest: true}}
+  const results = pluginStandard(args)
+  expect(results).toMatchSnapshot()
 })
 
 test('pluginStandard: default with pkg', () => {
-  const pkg = {
-    existing: true,
-    scripts: {
-      existing: true
-    },
-    devDependencies: {
-      existing: true
+  const args = {
+    pkg: {
+      existing: true,
+      scripts: {
+        existing: true
+      },
+      devDependencies: {
+        existing: true
+      }
     }
   }
-  const v = pluginStandard({pkg})
-  const expectation = {
-    existing: true,
-    scripts: {
-      existing: true,
-      standard: 'standard'
-    },
-    devDependencies: {
-      existing: true,
-      standard: '^11.0.0'
-    }
-  }
-  expect(v).toEqual(expectation)
+  const results = pluginStandard(args)
+  expect(results).toMatchSnapshot()
 })

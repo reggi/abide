@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pluginStandard: babel 1`] = `
+Object {
+  "devDependencies": Object {
+    "babel-eslint": "^8.2.2",
+    "standard": "^11.0.0",
+  },
+  "scripts": Object {
+    "standard": "standard",
+  },
+  "standard": Object {
+    "parser": "babel-eslint",
+  },
+}
+`;
+
+exports[`pluginStandard: default 1`] = `
+Object {
+  "devDependencies": Object {
+    "standard": "^11.0.0",
+  },
+  "scripts": Object {
+    "standard": "standard",
+  },
+}
+`;
+
+exports[`pluginStandard: default with pkg 1`] = `
+Object {
+  "devDependencies": Object {
+    "existing": true,
+    "standard": "^11.0.0",
+  },
+  "existing": true,
+  "scripts": Object {
+    "existing": true,
+    "standard": "standard",
+  },
+}
+`;
+
+exports[`pluginStandard: jest 1`] = `
+Object {
+  "devDependencies": Object {
+    "standard": "^11.0.0",
+  },
+  "scripts": Object {
+    "standard": "standard",
+  },
+  "standard": Object {
+    "globals": Array [
+      "beforeAll",
+      "afterAll",
+      "expect",
+      "test",
+      "beforeEach",
+      "afterEach",
+      "it",
+      "jest",
+    ],
+  },
+}
+`;

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import execa from 'execa'
-import help, {assign} from '@reggi/help'
+import help from '@reggi/help'
 import command from '@reggi/command'
 import {basename} from 'path'
 import colors from 'colors/safe'
@@ -46,6 +46,7 @@ const getCode = async ({cmd, workingDir, stdio}) => {
     const commandResponse = await execa.shell(cmd, {cwd: workingDir, stdio})
     return commandResponse.code
   } catch (e) {
+    console.log(e)
     return e.code
   }
 }

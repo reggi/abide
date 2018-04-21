@@ -3,7 +3,7 @@
 exports[`dep-merge-cli: help 1`] = `
 Array [
   "
-Usage: dep-merge [options]
+Usage: dep-merge 
 
   Tool for merging devDependencies into dependencies
 

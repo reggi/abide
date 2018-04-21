@@ -93,9 +93,11 @@ var getCode = function () {
           case 7:
             _context.prev = 7;
             _context.t0 = _context['catch'](0);
+
+            console.log(_context.t0);
             return _context.abrupt('return', _context.t0.code);
 
-          case 10:
+          case 11:
           case 'end':
             return _context.stop();
         }

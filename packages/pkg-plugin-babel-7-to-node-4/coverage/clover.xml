@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1522126217677" clover="3.2.0">
-  <project timestamp="1522126217680" name="All files">
+<coverage generated="1524295423220" clover="3.2.0">
+  <project timestamp="1524295423220" name="All files">
     <metrics statements="6" coveredstatements="6" conditionals="17" coveredconditionals="17" methods="1" coveredmethods="1" elements="24" coveredelements="24" complexity="0" loc="6" ncloc="6" packages="1" files="1" classes="1">
-      <file name="index.js" path="/Users/thomas/Desktop/abide/packages/pkg-plugin-babel-7-to-node-4/index.js">
+      <file name="index.js" path="/Users/thomas/Desktop/abide-master/packages/pkg-plugin-babel-7-to-node-4/index.js">
         <metrics statements="6" coveredstatements="6" conditionals="17" coveredconditionals="17" methods="1" coveredmethods="1"/>
         <line num="5" count="4" type="stmt"/>
         <line num="10" count="4" type="cond" truecount="5" falsecount="0"/>

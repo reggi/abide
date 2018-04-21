@@ -2,7 +2,7 @@ import sinon from 'sinon'
 import {ReadStream} from 'tty'
 import {Socket} from 'net'
 import {Duplex, Readable} from 'stream'
-import Stdio from './index'
+import stdio from './index'
 import assert from 'assert'
 
 const stdinTest = (stdin) => {
@@ -33,13 +33,13 @@ const stderrTest = (stderr) => {
 }
 
 test('stdin', () => {
-  const {stdin} = new Stdio()
+  const {stdin} = stdio()
   stdinTest(stdin)
   stdinTest(process.stdin)
 })
 
 test('stdin: pause with prop', () => {
-  const {stdin} = new Stdio()
+  const {stdin} = stdio()
   stdin._handle.readStop = sinon.spy()
   stdin.emit('pause')
   expect(stdin._handle.readStop.called).toEqual(true)
@@ -47,7 +47,7 @@ test('stdin: pause with prop', () => {
 })
 
 test('stdin: pause without', () => {
-  const {stdin} = new Stdio()
+  const {stdin} = stdio()
   const handle = stdin._handle
   stdin._handle = false
   expect(stdin.emit('pause')).toEqual(true)
@@ -56,7 +56,7 @@ test('stdin: pause without', () => {
 })
 
 test('stderr: _destroy', () => {
-  const {stderr} = new Stdio()
+  const {stderr} = stdio()
   const spyOne = sinon.spy()
   stderr._destroy(new Error(), spyOne)
   expect(spyOne.called).toBe(true)
@@ -66,7 +66,7 @@ test('stderr: _destroy', () => {
 })
 
 test('stdout: _destroy', () => {
-  const {stdout} = new Stdio()
+  const {stdout} = stdio()
   const spyOne = sinon.spy()
   stdout._destroy(new Error(), spyOne)
   expect(spyOne.called).toBe(true)
@@ -76,19 +76,19 @@ test('stdout: _destroy', () => {
 })
 
 test('stdout', () => {
-  const {stdout} = new Stdio()
+  const {stdout} = stdio()
   stdoutTest(stdout)
   stdoutTest(process.stdout)
 })
 
 test('stderr', () => {
-  const {stderr} = new Stdio()
+  const {stderr} = stdio()
   stderrTest(stderr)
   stderrTest(process.stderr)
 })
 
 test('stderr: _refreshSize.called on process.emit(SIGWINCH)', () => {
-  const {stderr} = new Stdio()
+  const {stderr} = stdio()
   stderr._refreshSize = sinon.spy()
   process.emit('SIGWINCH')
   expect(stderr._refreshSize.called).toEqual(true)

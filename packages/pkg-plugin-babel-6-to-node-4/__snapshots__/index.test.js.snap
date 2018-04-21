@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pluginBabel: with bin 1`] = `
+Object {
+  "babel": Object {
+    "plugins": Array [
+      "transform-object-rest-spread",
+      "transform-runtime",
+    ],
+    "presets": Array [
+      Array [
+        "env",
+        Object {
+          "targets": Object {
+            "node": "4",
+          },
+        },
+      ],
+    ],
+  },
+  "bin": "./lib/index.js",
+  "dependencies": Object {
+    "babel-runtime": "^6.26.0",
+  },
+  "devDependencies": Object {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+  },
+  "scripts": Object {
+    "babel": "babel ./src --out-dir ./lib",
+    "babel:watch": "npm run babel -- --watch",
+  },
+}
+`;
+
+exports[`pluginBabel: with main 1`] = `
+Object {
+  "babel": Object {
+    "plugins": Array [
+      "transform-object-rest-spread",
+      "transform-runtime",
+    ],
+    "presets": Array [
+      Array [
+        "env",
+        Object {
+          "targets": Object {
+            "node": "4",
+          },
+        },
+      ],
+    ],
+  },
+  "dependencies": Object {
+    "babel-runtime": "^6.26.0",
+  },
+  "devDependencies": Object {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+  },
+  "main": "./index.build.js",
+  "scripts": Object {
+    "babel": "babel ./index.js --out-file ./index.build.js",
+    "babel:watch": "npm run babel -- --watch",
+  },
+}
+`;
+
+exports[`pluginBabel: with main 2`] = `
+Object {
+  "babel": Object {
+    "plugins": Array [
+      "transform-object-rest-spread",
+      "transform-runtime",
+    ],
+    "presets": Array [
+      Array [
+        "env",
+        Object {
+          "targets": Object {
+            "node": "4",
+          },
+        },
+      ],
+    ],
+  },
+  "dependencies": Object {
+    "babel-runtime": "^6.26.0",
+  },
+  "devDependencies": Object {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+  },
+  "main": "./dist/index.js",
+  "scripts": Object {
+    "babel": "babel ./src --out-dir ./dist",
+    "babel:watch": "npm run babel -- --watch",
+  },
+}
+`;

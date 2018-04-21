@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pluginJest 1`] = `
+Object {
+  "devDependencies": Object {
+    "jest": "^22.4.2",
+  },
+  "jest": Object {},
+  "scripts": Object {
+    "jest": "jest",
+    "jest:coverage": "jest --coverage",
+  },
+}
+`;
+
+exports[`pluginJest: babel, hunderedPercent 1`] = `
+Object {
+  "devDependencies": Object {
+    "babel-jest": "^22.4.1",
+    "jest": "^22.4.2",
+  },
+  "jest": Object {
+    "collectCoverage": true,
+    "coverageThreshold": Object {
+      "global": Object {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100,
+      },
+    },
+  },
+  "scripts": Object {
+    "jest": "jest",
+    "jest:coverage": "jest --coverage",
+  },
+}
+`;
+
+exports[`pluginJest: babel, hunderedPercent, forceCoverageMatch 1`] = `
+Object {
+  "devDependencies": Object {
+    "babel-jest": "^22.4.1",
+    "jest": "^22.4.2",
+  },
+  "jest": Object {
+    "collectCoverage": true,
+    "coverageThreshold": Object {
+      "global": Object {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100,
+      },
+    },
+    "forceCoverageMatch": Array [
+      "index.js",
+    ],
+  },
+  "scripts": Object {
+    "jest": "jest",
+    "jest:coverage": "jest --coverage",
+  },
+}
+`;
+
+exports[`pluginJest: with overwrite 1`] = `
+Object {
+  "devDependencies": Object {
+    "babel-jest": "^22.4.1",
+    "jest": "^22.4.2",
+  },
+  "jest": Object {
+    "collectCoverage": true,
+    "coverageThreshold": Object {
+      "global": Object {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100,
+      },
+    },
+    "forceCoverageMatch": Array [
+      "index.js",
+    ],
+  },
+  "scripts": Object {
+    "jest": "jest",
+    "jest:coverage": "jest --coverage",
+    "test": "original example",
+  },
+}
+`;
+
+exports[`pluginJest: without overwrite 1`] = `
+Object {
+  "devDependencies": Object {
+    "babel-jest": "^22.4.1",
+    "jest": "^22.4.2",
+  },
+  "jest": Object {
+    "collectCoverage": true,
+    "coverageThreshold": Object {
+      "global": Object {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100,
+      },
+    },
+    "forceCoverageMatch": Array [
+      "index.js",
+    ],
+  },
+  "scripts": Object {
+    "jest": "jest",
+    "jest:coverage": "jest --coverage",
+    "test": "original example",
+  },
+}
+`;
