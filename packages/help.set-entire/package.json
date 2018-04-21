@@ -53,5 +53,8 @@
       "beforeEach",
       "afterEach"
     ]
+  },
+  "dependencies": {
+    "lodash": "^4.17.5"
   }
 }
