@@ -90,8 +90,6 @@
     "@reggi/pkg.prop-overwrite": "file:packages/pkg.prop-overwrite",
     "@reggi/pkg.read-json": "file:packages/pkg.read-json",
     "@reggi/pkg.throw-error": "file:packages/pkg.throw-error",
-    "@reggi/process.mock": "file:packages/process.mock",
-    "@reggi/process.stdio": "file:packages/process.stdio",
     "@reggi/results-cli": "file:packages/results-cli"
   }
 }
