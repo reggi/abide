@@ -39,6 +39,7 @@
     "standard": "^11.0.0"
   },
   "dependencies": {
+    "@reggi/dep-merge": "file:packages/dep-merge",
     "@reggi/dep-merge-cli": "file:packages/dep-merge-cli",
     "@reggi/help": "file:packages/help",
     "@reggi/help.filter-until": "file:packages/help.filter-until",
@@ -72,6 +73,7 @@
     "@reggi/pkg.read-json": "file:packages/pkg.read-json",
     "@reggi/pkg.throw-error": "file:packages/pkg.throw-error",
     "@reggi/process.mock": "file:packages/process.mock",
+    "@reggi/process.stdio": "file:packages/process.stdio",
     "results-cli": "file:packages/results-cli"
   },
   "standard": {
