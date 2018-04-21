@@ -41,14 +41,14 @@ test('resultCli: version', async () => {
 })
 
 test('resultCli: main', async () => {
-  const args = getArgs(['--', 'echo', 'hello world'])
+  const args = getArgs(['--', 'echo', 'hello'])
   await resultCli(args)
   expect(args.exit.called).toBe(true)
   expect(args.exit.args[0][0]).toBe(0)
 })
 
 test('resultCli: with options', async () => {
-  const args = getArgs(['-cpedi', '--', 'echo', 'hello world'])
+  const args = getArgs(['-cpedi', '--', 'echo', 'hello'])
   await resultCli(args)
   expect(args.exit.called).toBe(true)
   expect(args.exit.args[0][0]).toBe(0)
@@ -76,14 +76,14 @@ test('resultCli: with failure no color', async () => {
 })
 
 test('resultCli: main with color', async () => {
-  const args = getArgs(['--color', '--', 'echo', 'hello world'])
+  const args = getArgs(['--color', '--', 'echo', 'hello'])
   await resultCli(args)
   expect(args.exit.called).toBe(true)
   expect(args.exit.args[0][0]).toBe(0)
 })
 
 test('resultCli: main without color -u', async () => {
-  const args = getArgs(['-u', '--', 'echo', 'hello world'])
+  const args = getArgs(['-u', '--', 'echo', 'hello'])
   await resultCli(args)
   expect(args.exit.called).toBe(true)
   expect(args.exit.args[0][0]).toBe(0)
