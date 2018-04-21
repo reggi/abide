@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "@reggi/journey": "file:../journey",
+    "@reggi/pkg.file-exists": "file:../pkg.file-exists",
     "@reggi/pkg.json-parse": "file:../pkg.json-parse",
     "babel-runtime": "^6.26.0",
     "has-flag": "^3.0.0"
