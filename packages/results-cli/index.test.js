@@ -5,7 +5,7 @@ const getArgs = (argv) => ({
   argv: ['node', './index.js', ...argv],
   stdout: {write: sinon.spy()},
   exit: sinon.spy(),
-  cwd: sinon.spy(() => '/Users/thomas/Desktop/abide-master/packages/results-cli')
+  cwd: sinon.spy(() => process.cwd())
 })
 
 test('resultCli: else', async () => {

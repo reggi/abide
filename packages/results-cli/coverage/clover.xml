@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1524297187184" clover="3.2.0">
-  <project timestamp="1524297187184" name="All files">
+<coverage generated="1524424233628" clover="3.2.0">
+  <project timestamp="1524424233629" name="All files">
     <metrics statements="48" coveredstatements="48" conditionals="32" coveredconditionals="32" methods="8" coveredmethods="8" elements="88" coveredelements="88" complexity="0" loc="48" ncloc="48" packages="1" files="1" classes="1">
       <file name="index.js" path="/Users/thomas/Desktop/abide-master/packages/results-cli/index.js">
         <metrics statements="48" coveredstatements="48" conditionals="32" coveredconditionals="32" methods="8" coveredmethods="8"/>
