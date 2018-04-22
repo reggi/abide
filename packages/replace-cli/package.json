@@ -9,16 +9,10 @@
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
     "standard": "standard",
-    "test": "jest --coverage",
-    "test:result": "npm run test --silent &>/dev/null || echo $?"
+    "jest": "jest --coverage",
+    "test": "npm run standard && npm run jest"
   },
   "babel": {
-    "env": {
-      "plugins": [
-        "istanbul",
-        "rewire"
-      ]
-    },
     "plugins": [
       "transform-object-rest-spread"
     ],
@@ -45,7 +39,6 @@
     }
   },
   "devDependencies": {
-    "@reggi/process-mock": "file:../process-mock",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.2",
     "babel-jest": "^22.4.1",
@@ -73,32 +66,7 @@
       "afterEach"
     ]
   },
-  "nyc": {
-    "reporter": [
-      "lcov",
-      "html"
-    ],
-    "check-coverage": true,
-    "per-file": true,
-    "lines": 99,
-    "statements": 99,
-    "functions": 99,
-    "branches": 99,
-    "babel": {
-      "presets": [
-        "env"
-      ],
-      "env": {
-        "test": {
-          "plugins": [
-            "istanbul"
-          ]
-        }
-      }
-    }
-  },
   "dependencies": {
-    "@babel/polyfill": "^7.0.0-beta.42",
-    "babel-polyfill": "^6.26.0"
+    "@reggi/command": "file:../command"
   }
 }
