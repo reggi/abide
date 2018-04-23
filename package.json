@@ -21,7 +21,10 @@
     "standard": "standard",
     "bootstrap": "sh -e ./scripts/bootstrap.sh",
     "link-parent-bin": "link-parent-bin",
-    "test": "lerna exec --concurrency 1 -- results -d -- npm run test"
+    "test:all": "lerna exec --concurrency 1 -- results -d -- npm run test",
+    "test:requireable": "lerna exec --concurrency 1 -- results -di -- \"echo \"requireable $PWD\" && requireable -i ./\"",
+    "test:standard": "lerna exec --concurrency 1 -- npm run standard",
+    "test": "npm run test:standard && npm run test:all && npm run test:requireable"
   },
   "keywords": [],
   "author": "",

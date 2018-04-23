@@ -49,15 +49,19 @@
     "access": "public"
   },
   "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "*.build.js"
+    ],
     "globals": [
+      "beforeAll",
+      "afterAll",
       "expect",
       "test",
       "beforeEach",
-      "afterEach"
-    ],
-    "parser": "babel-eslint",
-    "ignore": [
-      "index.build.js"
+      "afterEach",
+      "it",
+      "jest"
     ]
   },
   "dependencies": {

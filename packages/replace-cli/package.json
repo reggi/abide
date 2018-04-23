@@ -5,6 +5,7 @@
   "bin": {
     "replace": "./index.build.js"
   },
+  "main": "./index.build.js",
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",

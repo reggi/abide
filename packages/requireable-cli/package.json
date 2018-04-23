@@ -5,6 +5,7 @@
   "bin": {
     "requireable": "./index.build.js"
   },
+  "main": "./index.build.js",
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
@@ -53,11 +54,19 @@
     "access": "public"
   },
   "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "*.build.js"
+    ],
     "globals": [
+      "beforeAll",
+      "afterAll",
       "expect",
       "test",
       "beforeEach",
-      "afterEach"
+      "afterEach",
+      "it",
+      "jest"
     ]
   },
   "dependencies": {
