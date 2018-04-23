@@ -1,21 +1,27 @@
 #!/usr/bin/env node
+import command from '@reggi/command'
 import help from '@reggi/help'
 import {get, flattenDeep} from 'lodash'
 
-const design = help()
+const getDesign = (argv) => help()
   .name('requireable')
   .description('Check and see if a module is requireable in node')
-  .option('--module <path>', 'path to the local module')
-  .option('--node <path>', 'path to the node binary')
-  .option('--verbose', 'show debug content')
-  .option('--help, -h', 'generate this output')
-  .option('--version, -v', 'show version number')
-  .option('--silent, -s', 'no output')
-  .parse(process.argv.slice(2))
+  .option('--module <path>', 'path to the local module', 'module')
+  .option('--node <path>', 'path to the node binary', 'node')
+  .option('--verbose', 'show debug content', 'verbose')
+  .option('--help, -h', 'generate this output', 'help')
+  .option('--version, -v', 'show version number', 'version')
+  .option('--silent, -s', 'no output', 'silent')
+  .parse(argv.slice(2))
 
-const flags = design.flags
+export default command(module, async ({argv}) => {
+  const design = getDesign(argv)
+  const modPath = design.flags.module || get(flattenDeep(design.flags._), '0') || false
+  
+})
 
-const modPath = flags['--module'] || get(flattenDeep(flags._), '0') || false
+
+
 const nodeBin = flags['--node'] || false
 const verbose = flags['--verbose'] || false
 const version = flags['--version'] || false

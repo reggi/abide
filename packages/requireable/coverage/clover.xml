@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1524446836400" clover="3.2.0">
-  <project timestamp="1524446836400" name="All files">
-    <metrics statements="32" coveredstatements="32" conditionals="7" coveredconditionals="7" methods="33" coveredmethods="33" elements="72" coveredelements="72" complexity="0" loc="32" ncloc="32" packages="1" files="1" classes="1">
+<coverage generated="1524447326171" clover="3.2.0">
+  <project timestamp="1524447326171" name="All files">
+    <metrics statements="33" coveredstatements="33" conditionals="7" coveredconditionals="7" methods="34" coveredmethods="34" elements="74" coveredelements="74" complexity="0" loc="33" ncloc="33" packages="1" files="1" classes="1">
       <file name="index.js" path="/Users/thomas/Desktop/abide-master/packages/requireable/index.js">
-        <metrics statements="32" coveredstatements="32" conditionals="7" coveredconditionals="7" methods="33" coveredmethods="33"/>
-        <line num="10" count="88" type="stmt"/>
+        <metrics statements="33" coveredstatements="33" conditionals="7" coveredconditionals="7" methods="34" coveredmethods="34"/>
+        <line num="10" count="94" type="stmt"/>
         <line num="11" count="4" type="stmt"/>
         <line num="12" count="6" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
@@ -36,6 +36,7 @@
         <line num="75" count="6" type="stmt"/>
         <line num="77" count="6" type="stmt"/>
         <line num="79" count="6" type="stmt"/>
+        <line num="81" count="6" type="stmt"/>
       </file>
     </metrics>
   </project>

@@ -40,3 +40,4 @@ results -c -- npm --prefix ./packages/pkg.throw-error run test
 echo 'Testing "process" suite...'
 results -c -- npm --prefix ./packages/replace-cli run test
 results -c -- npm --prefix ./packages/results-cli run test
+results -c -- npm --prefix ./packages/requireable run test
