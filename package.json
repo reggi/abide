@@ -21,7 +21,7 @@
     "standard": "standard",
     "bootstrap": "sh -e ./scripts/bootstrap.sh",
     "link-parent-bin": "link-parent-bin",
-    "test": "lerna exec -- results -d -- npm run test"
+    "test": "lerna exec --concurrency 1 -- results -d -- npm run test"
   },
   "keywords": [],
   "author": "",
