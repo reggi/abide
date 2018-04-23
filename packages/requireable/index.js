@@ -9,7 +9,7 @@ import debug from 'debug'
 
 const hook = (journeyName) => (acq, res) => debug(`requireable:${journeyName}`)(JSON.stringify(res))
 const isFile = async (p) => fs.lstat(p).then(stat => stat.isFile()).catch(() => false)
-const isDir = (p) => fs.lstat(p).then(stat => stat.isDirectory()).catch(() => false)
+const isDir = async (p) => fs.lstat(p).then(stat => stat.isDirectory()).catch(() => false)
 
 const tmpPkgTemplate = {
   'name': 'requireable-temp',
@@ -25,22 +25,22 @@ const tmpPkgTemplate = {
   'license': 'ISC'
 }
 
-const npmInstall = ({absoluteModPath, tmpFullDir}) => execa('npm', ['install', absoluteModPath], {cwd: tmpFullDir, stdio: 'inherit'})
-const requireModule = ({nodeBin = 'node', modPkgJson, tmpFullDir}) => execa.shell(`${nodeBin} -e "require('${modPkgJson.name}');console.log('require successfull')"`, {cwd: tmpFullDir, stdio: 'inherit'})
+const npmInstall = ({absoluteModPath, tmpFullDir, stdio}) => execa('npm', ['install', absoluteModPath], {cwd: tmpFullDir, stdio})
+const requireModule = ({nodeBin = 'node', modPkgJson, tmpFullDir, stdio}) => execa.shell(`${nodeBin} -e "require('${modPkgJson.name}');console.log('require successfull')"`, {cwd: tmpFullDir, stdio})
 
-export const requireableCore = journey(({modPath, tmpFullDir, nodeBin, inherit}) => [
-  () => ({modPath, tmpFullDir}),
+export const requireableCore = journey(({modPath, nodeBin, inherit, tmpFullDir}) => [
+  () => ({modPath, nodeBin, inherit, tmpFullDir}),
   ({inherit}) => ({stdio: (inherit) ? 'inherit' : 'pipe'}),
   // checks if the modPath is a directory
-  async ({modPath}) => ({modPathIsDir: isDir(modPath)}),
+  async ({modPath}) => ({modPathIsDir: await isDir(modPath)}),
   // throws an error if it is invalid dir
-  ({modPathIsDir}) => (!modPathIsDir) ? throwError('module path is not a directory') : false,
+  ({modPathIsDir}) => (!modPathIsDir) ? throwError('module path is not a directory') : {modPathIsDirError: 'pass'},
   // declares the path of the modPath's package.json file
   ({modPath}) => ({modPkgPath: path.join(modPath, 'package.json')}),
   // checks if the modPath has a package.json in it
-  async ({modPkgPath}) => ({modPkgPathIsFile: isFile(modPkgPath)}),
+  async ({modPkgPath}) => ({modPkgPathIsFile: await isFile(modPkgPath)}),
   // throws an error if the expected modPath package.json is not valid
-  ({modPkgPathIsFile}) => (!modPkgPathIsFile) ? throwError('module path missing package.json') : false,
+  ({modPkgPathIsFile}) => (!modPkgPathIsFile) ? throwError('module path missing package.json') : {modPkgPathIsFileError: 'pass'},
   // get the package.json
   async ({modPkgPath}) => ({modPkgJson: await fs.readJson(modPkgPath)}),
   // declares the path of the temp package.json file
@@ -52,21 +52,21 @@ export const requireableCore = journey(({modPath, tmpFullDir, nodeBin, inherit})
   // attempts to install the module with the cwd set to the temp dir
   async ({absoluteModPath, tmpFullDir, stdio}) => ({resultNpmInstall: await npmInstall({absoluteModPath, tmpFullDir, stdio})}),
   // attemps to require the install module and will throw error if fails
-  async ({modPkgJson, stdio}) => ({resultRequireMod: await requireModule({nodeBin, modPkgJson, tmpFullDir, stdio})}),
+  async ({nodeBin, modPkgJson, stdio}) => ({resultRequireMod: await requireModule({nodeBin, modPkgJson, tmpFullDir, stdio})}),
   // add success to object
   () => ({success: true})
 ], {hook: hook('requireableCore')})
 
-export const requireableCoreWrapped = ({modPath, tmpFullDir}) => {
+export const requireableCoreWrapped = async ({modPath, tmpFullDir, inherit}) => {
   try {
-    return requireableCore(({modPath, tmpFullDir}))
+    return await requireableCore(({modPath, tmpFullDir, inherit}))
   } catch (e) {
     return {success: false, ...e}
   }
 }
 
 export const requireable = journey(({modPath, nodeBin, inherit}) => [
-  () => ({modPath}),
+  () => ({modPath, nodeBin, inherit}),
   // gets the temp dir
   () => ({tmpDir: os.tmpdir()}),
   // generates uuid
@@ -76,9 +76,9 @@ export const requireable = journey(({modPath, nodeBin, inherit}) => [
   // ensures dirpath exists (mkdirp)
   async ({tmpFullDir}) => ({resultEnsureDir: await fs.ensureDir(tmpFullDir)}),
   // runs core code (catches errors)
-  async ({modPath, tmpFullDir}) => ({core: await requireableCoreWrapped({modPath, tmpFullDir, nodeBin, inherit})}),
+  async ({modPath, nodeBin, inherit, tmpFullDir}) => ({core: await requireableCoreWrapped({modPath, nodeBin, inherit, tmpFullDir})}),
   // should run this even if there are errors
-  async ({tmpFullDir}) => ({resultClean: await fs.remove(tmpFullDir)})
+  // async ({tmpFullDir}) => ({resultClean: await fs.remove(tmpFullDir)})
   // returns core
 ], {return: 'core', hook: hook('requireable')})
 

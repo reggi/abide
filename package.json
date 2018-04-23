@@ -91,6 +91,8 @@
     "@reggi/pkg.read-json": "file:packages/pkg.read-json",
     "@reggi/pkg.throw-error": "file:packages/pkg.throw-error",
     "@reggi/replace-cli": "file:packages/replace-cli",
-    "@reggi/results-cli": "file:packages/results-cli"
+    "@reggi/requireable": "file:packages/requireable",
+    "@reggi/results-cli": "file:packages/results-cli",
+    "replace-cli": "file:packages/replace-cli"
   }
 }
