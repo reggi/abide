@@ -17,21 +17,37 @@ test('requireable: working inherit', async () => {
 })
 
 test('requireable: should not work if file', async () => {
-  const {success} = await requireable({modPath: './examples/working/package.json'})
-  expect(success).toEqual(false)
+  try {
+    await requireable({modPath: './examples/working/package.json'})
+  } catch (e) {
+    expect(e).toBeDefined()
+  }
+  expect.assertions(1)
 })
 
 test('requireable: should not work if module doesn\'t exist', async () => {
-  const {success} = await requireable({modPath: './examples/non-existant'})
-  expect(success).toEqual(false)
+  try {
+    await requireable({modPath: './examples/non-existant'})
+  } catch (e) {
+    expect(e).toBeDefined()
+  }
+  expect.assertions(1)
 })
 
 test('requireable: broken', async () => {
-  const {success} = await requireable({modPath: './examples/broken'})
-  expect(success).toEqual(false)
+  try {
+    await requireable({modPath: './examples/broken'})
+  } catch (e) {
+    expect(e).toBeDefined()
+  }
+  expect.assertions(1)
 })
 
 test('requireable: dir without package', async () => {
-  const {success} = await requireable({modPath: './examples'})
-  expect(success).toEqual(false)
+  try {
+    await requireable({modPath: './examples'})
+  } catch (e) {
+    expect(e).toBeDefined()
+  }
+  expect.assertions(1)
 })

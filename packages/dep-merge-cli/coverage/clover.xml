@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1524295352010" clover="3.2.0">
-  <project timestamp="1524295352010" name="All files">
+<coverage generated="1524452584562" clover="3.2.0">
+  <project timestamp="1524452584563" name="All files">
     <metrics statements="41" coveredstatements="41" conditionals="19" coveredconditionals="19" methods="2" coveredmethods="2" elements="62" coveredelements="62" complexity="0" loc="41" ncloc="41" packages="1" files="1" classes="1">
       <file name="index.js" path="/Users/thomas/Desktop/abide-master/packages/dep-merge-cli/index.js">
         <metrics statements="41" coveredstatements="41" conditionals="19" coveredconditionals="19" methods="2" coveredmethods="2"/>

@@ -17,10 +17,11 @@
     "dep-merge:postinstall": "bash -e ./scripts/postinstall.sh",
     "preinstall": "npm run dep-merge:preinstall",
     "postinstall": "npm run dep-merge:postinstall && link-parent-bin",
-    "jenkins": "npm --prefix ./packages/results-cli/ run babel && npm run fully-tested",
+    "jenkins": "npm run test",
     "standard": "standard",
     "bootstrap": "sh -e ./scripts/bootstrap.sh",
-    "link-parent-bin": "link-parent-bin"
+    "link-parent-bin": "link-parent-bin",
+    "test": "lerna exec -- results -d -- npm run test"
   },
   "keywords": [],
   "author": "",
@@ -92,6 +93,7 @@
     "@reggi/pkg.throw-error": "file:packages/pkg.throw-error",
     "@reggi/replace-cli": "file:packages/replace-cli",
     "@reggi/requireable": "file:packages/requireable",
+    "@reggi/requireable-cli": "file:packages/requireable-cli",
     "@reggi/results-cli": "file:packages/results-cli",
     "replace-cli": "file:packages/replace-cli"
   }

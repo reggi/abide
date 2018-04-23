@@ -5,10 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.requireable = exports.requireableCoreWrapped = exports.requireableCore = undefined;
 
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
 var _regenerator = require('babel-runtime/regenerator');
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
@@ -375,7 +371,7 @@ var requireableCoreWrapped = exports.requireableCoreWrapped = function () {
           case 6:
             _context9.prev = 6;
             _context9.t0 = _context9['catch'](0);
-            return _context9.abrupt('return', (0, _extends3.default)({ success: false }, _context9.t0));
+            return _context9.abrupt('return', { success: false, error: _context9.t0 });
 
           case 9:
           case 'end':
@@ -471,7 +467,45 @@ var requireable = exports.requireable = (0, _journey.journey)(function (_ref26) 
     return function (_x11) {
       return _ref31.apply(this, arguments);
     };
-  }()];
+  }(),
+  // should run this even if there are errors
+  function () {
+    var _ref33 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee12(_ref32) {
+      var tmpFullDir = _ref32.tmpFullDir;
+      return _regenerator2.default.wrap(function _callee12$(_context12) {
+        while (1) {
+          switch (_context12.prev = _context12.next) {
+            case 0:
+              _context12.next = 2;
+              return _fsExtra2.default.remove(tmpFullDir);
+
+            case 2:
+              _context12.t0 = _context12.sent;
+              return _context12.abrupt('return', {
+                resultClean: _context12.t0
+              });
+
+            case 4:
+            case 'end':
+              return _context12.stop();
+          }
+        }
+      }, _callee12, undefined);
+    }));
+
+    return function (_x12) {
+      return _ref33.apply(this, arguments);
+    };
+  }(),
+  // should throw error if core has one
+  function (_ref34) {
+    var core = _ref34.core;
+
+    if (!core.success) throw core.error;
+    return { coreError: false };
+  }
+  // returns core
+  ];
 }, { return: 'core', hook: hook('requireable') });
 
 exports.default = requireable;
