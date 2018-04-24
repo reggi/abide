@@ -1,6 +1,6 @@
 {
   "name": "@reggi/command",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Thomas Reggi",
   "main": "./index.js",
   "scripts": {

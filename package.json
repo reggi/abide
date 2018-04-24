@@ -30,8 +30,8 @@
     "versions": "sh ./scripts/versions.sh",
     "rm:etc": "lerna exec -- rm -rf etc",
     "exec:cp-npmignore": "lerna exec -- cp ../../.npmignore ./.npmignore",
-    "pre-commit:sort-packages": "lerna exec -- sort-package-json"
-    
+    "pre-commit:sort-packages": "lerna exec -- sort-package-json",
+    "pre-commit:update-versions": "lerna exec -- results -d -- sh ../../scripts/updateversions.sh"
   },
   "keywords": [],
   "author": "",
@@ -103,10 +103,9 @@
     "@reggi/pkg.prop-overwrite": "file:packages/pkg.prop-overwrite",
     "@reggi/pkg.read-json": "file:packages/pkg.read-json",
     "@reggi/pkg.throw-error": "file:packages/pkg.throw-error",
-    "@reggi/replace-cli": "file:packages/replace-cli",
     "@reggi/requireable": "file:packages/requireable",
     "@reggi/requireable-cli": "file:packages/requireable-cli",
-    "@reggi/results-cli": "file:packages/results-cli",
+    "results-cli": "file:packages/results-cli",
     "replace-cli": "file:packages/replace-cli"
   }
 }

@@ -791,7 +791,6 @@
       "requires": {
         "@reggi/journey": "file:packages/journey",
         "@reggi/pkg.file-exists": "file:packages/pkg.file-exists",
-        "@reggi/pkg.json-parse": "file:packages/pkg.json-parse",
         "babel-runtime": "6.26.0",
         "fs-extra": "5.0.0"
       }
@@ -803,7 +802,8 @@
         "@reggi/dep-merge": "file:packages/dep-merge",
         "@reggi/help": "file:packages/help",
         "babel-runtime": "6.26.0",
-        "debug": "3.1.0"
+        "debug": "3.1.0",
+        "fs-extra": "5.0.0"
       }
     },
     "@reggi/help": {
@@ -811,14 +811,12 @@
       "requires": {
         "@reggi/help.parse-argv": "file:packages/help.parse-argv",
         "@reggi/journey": "file:packages/journey",
-        "babel-runtime": "6.26.0",
         "lodash": "4.17.5"
       }
     },
     "@reggi/help.filter-until": {
       "version": "file:packages/help.filter-until",
       "requires": {
-        "babel-runtime": "6.26.0",
         "lodash": "4.17.5"
       }
     },
@@ -827,7 +825,6 @@
       "requires": {
         "@reggi/help.filter-until": "file:packages/help.filter-until",
         "@reggi/help.set-entire": "file:packages/help.set-entire",
-        "@reggi/journey": "file:packages/journey",
         "lodash": "4.17.5"
       }
     },
@@ -868,8 +865,7 @@
     "@reggi/journey.fn-free": {
       "version": "file:packages/journey.fn-free",
       "requires": {
-        "@reggi/journey.is-promise": "file:packages/journey.is-promise",
-        "babel-runtime": "6.26.0"
+        "@reggi/journey.is-promise": "file:packages/journey.is-promise"
       }
     },
     "@reggi/journey.fn-reduce": {
@@ -886,8 +882,7 @@
     "@reggi/journey.pass-thru": {
       "version": "file:packages/journey.pass-thru",
       "requires": {
-        "@reggi/journey.is-promise": "file:packages/journey.is-promise",
-        "sort-package-json": "1.12.0"
+        "@reggi/journey.is-promise": "file:packages/journey.is-promise"
       }
     },
     "@reggi/pkg": {
@@ -895,6 +890,7 @@
       "requires": {
         "@reggi/journey": "file:packages/journey",
         "@reggi/journey.coerce-to-array": "file:packages/journey.coerce-to-array",
+        "@reggi/pkg.fs": "file:packages/pkg.fs",
         "@reggi/pkg.is-local-module": "file:packages/pkg.is-local-module",
         "@reggi/pkg.pretty-json": "file:packages/pkg.pretty-json",
         "@reggi/pkg.read-json": "file:packages/pkg.read-json",
@@ -910,17 +906,23 @@
         "@reggi/command": "file:packages/command",
         "@reggi/help": "file:packages/help",
         "@reggi/pkg": "file:packages/pkg",
-        "babel-runtime": "6.26.0"
+        "babel-runtime": "6.26.0",
+        "debug": "3.1.0"
       }
     },
     "@reggi/pkg-plugin-babel-6-to-node-4": {
       "version": "file:packages/pkg-plugin-babel-6-to-node-4",
       "requires": {
-        "@reggi/pkg.prop-overwrite": "file:packages/pkg.prop-overwrite"
+        "@reggi/pkg.prop-overwrite": "file:packages/pkg.prop-overwrite",
+        "lodash": "4.17.5"
       }
     },
     "@reggi/pkg-plugin-babel-7-to-node-4": {
-      "version": "file:packages/pkg-plugin-babel-7-to-node-4"
+      "version": "file:packages/pkg-plugin-babel-7-to-node-4",
+      "requires": {
+        "@reggi/pkg.prop-overwrite": "file:packages/pkg.prop-overwrite",
+        "lodash": "4.17.5"
+      }
     },
     "@reggi/pkg-plugin-cobalt": {
       "version": "file:packages/pkg-plugin-cobalt",
@@ -952,7 +954,10 @@
       "version": "file:packages/pkg-plugin-name-scope"
     },
     "@reggi/pkg-plugin-prop": {
-      "version": "file:packages/pkg-plugin-prop"
+      "version": "file:packages/pkg-plugin-prop",
+      "requires": {
+        "lodash": "4.17.5"
+      }
     },
     "@reggi/pkg-plugin-sort": {
       "version": "file:packages/pkg-plugin-sort",
@@ -1027,7 +1032,6 @@
         "@reggi/help": "file:packages/help",
         "@reggi/requireable": "file:packages/requireable",
         "babel-runtime": "6.26.0",
-        "debug": "3.1.0",
         "lodash": "4.17.5"
       }
     },
@@ -1038,7 +1042,8 @@
         "@reggi/help": "file:packages/help",
         "babel-runtime": "6.26.0",
         "colors": "1.2.1",
-        "commander": "2.15.1"
+        "debug": "3.1.0",
+        "execa": "0.10.0"
       }
     },
     "JSONStream": {
@@ -2775,7 +2780,8 @@
     "commander": {
       "version": "2.15.1",
       "resolved": "https://registry.npmjs.org/commander/-/commander-2.15.1.tgz",
-      "integrity": "sha512-VlfT9F3V0v+jr4yxPc5gg9s62/fIVWsd2Bk2iD435um1NlGMYdVCq+MjcXnhYq2icNOizHr1kK+5TI6H0Hy0ag=="
+      "integrity": "sha512-VlfT9F3V0v+jr4yxPc5gg9s62/fIVWsd2Bk2iD435um1NlGMYdVCq+MjcXnhYq2icNOizHr1kK+5TI6H0Hy0ag==",
+      "dev": true
     },
     "compare-func": {
       "version": "1.3.2",
