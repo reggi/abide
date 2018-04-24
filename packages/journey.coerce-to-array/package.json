@@ -36,6 +36,9 @@
       }
     }
   },
+  "dependencies": {
+    "lodash": "^4.17.5"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.2",
@@ -59,8 +62,5 @@
     "ignore": [
       "index.build.js"
     ]
-  },
-  "dependencies": {
-    "lodash": "^4.17.5"
   }
 }

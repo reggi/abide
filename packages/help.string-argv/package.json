@@ -37,6 +37,10 @@
       }
     }
   },
+  "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "execa": "^0.10.0"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -63,9 +67,5 @@
       "it",
       "jest"
     ]
-  },
-  "dependencies": {
-    "babel-runtime": "^6.26.0",
-    "execa": "^0.10.0"
   }
 }

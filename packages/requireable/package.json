@@ -6,8 +6,8 @@
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
-    "standard": "standard",
     "jest": "BABEL_ENV=test jest --coverage",
+    "standard": "standard",
     "test": "npm run standard && npm run jest"
   },
   "babel": {
@@ -37,13 +37,21 @@
       }
     }
   },
+  "dependencies": {
+    "@reggi/journey": "file:../journey",
+    "@reggi/pkg.throw-error": "file:../pkg.throw-error",
+    "babel-runtime": "^6.26.0",
+    "debug": "^3.1.0",
+    "execa": "^0.10.0",
+    "fs-extra": "^5.0.0",
+    "uuid": "^3.2.1"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "jest": "^22.4.3",
-    "mock-fs": "^4.4.2",
     "standard": "^11.0.0"
   },
   "publishConfig": {
@@ -60,14 +68,5 @@
       "afterEach",
       "jest"
     ]
-  },
-  "dependencies": {
-    "@reggi/journey": "file:../journey",
-    "@reggi/pkg.throw-error": "file:../pkg.throw-error",
-    "babel-runtime": "^6.26.0",
-    "debug": "^3.1.0",
-    "execa": "^0.10.0",
-    "fs-extra": "^5.0.0",
-    "uuid": "^3.2.1"
   }
 }

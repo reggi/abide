@@ -36,16 +36,19 @@
       }
     }
   },
+  "dependencies": {
+    "@reggi/help.filter-until": "file:../help.filter-until",
+    "@reggi/help.set-entire": "file:../help.set-entire",
+    "lodash": "^4.17.5"
+  },
   "devDependencies": {
-    "@reggi/help.string-argv": "0.0.1",
+    "@reggi/help.string-argv": "file:../help.string-argv",
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "bluebird": "^3.5.1",
-    "execa": "^0.10.0",
     "jest": "^22.4.2",
-    "standard": "^11.0.0",
-    "string-argv": "0.0.2"
+    "standard": "^11.0.0"
   },
   "publishConfig": {
     "access": "public"
@@ -65,11 +68,5 @@
       "it",
       "jest"
     ]
-  },
-  "dependencies": {
-    "@reggi/help.filter-until": "0.0.1",
-    "@reggi/help.set-entire": "0.0.1",
-    "@reggi/journey": "1.0.0",
-    "lodash": "^4.17.5"
   }
 }

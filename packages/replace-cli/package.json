@@ -2,15 +2,15 @@
   "name": "replace-cli",
   "version": "1.0.1",
   "author": "Thomas Reggi",
+  "main": "./index.build.js",
   "bin": {
     "replace": "./index.build.js"
   },
-  "main": "./index.build.js",
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
-    "standard": "standard",
     "jest": "jest --coverage",
+    "standard": "standard",
     "test": "npm run standard && npm run jest"
   },
   "babel": {
@@ -39,17 +39,17 @@
       }
     }
   },
+  "dependencies": {
+    "@reggi/command": "file:../command"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.2",
     "babel-jest": "^22.4.1",
-    "babel-plugin-istanbul": "^4.1.5",
-    "babel-plugin-rewire": "^1.1.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "jest": "^22.4.2",
-    "nyc": "^11.6.0",
+    "sinon": "^4.5.0",
     "standard": "^11.0.0"
   },
   "publishConfig": {
@@ -66,8 +66,5 @@
       "beforeEach",
       "afterEach"
     ]
-  },
-  "dependencies": {
-    "@reggi/command": "file:../command"
   }
 }

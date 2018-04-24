@@ -40,6 +40,7 @@
   "dependencies": {
     "@reggi/journey": "file:../journey",
     "@reggi/journey.coerce-to-array": "file:../journey.coerce-to-array",
+    "@reggi/pkg.fs": "file:../pkg.fs",
     "@reggi/pkg.is-local-module": "file:../pkg.is-local-module",
     "@reggi/pkg.pretty-json": "file:../pkg.pretty-json",
     "@reggi/pkg.read-json": "file:../pkg.read-json",
