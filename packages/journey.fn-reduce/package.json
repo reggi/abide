@@ -6,7 +6,10 @@
   "scripts": {
     "author": "Thomas Reggi",
     "babel": "babel ./index.js --out-file ./index.build.js",
-    "babel:watch": "npm run babel -- --watch"
+    "babel:watch": "npm run babel -- --watch",
+    "standard": "standard",
+    "jest": "jest --coverage",
+    "test": "npm run standard && npm run jest"
   },
   "babel": {
     "plugins": [
