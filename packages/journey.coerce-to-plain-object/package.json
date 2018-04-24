@@ -1,6 +1,6 @@
 {
   "name": "@reggi/journey.coerce-to-plain-object",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {

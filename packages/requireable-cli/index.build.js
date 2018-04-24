@@ -30,7 +30,7 @@ var _lodash = require('lodash');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var getDesign = function getDesign(argv) {
-  return (0, _help2.default)().name('requireable').description('Check and see if a module is requireable in node').option('--module <path>', 'path to the local module', 'module').option('--node <path>', 'path to the node binary', 'nodeBin').option('--verbose', 'show debug content', 'verbose').option('--inherit, -i', 'show debug content', 'inherit').option('--help, -h', 'generate this output', 'help').option('--version, -v', 'show version number', 'version').option('--silent, -s', 'no output', 'silent').parse(argv.slice(2));
+  return (0, _help2.default)().name('requireable').usage('[flags] [modulePath]').description('Check and see if a module is requireable in node').option('--module <path>', 'path to the local module', 'module').option('--node <path>', 'path to the node binary', 'nodeBin').option('--verbose', 'show debug content', 'verbose').option('--inherit, -i', 'show debug content', 'inherit').option('--help, -h', 'generate this output', 'help').option('--version, -v', 'show version number', 'version').option('--silent, -s', 'no output', 'silent').parse(argv.slice(2));
 };
 
 var main = function () {

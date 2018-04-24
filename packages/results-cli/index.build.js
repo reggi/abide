@@ -94,7 +94,7 @@ var getCode = function () {
             _context.prev = 7;
             _context.t0 = _context['catch'](0);
 
-            console.log(_context.t0);
+            d(_context.t0.message);
             return _context.abrupt('return', _context.t0.code);
 
           case 11:

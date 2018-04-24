@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg-plugin-name-scope",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {

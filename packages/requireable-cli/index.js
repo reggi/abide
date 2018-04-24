@@ -6,6 +6,7 @@ import {get, flattenDeep} from 'lodash'
 
 const getDesign = (argv) => help()
   .name('requireable')
+  .usage('[flags] [modulePath]')
   .description('Check and see if a module is requireable in node')
   .option('--module <path>', 'path to the local module', 'module')
   .option('--node <path>', 'path to the node binary', 'nodeBin')

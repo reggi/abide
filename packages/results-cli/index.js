@@ -46,7 +46,7 @@ const getCode = async ({cmd, workingDir, stdio}) => {
     const commandResponse = await execa.shell(cmd, {cwd: workingDir, stdio})
     return commandResponse.code
   } catch (e) {
-    console.log(e)
+    d(e.message)
     return e.code
   }
 }
