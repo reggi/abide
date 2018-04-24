@@ -2,7 +2,6 @@ __snapshots__/
 coverage/
 screenshots/
 examples/
-index.js
 index.test.js
 test.js
 .pkgrc
