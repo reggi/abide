@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg-plugin-babel-7-to-node-4",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {
