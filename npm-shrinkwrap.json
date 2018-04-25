@@ -806,6 +806,103 @@
         "fs-extra": "5.0.0"
       }
     },
+    "@reggi/gitpkg.upsert": {
+      "version": "file:packages/gitpkg.upsert",
+      "requires": {
+        "@reggi/journey": "file:packages/journey",
+        "babel-runtime": "6.26.0",
+        "lodash": "4.17.10"
+      },
+      "dependencies": {
+        "@reggi/journey": {
+          "version": "file:packages/journey",
+          "bundled": true,
+          "requires": {
+            "@reggi/journey.coerce-to-array": "file:packages/journey.coerce-to-array",
+            "@reggi/journey.fn-free": "file:packages/journey.fn-free",
+            "@reggi/journey.fn-reduce": "file:packages/journey.fn-reduce",
+            "lodash": "4.17.10"
+          },
+          "dependencies": {
+            "@reggi/journey.coerce-to-array": {
+              "version": "file:packages/journey.coerce-to-array",
+              "bundled": true,
+              "requires": {
+                "lodash": "4.17.10"
+              },
+              "dependencies": {
+                "lodash": {
+                  "version": "4.17.10",
+                  "bundled": true
+                }
+              }
+            },
+            "@reggi/journey.fn-free": {
+              "version": "file:packages/journey.fn-free",
+              "bundled": true,
+              "requires": {
+                "@reggi/journey.is-promise": "file:packages/journey.is-promise"
+              },
+              "dependencies": {
+                "@reggi/journey.is-promise": {
+                  "version": "file:packages/journey.is-promise",
+                  "bundled": true
+                }
+              }
+            },
+            "@reggi/journey.fn-reduce": {
+              "version": "file:packages/journey.fn-reduce",
+              "bundled": true,
+              "requires": {
+                "@reggi/journey.coerce-to-plain-object": "file:packages/journey.coerce-to-plain-object",
+                "@reggi/journey.is-promise": "file:packages/journey.is-promise",
+                "@reggi/journey.pass-thru": "file:packages/journey.pass-thru"
+              },
+              "dependencies": {
+                "@reggi/journey.coerce-to-plain-object": {
+                  "version": "file:packages/journey.coerce-to-plain-object",
+                  "bundled": true,
+                  "requires": {
+                    "lodash": "4.17.10"
+                  },
+                  "dependencies": {
+                    "lodash": {
+                      "version": "4.17.10",
+                      "bundled": true
+                    }
+                  }
+                },
+                "@reggi/journey.is-promise": {
+                  "version": "file:packages/journey.is-promise",
+                  "bundled": true
+                },
+                "@reggi/journey.pass-thru": {
+                  "version": "file:packages/journey.pass-thru",
+                  "bundled": true,
+                  "requires": {
+                    "@reggi/journey.is-promise": "file:packages/journey.is-promise"
+                  },
+                  "dependencies": {
+                    "@reggi/journey.is-promise": {
+                      "version": "file:packages/journey.is-promise",
+                      "bundled": true
+                    }
+                  }
+                }
+              }
+            },
+            "lodash": {
+              "version": "4.17.10",
+              "bundled": true
+            }
+          }
+        },
+        "lodash": {
+          "version": "4.17.10",
+          "bundled": true
+        }
+      }
+    },
     "@reggi/help": {
       "version": "file:packages/help",
       "requires": {
@@ -1033,17 +1130,6 @@
         "@reggi/requireable": "file:packages/requireable",
         "babel-runtime": "6.26.0",
         "lodash": "4.17.5"
-      }
-    },
-    "@reggi/results-cli": {
-      "version": "file:packages/results-cli",
-      "requires": {
-        "@reggi/command": "file:packages/command",
-        "@reggi/help": "file:packages/help",
-        "babel-runtime": "6.26.0",
-        "colors": "1.2.1",
-        "debug": "3.1.0",
-        "execa": "0.10.0"
       }
     },
     "JSONStream": {
@@ -8857,6 +8943,17 @@
       "requires": {
         "onetime": "2.0.1",
         "signal-exit": "3.0.2"
+      }
+    },
+    "results-cli": {
+      "version": "file:packages/results-cli",
+      "requires": {
+        "@reggi/command": "file:packages/command",
+        "@reggi/help": "file:packages/help",
+        "babel-runtime": "6.26.0",
+        "colors": "1.2.1",
+        "debug": "3.1.0",
+        "execa": "0.10.0"
       }
     },
     "ret": {
