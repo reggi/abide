@@ -7,8 +7,8 @@
     "author": "Thomas Reggi",
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
-    "standard": "standard",
     "jest": "jest --coverage",
+    "standard": "standard",
     "test": "npm run standard && npm run jest"
   },
   "babel": {
@@ -28,6 +28,9 @@
   },
   "jest": {
     "collectCoverage": true,
+    "coverageReporters": [
+      "json"
+    ],
     "coverageThreshold": {
       "global": {
         "branches": 100,

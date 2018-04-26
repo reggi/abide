@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for help/index.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">help/</a> index.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>100/100</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>40/40</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>40/40</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>82/82</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">31×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-yes">31×</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-yes">31×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">37×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">30×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">30×</span>
+<span class="cline-any cline-yes">30×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {flattenDeep, omitBy, isUndefined, find, map, max, reduce, isArray, includes, each, chain, get} from 'lodash'
+import {parseArgv, modifiers, mergeProperties, isDashFlag, isDoubleDashFlag, isDoubleDashNoFlag} from '@reggi/help.parse-argv'
+import {journey} from '@reggi/journey'
+&nbsp;
+export const parseFlagOption = journey((flagsOption) =&gt; [
+  () =&gt; ({flagsOption}),
+  ({flagsOption}) =&gt; ({flagsString: flagsOption.replace(/&lt;.+&gt;|\[.+\]/g, '')}),
+  ({flagsString}) =&gt; ({flagsString: flagsString.replace(/,|=/g, ' ')}),
+  ({flagsString}) =&gt; ({flagsString: flagsString.replace(/\s+/g, ' ')}),
+  ({flagsString}) =&gt; ({flagsString: flagsString.trim()}),
+  ({flagsOption}) =&gt; ({required: get(flagsOption.match(/&lt;.+&gt;/g), 0, false)}),
+  ({flagsOption}) =&gt; ({optional: get(flagsOption.match(/\[.+\]/g), 0, false)}),
+  ({flagsString}) =&gt; ({flags: flagsString.split(' ')}),
+  ({flags, required, optional}) =&gt; ({return: {flags, required, optional}})
+], {return: true})
+&nbsp;
+export const choices = (...choices) =&gt; ({value, flag, required}) =&gt; {
+  if (!required || !value) return false
+  const valid = includes(choices, value)
+  if (!valid) throw new Error(`${flag}: invalid choice "${value}" please pick [${choices.join(', ')}]`)
+  return false
+}
+&nbsp;
+export const assign = (name, defaultValue) =&gt; ({value, flag}) =&gt; {
+  const _value = (typeof value === 'undefined') ? defaultValue : value
+  return {[name]: _value}
+}
+&nbsp;
+export const rename = assign
+&nbsp;
+export const pad = (str, width) =&gt; {
+  const len = Math.max(0, width - str.length)
+  return str + Array(len + 1).join(' ')
+}
+&nbsp;
+export const template = ({name, usage, description, options, padLength}) =&gt; `
+Usage: ${name} ${usage}
+&nbsp;
+  ${description}
+&nbsp;
+  Options:
+&nbsp;
+${options.map(({flagString, desc}) =&gt; `    ${pad(flagString, padLength)}${desc}`).join('\n')}
+`
+&nbsp;
+const getSpecifier = (criteria, type) =&gt; {
+  return {specifier: modifiers[criteria][type], specifierType: type}
+}
+&nbsp;
+export const defaultSpecifier = ({flag, required, optional}) =&gt; {
+  const dashFlag = isDashFlag(flag)
+  const doubleDashFlag = isDoubleDashFlag(flag)
+  const doubleDashNoFlag = isDoubleDashNoFlag(flag)
+  const next = (required || optional)
+  if (doubleDashNoFlag) return getSpecifier('doubleDash', 'no')
+  if (next &amp;&amp; dashFlag) return getSpecifier('onlyDash', 'next')
+  if (!next &amp;&amp; dashFlag) return getSpecifier('onlyDash', 'bool')
+  if (next &amp;&amp; doubleDashFlag) return getSpecifier('doubleDash', 'next')
+  if (!next &amp;&amp; doubleDashFlag) return getSpecifier('doubleDash', 'bool')
+  return {}
+}
+&nbsp;
+export class Program {
+  constructor () {
+    this.options = []
+    this._usage = ''
+    this._description = ''
+    this._name = ''
+    return this
+  }
+  help () {
+    const {_name, _description, _usage, options} = this
+    const padLength = max(options.map(({flagString}) =&gt; flagString)).length + 10
+    return template({name: _name, usage: _usage, description: _description, options, padLength})
+  }
+  name (name) {
+    this._name = name
+    return this
+  }
+  description (description) {
+    this._description = description
+    return this
+  }
+  usage (usage) {
+    this._usage = usage
+    return this
+  }
+  option (flagString, desc, modifier) {
+    this.options.push({flagString, desc, modifier})
+    return this
+  }
+  parse (argv) {
+    // get options in shape for specifiers
+    let options = this.options
+    options = map(options, option =&gt; ({...option, ...parseFlagOption(option.flagString)}))
+    options = flattenDeep(map(options, (option) =&gt; map(option.flags, flag =&gt; ({flag, ...option}))))
+    options = map(options, (option) =&gt; ({...option, ...defaultSpecifier(option)}))
+&nbsp;
+    const specifiers = chain(options)
+      .filter(option =&gt; option.specifier)
+      .map(option =&gt; [option.flag, option.specifier])
+      .fromPairs()
+      .value()
+&nbsp;
+    const flags = parseArgv(argv, {specifiers})
+&nbsp;
+    // throws error for required fields
+    each(flags, (value, flag) =&gt; {
+      const option = find(options, option =&gt; includes(option.flags, flag))
+      if (option &amp;&amp; typeof value === 'boolean' &amp;&amp; option.specifierType !== 'bool' &amp;&amp; option.required) {
+        throw new Error(`${flag}: missing required value ${option.required}`)
+      }
+    })
+&nbsp;
+    // apply modifiers
+    const modifierValues = chain(options)
+      .map(option =&gt; ({...option, value: get(flags, option.flag, undefined)}))
+      .map((option) =&gt; {
+        const {modifier, required, optional, desc, value, flag} = option
+        if (typeof modifier === 'string') {
+          return {[modifier]: value}
+        } else if (typeof modifier === 'function') {
+          return modifier({value, flag, required, optional, desc})
+        } else if (isArray(modifier)) {
+          return reduce(modifier, (acq, fn) =&gt; {
+            return {...acq, ...fn({value, flag, required, optional, desc})}
+          }, {})
+        }
+        return false
+      })
+      .without(false)
+      .without(true)
+      .map(values =&gt; omitBy(values, isUndefined))
+      .thru(mergeProperties)
+      .value()
+    this.parsed = flags
+    this.modifiers = modifierValues
+    this.flags = {...flags, ...modifierValues}
+    return this
+  }
+}
+&nbsp;
+export const program = () =&gt; new Program()
+&nbsp;
+export default program
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Apr 25 2018 23:58:08 GMT-0400 (EDT)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

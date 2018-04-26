@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for pkg/index.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">pkg/</a> index.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>33/33</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>21/21</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>15/15</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>28/28</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">68×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import bluebird from 'bluebird'
+import path from 'path'
+import {map, isArray, flattenDeep} from 'lodash'
+import journey from '@reggi/journey'
+import coerceToArray from '@reggi/journey.coerce-to-array'
+import isLocalModule from '@reggi/pkg.is-local-module'
+import readJson from '@reggi/pkg.read-json'
+import prettyJson from '@reggi/pkg.pretty-json'
+import fs from '@reggi/pkg.fs'
+import debug from 'debug'
+&nbsp;
+export const existsRequired = true
+export const validJsonRequired = true
+&nbsp;
+export const resolvePlugins = (workingDir, plugins) =&gt; {
+  return map(plugins, (plugin) =&gt; {
+    plugin = coerceToArray(plugin)
+    const mod = plugin[0]
+    const opt = (plugin.length === 1) ? false : plugin[1]
+    let modPath = false
+    let fn = false
+    if (typeof mod !== 'function') {
+      modPath = (isLocalModule(mod) &amp;&amp; !mod.match('^/')) ? path.join(workingDir, mod) : mod
+      const rawRequire = require(modPath)
+      fn = rawRequire.default || rawRequire
+      if (isArray(fn)) return resolvePlugins(workingDir, fn)
+    } else {
+      fn = mod
+    }
+    return {mod, opt, modPath, fn}
+  })
+}
+&nbsp;
+export const mapPlugins = (workingDir, plugins) =&gt; flattenDeep(resolvePlugins(workingDir, plugins))
+export const hook = (journeyName) =&gt; (acq, res) =&gt; debug(`pkg:${journeyName}`)(JSON.stringify(res))
+&nbsp;
+export const pkgCore = journey(({workingDir, write, plugin, stdout, argv} = {}) =&gt; [
+  () =&gt; ({workingDir, write, stdout, plugin, argv}),
+  ({plugin}) =&gt; ({pkgrcRequired: !plugin}),
+  async ({workingDir, pkgrcRequired}) =&gt; bluebird.props({
+    pkgrc: readJson({workingDir, fileName: '.pkgrc', existsRequired: pkgrcRequired, validJsonRequired: pkgrcRequired}),
+    pkg: readJson({workingDir, fileName: 'package.json', validJsonRequired})
+  }),
+  ({pkgrc, plugin}) =&gt; (
+    (plugin) ? {plugins: mapPlugins(workingDir, [plugin])} : {plugins: mapPlugins(workingDir, pkgrc)}
+  ),
+  async ({pkgrc, plugins, pkg, argv}) =&gt; ({model: await bluebird.reduce(plugins, (acq, {fn, opt, mod, modPath}) =&gt; {
+    return fn({pkgrc, pkg: acq, workingDir, wd: workingDir, opt, mod, modPath, argv})
+  }, pkg || {})}),
+  ({model}) =&gt; ({writeFileContent: prettyJson(model)}),
+  ({workingDir}) =&gt; ({writeFilePath: path.join(workingDir, 'package.json')}),
+  async ({write, writeFilePath, writeFileContent}) =&gt; (write) ? ({writeFileResult: await fs.writeFileAsync(writeFilePath, writeFileContent) || true}) : {}
+], {hook: hook('pkgCore')})
+&nbsp;
+export default pkgCore
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Apr 25 2018 23:58:08 GMT-0400 (EDT)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

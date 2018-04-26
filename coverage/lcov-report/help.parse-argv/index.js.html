@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for help.parse-argv/index.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">help.parse-argv/</a> index.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>184/184</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>78/78</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>58/58</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>131/131</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">167×</span>
+<span class="cline-any cline-yes">167×</span>
+<span class="cline-any cline-yes">167×</span>
+<span class="cline-any cline-yes">167×</span>
+<span class="cline-any cline-yes">167×</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">49×</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-yes">26×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">59×</span>
+<span class="cline-any cline-yes">59×</span>
+<span class="cline-any cline-yes">39×</span>
+<span class="cline-any cline-yes">39×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26×</span>
+<span class="cline-any cline-yes">26×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">27×</span>
+<span class="cline-any cline-yes">27×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">25×</span>
+<span class="cline-any cline-yes">25×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">27×</span>
+<span class="cline-any cline-yes">27×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">33×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">59×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">71×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">155×</span>
+<span class="cline-any cline-yes">155×</span>
+<span class="cline-any cline-yes">155×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">155×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">71×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-yes">36×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-yes">21×</span>
+<span class="cline-any cline-yes">183×</span>
+<span class="cline-any cline-yes">183×</span>
+<span class="cline-any cline-yes">57×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { each, cloneDeep, isArray, get, zipObject, keys, mapValues, uniq, flatten, map, last, filter, slice, merge, range, chain } from 'lodash'
+import filterUntil from '@reggi/help.filter-until'
+import setEntire from '@reggi/help.set-entire'
+&nbsp;
+export const dash = /^-(\w+)/
+export const multiDash = /^-(\w\w+)/
+export const doubleDash = /^--(\w[-\w]*)/
+export const doubleDashNo = /^--no-(\w+)/
+export const onlyDash = /^-(\w)$|^-(\w)(?==)/
+export const anyDash = /^-+([\w|-]+)$|^-+([\w|-]+)=.+$/
+export const child = /^(--)$/
+export const childKey = '--'
+export const doubleDashNoKeyPrefix = '--'
+&nbsp;
+export const matchCheck = (patternString, statement) =&gt; {
+  const match = statement.match(patternString)
+  const hasGroupOne = (match &amp;&amp; match[1] &amp;&amp; match[1] !== '') ? match[1] : false
+  const hasGroupTwo = (match &amp;&amp; match[2] &amp;&amp; match[2] !== '') ? match[2] : false
+  const group = hasGroupOne || hasGroupTwo
+  if (!group) return false
+  match.group = group
+  return match
+}
+&nbsp;
+export const isAnyDash = (statement) =&gt; matchCheck(anyDash, statement)
+export const isDashFlag = (statement) =&gt; matchCheck(dash, statement)
+export const isOnlyDashFlag = (statement) =&gt; matchCheck(onlyDash, statement)
+export const isMultiDashFlag = (statement) =&gt; matchCheck(multiDash, statement)
+export const isDoubleDashFlag = (statement) =&gt; matchCheck(doubleDash, statement)
+export const isDoubleDashNoFlag = (statement) =&gt; matchCheck(doubleDashNo, statement)
+export const isChild = (statement) =&gt; matchCheck(child, statement)
+&nbsp;
+export const assignBoolean = (criteria) =&gt; (argvTouch) =&gt; (item, key) =&gt; {
+  if (argvTouch[key].touched) return false
+  const validCase = criteria(item)
+  if (!validCase) return false
+  argvTouch[key].touched = true
+  return {[validCase[0]]: true}
+}
+&nbsp;
+export const assignEqual = (criteria) =&gt; (argvTouch) =&gt; (item, key) =&gt; {
+  if (argvTouch[key].touched) return false
+  const validCase = criteria(item)
+  if (!validCase) return false
+  const split = item.split('=')
+  if (split.length === 1) return false
+  argvTouch[key].touched = true
+  return {[split[0]]: split[1]}
+}
+&nbsp;
+export const assignNext = (criteria) =&gt; (argvTouch) =&gt; (item, key) =&gt; {
+  if (argvTouch[key].touched) return false
+  const validCase = criteria(item)
+  if (!validCase) return false
+  if (!argvTouch[key + 1]) return false
+  const next = argvTouch[key + 1]
+  if (isAnyDash(next.value)) return false
+  argvTouch[key].touched = true
+  argvTouch[key + 1].touched = true
+  return {[validCase[0]]: next.value}
+}
+&nbsp;
+export const assignUntil = (criteria) =&gt; (argvTouch) =&gt; (item, key) =&gt; {
+  if (argvTouch[key].touched) return false
+  const validCase = criteria(item)
+  if (!validCase) return false
+  if (argvTouch.length === key + 1) return false
+  const values = slice(argvTouch, key + 1)
+  const validValues = filterUntil(values, (item) =&gt; isAnyDash(item.value))
+  if (!validValues.length) return false
+  const value = validValues.map(i =&gt; i.value).join(' ')
+  argvTouch[key].touched = true
+  each(validValues, i =&gt; {
+    argvTouch[i.key].touched = true
+  })
+  return {[validCase[0]]: value}
+}
+&nbsp;
+export const assignSpread = (criteria) =&gt; (argvTouch) =&gt; (item, key) =&gt; {
+  if (argvTouch[key].touched) return false
+  const validCase = criteria(item)
+  if (!validCase) return false
+  argvTouch[key].touched = true
+  return validCase[1].split('').map(flag =&gt; ({[`-${flag}`]: true}))
+}
+&nbsp;
+export const assignNo = (criteria, criteriaKeyPrefix) =&gt; (argvTouch) =&gt; (item, key) =&gt; {
+  if (argvTouch[key].touched) return false
+  const validCase = criteria(item)
+  if (!validCase) return false
+  argvTouch[key].touched = true
+  return {[`${criteriaKeyPrefix}${validCase[1]}`]: false}
+}
+&nbsp;
+export const assignRest = (criteria, criteriaKey) =&gt; (argvTouch) =&gt; (item, key) =&gt; {
+  if (argvTouch[key].touched) return false
+  const validCase = criteria(item)
+  if (!validCase) return false
+  const validValues = slice(argvTouch, key + 1)
+  if (!validValues.length) return false
+  const value = validValues.map(i =&gt; i.value).join(' ')
+  argvTouch[key].touched = true
+  each(validValues, i =&gt; {
+    argvTouch[i.key].touched = true
+  })
+  return {[criteriaKey]: value}
+}
+&nbsp;
+export const _modifiers = {
+  'anyDash.bool': assignBoolean(isAnyDash),
+  'anyDash.equal': assignEqual(isAnyDash),
+  'anyDash.next': assignNext(isAnyDash),
+  'anyDash.until': assignUntil(isAnyDash),
+  'onlyDash.bool': assignBoolean(isOnlyDashFlag),
+  'onlyDash.equal': assignEqual(isOnlyDashFlag),
+  'onlyDash.next': assignNext(isOnlyDashFlag),
+  'onlyDash.until': assignUntil(isOnlyDashFlag),
+  'multiDash.bool': assignBoolean(isMultiDashFlag),
+  'multiDash.equal': assignEqual(isMultiDashFlag),
+  'multiDash.next': assignNext(isMultiDashFlag),
+  'multiDash.until': assignUntil(isMultiDashFlag),
+  'multiDash.spread': assignSpread(isMultiDashFlag),
+  'dash.bool': assignBoolean(isDashFlag),
+  'dash.equal': assignEqual(isDashFlag),
+  'dash.next': assignNext(isDashFlag),
+  'dash.until': assignUntil(isDashFlag),
+  'doubleDash.bool': assignBoolean(isDoubleDashFlag),
+  'doubleDash.equal': assignEqual(isDoubleDashFlag),
+  'doubleDash.next': assignNext(isDoubleDashFlag),
+  'doubleDash.until': assignUntil(isDoubleDashFlag),
+  'doubleDash.no': assignNo(isDoubleDashNoFlag, doubleDashNoKeyPrefix),
+  'child.rest': assignRest(isChild, childKey)
+}
+&nbsp;
+export const modifiers = setEntire(_modifiers)
+export const touchObj = (arr) =&gt; merge(arr.map((value, key) =&gt; ({value, key})), range(arr.length).map(() =&gt; ({touched: false})))
+export class Undefined {}
+export const coerceToString = (val) =&gt; (isArray(val) &amp;&amp; val.length === 1) ? val[0] : val
+&nbsp;
+export const applySpecifier = (specifiers, argv, argvTouch) =&gt; {
+  return chain(specifiers)
+    .map((fn, pattern) =&gt; {
+      return chain(argv)
+        .map((item, key) =&gt; {
+          if (item.match(new RegExp(pattern))) {
+            return fn(argvTouch)(item, key)
+          }
+          return false
+        })
+        .without(false)
+        .value()
+    })
+    .value()
+}
+&nbsp;
+export const applyModifiers = (modifiers, argv, argvTouch) =&gt; {
+  return chain(modifiers)
+    .flattenDeep()
+    .reduce((acq, modifier) =&gt; {
+      const result = chain(argvTouch)
+        .mapValues((obj) =&gt; {
+          const _obj = cloneDeep(obj)
+          _obj.result = modifier(argvTouch)(_obj.value, _obj.key)
+          return _obj
+        })
+        .filter(obj =&gt; {
+          return (obj.result !== false)
+        })
+        .value()
+      return [acq, result]
+    }, [])
+    .flattenDeep()
+    .sortBy('key')
+    .map(obj =&gt; obj.result)
+    .value()
+}
+&nbsp;
+export function groupByIncProp (collection, prop = 'key') {
+  const results = []
+  var bundle = []
+  each(collection, (obj, key) =&gt; {
+    if (!bundle.length || (obj[prop] - 1) !== last(bundle)[prop]) {
+      bundle = []
+      bundle.push(obj)
+    }
+    if (obj[prop] - 1 === last(bundle)[prop]) {
+      bundle.push(obj)
+    }
+    if (!collection[key + 1] || obj[prop] + 1 !== collection[key + 1][prop]) {
+      results.push(bundle)
+    }
+  })
+  return results
+}
+&nbsp;
+export const untouched = (argvTouch) =&gt; {
+  return chain(argvTouch)
+    .filter((obj) =&gt; !obj.touched)
+    .thru(groupByIncProp)
+    .map(group =&gt; map(group, i =&gt; i.value))
+    .value()
+}
+&nbsp;
+export const mergeProperties = (arrOfObjects) =&gt; {
+  const allKeys = uniq(flatten(map(arrOfObjects, keys)))
+  const mergedObj = zipObject(allKeys)
+  return mapValues(mergedObj, (value, key) =&gt; {
+    const values = map(arrOfObjects, obj =&gt; get(obj, key, new Undefined()))
+    const valuesWithoutUndefined = filter(values, (value) =&gt; !(value instanceof Undefined))
+    return coerceToString(uniq(flatten(valuesWithoutUndefined)))
+  })
+}
+&nbsp;
+export const defaultModifiers = [
+  modifiers.child.rest,
+  modifiers.doubleDash.no,
+  modifiers.doubleDash.equal,
+  modifiers.doubleDash.next,
+  modifiers.doubleDash.bool,
+  modifiers.onlyDash.bool,
+  modifiers.multiDash.spread
+]
+&nbsp;
+export const parseArgv = (argv, {modifiers = defaultModifiers, specifiers = false} = {}) =&gt; {
+  const argvTouch = touchObj(argv)
+  const specifiersRes = (specifiers) ? applySpecifier(specifiers, argv, argvTouch) : []
+  const modifiersRes = (modifiers) ? applyModifiers(modifiers, argv, argvTouch) : []
+  return chain([specifiersRes, modifiersRes, {_: untouched(argvTouch)}])
+    .flattenDeep()
+    .thru(mergeProperties)
+    .value()
+}
+&nbsp;
+export default parseArgv
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Apr 25 2018 23:58:08 GMT-0400 (EDT)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

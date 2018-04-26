@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for requireable/index.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">requireable/</a> index.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>48/48</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>9/9</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>35/35</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>35/35</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">96×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import os from 'os'
+import path from 'path'
+import {journey} from '@reggi/journey'
+import throwError from '@reggi/pkg.throw-error'
+import execa from 'execa'
+import fs from 'fs-extra'
+import uuid from 'uuid'
+import debug from 'debug'
+&nbsp;
+const hook = (journeyName) =&gt; (acq, res) =&gt; debug(`requireable:${journeyName}`)(JSON.stringify(res))
+const isFile = async (p) =&gt; fs.lstat(p).then(stat =&gt; stat.isFile()).catch(() =&gt; false)
+const isDir = async (p) =&gt; fs.lstat(p).then(stat =&gt; stat.isDirectory()).catch(() =&gt; false)
+&nbsp;
+const tmpPkgTemplate = {
+  'name': 'requireable-temp',
+  'version': '1.0.0',
+  'description': 'This is a temporary package.json to test',
+  'repository': 'https://github.com/nodejs/node',
+  'main': 'index.js',
+  'scripts': {
+    'test': 'echo \'Error: no test specified\' &amp;&amp; exit 1'
+  },
+  'keywords': [],
+  'author': '',
+  'license': 'ISC'
+}
+&nbsp;
+const npmInstall = ({absoluteModPath, tmpFullDir, stdio}) =&gt; execa('npm', ['install', absoluteModPath], {cwd: tmpFullDir, stdio})
+const requireModule = ({nodeBin = 'node', modPkgJson, tmpFullDir, stdio}) =&gt; execa.shell(`${nodeBin} -e "require('${modPkgJson.name}');console.log('require successfull')"`, {cwd: tmpFullDir, stdio})
+&nbsp;
+export const requireableCore = journey(({modPath, nodeBin, inherit, tmpFullDir}) =&gt; [
+  () =&gt; ({modPath, nodeBin, inherit, tmpFullDir}),
+  ({inherit}) =&gt; ({stdio: (inherit) ? 'inherit' : 'pipe'}),
+  // checks if the modPath is a directory
+  async ({modPath}) =&gt; ({modPathIsDir: await isDir(modPath)}),
+  // throws an error if it is invalid dir
+  ({modPathIsDir}) =&gt; (!modPathIsDir) ? throwError('module path is not a directory') : {modPathIsDirError: 'pass'},
+  // declares the path of the modPath's package.json file
+  ({modPath}) =&gt; ({modPkgPath: path.join(modPath, 'package.json')}),
+  // checks if the modPath has a package.json in it
+  async ({modPkgPath}) =&gt; ({modPkgPathIsFile: await isFile(modPkgPath)}),
+  // throws an error if the expected modPath package.json is not valid
+  ({modPkgPathIsFile}) =&gt; (!modPkgPathIsFile) ? throwError('module path missing package.json') : {modPkgPathIsFileError: 'pass'},
+  // get the package.json
+  async ({modPkgPath}) =&gt; ({modPkgJson: await fs.readJson(modPkgPath)}),
+  // declares the path of the temp package.json file
+  ({tmpFullDir}) =&gt; ({tmpFullDirPkg: path.join(tmpFullDir, 'package.json')}),
+  // creates a the temp package.json file
+  async ({tmpFullDirPkg}) =&gt; ({resultWritePkg: await fs.writeJson(tmpFullDirPkg, tmpPkgTemplate)}),
+  // creates an absolute path for the module (to install anywhere on machine)
+  ({modPath}) =&gt; ({absoluteModPath: path.resolve(modPath)}),
+  // attempts to install the module with the cwd set to the temp dir
+  async ({absoluteModPath, tmpFullDir, stdio}) =&gt; ({resultNpmInstall: await npmInstall({absoluteModPath, tmpFullDir, stdio})}),
+  // attemps to require the install module and will throw error if fails
+  async ({nodeBin, modPkgJson, stdio}) =&gt; ({resultRequireMod: await requireModule({nodeBin, modPkgJson, tmpFullDir, stdio})}),
+  // add success to object
+  () =&gt; ({success: true})
+], {hook: hook('requireableCore')})
+&nbsp;
+export const requireableCoreWrapped = async ({modPath, tmpFullDir, inherit}) =&gt; {
+  try {
+    return await requireableCore(({modPath, tmpFullDir, inherit}))
+  } catch (e) {
+    return {success: false, error: e}
+  }
+}
+&nbsp;
+export const requireable = journey(({modPath, nodeBin, inherit}) =&gt; [
+  () =&gt; ({modPath, nodeBin, inherit}),
+  // gets the temp dir
+  () =&gt; ({tmpDir: os.tmpdir()}),
+  // generates uuid
+  () =&gt; ({uuid: uuid()}),
+  // full expected dir path
+  ({tmpDir, uuid}) =&gt; ({tmpFullDir: path.join(tmpDir, 'requireable-cli', uuid)}),
+  // ensures dirpath exists (mkdirp)
+  async ({tmpFullDir}) =&gt; ({resultEnsureDir: await fs.ensureDir(tmpFullDir)}),
+  // runs core code (catches errors)
+  async ({modPath, nodeBin, inherit, tmpFullDir}) =&gt; ({core: await requireableCoreWrapped({modPath, nodeBin, inherit, tmpFullDir})}),
+  // should run this even if there are errors
+  async ({tmpFullDir}) =&gt; ({resultClean: await fs.remove(tmpFullDir)}),
+  // should throw error if core has one
+  ({core}) =&gt; {
+    if (!core.success) throw core.error
+    return {coreError: false}
+  }
+  // returns core
+], {return: 'core', hook: hook('requireable')})
+&nbsp;
+export default requireable
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Apr 25 2018 23:58:08 GMT-0400 (EDT)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
