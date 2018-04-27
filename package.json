@@ -19,7 +19,7 @@
     "fully-tested": "sh -e ./scripts/completely-tested.sh",
     "preinstall": "npm run dep-merge:preinstall",
     "postinstall": "npm run dep-merge:postinstall && link-parent-bin",
-    "jenkins": "npm run versions && npm run test && npm run publish",
+    "jenkins": "npm run versions && npm run test && git reset --hard && npm run publish",
     "lerna:boostrap:hoist": "lerna bootstrap --hoist &>/dev/null || true",
     "link-parent-bin": "link-parent-bin",
     "link-pkg-cli": "cd ../packages/pkg-cli && npm link",
