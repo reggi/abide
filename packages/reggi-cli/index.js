@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import {get, each} from 'lodash'
 import help from '@reggi/help'
 import command from '@reggi/command'
