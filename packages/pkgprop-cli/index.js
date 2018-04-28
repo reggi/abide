@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import path from 'path'
 import command from '@reggi/command'
 import help from '@reggi/help'
