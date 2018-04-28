@@ -1,6 +1,7 @@
 {
   "name": "@reggi/pkg.file-exists",
   "version": "0.0.8",
+  "description": "Checks if file exists using lstat does not throw",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {

@@ -1,6 +1,7 @@
 {
   "name": "@reggi/pkg-plugin-cobalt",
   "version": "0.0.8",
+  "description": "Suite of pkg-plugins arbitrarily designated cobalt",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {

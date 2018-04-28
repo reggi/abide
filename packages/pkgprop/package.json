@@ -1,6 +1,7 @@
 {
   "name": "@reggi/pkgprop",
   "version": "0.0.1",
+  "description": "Allows for editing a given package property",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {

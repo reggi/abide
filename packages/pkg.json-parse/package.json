@@ -1,6 +1,7 @@
 {
   "name": "@reggi/pkg.json-parse",
   "version": "0.0.8",
+  "description": "JSON.parse wrapped in a try / catch returns false if error",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {

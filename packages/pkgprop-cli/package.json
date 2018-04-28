@@ -1,11 +1,12 @@
 {
   "name": "@reggi/pkgprop-cli",
   "version": "0.0.1",
+  "description": "Allows for editing a given package property",
   "author": "Thomas Reggi",
+  "main": "./index.build.js",
   "bin": {
     "pkgprop": "./index.build.js"
   },
-  "main": "./index.build.js",
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",

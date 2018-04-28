@@ -1,6 +1,7 @@
 {
   "name": "@reggi/subrepo-cli",
   "version": "0.0.1",
+  "description": "Creates a repo with commits & files from another repo subdirectory",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "bin": {
