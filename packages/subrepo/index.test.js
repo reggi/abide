@@ -3,7 +3,7 @@ import fs from 'fs-extra'
 import execa from 'execa'
 import subrepo from './index'
 
-beforeAll(async () => {
+beforeEach(async () => {
   await execa.shell(`
     mkdir -p ./example-repo
     cd ./example-repo
@@ -23,7 +23,7 @@ beforeAll(async () => {
   `)
 })
 
-afterAll(async () => {
+afterEach(async () => {
   await fs.remove('./example-repo')
   await fs.remove('./example-subrepo')
   await fs.remove('./example-subrepo-error')
