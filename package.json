@@ -35,7 +35,8 @@
     "test:requireable": "lerna exec --concurrency 1 -- results -di -- \"echo \"requireable $PWD\" && requireable -i ./\"",
     "test:standard": "lerna exec --concurrency 1 -- npm run standard",
     "versions": "sh ./scripts/versions.sh",
-    "total:coverage": "istanbul report --include=./packages/**/coverage/coverage-final.json"
+    "total:coverage": "istanbul report --include=./packages/**/coverage/coverage-final.json",
+    "descriptions": "lerna exec -- pkgprop --prop description"
   },
   "dependencies": {
     "@reggi/command": "file:packages/command",
@@ -73,8 +74,11 @@
     "@reggi/pkg.prop-overwrite": "file:packages/pkg.prop-overwrite",
     "@reggi/pkg.read-json": "file:packages/pkg.read-json",
     "@reggi/pkg.throw-error": "file:packages/pkg.throw-error",
+    "@reggi/pkgprop": "file:packages/pkgprop",
     "@reggi/requireable": "file:packages/requireable",
     "@reggi/requireable-cli": "file:packages/requireable-cli",
+    "@reggi/subrepo": "file:packages/subrepo",
+    "@reggi/subrepo-cli": "file:packages/subrepo-cli",
     "replace-cli": "file:packages/replace-cli",
     "results-cli": "file:packages/results-cli"
   },
