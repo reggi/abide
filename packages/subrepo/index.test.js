@@ -8,6 +8,8 @@ beforeEach(async () => {
     mkdir -p ./example-repo
     cd ./example-repo
     git init
+    git config user.email "thomas@reggi.com"
+    git config user.name "reggi"
     echo "a" > index-a.txt
     echo "b" > index-b.txt
     git add -A

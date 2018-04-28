@@ -58,83 +58,86 @@ var subrepo = exports.subrepo = function () {
           case 0:
             tmpDir = _os2.default.tmpdir();
             id = (0, _v2.default)();
+
+            console.log({ id });
             fullDestDir = _path2.default.join(workingDir, destDir);
             fullSource = (0, _isGitUrl2.default)(source) || _path2.default.isAbsolute(source) ? source : _path2.default.join(workingDir, source);
             baseDir = _path2.default.join(tmpDir, 'subrepo-cli', id);
             sourceDir = _path2.default.join(baseDir, 'source');
             subrepoDir = _path2.default.join(baseDir, 'subrepo');
             error = void 0;
-            _context.prev = 8;
-            _context.next = 11;
+            _context.prev = 9;
+            _context.next = 12;
             return _bluebird2.default.props({
               mkSourceDir: _fsExtra2.default.mkdirp(sourceDir),
               mkSubrepoDir: _fsExtra2.default.mkdirp(subrepoDir),
               mkDestDir: _fsExtra2.default.mkdirp(fullDestDir)
             });
 
-          case 11:
-            _context.next = 13;
+          case 12:
+            _context.next = 14;
             return _execa2.default.shell(`git clone ${fullSource} ${sourceDir}`, { cwd: baseDir, stdio });
 
-          case 13:
-            _context.next = 15;
+          case 14:
+            _context.next = 16;
             return _execa2.default.shell(`git remote remove origin`, { cwd: sourceDir, stdio });
 
-          case 15:
-            _context.next = 17;
+          case 16:
+            _context.next = 18;
             return _execa2.default.shell(`git filter-branch --subdirectory-filter ${subrepoPath}`, { cwd: sourceDir, stdio });
 
-          case 17:
-            _context.next = 19;
+          case 18:
+            _context.next = 20;
             return _execa2.default.shell(`git init`, { cwd: subrepoDir, stdio });
 
-          case 19:
-            _context.next = 21;
+          case 20:
+            _context.next = 22;
             return _execa2.default.shell(`git remote add source ${sourceDir}`, { cwd: subrepoDir, stdio });
 
-          case 21:
-            _context.next = 23;
+          case 22:
+            _context.next = 24;
             return _execa2.default.shell(`git fetch source`, { cwd: subrepoDir, stdio });
 
-          case 23:
-            _context.next = 25;
+          case 24:
+            _context.next = 26;
             return _execa2.default.shell(`git merge source/master`, { cwd: subrepoDir, stdio });
 
-          case 25:
-            _context.next = 27;
+          case 26:
+            _context.next = 28;
             return _fsExtra2.default.move(subrepoDir, fullDestDir);
 
-          case 27:
-            _context.next = 32;
+          case 28:
+            _context.next = 33;
             break;
 
-          case 29:
-            _context.prev = 29;
-            _context.t0 = _context['catch'](8);
+          case 30:
+            _context.prev = 30;
+            _context.t0 = _context['catch'](9);
 
             error = _context.t0;
 
-          case 32:
-            _context.next = 34;
+          case 33:
+            console.log({ baseDir });
+            _context.next = 36;
             return _fsExtra2.default.remove(baseDir);
 
-          case 34:
+          case 36:
             if (!error) {
-              _context.next = 36;
+              _context.next = 38;
               break;
             }
 
             throw error;
 
-          case 36:
+          case 38:
             return _context.abrupt('return', true);
 
-          case 37:
+          case 39:
           case 'end':
             return _context.stop();
         }
       }
-    }, _callee, undefined, [[8, 29]]);
+    }, _callee, undefined, [[9, 30]]);
   }));
 
   return function subrepo(_x) {

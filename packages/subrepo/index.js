@@ -15,7 +15,7 @@ export const subrepo = async ({
 }) => {
   const tmpDir = os.tmpdir()
   const id = uuid()
-
+  console.log({id})
   const fullDestDir = path.join(workingDir, destDir)
   const fullSource = (isGitUrl(source) || path.isAbsolute(source)) ? source : path.join(workingDir, source)
   const baseDir = path.join(tmpDir, 'subrepo-cli', id)
@@ -39,6 +39,7 @@ export const subrepo = async ({
   } catch (e) {
     error = e
   }
+  console.log({baseDir})
   await fs.remove(baseDir)
   if (error) throw error
   return true
