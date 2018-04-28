@@ -14,6 +14,20 @@ var _command = require('@reggi/command');
 
 var _command2 = _interopRequireDefault(_command);
 
+require('@reggi/dep-merge-cli');
+
+require('@reggi/pkg-cli');
+
+require('@reggi/pkgprop-cli');
+
+require('@reggi/requireable-cli');
+
+require('@reggi/subrepo-cli');
+
+require('replace-cli');
+
+require('results-cli');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var subCommands = {
@@ -40,5 +54,6 @@ exports.default = (0, _command2.default)(module, function (p) {
   var command = design.flags._[0];
   var match = (0, _lodash.get)(subCommands, command, false);
   if (match) return require(match).default(p);
-  if (design.flags.help) return p.stdout.write(design.help() + '\n');
+  p.stdout.write(design.help() + '\n');
+  return p.exit(0);
 });
