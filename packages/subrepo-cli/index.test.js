@@ -1,3 +1,4 @@
+import path from 'path'
 import stringArgv from '@reggi/help.string-argv'
 import {spy} from 'sinon'
 import fs from 'fs-extra'
@@ -26,10 +27,10 @@ beforeEach(async () => {
   `)
 })
 
-afterAll(async () => {
-  await fs.remove('./example-repo')
-  await fs.remove('./example-subrepo')
-  await fs.remove('./example-subrepo-error')
+afterEach(async () => {
+  await fs.remove(path.join(__dirname, './example-repo'))
+  await fs.remove(path.join(__dirname, './example-subrepo'))
+  await fs.remove(path.join(__dirname, './example-subrepo-error'))
 })
 
 const getArgs = (argv) => ({
