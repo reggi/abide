@@ -6,7 +6,6 @@ import '@reggi/pkg-cli'
 import '@reggi/pkgprop-cli'
 import '@reggi/requireable-cli'
 import '@reggi/subrepo-cli'
-import 'babel-runtime'
 import 'replace-cli'
 import 'results-cli'
 
