@@ -66,7 +66,7 @@ test('subrepoCli', async () => {
 })
 
 test('subrepo: error', async () => {
-  const argv = await stringArgv("node ./index.js -C '/this-dir-does-not-exit' --source './example-repo' --subpath './subrepo-a' --dest './example-subrepo'")
+  const argv = await stringArgv("node ./index.js -C './invalid-working-directory' --source './example-repo' --subpath './subrepo-a' --dest './example-subrepo'")
   const p = getArgs(argv)
   await subrepoCli(p)
   expect(p.exit.args[0][0]).toEqual(1)

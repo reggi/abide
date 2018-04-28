@@ -48,7 +48,7 @@ test('subrepo: error', async () => {
   try {
     await subrepo({
       source: path.join(__dirname, './example-repo'),
-      workingDir: '/this-dir-does-not-exit',
+      workingDir: './invalid-working-directory',
       subrepoPath: './subrepo-a',
       destDir: './example-subrepo-error'
     })
