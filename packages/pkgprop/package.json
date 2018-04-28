@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkgprop",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Allows for editing a given package property",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
@@ -37,7 +37,9 @@
     ]
   },
   "jest": {
-    "coverageReporters": ["json"],
+    "coverageReporters": [
+      "json"
+    ],
     "collectCoverage": true,
     "coverageThreshold": {
       "global": {
