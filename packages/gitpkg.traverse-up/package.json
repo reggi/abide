@@ -1,0 +1,73 @@
+{
+  "name": "@reggi/gitpkg.traverse-up",
+  "version": "0.0.1",
+  "author": "Thomas Reggi",
+  "main": "./index.build.js",
+  "scripts": {
+    "babel": "babel ./index.js --out-file ./index.build.js",
+    "babel:watch": "npm run babel -- --watch",
+    "build": "npm run babel",
+    "jest": "jest",
+    "jest:coverage": "jest --coverage",
+    "standard": "standard",
+    "test": "npm run standard && npm run jest"
+  },
+  "babel": {
+    "plugins": [
+      "transform-object-rest-spread",
+      "transform-runtime"
+    ],
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "4"
+          }
+        }
+      ]
+    ]
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  },
+  "dependencies": {
+    "babel-runtime": "^6.26.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "jest": "^22.4.2",
+    "standard": "^11.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "*.build.js"
+    ],
+    "globals": [
+      "beforeAll",
+      "afterAll",
+      "expect",
+      "test",
+      "beforeEach",
+      "afterEach",
+      "it",
+      "jest"
+    ]
+  }
+}
