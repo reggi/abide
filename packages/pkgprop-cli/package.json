@@ -55,8 +55,7 @@
     "@reggi/command": "file:../command",
     "@reggi/help": "file:../help",
     "@reggi/help.string-argv": "file:../help.string-argv",
-    "@reggi/pkgprop": "file:../pkgprop",
-    "babel-runtime": "^6.26.0"
+    "@reggi/pkgprop": "file:../pkgprop"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
