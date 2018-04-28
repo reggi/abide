@@ -22,6 +22,8 @@ export const subrepo = async ({
   const subrepoDir = path.join(baseDir, 'subrepo')
   let error
   try {
+    const workingDirExists = await fs.pathExists(workingDir)
+    if (!workingDirExists) throw new Error(`provided working directory does not exist ${workingDir}`)
     await bluebird.props({
       mkSourceDir: fs.mkdirp(sourceDir),
       mkSubrepoDir: fs.mkdirp(subrepoDir)

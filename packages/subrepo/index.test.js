@@ -53,7 +53,7 @@ test('subrepo: error', async () => {
       destDir: './example-subrepo-error'
     })
   } catch (e) {
-    expect(e.message).toMatch('permission denied, mkdir \'/this-dir-does-not-exit\'')
+    expect(e.message).toMatch('provided working directory does not exist')
   }
   expect.assertions(1)
 })
