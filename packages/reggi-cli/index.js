@@ -1,6 +1,14 @@
 import {get, each} from 'lodash'
 import help from '@reggi/help'
 import command from '@reggi/command'
+import '@reggi/dep-merge-cli'
+import '@reggi/pkg-cli'
+import '@reggi/pkgprop-cli'
+import '@reggi/requireable-cli'
+import '@reggi/subrepo-cli'
+import 'babel-runtime'
+import 'replace-cli'
+import 'results-cli'
 
 const subCommands = {
   'replace': 'replace-cli',

@@ -51,6 +51,7 @@
     "@reggi/requireable-cli": "file:../requireable-cli",
     "@reggi/subrepo-cli": "file:../subrepo-cli",
     "babel-runtime": "^6.26.0",
+    "lodash": "^4.17.10",
     "replace-cli": "file:../replace-cli",
     "results-cli": "file:../results-cli"
   },
