@@ -13,7 +13,7 @@ export const pathType = async (path) => {
   }
 }
 
-export const traverseUp = async ({findPathPattern, findTypePattren, workingDir, cwd = process.cwd()}) => {
+export const traverseUp = async ({findPathPattern, findTypePattren, workingDir, cwd}) => {
   if (workingDir === '/') throw new Error('not found')
   const thisDir = (path.isAbsolute(workingDir)) ? workingDir : path.join(cwd, workingDir)
   const files = await fs.readdir(thisDir)

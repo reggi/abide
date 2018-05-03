@@ -1,5 +1,5 @@
 {
-  "name": "@reggi/exec-updated-cli",
+  "name": "@reggi/lerna-updated-paths",
   "version": "0.0.1",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
@@ -7,12 +7,19 @@
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
     "build": "npm run babel",
-    "jest": "jest",
-    "jest:coverage": "jest --coverage",
+    "jest": "BABEL_ENV=test jest",
+    "jest:coverage": "npm run jest -- --coverage",
     "standard": "standard",
     "test": "npm run standard && npm run jest"
   },
   "babel": {
+    "env": {
+      "test": {
+        "plugins": [
+          "rewire"
+        ]
+      }
+    },
     "plugins": [
       "transform-object-rest-spread",
       "transform-runtime"
@@ -41,9 +48,12 @@
   },
   "dependencies": {
     "@reggi/gitpkg.traverse-up": "file:../gitpkg.traverse-up",
+    "babel-plugin-rewire": "^1.1.0",
     "babel-runtime": "^6.26.0",
+    "bluebird": "^3.5.1",
     "execa": "^0.10.0",
-    "lerna": "^2.11.0"
+    "fs-extra": "^5.0.0",
+    "lodash": "^4.17.10"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -52,6 +62,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "jest": "^22.4.2",
+    "mock-fs": "^4.4.2",
     "standard": "^11.0.0"
   },
   "publishConfig": {
