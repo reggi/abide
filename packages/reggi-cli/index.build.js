@@ -25,6 +25,8 @@ require('@reggi/requireable-cli');
 
 require('@reggi/subrepo-cli');
 
+require('@reggi/dep-pointer-cli');
+
 require('replace-cli');
 
 require('results-cli');
@@ -38,7 +40,8 @@ var subCommands = {
   'pkg': '@reggi/pkg-cli',
   'subrepo': '@reggi/subrepo-cli',
   'pkgprop': '@reggi/pkgprop-cli',
-  'dep-merge': '@reggi/dep-merge-cli'
+  'dep-merge': '@reggi/dep-merge-cli',
+  'dep-pointer': '@reggi/dep-pointer-cli'
 };
 
 var getDesign = function getDesign(argv) {

@@ -220,13 +220,3 @@ var updatedPaths = exports.updatedPaths = function () {
     return _ref10.apply(this, arguments);
   };
 }();
-
-// export const execUpdated = async ({workingDir, packagesDir, childCommand, stdio}) => {
-//   const paths = await updatedPaths({workingDir, packagesDir})
-//   return bluebird.map(paths, path => execa.shell(childCommand, {cwd: path, stdio}))
-// }
-
-// const childCommand = `json -f ./package.json -c "console.log(this.name)"`
-// execUpdated({workingDir: process.cwd(), childCommand})
-//   .then(console.log)
-//   .catch(console.log)

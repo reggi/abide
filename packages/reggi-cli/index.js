@@ -7,6 +7,7 @@ import '@reggi/pkg-cli'
 import '@reggi/pkgprop-cli'
 import '@reggi/requireable-cli'
 import '@reggi/subrepo-cli'
+import '@reggi/dep-pointer-cli'
 import 'replace-cli'
 import 'results-cli'
 
@@ -17,7 +18,8 @@ const subCommands = {
   'pkg': '@reggi/pkg-cli',
   'subrepo': '@reggi/subrepo-cli',
   'pkgprop': '@reggi/pkgprop-cli',
-  'dep-merge': '@reggi/dep-merge-cli'
+  'dep-merge': '@reggi/dep-merge-cli',
+  'dep-pointer': '@reggi/dep-pointer-cli'
 }
 
 const getDesign = (argv) => {

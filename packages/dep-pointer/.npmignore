@@ -1,0 +1,12 @@
+__snapshots__
+coverage
+screenshots
+examples
+index.js
+index.test.js
+test.js
+.pkgrc
+.gitignore
+example
+package-local.json
+node_modules

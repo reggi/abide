@@ -37,13 +37,15 @@
     "test:standard": "lerna exec --concurrency 1 -- npm run standard",
     "total:coverage": "istanbul report --include=./packages/**/coverage/coverage-final.json",
     "versions": "sh ./scripts/versions.sh",
-    "nuke": "sh ./scripts/nuke.sh"
+    "nuke": "sh ./scripts/nuke.sh",
+    "publish:all:reggi": "lerna exec --concurrency 1 --bail=false -- 'dep-pointer && npm publish --registry https://registry.reggi.com && dep-pointer --local'"
   },
   "dependencies": {
     "@reggi/command": "file:packages/command",
     "@reggi/dep-merge": "file:packages/dep-merge",
     "@reggi/dep-merge-cli": "file:packages/dep-merge-cli",
-    "@reggi/exec-updated-cli": "file:packages/exec-updated-cli",
+    "@reggi/dep-pointer": "file:packages/dep-pointer",
+    "@reggi/dep-pointer-cli": "file:packages/dep-pointer-cli",
     "@reggi/gitpkg.traverse-up": "file:packages/gitpkg.traverse-up",
     "@reggi/gitpkg.upsert": "file:packages/gitpkg.upsert",
     "@reggi/help": "file:packages/help",
@@ -58,6 +60,7 @@
     "@reggi/journey.fn-reduce": "file:packages/journey.fn-reduce",
     "@reggi/journey.is-promise": "file:packages/journey.is-promise",
     "@reggi/journey.pass-thru": "file:packages/journey.pass-thru",
+    "@reggi/lerna-updated-paths": "file:packages/lerna-updated-paths",
     "@reggi/pkg": "file:packages/pkg",
     "@reggi/pkg-cli": "file:packages/pkg-cli",
     "@reggi/pkg-plugin-babel-6-to-node-4": "file:packages/pkg-plugin-babel-6-to-node-4",
@@ -96,6 +99,7 @@
     "json": "^9.0.6",
     "lerna": "^3.0.0-beta.18",
     "link-parent-bin": "^0.1.3",
+    "shrinkpack": "^0.18.1",
     "sort-package-json": "^1.12.0",
     "standard": "^11.0.0"
   },
