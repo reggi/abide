@@ -1,8 +1,12 @@
-node {
-    stage("git checkout") {
-        checkout scm
+pipeline {
+    agent {
+        docker { image 'node:7-alpine' }
     }
-    stage("npm install") {
-        sh "npm install"    
+    stages {
+        stage('Test') {
+            steps {
+                sh 'node --version'
+            }
+        }
     }
 }
