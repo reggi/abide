@@ -1,6 +1,6 @@
 node {
-    stage("alpha") {
-        echo "alpha"    
+    stage("git checkout") {
+        checkout scm
     }
     stage("beta") {
         echo "beta"    
