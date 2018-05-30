@@ -16,7 +16,7 @@ pipeline {
         }
         stage('npm install') {
             steps {
-                sh 'npm install'
+                sh 'npm install --verbose'
             }
         }
     }
