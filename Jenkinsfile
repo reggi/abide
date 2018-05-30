@@ -4,14 +4,20 @@ pipeline {
     }
     stages {
         stage('versions') {
-            sh 'node --version'
-            sh 'npm -v'
+            steps {
+                sh 'node --version'
+                sh 'npm -v'
+            }
         }
         stage('checkout') {
-            sh 'checkout scm'
+            steps {
+                sh 'checkout scm'
+            }
         }
         stage('npm install') {
-            sh 'npm install'
+            steps {
+                sh 'npm install'
+            }
         }
     }
 }
