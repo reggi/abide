@@ -19,11 +19,6 @@ pipeline {
                 sh 'npm install --verbose'
             }
         }
-        stage('standard check') {
-            steps {
-                sh 'npm run standard'
-            }
-        }
         stage('standard') {
             steps {
                 sh 'npm run standard'
@@ -34,14 +29,9 @@ pipeline {
                 sh 'npm run depcheck'
             }
         }
-        stage('depcheck') {
+        stage('requireable') {
             steps {
-                sh 'npm run depcheck'
-            }
-        }
-        stage('depcheck') {
-            steps {
-                sh 'npm run depcheck'
+                sh 'npm run requireable'
             }
         }
     }
