@@ -11,7 +11,7 @@ pipeline {
         }
         stage('checkout') {
             steps {
-                sh 'checkout scm'
+                checkout scm
             }
         }
         stage('npm install') {
