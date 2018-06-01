@@ -45,14 +45,13 @@
   "dependencies": {
     "@lerna/collect-packages": "^3.0.0-beta.17",
     "@lerna/collect-updates": "^3.0.0-beta.21",
-    "@lerna/filter-packages": "^3.0.0-beta.10",
     "@lerna/package-graph": "^3.0.0-beta.18",
     "@lerna/project": "^3.0.0-beta.20",
-    "@lerna/publish": "^3.0.0-beta.21",
     "@reggi/gitpkg.traverse-up": "file:../gitpkg.traverse-up",
     "babel-runtime": "^6.26.0",
     "fs-extra": "^6.0.1",
     "lodash": "^4.17.10",
+    "npmlog": "^4.1.2",
     "p-map": "^1.2.0"
   },
   "devDependencies": {

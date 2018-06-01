@@ -16,7 +16,7 @@ pipeline {
         }
         stage('npm install') {
             steps {
-                sh 'npm install --verbose'
+                sh 'npm install --verbose --prefer-offline'
             }
         }
         stage('standard') {
@@ -32,6 +32,11 @@ pipeline {
         stage('requireable') {
             steps {
                 sh 'npm run requireable'
+            }
+        }
+        stage('test') {
+            steps {
+                sh 'npm run test'
             }
         }
     }

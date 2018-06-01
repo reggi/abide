@@ -41,6 +41,9 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
+    "execa": "^0.10.0",
+    "fs-extra": "^6.0.1",
+    "lodash": "^4.17.10",
     "semver": "^5.5.0",
     "semver-sort": "0.0.4"
   },
