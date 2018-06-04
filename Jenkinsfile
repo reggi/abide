@@ -21,7 +21,7 @@ pipeline {
         }
         stage('dep install') {
             steps {
-                sh 'yarn install --verbose --prefer-offline'
+                sh 'yarn install --prefer-offline'
             }
         }
         stage('standard') {
