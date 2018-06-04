@@ -10,7 +10,7 @@ pipeline {
             steps {
                 sh 'node --version'
                 sh 'npm -v'
-                sh "npm i yarn -g"
+                sh "yarn -v"
             }
         }
         stage('checkout') {
