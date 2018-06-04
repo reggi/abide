@@ -11,6 +11,7 @@ pipeline {
                 sh 'node --version'
                 sh 'npm -v'
                 sh "yarn -v"
+                sh "npm i lerna -g"
             }
         }
         stage('checkout') {
