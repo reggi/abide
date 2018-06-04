@@ -3,10 +3,12 @@ pipeline {
         docker { image 'node' }
     }
     stages {
-        stage('versions') {
+        stage('setup') {
             steps {
                 sh 'node --version'
                 sh 'npm -v'
+                sh "npm i yarn -g"
+                sh "yarn -v"
             }
         }
         stage('checkout') {
@@ -16,7 +18,7 @@ pipeline {
         }
         stage('npm install') {
             steps {
-                sh 'npm install --verbose --prefer-offline'
+                sh 'yarn install --verbose --prefer-offline'
             }
         }
         stage('standard') {
