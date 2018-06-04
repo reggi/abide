@@ -31,6 +31,7 @@
     "---------------IN USE---------------": "----------------------------------------",
     "depmerge": "source ./scripts/9999-import.sh && import && depMerge",
     "depunmerge": "source ./scripts/9999-import.sh && import && depUnMerge",
+    "installeach": "lerna exec -- npm install",
     "x-preinstall": "npm run depmerge",
     "x-postinstall": "npm run depunmerge && npm run link-parent-bin",
     "postinstall": "npm run link-parent-bin",

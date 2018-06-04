@@ -20,7 +20,8 @@ pipeline {
         }
         stage('dep install') {
             steps {
-                sh 'yarn install --prefer-offline'
+                // sh 'yarn install --prefer-offline'
+                sh 'npm run installeach'
             }
         }
         stage('standard') {
