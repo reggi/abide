@@ -1,0 +1,3 @@
+function stderrColor {
+     stderr "$(color "$@")"
+  }

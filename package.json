@@ -49,7 +49,7 @@
   "dependencies": {
     "@reggi/command": "file:packages/command",
     "@reggi/dep-merge": "file:packages/dep-merge",
-    "@reggi/dep-merge-cli": "./packages/dep-merge-cli",
+    "@reggi/dep-merge-cli": "file:packages/dep-merge-cli",
     "@reggi/dep-pointer": "file:packages/dep-pointer",
     "@reggi/dep-pointer-cli": "file:packages/dep-pointer-cli",
     "@reggi/gitpkg.traverse-up": "file:packages/gitpkg.traverse-up",
