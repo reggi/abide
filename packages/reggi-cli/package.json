@@ -40,7 +40,10 @@
         "lines": 100,
         "statements": 100
       }
-    }
+    },
+    "coverageReporters": [
+      "json"
+    ]
   },
   "dependencies": {
     "@reggi/command": "file:../command",
