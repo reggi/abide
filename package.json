@@ -35,7 +35,7 @@
     "x-postinstall": "npm run depunmerge && npm run link-parent-bin",
     "postinstall": "npm run link-parent-bin",
     "yarninstall": "npm install -g yarn",
-    "standard": "lerna exec -- results -di -- standard",
+    "standard": "standard",
     "depcheck": "lerna exec -- results -di -- depcheck ./ --ignores 'jest,standard,babel-eslint,babel-cli,babel-jest'",
     "requireable": "lerna exec -- results -di -- node ../../node_modules/@reggi/requireable-cli/index.build.js -i ./",
     "shebangcheck": "echo 'needs to be invented'",
