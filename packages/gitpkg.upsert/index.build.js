@@ -39,7 +39,7 @@ var upsert = exports.upsert = (0, _journey2.default)(function (arr, record, quer
   }, function (_ref2) {
     var arr = _ref2.arr,
         queryFn = _ref2.queryFn;
-    return { findIndex: (0, _lodash.findIndex)(arr, function (i) {
+    return { index: (0, _lodash.findIndex)(arr, function (i) {
         return queryFn(i, record);
       }) };
   }, function (_ref3) {
@@ -57,11 +57,11 @@ var upsert = exports.upsert = (0, _journey2.default)(function (arr, record, quer
     return { back: (0, _lodash.takeRight)(arr, takeRightAmount) };
   }, function (_ref6) {
     var arr = _ref6.arr,
-        findIndex = _ref6.findIndex,
+        index = _ref6.index,
         front = _ref6.front,
         record = _ref6.record,
         back = _ref6.back;
-    return { return: findIndex >= 0 ? [].concat((0, _toConsumableArray3.default)(front), [updatedRecord(arr, record, findIndex)], (0, _toConsumableArray3.default)(back)) : [].concat((0, _toConsumableArray3.default)(arr), [record]) };
+    return { return: index >= 0 ? [].concat((0, _toConsumableArray3.default)(front), [updatedRecord(arr, record, index)], (0, _toConsumableArray3.default)(back)) : [].concat((0, _toConsumableArray3.default)(arr), [record]) };
   }];
 }, { return: true });
 

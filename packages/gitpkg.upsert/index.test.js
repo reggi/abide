@@ -13,6 +13,28 @@ test('upsert', () => {
   ])
 })
 
+test('upsert: three things first update', () => {
+  const results = upsert([
+    {name: 'dolphin', job: 'waffle maker'},
+    {name: 'brooke', job: 'youtube watcher'},
+    {name: 'birdman', job: 'cellist'}
+  ], {name: 'dolphin', job: 'pancake maker'}, 'name')
+  expect(results).toEqual([
+    {name: 'dolphin', job: 'pancake maker'},
+    {name: 'brooke', job: 'youtube watcher'},
+    {name: 'birdman', job: 'cellist'}
+  ])
+})
+
+test('upsert: one update', () => {
+  const results = upsert([
+    {name: 'dolphin', job: 'waffle maker'}
+  ], {name: 'dolphin', job: 'pancake maker'}, 'name')
+  expect(results).toEqual([
+    {name: 'dolphin', job: 'pancake maker'}
+  ])
+})
+
 test('upsert: adding a prop', () => {
   const results = upsert([
     {name: 'dolphin', job: 'waffle maker'},

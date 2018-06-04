@@ -7,11 +7,11 @@ export const updatedRecord = (arr, record, index) => ({...get(arr, index, {}), .
 export const upsert = journey((arr, record, query) => [
   () => ({arr, record, query}),
   ({query}) => ({queryFn: (typeof query === 'string') ? defaultQuery(query) : query}),
-  ({arr, queryFn}) => ({findIndex: findIndex(arr, (i) => queryFn(i, record))}),
+  ({arr, queryFn}) => ({index: findIndex(arr, (i) => queryFn(i, record))}),
   ({arr, index}) => ({front: take(arr, index)}),
   ({arr, front}) => ({takeRightAmount: arr.length - (front.length + 1)}),
   ({arr, index, takeRightAmount}) => ({back: takeRight(arr, takeRightAmount)}),
-  ({arr, findIndex, front, record, back}) => ({return: (findIndex >= 0) ? [...front, updatedRecord(arr, record, findIndex), ...back] : [...arr, record]})
+  ({arr, index, front, record, back}) => ({return: (index >= 0) ? [...front, updatedRecord(arr, record, index), ...back] : [...arr, record]})
 ], {return: true})
 
 export default upsert
