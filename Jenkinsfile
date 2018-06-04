@@ -1,6 +1,9 @@
 pipeline {
     agent {
-        docker { image 'node' }
+        docker {
+            image 'node'
+            args '-u 0:0'
+        }
     }
     stages {
         stage('setup') {
@@ -16,7 +19,7 @@ pipeline {
                 checkout scm
             }
         }
-        stage('npm install') {
+        stage('dep install') {
             steps {
                 sh 'yarn install --verbose --prefer-offline'
             }
