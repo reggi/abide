@@ -22,7 +22,7 @@ pipeline {
         stage('dep install') {
             steps {
                 // sh 'yarn install --prefer-offline'
-                sh 'npm run installeach'
+                sh 'lerna bootstrap --nohoist -- --prefer-offline'
             }
         }
         stage('standard') {
