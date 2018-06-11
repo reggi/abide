@@ -7,6 +7,7 @@ import subrepoCli from './index'
 
 beforeEach(async () => {
   await execa.shell(`
+    cd ${__dirname}
     mkdir -p ./example-repo
     cd ./example-repo
     git init

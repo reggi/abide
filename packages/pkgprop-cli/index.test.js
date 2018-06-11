@@ -51,13 +51,13 @@ test('pkgpropCli: version', async () => {
 
 test('pkgpropCli', async () => {
   await execa.shell(`
-    mkdir -p ./examples/
-    mkdir -p ./examples/working
+    mkdir -p ./examples/ &&
+    mkdir -p ./examples/working &&
     echo "{}" > ./examples/working/package.json
-  `)
+  `, {cwd: __dirname})
   const argv = await stringArgv('--prop description --dir ./examples/working')
   await pkgpropCli(getArgs(argv))
-  const pkg = await fs.readJson('./examples/working/package.json')
+  const pkg = await fs.readJson(path.join(__dirname, './examples/working/package.json'))
   expect(pkg.description).toEqual('Hello World')
 })
 
@@ -66,10 +66,10 @@ test('pkgpropCli: absolute', async () => {
     mkdir -p ./examples/
     mkdir -p ./examples/working
     echo "{}" > ./examples/working/package.json
-  `)
+  `, {cwd: __dirname})
   const argv = await stringArgv(`--prop description --dir ${path.join(__dirname, './examples/working')}`)
   await pkgpropCli(getArgs(argv))
-  const pkg = await fs.readJson('./examples/working/package.json')
+  const pkg = await fs.readJson(path.join(__dirname, './examples/working/package.json'))
   expect(pkg.description).toEqual('Hello World')
 })
 
@@ -78,46 +78,9 @@ test('pkgpropCli: to-package', async () => {
     mkdir -p ./examples/
     mkdir -p ./examples/to-package
     echo "{}" > ./examples/to-package/package.json
-  `)
+  `, {cwd: __dirname})
   const argv = await stringArgv('--prop description --pkgpath ./examples/to-package/package.json')
   await pkgpropCli(getArgs(argv))
-  const pkg = await fs.readJson('./examples/to-package/package.json')
+  const pkg = await fs.readJson(path.join(__dirname, './examples/to-package/package.json'))
   expect(pkg.description).toEqual('Hello World')
 })
-
-// test('pkgprop: without defaults', async () => {
-//   await pkgprop({
-//     workingDir: '/example',
-//     prop: 'description',
-//     packagePath: './package.json'
-//   })
-//   const pkg = await fs.readJson('/example/package.json')
-//   expect(pkg.description).toEqual('Hello World')
-// })
-
-// test('pkgprop: absolute package', async () => {
-//   await pkgprop({
-//     prop: 'description',
-//     packagePath: '/example/package.json'
-//   })
-//   const pkg = await fs.readJson('/example/package.json')
-//   expect(pkg.description).toEqual('Hello World')
-// })
-
-// test('pkgprop: absolute package', async () => {
-//   await pkgprop({
-//     prop: 'description',
-//     packagePath: '/example/package.json'
-//   })
-//   const pkg = await fs.readJson('/example/package.json')
-//   expect(pkg.description).toEqual('Hello World')
-// })
-
-// test('pkgprop: absolute package', async () => {
-//   await pkgprop({
-//     prop: 'description',
-//     packagePath: '/exists/package.json'
-//   })
-//   const pkg = await fs.readJson('/exists/package.json')
-//   expect(pkg.description).toEqual('Hello World')
-// })

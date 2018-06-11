@@ -1,6 +1,9 @@
+import path from 'path'
 import sinon from 'sinon'
 import fs from 'fs-extra'
 import requireableCli from './index'
+
+jest.setTimeout(10000)
 
 const getArgs = (argv) => ({
   argv: ['node', './index.js', ...argv],
@@ -9,8 +12,8 @@ const getArgs = (argv) => ({
 })
 
 afterEach(async () => {
-  await fs.remove('./examples/working/node_modules')
-  await fs.remove('./examples/broken/node_modules')
+  await fs.remove(path.join(__dirname, './examples/working/node_modules'))
+  await fs.remove(path.join(__dirname, './examples/broken/node_modules'))
 })
 
 test('requireableCli: help', async () => {
@@ -30,14 +33,14 @@ test('requireableCli: version', async () => {
 })
 
 test('requireableCli: working example', async () => {
-  const args = getArgs(['./examples/working'])
+  const args = getArgs([path.join(__dirname, './examples/working')])
   await requireableCli(args)
   expect(args.exit.called).toBe(true)
   expect(args.exit.args[0][0]).toBe(0)
 }, 10000)
 
 test('requireableCli: working verbose', async () => {
-  const args = getArgs(['./examples/working', '--verbose'])
+  const args = getArgs([path.join(__dirname, './examples/working'), '--verbose'])
   await requireableCli(args)
   expect(args.exit.called).toBe(true)
   expect(args.exit.args[0][0]).toBe(0)

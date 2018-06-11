@@ -26,21 +26,15 @@
     "rm:etc": "lerna exec -- rm -rf etc",
     "coverage": "istanbul report --include=./packages/**/coverage/coverage-final.json",
     "versions": "sh ./scripts/versions.sh",
-    "nuke": "sh ./scripts/nuke.sh",
     "publish:all:reggi": "lerna exec --concurrency 1 --bail=false -- 'dep-pointer && npm publish --registry https://registry.reggi.com && dep-pointer --local'",
     "---------------IN USE---------------": "----------------------------------------",
-    "depmerge": "source ./scripts/9999-import.sh && import && depMerge",
-    "depunmerge": "source ./scripts/9999-import.sh && import && depUnMerge",
-    "installeach": "lerna exec -- npm install",
-    "x-preinstall": "npm run depmerge",
-    "x-postinstall": "npm run depunmerge && npm run link-parent-bin",
-    "postinstall": "npm run link-parent-bin",
-    "yarninstall": "npm install -g yarn",
+    "build": "npm run babel",
+    "babel": "NODE_ENV=production lerna exec --parallel -- npm run babel",
     "standard": "standard",
+    "jest": "jest --coverage",
     "depcheck": "lerna exec -- results -di -- depcheck ./ --ignores 'jest,standard,babel-eslint,babel-cli,babel-jest'",
-    "requireable": "lerna exec -- results -di -- node ../../node_modules/@reggi/requireable-cli/index.build.js -i ./",
+    "depaudit": "node ./packages/results-cli -- node ./packages/monorepo-dep-audit-cli",
     "shebangcheck": "echo 'needs to be invented'",
-    "test": "lerna exec -- results -di -- jest --coverage",
     "githubpopulate": "echo 'needs to be invented'",
     "buildcheck": "echo 'needs to be invented'",
     "publishnpm": "echo 'needs to be invented'",
@@ -67,7 +61,8 @@
     "@reggi/journey.fn-reduce": "file:packages/journey.fn-reduce",
     "@reggi/journey.is-promise": "file:packages/journey.is-promise",
     "@reggi/journey.pass-thru": "file:packages/journey.pass-thru",
-    "@reggi/lerna-updated-paths": "file:packages/lerna-updated-paths",
+    "@reggi/lerna.dep-ling": "file:packages/lerna.dep-lint",
+    "@reggi/lerna.paths": "file:packages/lerna.paths",
     "@reggi/pkg": "file:packages/pkg",
     "@reggi/pkg-cli": "file:packages/pkg-cli",
     "@reggi/pkg-plugin-babel-6-to-node-4": "file:packages/pkg-plugin-babel-6-to-node-4",
@@ -97,10 +92,37 @@
     "replace-cli": "file:packages/replace-cli",
     "results-cli": "file:packages/results-cli"
   },
+  "babel": {
+    "plugins": [
+      "transform-object-rest-spread",
+      "transform-runtime"
+    ],
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "4"
+          }
+        }
+      ]
+    ],
+    "env": {
+      "test": {
+        "plugins": [
+          "rewire"
+        ]
+      }
+    }
+  },
+  "jest": {
+    "projects": [
+      "<rootDir>/packages/*"
+    ]
+  },
   "devDependencies": {
-    "npm-run-all": "^4.1.3",
     "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.2.2",
+    "babel-eslint": "^8.2.3",
     "babel-jest": "^22.4.1",
     "babel-plugin-rewire": "^1.1.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -109,16 +131,16 @@
     "bluebird": "^3.5.1",
     "depcheck": "^0.6.9",
     "execa": "^0.10.0",
-    "fs-extra": "^5.0.0",
+    "fs-extra": "^6.0.1",
     "istanbul": "^0.4.5",
-    "jest": "^22.4.2",
-    "json": "^9.0.6",
+    "jest": "^22.4.4",
     "lerna": "^2.11.0",
     "link-parent-bin": "^0.1.3",
     "lodash": "^4.17.10",
     "mock-fs": "^4.4.2",
     "mz": "^2.7.0",
-    "sinon": "^4.5.0",
+    "npm-run-all": "^4.1.3",
+    "sinon": "^5.1.0",
     "sort-package-json": "^1.12.0",
     "standard": "^11.0.0"
   },
@@ -126,7 +148,8 @@
     "parser": "babel-eslint",
     "ignore": [
       "coverage",
-      "index.build.js"
+      "index.build.js",
+      "unpublished"
     ],
     "globals": [
       "beforeAll",

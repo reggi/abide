@@ -5,6 +5,7 @@ import subrepo from './index'
 
 beforeEach(async () => {
   await execa.shell(`
+    cd ${__dirname}
     mkdir -p ./example-repo
     cd ./example-repo
     git init
@@ -34,7 +35,7 @@ afterEach(async () => {
 test('subrepo', async () => {
   await subrepo({
     source: './example-repo',
-    workingDir: process.cwd(),
+    workingDir: __dirname,
     subrepoPath: './subrepo-a',
     destDir: './example-subrepo'
   })

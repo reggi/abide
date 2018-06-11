@@ -10,6 +10,7 @@ const getDesign = (argv) => help()
   .description('Check and see if a module is requireable in node')
   .option('--module <path>', 'path to the local module', 'module')
   .option('--node <path>', 'path to the node binary', 'nodeBin')
+  .option('--npmClient <path>', 'path to the npm client', 'npmClient')
   .option('--verbose', 'show debug content', 'verbose')
   .option('--inherit, -i', 'show debug content', 'inherit')
   .option('--help, -h', 'generate this output', 'help')
@@ -26,8 +27,8 @@ const main = async ({argv}) => {
   } else if (design.flags.version) {
     return require('./package.json').version
   } else if (modPath) {
-    const {nodeBin, inherit} = design.flags
-    await requireable({modPath, nodeBin, inherit})
+    const {nodeBin, npmClient, inherit} = design.flags
+    await requireable({modPath, nodeBin, npmClient, inherit})
     return false
   } else {
     throw new Error('invalid argument')

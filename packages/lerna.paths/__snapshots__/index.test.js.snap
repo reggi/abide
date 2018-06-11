@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`lernaCorePaths: working case 1`] = `
+Object {
+  "binPath": "/working-case/node_modules/.bin/lerna",
+  "configPath": "/working-case/lerna.json",
+  "rootPackagePath": "/working-case/package.json",
+  "rootPath": "/working-case",
+}
+`;
+
+exports[`lernaPaths: working case 1`] = `
+Object {
+  "binPath": "/working-case/node_modules/.bin/lerna",
+  "config": Object {
+    "packages": Array [
+      "./packages/*",
+    ],
+  },
+  "configPath": "/working-case/lerna.json",
+  "packagePaths": Array [
+    "/working-case/packages/a",
+    "/working-case/packages/b",
+    "/working-case/packages/c",
+  ],
+  "rootPackagePath": "/working-case/package.json",
+  "rootPath": "/working-case",
+}
+`;

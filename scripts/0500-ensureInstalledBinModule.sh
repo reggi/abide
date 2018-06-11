@@ -2,16 +2,16 @@ USAGE="--ensureInstalledBinModule <cmd> <moduleName> (ensures npm module bin glo
 function ensureInstalledBinModule {
   location=""
   stderrBanner "ensureInstalledBinModule" "checking if \"$1\" is installed"
-  if [ -x "$(command -v $1)" ]; then
-    stderrBanner "ensureInstalledBinModule" "global command for \"$1\" found"
-    location=$1
-  elif [ -f "./node_modules/.bin/$1" ]; then
+  if [ -f "./node_modules/.bin/$1" ]; then
     stderrBanner "ensureInstalledBinModule" "local command for \"$1\" found"
     location="./node_modules/.bin/$1"
+  elif [ -x "$(command -v $1)" ]; then
+    stderrBanner "ensureInstalledBinModule" "global command for \"$1\" found"
+    location=$1
   else
     stderrBanner "ensureInstalledBinModule" "command \"$1\" not found"
     stderrBanner "ensureInstalledBinModule" "running \"npm i $2\" to install module locally"
-    npm i $2
+    npm i $2 1>&2
     location="./node_modules/.bin/$1"
   fi
   location_path="$(which "$location")"

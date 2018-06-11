@@ -25,11 +25,11 @@ const tmpPkgTemplate = {
   'license': 'ISC'
 }
 
-const npmInstall = ({absoluteModPath, tmpFullDir, stdio}) => execa('npm', ['install', absoluteModPath], {cwd: tmpFullDir, stdio})
+const npmInstall = ({npmClient = 'npm', absoluteModPath, tmpFullDir, stdio}) => execa(npmClient, ['install', absoluteModPath], {cwd: tmpFullDir, stdio})
 const requireModule = ({nodeBin = 'node', modPkgJson, tmpFullDir, stdio}) => execa.shell(`${nodeBin} -e "require('${modPkgJson.name}');console.log('require successfull')"`, {cwd: tmpFullDir, stdio})
 
-export const requireableCore = journey(({modPath, nodeBin, inherit, tmpFullDir}) => [
-  () => ({modPath, nodeBin, inherit, tmpFullDir}),
+export const requireableCore = journey(({modPath, nodeBin, npmClient, inherit, tmpFullDir}) => [
+  () => ({modPath, nodeBin, npmClient, inherit, tmpFullDir}),
   ({inherit}) => ({stdio: (inherit) ? 'inherit' : 'pipe'}),
   // checks if the modPath is a directory
   async ({modPath}) => ({modPathIsDir: await isDir(modPath)}),
@@ -50,23 +50,23 @@ export const requireableCore = journey(({modPath, nodeBin, inherit, tmpFullDir})
   // creates an absolute path for the module (to install anywhere on machine)
   ({modPath}) => ({absoluteModPath: path.resolve(modPath)}),
   // attempts to install the module with the cwd set to the temp dir
-  async ({absoluteModPath, tmpFullDir, stdio}) => ({resultNpmInstall: await npmInstall({absoluteModPath, tmpFullDir, stdio})}),
+  async ({absoluteModPath, tmpFullDir, stdio, npmClient}) => ({resultNpmInstall: await npmInstall({npmClient, absoluteModPath, tmpFullDir, stdio})}),
   // attemps to require the install module and will throw error if fails
   async ({nodeBin, modPkgJson, stdio}) => ({resultRequireMod: await requireModule({nodeBin, modPkgJson, tmpFullDir, stdio})}),
   // add success to object
   () => ({success: true})
 ], {hook: hook('requireableCore')})
 
-export const requireableCoreWrapped = async ({modPath, tmpFullDir, inherit}) => {
+export const requireableCoreWrapped = async ({modPath, nodeBin, npmClient, tmpFullDir, inherit}) => {
   try {
-    return await requireableCore(({modPath, tmpFullDir, inherit}))
+    return await requireableCore(({modPath, nodeBin, npmClient, tmpFullDir, inherit}))
   } catch (e) {
     return {success: false, error: e}
   }
 }
 
-export const requireable = journey(({modPath, nodeBin, inherit}) => [
-  () => ({modPath, nodeBin, inherit}),
+export const requireable = journey(({modPath, nodeBin, npmClient, inherit}) => [
+  () => ({modPath, nodeBin, npmClient, inherit}),
   // gets the temp dir
   () => ({tmpDir: os.tmpdir()}),
   // generates uuid
@@ -76,7 +76,7 @@ export const requireable = journey(({modPath, nodeBin, inherit}) => [
   // ensures dirpath exists (mkdirp)
   async ({tmpFullDir}) => ({resultEnsureDir: await fs.ensureDir(tmpFullDir)}),
   // runs core code (catches errors)
-  async ({modPath, nodeBin, inherit, tmpFullDir}) => ({core: await requireableCoreWrapped({modPath, nodeBin, inherit, tmpFullDir})}),
+  async ({modPath, nodeBin, npmClient, inherit, tmpFullDir}) => ({core: await requireableCoreWrapped({modPath, nodeBin, npmClient, inherit, tmpFullDir})}),
   // should run this even if there are errors
   async ({tmpFullDir}) => ({resultClean: await fs.remove(tmpFullDir)}),
   // should throw error if core has one

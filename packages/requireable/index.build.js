@@ -118,10 +118,12 @@ var tmpPkgTemplate = {
 };
 
 var npmInstall = function npmInstall(_ref3) {
-  var absoluteModPath = _ref3.absoluteModPath,
+  var _ref3$npmClient = _ref3.npmClient,
+      npmClient = _ref3$npmClient === undefined ? 'npm' : _ref3$npmClient,
+      absoluteModPath = _ref3.absoluteModPath,
       tmpFullDir = _ref3.tmpFullDir,
       stdio = _ref3.stdio;
-  return (0, _execa2.default)('npm', ['install', absoluteModPath], { cwd: tmpFullDir, stdio });
+  return (0, _execa2.default)(npmClient, ['install', absoluteModPath], { cwd: tmpFullDir, stdio });
 };
 var requireModule = function requireModule(_ref4) {
   var _ref4$nodeBin = _ref4.nodeBin,
@@ -135,10 +137,11 @@ var requireModule = function requireModule(_ref4) {
 var requireableCore = exports.requireableCore = (0, _journey.journey)(function (_ref5) {
   var modPath = _ref5.modPath,
       nodeBin = _ref5.nodeBin,
+      npmClient = _ref5.npmClient,
       inherit = _ref5.inherit,
       tmpFullDir = _ref5.tmpFullDir;
   return [function () {
-    return { modPath, nodeBin, inherit, tmpFullDir };
+    return { modPath, nodeBin, npmClient, inherit, tmpFullDir };
   }, function (_ref6) {
     var inherit = _ref6.inherit;
     return { stdio: inherit ? 'inherit' : 'pipe' };
@@ -289,13 +292,14 @@ var requireableCore = exports.requireableCore = (0, _journey.journey)(function (
     var _ref21 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee7(_ref20) {
       var absoluteModPath = _ref20.absoluteModPath,
           tmpFullDir = _ref20.tmpFullDir,
-          stdio = _ref20.stdio;
+          stdio = _ref20.stdio,
+          npmClient = _ref20.npmClient;
       return _regenerator2.default.wrap(function _callee7$(_context7) {
         while (1) {
           switch (_context7.prev = _context7.next) {
             case 0:
               _context7.next = 2;
-              return npmInstall({ absoluteModPath, tmpFullDir, stdio });
+              return npmInstall({ npmClient, absoluteModPath, tmpFullDir, stdio });
 
             case 2:
               _context7.t0 = _context7.sent;
@@ -355,6 +359,8 @@ var requireableCore = exports.requireableCore = (0, _journey.journey)(function (
 var requireableCoreWrapped = exports.requireableCoreWrapped = function () {
   var _ref25 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee9(_ref24) {
     var modPath = _ref24.modPath,
+        nodeBin = _ref24.nodeBin,
+        npmClient = _ref24.npmClient,
         tmpFullDir = _ref24.tmpFullDir,
         inherit = _ref24.inherit;
     return _regenerator2.default.wrap(function _callee9$(_context9) {
@@ -363,7 +369,7 @@ var requireableCoreWrapped = exports.requireableCoreWrapped = function () {
           case 0:
             _context9.prev = 0;
             _context9.next = 3;
-            return requireableCore({ modPath, tmpFullDir, inherit });
+            return requireableCore({ modPath, nodeBin, npmClient, tmpFullDir, inherit });
 
           case 3:
             return _context9.abrupt('return', _context9.sent);
@@ -389,9 +395,10 @@ var requireableCoreWrapped = exports.requireableCoreWrapped = function () {
 var requireable = exports.requireable = (0, _journey.journey)(function (_ref26) {
   var modPath = _ref26.modPath,
       nodeBin = _ref26.nodeBin,
+      npmClient = _ref26.npmClient,
       inherit = _ref26.inherit;
   return [function () {
-    return { modPath, nodeBin, inherit };
+    return { modPath, nodeBin, npmClient, inherit };
   },
   // gets the temp dir
   function () {
@@ -441,6 +448,7 @@ var requireable = exports.requireable = (0, _journey.journey)(function (_ref26) 
     var _ref31 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee11(_ref30) {
       var modPath = _ref30.modPath,
           nodeBin = _ref30.nodeBin,
+          npmClient = _ref30.npmClient,
           inherit = _ref30.inherit,
           tmpFullDir = _ref30.tmpFullDir;
       return _regenerator2.default.wrap(function _callee11$(_context11) {
@@ -448,7 +456,7 @@ var requireable = exports.requireable = (0, _journey.journey)(function (_ref26) 
           switch (_context11.prev = _context11.next) {
             case 0:
               _context11.next = 2;
-              return requireableCoreWrapped({ modPath, nodeBin, inherit, tmpFullDir });
+              return requireableCoreWrapped({ modPath, nodeBin, npmClient, inherit, tmpFullDir });
 
             case 2:
               _context11.t0 = _context11.sent;

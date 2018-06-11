@@ -1,0 +1,91 @@
+{
+  "name": "@reggi/lerna.utils",
+  "version": "0.0.1",
+  "author": "Thomas Reggi",
+  "main": "./index.build.js",
+  "scripts": {
+    "babel": "babel ./index.js --out-file ./index.build.js",
+    "babel:watch": "npm run babel -- --watch",
+    "build": "npm run babel",
+    "jest": "BABEL_ENV=test jest",
+    "jest:coverage": "npm run jest -- --coverage",
+    "standard": "standard",
+    "test": "npm run standard && npm run jest"
+  },
+  "babel": {
+    "env": {
+      "test": {
+        "plugins": [
+          "rewire"
+        ]
+      }
+    },
+    "plugins": [
+      "transform-object-rest-spread",
+      "transform-runtime"
+    ],
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "4"
+          }
+        }
+      ]
+    ]
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  },
+  "dependencies": {
+    "@reggi/gitpkg.traverse-up": "file:../gitpkg.traverse-up",
+    "@reggi/lerna.paths": "file:../lerna.paths",
+    "babel-plugin-rewire": "^1.1.0",
+    "babel-runtime": "^6.26.0",
+    "bluebird": "^3.5.1",
+    "execa": "^0.10.0",
+    "fs-extra": "^6.0.1",
+    "glob": "^7.1.2",
+    "lodash": "^4.17.10",
+    "semver": "^5.5.0",
+    "semver-sort": "0.0.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.3",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "jest": "^22.4.4",
+    "mock-fs": "^4.4.2",
+    "standard": "^11.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "*.build.js"
+    ],
+    "globals": [
+      "beforeAll",
+      "afterAll",
+      "expect",
+      "test",
+      "beforeEach",
+      "afterEach",
+      "it",
+      "jest"
+    ]
+  }
+}

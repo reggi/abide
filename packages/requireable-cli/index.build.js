@@ -30,14 +30,14 @@ var _lodash = require('lodash');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var getDesign = function getDesign(argv) {
-  return (0, _help2.default)().name('requireable').usage('[flags] [modulePath]').description('Check and see if a module is requireable in node').option('--module <path>', 'path to the local module', 'module').option('--node <path>', 'path to the node binary', 'nodeBin').option('--verbose', 'show debug content', 'verbose').option('--inherit, -i', 'show debug content', 'inherit').option('--help, -h', 'generate this output', 'help').option('--version, -v', 'show version number', 'version').option('--silent, -s', 'no output', 'silent').parse(argv.slice(2));
+  return (0, _help2.default)().name('requireable').usage('[flags] [modulePath]').description('Check and see if a module is requireable in node').option('--module <path>', 'path to the local module', 'module').option('--node <path>', 'path to the node binary', 'nodeBin').option('--npmClient <path>', 'path to the npm client', 'npmClient').option('--verbose', 'show debug content', 'verbose').option('--inherit, -i', 'show debug content', 'inherit').option('--help, -h', 'generate this output', 'help').option('--version, -v', 'show version number', 'version').option('--silent, -s', 'no output', 'silent').parse(argv.slice(2));
 };
 
 var main = function () {
   var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(_ref) {
     var argv = _ref.argv;
 
-    var design, modPath, _design$flags, nodeBin, inherit;
+    var design, modPath, _design$flags, nodeBin, npmClient, inherit;
 
     return _regenerator2.default.wrap(function _callee$(_context) {
       while (1) {
@@ -69,9 +69,9 @@ var main = function () {
               break;
             }
 
-            _design$flags = design.flags, nodeBin = _design$flags.nodeBin, inherit = _design$flags.inherit;
+            _design$flags = design.flags, nodeBin = _design$flags.nodeBin, npmClient = _design$flags.npmClient, inherit = _design$flags.inherit;
             _context.next = 15;
-            return (0, _requireable2.default)({ modPath, nodeBin, inherit });
+            return (0, _requireable2.default)({ modPath, nodeBin, npmClient, inherit });
 
           case 15:
             return _context.abrupt('return', false);
