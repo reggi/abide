@@ -1,5 +1,5 @@
 {
-  "name": "@reggi/monorepo-dep-audit-cli",
+  "name": "@reggi/monorepo-babel-cli",
   "version": "0.0.1",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
@@ -40,8 +40,11 @@
     }
   },
   "dependencies": {
+    "@reggi/command": "file:../command",
+    "@reggi/help": "file:../help",
     "@reggi/lerna.utils": "file:../lerna.utils",
-    "babel-runtime": "^6.26.0"
+    "babel-runtime": "^6.26.0",
+    "debug": "^3.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

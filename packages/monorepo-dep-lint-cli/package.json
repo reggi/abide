@@ -1,5 +1,5 @@
 {
-  "name": "@reggi/lerna.utils",
+  "name": "@reggi/monorepo-dep-lint-cli",
   "version": "0.0.1",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
@@ -7,19 +7,12 @@
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
     "build": "npm run babel",
-    "jest": "BABEL_ENV=test jest",
-    "jest:coverage": "npm run jest -- --coverage",
+    "jest": "jest",
+    "jest:coverage": "jest --coverage",
     "standard": "standard",
     "test": "npm run standard && npm run jest"
   },
   "babel": {
-    "env": {
-      "test": {
-        "plugins": [
-          "rewire"
-        ]
-      }
-    },
     "plugins": [
       "transform-object-rest-spread",
       "transform-runtime"
@@ -47,14 +40,11 @@
     }
   },
   "dependencies": {
-    "@reggi/lerna.paths": "file:../lerna.paths",
-    "babel-merge": "^1.1.1",
-    "babel-plugin-rewire": "^1.1.0",
+    "@reggi/command": "file:../command",
+    "@reggi/help": "file:../help",
+    "@reggi/lerna.utils": "file:../lerna.utils",
     "babel-runtime": "^6.26.0",
-    "bluebird": "^3.5.1",
-    "fs-extra": "^6.0.1",
-    "lodash": "^4.17.10",
-    "semver-sort": "0.0.4"
+    "debug": "^3.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -63,7 +53,6 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "jest": "^22.4.4",
-    "mock-fs": "^4.4.2",
     "standard": "^11.0.0"
   },
   "publishConfig": {

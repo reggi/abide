@@ -1,12 +1,12 @@
 {
   "name": "@reggi/dep-pointer-cli",
   "version": "0.0.2",
-  "author": "Thomas Reggi",
   "description": "Tool for assigning version from file references",
+  "author": "Thomas Reggi",
+  "main": "./index.build.js",
   "bin": {
     "dep-pointer": "./index.build.js"
   },
-  "main": "./index.build.js",
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
@@ -33,10 +33,10 @@
     ]
   },
   "jest": {
+    "collectCoverage": true,
     "coverageReporters": [
       "json"
     ],
-    "collectCoverage": true,
     "coverageThreshold": {
       "global": {
         "branches": 100,

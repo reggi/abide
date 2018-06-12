@@ -98,17 +98,26 @@ var lernaPaths = exports.lernaPaths = function () {
 
           case 9:
             config = _context2.sent;
-            _context2.next = 12;
+
+            if ((0, _lodash.get)(config, 'packages')) {
+              _context2.next = 12;
+              break;
+            }
+
+            throw new Error('lerna config is missing packages property');
+
+          case 12:
+            _context2.next = 14;
             return _bluebird2.default.map(config.packages, function (pkg) {
               return globAsync(pkg, { cwd: rootPath, realpath: true });
             });
 
-          case 12:
+          case 14:
             packagePaths = _context2.sent;
             flatPackagePaths = (0, _lodash.flatten)(packagePaths);
             return _context2.abrupt('return', { configPath, rootPath, rootPackagePath, binPath, config, packagePaths: flatPackagePaths });
 
-          case 15:
+          case 17:
           case 'end':
             return _context2.stop();
         }

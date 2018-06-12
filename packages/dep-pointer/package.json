@@ -29,10 +29,10 @@
     ]
   },
   "jest": {
+    "collectCoverage": true,
     "coverageReporters": [
       "json"
     ],
-    "collectCoverage": true,
     "coverageThreshold": {
       "global": {
         "branches": 100,

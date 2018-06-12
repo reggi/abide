@@ -3,7 +3,8 @@ import fs from 'fs-extra'
 import lernaPaths from '@reggi/lerna.paths'
 import bluebird from 'bluebird'
 import semverSort from 'semver-sort'
-import {get, set, each, map, extend, without, size, includes, last, isEqual, mergeWith, isArray} from 'lodash'
+import babelMerge from 'babel-merge'
+import {get, set, each, map, extend, without, size, includes, last, isEqual, reduce} from 'lodash'
 
 export const lernaPackageContents = async ({packagePaths}) => {
   const paths = await bluebird.map(packagePaths, async packagePath => {
@@ -78,14 +79,11 @@ export const lernaDepConsistency = ({dependencies}) => {
   return errors
 }
 
-export const mergeWithArraysCallback = (objValue, srcValue) => (isArray(objValue)) ? objValue.concat(srcValue) : undefined
-export const mergeWithArrays = (...rest) => mergeWith(...rest, mergeWithArraysCallback)
-
 export const lernaRootBabel = async ({workingDir}) => {
   const {rootPath, packagePaths} = await lernaPaths({workingDir})
   const packageContents = await lernaPackageContents({packagePaths})
   const babelConfigs = map(packageContents, pkg => pkg.babel)
-  const babelConfig = mergeWithArrays({}, ...babelConfigs)
+  const babelConfig = reduce(babelConfigs, (acq, item) => babelMerge(acq, item))
   return {babelConfig, rootPath}
 }
 

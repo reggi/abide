@@ -123,7 +123,7 @@ beforeEach(async () => {
       },
       'lerna.json': JSON.stringify({'packages': ['./packages/*']}),
       'package.json': JSON.stringify({'name': 'root', dependencies, devDependencies})
-    },
+    }
   })
 })
 
@@ -192,13 +192,13 @@ test('lernaRootBabelCompare: working-case-babel', async () => {
   expect(compared).toEqual(true)
 })
 
-test('lernaDepAudit: non-working-case-babel', async () => {
+test('lernaRootBabelCompare: non-working-case-babel', async () => {
   const workingDir = '/non-working-case-babel'
   const babelCompare = await lernaRootBabelCompare({workingDir})
   expect(babelCompare).toEqual(false)
 })
 
-test('lernaDepAudit: non-working-case-babel-missing-root', async () => {
+test('lernaRootBabelCompare: non-working-case-babel-missing-root', async () => {
   try {
     const workingDir = '/non-working-case-babel-missing-root'
     await lernaRootBabelCompare({workingDir})

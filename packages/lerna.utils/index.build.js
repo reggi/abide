@@ -3,11 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.lernaDepAudit = exports.lernaRootBabel = exports.lernaDepConsistency = exports.lernaDevDepConsistency = exports.FixError = exports.getIsFileSpecifier = exports.lernaDeps = exports.lernaPackageContents = undefined;
-
-var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
-
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+exports.lernaDepAudit = exports.lernaRootBabelCompare = exports.lernaRootBabelComparePure = exports.lernaRootBabel = exports.lernaDepConsistency = exports.lernaDevDepConsistency = exports.FixError = exports.getIsFileSpecifier = exports.lernaDeps = exports.lernaPackageContents = undefined;
 
 var _keys = require('babel-runtime/core-js/object/keys');
 
@@ -40,6 +36,10 @@ var _bluebird2 = _interopRequireDefault(_bluebird);
 var _semverSort = require('semver-sort');
 
 var _semverSort2 = _interopRequireDefault(_semverSort);
+
+var _babelMerge = require('babel-merge');
+
+var _babelMerge2 = _interopRequireDefault(_babelMerge);
 
 var _lodash = require('lodash');
 
@@ -178,7 +178,7 @@ var lernaRootBabel = exports.lernaRootBabel = function () {
   var _ref8 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3(_ref7) {
     var workingDir = _ref7.workingDir;
 
-    var _ref9, packagePaths, packageContents, babelConfigs, babelConfig;
+    var _ref9, rootPath, packagePaths, packageContents, babelConfigs, babelConfig;
 
     return _regenerator2.default.wrap(function _callee3$(_context3) {
       while (1) {
@@ -189,19 +189,22 @@ var lernaRootBabel = exports.lernaRootBabel = function () {
 
           case 2:
             _ref9 = _context3.sent;
+            rootPath = _ref9.rootPath;
             packagePaths = _ref9.packagePaths;
-            _context3.next = 6;
+            _context3.next = 7;
             return lernaPackageContents({ packagePaths });
 
-          case 6:
+          case 7:
             packageContents = _context3.sent;
             babelConfigs = (0, _lodash.map)(packageContents, function (pkg) {
               return pkg.babel;
             });
-            babelConfig = _lodash.merge.apply(undefined, [{}].concat((0, _toConsumableArray3.default)(babelConfigs)));
-            return _context3.abrupt('return', babelConfig);
+            babelConfig = (0, _lodash.reduce)(babelConfigs, function (acq, item) {
+              return (0, _babelMerge2.default)(acq, item);
+            });
+            return _context3.abrupt('return', { babelConfig, rootPath });
 
-          case 10:
+          case 11:
           case 'end':
             return _context3.stop();
         }
@@ -214,41 +217,33 @@ var lernaRootBabel = exports.lernaRootBabel = function () {
   };
 }();
 
-var lernaDepAudit = exports.lernaDepAudit = function () {
+var lernaRootBabelComparePure = exports.lernaRootBabelComparePure = function () {
   var _ref11 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4(_ref10) {
-    var workingDir = _ref10.workingDir;
-
-    var _ref12, rootPackagePath, packagePaths, packageContents, _lernaDeps, dependencies, devDependencies, rootPackageContents, errors;
-
+    var rootPath = _ref10.rootPath,
+        babelConfig = _ref10.babelConfig;
+    var rootPathPackagePath, rootPathPackageContent;
     return _regenerator2.default.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
-            _context4.next = 2;
-            return (0, _lerna2.default)({ workingDir });
+            rootPathPackagePath = _path2.default.join(rootPath, 'package.json');
+            _context4.next = 3;
+            return _fsExtra2.default.readJson(rootPathPackagePath);
 
-          case 2:
-            _ref12 = _context4.sent;
-            rootPackagePath = _ref12.rootPackagePath;
-            packagePaths = _ref12.packagePaths;
-            _context4.next = 7;
-            return lernaPackageContents({ packagePaths });
+          case 3:
+            rootPathPackageContent = _context4.sent;
+
+            if (rootPathPackageContent.babel) {
+              _context4.next = 6;
+              break;
+            }
+
+            throw new Error('no babel config at package root');
+
+          case 6:
+            return _context4.abrupt('return', (0, _lodash.isEqual)(babelConfig, rootPathPackageContent.babel));
 
           case 7:
-            packageContents = _context4.sent;
-            _lernaDeps = lernaDeps({ packageContents }), dependencies = _lernaDeps.dependencies, devDependencies = _lernaDeps.devDependencies;
-            _context4.next = 11;
-            return _fsExtra2.default.readJson(rootPackagePath);
-
-          case 11:
-            rootPackageContents = _context4.sent;
-            errors = [];
-
-            errors = errors.concat(lernaDevDepConsistency({ devDependencies, rootPackageContents }));
-            errors = errors.concat(lernaDepConsistency({ dependencies }));
-            return _context4.abrupt('return', errors);
-
-          case 16:
           case 'end':
             return _context4.stop();
         }
@@ -256,7 +251,91 @@ var lernaDepAudit = exports.lernaDepAudit = function () {
     }, _callee4, undefined);
   }));
 
-  return function lernaDepAudit(_x4) {
+  return function lernaRootBabelComparePure(_x4) {
     return _ref11.apply(this, arguments);
+  };
+}();
+
+var lernaRootBabelCompare = exports.lernaRootBabelCompare = function () {
+  var _ref13 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5(_ref12) {
+    var workingDir = _ref12.workingDir;
+
+    var _ref14, babelConfig, rootPath, compared;
+
+    return _regenerator2.default.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            _context5.next = 2;
+            return lernaRootBabel({ workingDir });
+
+          case 2:
+            _ref14 = _context5.sent;
+            babelConfig = _ref14.babelConfig;
+            rootPath = _ref14.rootPath;
+            _context5.next = 7;
+            return lernaRootBabelComparePure({ rootPath, babelConfig });
+
+          case 7:
+            compared = _context5.sent;
+            return _context5.abrupt('return', compared);
+
+          case 9:
+          case 'end':
+            return _context5.stop();
+        }
+      }
+    }, _callee5, undefined);
+  }));
+
+  return function lernaRootBabelCompare(_x5) {
+    return _ref13.apply(this, arguments);
+  };
+}();
+
+var lernaDepAudit = exports.lernaDepAudit = function () {
+  var _ref16 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee6(_ref15) {
+    var workingDir = _ref15.workingDir;
+
+    var _ref17, rootPackagePath, packagePaths, packageContents, _lernaDeps, dependencies, devDependencies, rootPackageContents, errors;
+
+    return _regenerator2.default.wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
+          case 0:
+            _context6.next = 2;
+            return (0, _lerna2.default)({ workingDir });
+
+          case 2:
+            _ref17 = _context6.sent;
+            rootPackagePath = _ref17.rootPackagePath;
+            packagePaths = _ref17.packagePaths;
+            _context6.next = 7;
+            return lernaPackageContents({ packagePaths });
+
+          case 7:
+            packageContents = _context6.sent;
+            _lernaDeps = lernaDeps({ packageContents }), dependencies = _lernaDeps.dependencies, devDependencies = _lernaDeps.devDependencies;
+            _context6.next = 11;
+            return _fsExtra2.default.readJson(rootPackagePath);
+
+          case 11:
+            rootPackageContents = _context6.sent;
+            errors = [];
+
+            errors = errors.concat(lernaDevDepConsistency({ devDependencies, rootPackageContents }));
+            errors = errors.concat(lernaDepConsistency({ dependencies }));
+            return _context6.abrupt('return', errors);
+
+          case 16:
+          case 'end':
+            return _context6.stop();
+        }
+      }
+    }, _callee6, undefined);
+  }));
+
+  return function lernaDepAudit(_x6) {
+    return _ref16.apply(this, arguments);
   };
 }();

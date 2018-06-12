@@ -349,24 +349,34 @@ var depPointer = exports.depPointer = function () {
                     switch (_context6.prev = _context6.next) {
                       case 0:
                         packageLocalPath = _path2.default.join(pkg.location, 'package-local.json');
-                        _context6.next = 3;
+                        _context6.prev = 1;
+                        _context6.next = 4;
                         return _fsExtra2.default.readJson(packageLocalPath);
 
-                      case 3:
+                      case 4:
                         pkgLocal = _context6.sent;
-                        _context6.next = 6;
+                        _context6.next = 7;
                         return _fsExtra2.default.writeJson(_path2.default.join(pkg.location, 'package.json'), pkgLocal, { spaces: 2 });
 
-                      case 6:
-                        _context6.next = 8;
+                      case 7:
+                        _context6.next = 9;
                         return _fsExtra2.default.remove(packageLocalPath);
 
-                      case 8:
+                      case 9:
+                        _context6.next = 14;
+                        break;
+
+                      case 11:
+                        _context6.prev = 11;
+                        _context6.t0 = _context6['catch'](1);
+                        throw new Error('no package local file available');
+
+                      case 14:
                       case 'end':
                         return _context6.stop();
                     }
                   }
-                }, _callee6, undefined);
+                }, _callee6, undefined, [[1, 11]]);
               }));
 
               return function (_x8) {

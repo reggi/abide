@@ -2,10 +2,10 @@
   "name": "reggi-cli",
   "version": "0.0.4",
   "author": "Thomas Reggi",
+  "main": "./index.build.js",
   "bin": {
     "reggi": "./index.build.js"
   },
-  "main": "./index.build.js",
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
@@ -33,6 +33,9 @@
   },
   "jest": {
     "collectCoverage": true,
+    "coverageReporters": [
+      "json"
+    ],
     "coverageThreshold": {
       "global": {
         "branches": 100,
@@ -40,10 +43,7 @@
         "lines": 100,
         "statements": 100
       }
-    },
-    "coverageReporters": [
-      "json"
-    ]
+    }
   },
   "dependencies": {
     "@reggi/command": "file:../command",

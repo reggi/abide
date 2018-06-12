@@ -1,5 +1,5 @@
 {
-  "name": "@reggi/monorepo-root-babel-cli",
+  "name": "@reggi/shebang-check",
   "version": "0.0.1",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
@@ -40,16 +40,15 @@
     }
   },
   "dependencies": {
-    "@reggi/lerna.utils": "file:../lerna.utils",
     "babel-runtime": "^6.26.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.2.3",
+    "babel-eslint": "^8.2.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
-    "jest": "^22.4.4",
+    "jest": "^22.4.2",
     "standard": "^11.0.0"
   },
   "publishConfig": {
