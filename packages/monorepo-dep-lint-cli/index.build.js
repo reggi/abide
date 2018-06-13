@@ -19,13 +19,9 @@ var _help = require('@reggi/help');
 
 var _help2 = _interopRequireDefault(_help);
 
-var _command = require('@reggi/command');
+var _commandPlus = require('@reggi/command-plus');
 
-var _command2 = _interopRequireDefault(_command);
-
-var _debug = require('debug');
-
-var _debug2 = _interopRequireDefault(_debug);
+var _commandPlus2 = _interopRequireDefault(_commandPlus);
 
 var _package = require('./package.json');
 
@@ -33,73 +29,77 @@ var _package2 = _interopRequireDefault(_package);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var d = (0, _debug2.default)('monorepo-dep-audit');
-
 var getDesign = function getDesign(argv) {
-  return (0, _help2.default)().name('monorepo-dep-audit').description(_package2.default.description).option('--showFix, -f', 'shows possible fixes', 'showFix').option('--silent, -s', 'silent output', 'silent').option('--version, -v', 'shows the version', 'version').option('--help, -h', 'shows this usage output', 'help').parse(argv.slice(2));
+  return (0, _help2.default)().name('monorepo-dep-lint').description(_package2.default.description).option('--showFix, -f', 'shows possible fixes', 'showFix').option('--silent, -s', 'silent output', 'silent').option('--version, -v', 'shows the version', 'version').option('--help, -h', 'shows this usage output', 'help').parse(argv.slice(2));
 };
 
-exports.default = (0, _command2.default)(module, function () {
-  var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(_ref) {
-    var argv = _ref.argv,
-        stdout = _ref.stdout,
-        stderr = _ref.stderr,
-        cwd = _ref.cwd,
-        exit = _ref.exit;
+var output = function output(_ref) {
+  var errors = _ref.errors,
+      showFix = _ref.showFix;
 
-    var design, _pkg, results;
+  var output = [];
+  errors.forEach(function (e) {
+    output.push(`${e.message}`);
+    if (showFix) output.push(`\t ${e.fix}`);
+  });
+  return output.join('\n');
+};
 
+exports.default = (0, _commandPlus2.default)(module, function () {
+  var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(_ref2) {
+    var argv = _ref2.argv,
+        cwd = _ref2.cwd;
+    var design, workingDir, silent, showFix, errors;
     return _regenerator2.default.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             design = getDesign(argv);
+            workingDir = cwd();
+            silent = design.flags.silent;
+            showFix = design.flags.showFix;
 
             if (!design.flags.help) {
-              _context.next = 7;
+              _context.next = 6;
               break;
             }
 
-            d('help hit');
-            stdout.write(design.help() + '\n');
-            return _context.abrupt('return', exit(0));
+            return _context.abrupt('return', design.help());
 
-          case 7:
+          case 6:
             if (!design.flags.version) {
-              _context.next = 14;
+              _context.next = 8;
               break;
             }
 
-            d('version hit');
-            _pkg = require('./package.json');
+            return _context.abrupt('return', _package2.default.version);
 
-            stdout.write(_pkg.version + '\n');
-            return _context.abrupt('return', exit(0));
+          case 8:
+            _context.next = 10;
+            return (0, _lerna.lernaDepAudit)({ workingDir });
 
-          case 14:
-            _context.next = 16;
-            return (0, _lerna.lernaDepAudit)({ workingDir: cwd() });
+          case 10:
+            errors = _context.sent;
+
+            if (errors.length) {
+              _context.next = 13;
+              break;
+            }
+
+            return _context.abrupt('return', true);
+
+          case 13:
+            if (!silent) {
+              _context.next = 15;
+              break;
+            }
+
+            return _context.abrupt('return', false);
+
+          case 15:
+            throw new Error(output({ errors, showFix }));
 
           case 16:
-            results = _context.sent;
-
-            if (results.length) {
-              _context.next = 19;
-              break;
-            }
-
-            return _context.abrupt('return', exit(0));
-
-          case 19:
-            if (!design.flags.silent) {
-              results.forEach(function (e) {
-                stderr.write(`${e.message}\n`);
-                if (design.flags.showFix) stderr.write(`\t ${e.fix}\n`);
-              });
-            }
-            return _context.abrupt('return', exit(1));
-
-          case 21:
           case 'end':
             return _context.stop();
         }
@@ -108,6 +108,6 @@ exports.default = (0, _command2.default)(module, function () {
   }));
 
   return function (_x) {
-    return _ref2.apply(this, arguments);
+    return _ref3.apply(this, arguments);
   };
 }());

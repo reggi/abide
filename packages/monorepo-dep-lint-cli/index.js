@@ -1,14 +1,11 @@
 #!/usr/bin/env node
 import {lernaDepAudit} from '@reggi/lerna.utils'
 import help from '@reggi/help'
-import command from '@reggi/command'
-import debug from 'debug'
+import commandPlus from '@reggi/command-plus'
 import pkg from './package.json'
 
-const d = debug('monorepo-dep-audit')
-
 const getDesign = (argv) => help()
-  .name('monorepo-dep-audit')
+  .name('monorepo-dep-lint')
   .description(pkg.description)
   .option('--showFix, -f', 'shows possible fixes', 'showFix')
   .option('--silent, -s', 'silent output', 'silent')
@@ -16,26 +13,24 @@ const getDesign = (argv) => help()
   .option('--help, -h', 'shows this usage output', 'help')
   .parse(argv.slice(2))
 
-export default command(module, async ({argv, stdout, stderr, cwd, exit}) => {
+const output = ({errors, showFix}) => {
+  const output = []
+  errors.forEach(e => {
+    output.push(`${e.message}`)
+    if (showFix) output.push(`\t ${e.fix}`)
+  })
+  return output.join('\n')
+}
+
+export default commandPlus(module, async ({argv, cwd}) => {
   const design = getDesign(argv)
-  if (design.flags.help) {
-    d('help hit')
-    stdout.write(design.help() + '\n')
-    return exit(0)
-  } else if (design.flags.version) {
-    d('version hit')
-    const pkg = require('./package.json')
-    stdout.write(pkg.version + '\n')
-    return exit(0)
-  } else {
-    const results = await lernaDepAudit({workingDir: cwd()})
-    if (!results.length) return exit(0)
-    if (!design.flags.silent) {
-      results.forEach(e => {
-        stderr.write(`${e.message}\n`)
-        if (design.flags.showFix) stderr.write(`\t ${e.fix}\n`)
-      })
-    }
-    return exit(1)
-  }
+  const workingDir = cwd()
+  const silent = design.flags.silent
+  const showFix = design.flags.showFix
+  if (design.flags.help) return design.help()
+  if (design.flags.version) return pkg.version
+  const errors = await lernaDepAudit({workingDir})
+  if (!errors.length) return true
+  if (silent) return false
+  throw new Error(output({errors, showFix}))
 })
