@@ -37,7 +37,6 @@ afterEach(async () => {
   mockFs.restore()
 })
 
-
 test('shebangCheckCli: help', async () => {
   const args = getArgs(['--help'])
   await shebangCheckCli(args)
