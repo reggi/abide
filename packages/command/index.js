@@ -1,6 +1,6 @@
-const command = (m, fn) => {
+const command = (m, fn, _process = process) => {
   if (require.main === m) {
-    return fn(process)
+    return fn(_process)
   } else {
     return fn
   }

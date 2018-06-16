@@ -21,10 +21,10 @@ export const commandPlusHandler = async ({main, ...p}) => {
   }
 }
 
-export const commandPlus = (module, main) => {
-  return command(module, async (p) => {
-    return commandPlusHandler({main, ...p})
-  })
+export const commandPlus = (module, main, _process = process) => {
+  return command(module, async (_process) => {
+    return commandPlusHandler({main, ..._process})
+  }, _process)
 }
 
 export default commandPlus
