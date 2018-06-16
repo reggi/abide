@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`monorepoDepLintCli: help 1`] = `
+Array [
+  "
+Usage: monorepo-dep-lint 
+
+  undefined
+
+  Options:
+
+    --showFix, -f          shows possible fixes
+    --silent, -s           silent output
+    --version, -v          shows the version
+    --help, -h             shows this usage output
+
+",
+]
+`;

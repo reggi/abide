@@ -17,7 +17,7 @@ const output = ({errors, showFix}) => {
   const output = []
   errors.forEach(e => {
     output.push(`${e.message}`)
-    if (showFix) output.push(`\t ${e.fix}`)
+    if (showFix) output.push(`\t${e.fix}`)
   })
   return output.join('\n')
 }
