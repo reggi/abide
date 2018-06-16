@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import path from 'path'
+import fs from 'fs-extra'
 import {lernaRootBabel, lernaRootBabelCompare} from '@reggi/lerna.utils'
 import help from '@reggi/help'
 import commandPlus from '@reggi/command-plus'

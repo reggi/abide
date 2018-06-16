@@ -4,7 +4,7 @@
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "bin": {
-    "monorepo-babel-cli": "./index.build.js"
+    "monorepo-babel": "./index.build.js"
   },
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",

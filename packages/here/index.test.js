@@ -1,5 +1,4 @@
 import here from './index'
-import path from 'path'
 import sinon from 'sinon'
 import execa from 'execa'
 

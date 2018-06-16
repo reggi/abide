@@ -16,6 +16,7 @@ export const commandPlusHandler = async ({main, ...p}) => {
       return exit(0)
     }
   } catch (e) {
+    process.stderr.write(`${e.message}\n`)
     stderr.write(e.message + '\n')
     return exit(1)
   }
