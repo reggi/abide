@@ -135,7 +135,6 @@ afterEach(async () => {
   mockFs.restore()
 })
 
-
 test('monorepoDepLintCli: help', async () => {
   const args = getArgs(['node', './index', '--help'])
   await monorepoDepLintCli(args)

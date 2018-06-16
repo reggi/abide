@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`shebangCheckCli: help 1`] = `
+Array [
+  "
+Usage: shebang-check 
+
+  undefined
+
+  Options:
+
+    --dir [dir]            directory to run in
+    --version, -v          shows the version
+    --help, -h             shows this usage output
+
+",
+]
+`;
