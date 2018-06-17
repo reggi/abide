@@ -32,9 +32,6 @@
   },
   "jest": {
     "collectCoverage": true,
-    "coverageReporters": [
-      "json"
-    ],
     "coverageThreshold": {
       "global": {
         "branches": 100,
@@ -45,8 +42,8 @@
     }
   },
   "dependencies": {
-    "execa": "^0.10.0",
-    "@reggi/command": "file:../command"
+    "@reggi/command": "file:../command",
+    "execa": "^0.10.0"
   },
   "devDependencies": {
     "sinon": "^5.1.0"

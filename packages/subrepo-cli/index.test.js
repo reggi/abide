@@ -6,6 +6,9 @@ import execa from 'execa'
 import subrepoCli from './index'
 
 beforeEach(async () => {
+  await fs.remove(path.join(__dirname, './example-repo'))
+  await fs.remove(path.join(__dirname, './example-subrepo'))
+  await fs.remove(path.join(__dirname, './example-subrepo-error'))
   await execa.shell(`
     cd ${__dirname}
     mkdir -p ./example-repo
@@ -34,15 +37,16 @@ afterEach(async () => {
   await fs.remove(path.join(__dirname, './example-subrepo-error'))
 })
 
-const getArgs = (argv) => ({
-  argv: ['node', './index.js', ...argv],
-  cwd: () => __dirname,
+const getArgs = (argv, workingDir) => ({
+  argv,
+  cwd: () => workingDir,
+  stderr: {write: spy()},
   stdout: {write: spy()},
   exit: spy()
 })
 
 test('subrepoCli: help', async () => {
-  const args = getArgs(['--help'])
+  const args = getArgs(['node', './index.js', '--help'])
   await subrepoCli(args)
   expect(args.stdout.write.called).toBe(true)
   expect(args.exit.called).toBe(true)
@@ -50,7 +54,7 @@ test('subrepoCli: help', async () => {
 })
 
 test('subrepoCli: version', async () => {
-  const args = getArgs(['--version'])
+  const args = getArgs(['node', './index.js', '--version'])
   await subrepoCli(args)
   expect(args.stdout.write.called).toBe(true)
   expect(args.exit.called).toBe(true)
@@ -58,16 +62,24 @@ test('subrepoCli: version', async () => {
 })
 
 test('subrepoCli', async () => {
-  const argv = await stringArgv("node ./index.js --source './example-repo' --subpath './subrepo-a' --dest './example-subrepo'")
-  await subrepoCli(getArgs(argv))
-  const {stdout} = await execa.shell('git -C ./example-subrepo log --pretty=oneline')
-  expect(stdout).not.toMatch('subrepo-b')
-  expect(stdout).not.toMatch('init')
-  expect(stdout).toMatch('subrepo-a')
+  const source = './example-repo'
+  const workingDir = __dirname
+  const subrepoPath = './subrepo-a'
+  const destDir = './example-subrepo'
+  const pureArgs = await stringArgv(`node ./index.js --source ${source} --subpath ${subrepoPath} --dest ${destDir}`)
+  const {argv, cwd, stderr, stdout, exit} = getArgs(pureArgs, workingDir)
+  await subrepoCli(({argv, cwd, stderr, stdout, exit}))
+  expect(stderr.write.args).toEqual([])
+  expect(exit.called).toBe(true)
+  expect(exit.args).toEqual([[0]])
+  const check = await execa.shell(`git -C ${path.join(__dirname, destDir)} log --pretty=oneline`)
+  expect(check.stdout).not.toMatch('init')
+  expect(check.stdout).not.toMatch('subrepo-b')
+  expect(check.stdout).toMatch('subrepo-a')
 })
 
 test('subrepo: error', async () => {
-  const argv = await stringArgv("node ./index.js -C './invalid-working-directory' --source './example-repo' --subpath './subrepo-a' --dest './example-subrepo'")
+  const argv = await stringArgv(`node ./index.js -C ${path.join(__dirname, './invalid-working-directory')} --source ${path.join(__dirname, './example-repo')} --subpath ${path.join(__dirname, './subrepo-a')} --dest ${path.join(__dirname, './example-subrepo')}`)
   const p = getArgs(argv)
   await subrepoCli(p)
   expect(p.exit.args[0][0]).toEqual(1)

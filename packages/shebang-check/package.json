@@ -41,11 +41,11 @@
   },
   "dependencies": {
     "@reggi/journey": "file:../journey",
-    "fs-extra": "^6.0.1",
-    "bluebird": "^3.5.1",
     "babel-runtime": "^6.26.0",
-    "shebang-regex": "^2.0.0",
-    "lodash": "^4.17.10"
+    "bluebird": "^3.5.1",
+    "fs-extra": "^6.0.1",
+    "lodash": "^4.17.10",
+    "shebang-regex": "^2.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -54,8 +54,8 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "jest": "^22.4.4",
-    "standard": "^11.0.0",
-    "mock-fs": "^4.4.2"
+    "mock-fs": "^4.4.2",
+    "standard": "^11.0.0"
   },
   "publishConfig": {
     "access": "public"

@@ -2,7 +2,7 @@ import path from 'path'
 import requireable from './index'
 import fs from 'fs-extra'
 
-jest.setTimeout(10000)
+jest.setTimeout(15000)
 
 const workingPath = path.join(__dirname, './examples/working')
 

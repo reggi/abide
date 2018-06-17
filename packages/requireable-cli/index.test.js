@@ -3,7 +3,7 @@ import sinon from 'sinon'
 import fs from 'fs-extra'
 import requireableCli from './index'
 
-jest.setTimeout(10000)
+jest.setTimeout(15000)
 
 const getArgs = (argv) => ({
   argv: ['node', './index.js', ...argv],
@@ -37,14 +37,14 @@ test('requireableCli: working example', async () => {
   await requireableCli(args)
   expect(args.exit.called).toBe(true)
   expect(args.exit.args[0][0]).toBe(0)
-}, 10000)
+})
 
 test('requireableCli: working verbose', async () => {
   const args = getArgs([path.join(__dirname, './examples/working'), '--verbose'])
   await requireableCli(args)
   expect(args.exit.called).toBe(true)
   expect(args.exit.args[0][0]).toBe(0)
-}, 10000)
+})
 
 test('requireableCli: else path, no args', async () => {
   const args = getArgs([])

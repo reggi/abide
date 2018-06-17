@@ -35,7 +35,7 @@
     "-----PIPELINE-----": "echo 'FOR JENKINS PIPELINE'",
     "update": "npm i ./packages/*",
     "standard": "standard",
-    "jest": "jest --coverage",
+    "jest": "jest --coverage --no-cache",
     "depcheck": "lerna exec -- results -di -- depcheck ./ --ignores 'jest,standard,babel-eslint,babel-cli,babel-jest'",
     "monorepo-dep-lint": "monorepo-dep-lint -f",
     "babel-compare": "results -- monorepo-babel-cli --compare",
@@ -126,11 +126,6 @@
       }
     }
   },
-  "jest": {
-    "projects": [
-      "<rootDir>/packages/*"
-    ]
-  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.3",
@@ -144,7 +139,7 @@
     "execa": "^0.10.0",
     "fs-extra": "^6.0.1",
     "istanbul": "^0.4.5",
-    "jest": "^22.4.4",
+    "jest": "^23.1.0",
     "lerna": "^2.11.0",
     "link-parent-bin": "^0.1.3",
     "lodash": "^4.17.10",
@@ -172,5 +167,39 @@
       "it",
       "jest"
     ]
+  },
+  "jest": {
+    "projects": [
+      "<rootDir>/packages/.+"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/unpublished/.+",
+      "<rootDir>/packages/.+/examples/.+",
+      ".+build.js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/unpublished/.+",
+      "<rootDir>/packages/.+/examples/.+",
+      ".+build.js"
+    ],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/unpublished/.+",
+      "<rootDir>/packages/.+/examples/.+",
+      ".+build.js"
+    ],
+    "watchPathIgnorePatterns": [
+      "<rootDir>/unpublished/.+",
+      "<rootDir>/packages/.+/examples/.+",
+      ".+build.js"
+    ],
+    "collectCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
   }
 }

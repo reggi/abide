@@ -4,7 +4,7 @@ import fs from 'fs-extra'
 import path from 'path'
 import depPointer from './index'
 
-const packagesPath = path.join(__dirname, 'example/packages')
+const packagesPath = path.join(__dirname, 'examples/packages')
 let originalPackages
 
 beforeAll(async () => {
@@ -27,7 +27,7 @@ afterEach(async () => {
 })
 
 test('depPointer: with no arguments but in directory with package', async () => {
-  const workingDir = path.join(__dirname, 'example/packages/module-three')
+  const workingDir = path.join(__dirname, 'examples/packages/module-three')
   await depPointer({workingDir})
   const pkg = await fs.readJson(path.join(workingDir, 'package.json'))
   expect(pkg.dependencies['module-one']).toEqual('1.0.0')
@@ -38,7 +38,7 @@ test('depPointer: with no arguments but in directory with package', async () => 
 })
 
 test('depPointer: with no arguments but in directory with package (no backup)', async () => {
-  const workingDir = path.join(__dirname, 'example/packages/module-three')
+  const workingDir = path.join(__dirname, 'examples/packages/module-three')
   await depPointer({workingDir, backupLocal: false})
   const pkg = await fs.readJson(path.join(workingDir, 'package.json'))
   expect(pkg.dependencies['module-one']).toEqual('1.0.0')
@@ -47,7 +47,7 @@ test('depPointer: with no arguments but in directory with package (no backup)', 
 })
 
 test('depPointer: in parent dir with passed in updatePackage', async () => {
-  const workingDir = path.join(__dirname, 'example')
+  const workingDir = path.join(__dirname, 'examples')
   await depPointer({workingDir, packageName: 'module-three'})
   const pkg = await fs.readJson(path.join(workingDir, 'packages/module-three/package.json'))
   expect(pkg.dependencies['module-one']).toEqual('1.0.0')
@@ -58,7 +58,7 @@ test('depPointer: in parent dir with passed in updatePackage', async () => {
 })
 
 test('depPointer: updateAll', async () => {
-  const workingDir = path.join(__dirname, 'example')
+  const workingDir = path.join(__dirname, 'examples')
   await depPointer({workingDir, all: true})
   const pkg = await fs.readJson(path.join(workingDir, 'packages/module-three/package.json'))
   expect(pkg.dependencies['module-one']).toEqual('1.0.0')
@@ -67,16 +67,16 @@ test('depPointer: updateAll', async () => {
 })
 
 test('depPointer: updateChanged', async () => {
-  const workingDir = path.join(__dirname, 'example')
+  const workingDir = path.join(__dirname, 'examples')
   await depPointer({workingDir, changed: true})
-  const pkg = await fs.readJson(path.join(workingDir, 'packages/module-three/package.json'))
-  expect(pkg.dependencies['module-one']).toEqual('1.0.0')
-  const pkgFour = await fs.readJson(path.join(workingDir, 'packages/module-four/package.json'))
-  expect(pkgFour.dependencies['module-one']).toEqual('1.0.0')
+  const c = await fs.readJson(path.join(workingDir, 'packages/module-three/package.json'))
+  expect(c.dependencies['module-one']).toEqual('1.0.0')
+  const d = await fs.readJson(path.join(workingDir, 'packages/module-four/package.json'))
+  expect(d.dependencies['module-one']).toEqual('1.0.0')
 })
 
 test('depPointer: no package specified ', async () => {
-  const workingDir = path.join(__dirname, 'example/package')
+  const workingDir = path.join(__dirname, 'examples/package')
   try {
     await depPointer({workingDir})
   } catch (e) {
@@ -86,7 +86,7 @@ test('depPointer: no package specified ', async () => {
 })
 
 test('depPointer: uses then rollback', async () => {
-  const workingDir = path.join(__dirname, 'example/packages/module-three')
+  const workingDir = path.join(__dirname, 'examples/packages/module-three')
   await depPointer({workingDir})
   const pkg = await fs.readJson(path.join(workingDir, 'package.json'))
   expect(pkg.dependencies['module-one']).toEqual('1.0.0')
@@ -96,7 +96,7 @@ test('depPointer: uses then rollback', async () => {
 })
 
 test('depPointer: no lock file', async () => {
-  const workingDir = path.join(__dirname, 'example/packages/module-three')
+  const workingDir = path.join(__dirname, 'examples/packages/module-three')
   try {
     await depPointer({workingDir, useLocal: true})
   } catch (e) {

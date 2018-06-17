@@ -39,13 +39,28 @@ test('subrepo', async () => {
     subrepoPath: './subrepo-a',
     destDir: './example-subrepo'
   })
-  const {stdout} = await execa.shell('git -C ./example-subrepo log --pretty=oneline')
+  const exampleSubrepo = path.join(__dirname, './example-subrepo')
+  const {stdout} = await execa.shell(`git -C ${exampleSubrepo} log --pretty=oneline`)
   expect(stdout).not.toMatch('subrepo-b')
   expect(stdout).not.toMatch('init')
   expect(stdout).toMatch('subrepo-a')
 })
 
 test('subrepo: error', async () => {
+  try {
+    await subrepo({
+      source: './example-repo',
+      workingDir: './invalid-working-directory',
+      subrepoPath: './subrepo-a',
+      destDir: './example-subrepo-error'
+    })
+  } catch (e) {
+    expect(e.message).toMatch('provided working directory does not exist')
+  }
+  expect.assertions(1)
+})
+
+test('subrepo: direct', async () => {
   try {
     await subrepo({
       source: path.join(__dirname, './example-repo'),

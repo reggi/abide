@@ -28,9 +28,6 @@
   },
   "jest": {
     "collectCoverage": true,
-    "coverageReporters": [
-      "json"
-    ],
     "coverageThreshold": {
       "global": {
         "branches": 100,
@@ -38,10 +35,7 @@
         "lines": 100,
         "statements": 100
       }
-    },
-    "forceCoverageMatch": [
-      "**/*.index.js"
-    ]
+    }
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

@@ -12,7 +12,7 @@ const getArgs = (argv, workingDir) => ({
   cwd: () => workingDir
 })
 
-const packagesPath = path.join(__dirname, 'example/packages')
+const packagesPath = path.join(__dirname, 'examples/packages')
 let originalPackages
 
 beforeAll(async () => {
@@ -51,7 +51,7 @@ test('dep-pointer-cli: version', async () => {
 })
 
 test('dep-pointer-cli', async () => {
-  const workingDir = path.join(__dirname, './example/packages/module-three')
+  const workingDir = path.join(__dirname, './examples/packages/module-three')
   await depPointerCli(getArgs([], workingDir))
   const pkg = await fs.readJson(path.join(workingDir, 'package.json'))
   expect(pkg.dependencies['module-one']).toEqual('1.0.0')
