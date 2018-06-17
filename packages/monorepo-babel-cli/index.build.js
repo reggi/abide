@@ -13,14 +13,6 @@ var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _path = require('path');
-
-var _path2 = _interopRequireDefault(_path);
-
-var _fsExtra = require('fs-extra');
-
-var _fsExtra2 = _interopRequireDefault(_fsExtra);
-
 var _lerna = require('@reggi/lerna.utils');
 
 var _help = require('@reggi/help');

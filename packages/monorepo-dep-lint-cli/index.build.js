@@ -40,7 +40,7 @@ var output = function output(_ref) {
   var output = [];
   errors.forEach(function (e) {
     output.push(`${e.message}`);
-    if (showFix) output.push(`\t ${e.fix}`);
+    if (showFix) output.push(`\t${e.fix}`);
   });
   return output.join('\n');
 };

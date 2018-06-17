@@ -77,17 +77,18 @@ var commandPlusHandler = function () {
             return _context.abrupt('return', exit(0));
 
           case 20:
-            _context.next = 26;
+            _context.next = 27;
             break;
 
           case 22:
             _context.prev = 22;
             _context.t0 = _context['catch'](1);
 
+            process.stderr.write(`${_context.t0.message}\n`);
             stderr.write(_context.t0.message + '\n');
             return _context.abrupt('return', exit(1));
 
-          case 26:
+          case 27:
           case 'end':
             return _context.stop();
         }
@@ -102,13 +103,15 @@ var commandPlusHandler = function () {
 
 exports.commandPlusHandler = commandPlusHandler;
 var commandPlus = exports.commandPlus = function commandPlus(module, main) {
+  var _process = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : process;
+
   return (0, _command2.default)(module, function () {
-    var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(p) {
+    var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(_process) {
       return _regenerator2.default.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              return _context2.abrupt('return', commandPlusHandler((0, _extends3.default)({ main }, p)));
+              return _context2.abrupt('return', commandPlusHandler((0, _extends3.default)({ main }, _process)));
 
             case 1:
             case 'end':
@@ -118,10 +121,10 @@ var commandPlus = exports.commandPlus = function commandPlus(module, main) {
       }, _callee2, undefined);
     }));
 
-    return function (_x2) {
+    return function (_x3) {
       return _ref3.apply(this, arguments);
     };
-  }());
+  }(), _process);
 };
 
 exports.default = commandPlus;

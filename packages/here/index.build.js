@@ -32,21 +32,26 @@ exports.default = (0, _command2.default)(module, function () {
     var argv = _ref.argv,
         cwd = _ref.cwd,
         exit = _ref.exit;
-    var shellScript, passArgv, code;
+
+    var shellScript, workingDir, passArgv, cmd, _ref3, code;
+
     return _regenerator2.default.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             shellScript = _path2.default.join(__dirname, 'index.sh');
+            workingDir = cwd();
             passArgv = argv.slice(2).join(' ');
-            _context.next = 4;
-            return _execa2.default.shell(`sh ${shellScript} ${passArgv}`, { cwd: cwd(), stdio: 'inherit' });
-
-          case 4:
-            code = _context.sent;
-            return _context.abrupt('return', exit(code));
+            cmd = `sh ${shellScript} ${passArgv}`;
+            _context.next = 6;
+            return _execa2.default.shell(cmd, { cwd: workingDir, stdio: 'inherit' });
 
           case 6:
+            _ref3 = _context.sent;
+            code = _ref3.code;
+            return _context.abrupt('return', exit(code));
+
+          case 9:
           case 'end':
             return _context.stop();
         }
