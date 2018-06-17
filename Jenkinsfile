@@ -10,8 +10,6 @@ pipeline {
             steps {
                 sh 'node --version'
                 sh 'npm -v'
-                sh "yarn -v"
-                sh "npm i lerna -g"
             }
         }
         stage('checkout') {
@@ -21,8 +19,7 @@ pipeline {
         }
         stage('dep install') {
             steps {
-                // sh 'yarn install --prefer-offline'
-                sh 'lerna bootstrap --nohoist -- --prefer-offline'
+                sh 'npm i'
             }
         }
         stage('standard') {
@@ -33,11 +30,6 @@ pipeline {
         stage('depcheck') {
             steps {
                 sh 'npm run depcheck'
-            }
-        }
-        stage('requireable') {
-            steps {
-                sh 'npm run requireable'
             }
         }
         stage('test') {
