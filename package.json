@@ -7,44 +7,79 @@
   "author": "",
   "main": "index.js",
   "scripts": {
-    "pre-commit:sort-packages": "lerna exec -- sort-package-json",
-    "pre-commit:update-versions": "lerna exec -- results -d -- sh ../../scripts/updateversions.sh",
-    "bootstrap": "sh -e ./scripts/bootstrap.sh",
-    "descriptions": "lerna --concurrency 1 exec -- pkgprop --prop description",
-    "exec:cp-npmignore": "lerna exec -- cp ../../.npmignore ./.npmignore",
-    "fully-tested": "sh -e ./scripts/completely-tested.sh",
-    "jenkins": "npm run versions && npm run test && git reset --hard && npm run publish",
-    "lerna:boostrap:hoist": "lerna bootstrap --hoist &>/dev/null || true",
-    "link-parent-bin": "link-parent-bin",
-    "link-pkg-cli": "cd ../packages/pkg-cli && npm link",
-    "old:bootstrap": "npm i packages/* && lerna bootstrap --hoist &>/dev/null || true",
-    "package-cobalt-update": "lerna exec -- pkg --plugin=../pkg-plugin-cobalt -w",
-    "publish": "lerna publish --yes --cd-version=patch",
-    "rm-package-locks": "lerna exec -- rm -rf ./package-lock.json",
-    "rm:etc": "lerna exec -- rm -rf etc",
-    "coverage": "istanbul report --include=./packages/**/coverage/coverage-final.json",
-    "versions": "sh ./scripts/versions.sh",
-    "publish:all:reggi": "lerna exec --concurrency 1 --bail=false -- 'dep-pointer && npm publish --registry https://registry.reggi.com && dep-pointer --local'",
-    "---------------IN USE---------------": "----------------------------------------",
-    "-----DEVTOOLS-----": "echo 'FOR DEVELOPMENT TOOLS'",
     "babel": "NODE_ENV=production lerna exec --parallel --bail=false -- npm run babel",
+    "babel-compare": "results -- monorepo-babel-cli --compare",
+    "babel:root-config": "node ./packages/monorepo-root-babel-cli/index.build.js --output",
     "babel:watch": "NODE_ENV=production lerna exec --parallel -- npm run babel:watch",
     "build": "npm run babel",
-    "babel:root-config": "node ./packages/monorepo-root-babel-cli/index.build.js --output",
-    "sort-package-json": "lerna exec -- ../../node_modules/.bin/sort-package-json",
-    "-----PIPELINE-----": "echo 'FOR JENKINS PIPELINE'",
-    "update": "npm i ./packages/*",
-    "standard": "standard",
-    "jest": "jest --coverage --no-cache",
     "depcheck": "lerna exec -- results -di -- depcheck ./ --ignores 'jest,standard,babel-eslint,babel-cli,babel-jest'",
+    "jest": "jest --coverage --no-cache",
     "monorepo-dep-lint": "monorepo-dep-lint -f",
-    "babel-compare": "results -- monorepo-babel-cli --compare",
     "shebang-check": "lerna exec -- results -- shebang-check",
-    "githubpopulate": "echo 'needs to be invented'",
-    "buildcheck": "echo 'needs to be invented'",
-    "publishnpm": "echo 'needs to be invented'",
-    "publishreggi": "echo 'needs to be invented'",
-    "---------------END---------------": "----------------------------------------"
+    "sort-package-json": "sort-package-json && lerna exec -- sort-package-json",
+    "standard": "standard",
+    "update": "npm i ./packages/*"
+  },
+  "babel": {
+    "env": {
+      "test": {
+        "plugins": [
+          "rewire"
+        ]
+      }
+    },
+    "plugins": [
+      "transform-object-rest-spread",
+      "transform-runtime"
+    ],
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "4"
+          }
+        }
+      ]
+    ]
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/unpublished/.+",
+      "<rootDir>/packages/.+/examples/.+",
+      ".+build.js"
+    ],
+    "coverageReporters": [
+      "html",
+      "text"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "modulePathIgnorePatterns": [
+      "<rootDir>/unpublished/.+",
+      "<rootDir>/packages/.+/examples/.+",
+      ".+build.js"
+    ],
+    "projects": [
+      "<rootDir>/packages/.+"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/unpublished/.+",
+      "<rootDir>/packages/.+/examples/.+",
+      ".+build.js"
+    ],
+    "watchPathIgnorePatterns": [
+      "<rootDir>/unpublished/.+",
+      "<rootDir>/packages/.+/examples/.+",
+      ".+build.js"
+    ]
   },
   "dependencies": {
     "@reggi/command": "file:packages/command",
@@ -103,29 +138,6 @@
     "replace-cli": "file:packages/replace-cli",
     "results-cli": "file:packages/results-cli"
   },
-  "babel": {
-    "plugins": [
-      "transform-object-rest-spread",
-      "transform-runtime"
-    ],
-    "presets": [
-      [
-        "env",
-        {
-          "targets": {
-            "node": "4"
-          }
-        }
-      ]
-    ],
-    "env": {
-      "test": {
-        "plugins": [
-          "rewire"
-        ]
-      }
-    }
-  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.3",
@@ -167,40 +179,5 @@
       "it",
       "jest"
     ]
-  },
-  "jest": {
-    "coverageReporters": ["html", "text"],
-    "projects": [
-      "<rootDir>/packages/.+"
-    ],
-    "testPathIgnorePatterns": [
-      "<rootDir>/unpublished/.+",
-      "<rootDir>/packages/.+/examples/.+",
-      ".+build.js"
-    ],
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/unpublished/.+",
-      "<rootDir>/packages/.+/examples/.+",
-      ".+build.js"
-    ],
-    "modulePathIgnorePatterns": [
-      "<rootDir>/unpublished/.+",
-      "<rootDir>/packages/.+/examples/.+",
-      ".+build.js"
-    ],
-    "watchPathIgnorePatterns": [
-      "<rootDir>/unpublished/.+",
-      "<rootDir>/packages/.+/examples/.+",
-      ".+build.js"
-    ],
-    "collectCoverage": true,
-    "coverageThreshold": {
-      "global": {
-        "branches": 100,
-        "functions": 100,
-        "lines": 100,
-        "statements": 100
-      }
-    }
   }
 }
