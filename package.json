@@ -169,6 +169,7 @@
     ]
   },
   "jest": {
+    "coverageReporters": ["html", "text"],
     "projects": [
       "<rootDir>/packages/.+"
     ],
