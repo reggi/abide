@@ -27,14 +27,19 @@ pipeline {
                 sh 'npm run standard'
             }
         }
+        stage('monorepo-dep-lint') {
+            steps {
+                sh 'npm run monorepo-dep-lint'
+            }
+        }
         stage('depcheck') {
             steps {
                 sh 'npm run depcheck'
             }
         }
-        stage('test') {
+        stage('jest') {
             steps {
-                sh 'npm run test'
+                sh 'npm run jest'
             }
         }
     }
