@@ -7,7 +7,7 @@ export default command(module, async ({argv, cwd, exit}) => {
   const shellScript = path.join(__dirname, 'index.sh')
   const workingDir = cwd()
   const passArgv = argv.slice(2).join(' ')
-  const cmd = `sh ${shellScript} ${passArgv}`
+  const cmd = `bash ${shellScript} ${passArgv}`
   const {code} = await execa.shell(cmd, {cwd: workingDir, stdio: 'inherit'})
   return exit(code)
 })

@@ -26,8 +26,8 @@ TUSAGE="$TUSAGE\\t--help (shows this help output)\\n"
 
 # some internal functions
 function namespaceShowUsage () {
-  echo "Usage: --function <args> [--function <args>]"
-  echo "$TUSAGE"
+  printf "Usage: --function <args> [--function <args>]\n"
+  printf "$TUSAGE"
   exit 0
 }
 

@@ -42,7 +42,7 @@ exports.default = (0, _command2.default)(module, function () {
             shellScript = _path2.default.join(__dirname, 'index.sh');
             workingDir = cwd();
             passArgv = argv.slice(2).join(' ');
-            cmd = `sh ${shellScript} ${passArgv}`;
+            cmd = `bash ${shellScript} ${passArgv}`;
             _context.next = 6;
             return _execa2.default.shell(cmd, { cwd: workingDir, stdio: 'inherit' });
 

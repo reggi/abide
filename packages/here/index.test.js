@@ -15,9 +15,9 @@ beforeEach(async () => {
     cd ${__dirname}
     mkdir -p scripts
     cd scripts
-    echo "USAGE='--a (echo hi)'\nfunction a { echo 'hi'; }\n" > 001-a.sh 
-    echo "USAGE='--b (echo hi)'\nfunction b { echo 'hi'; }\n" > 001-b.sh
-    echo "USAGE='--c (echo hi)'\nfunction c { echo 'hi'; }\n" > 001-c.sh
+    printf "USAGE='--a (echo hi)'\na () { echo 'hi'; }\n" > 001-a.sh 
+    printf "USAGE='--b (echo hi)'\nb () { echo 'hi'; }\n" > 001-b.sh
+    printf "USAGE='--c (echo hi)'\nc () { echo 'hi'; }\n" > 001-c.sh
   `)
 })
 
