@@ -16,7 +16,7 @@
     "jest": "jest --coverage --no-cache --runInBand",
     "jest-series": "lerna exec -- \"bash ../../script.sh\"",
     "jest-requireable": "results -i -- jest --projects=./packages/requireable --coverage --no-cache --runInBand --detectOpenHandles",
-    "postjest": "here --cleanCoverage",
+    "cleanup": "here --cleanCoverage",
     "monorepo-dep-lint": "monorepo-dep-lint -f",
     "shebang-check": "lerna exec -- results -- shebang-check",
     "sort-package-json": "sort-package-json && lerna exec -- sort-package-json",
