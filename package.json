@@ -15,7 +15,7 @@
     "depcheck": "lerna exec -- results -di -- depcheck ./ --ignores 'jest,standard,babel-eslint,babel-cli,babel-jest'",
     "jest": "jest --coverage --no-cache --runInBand",
     "jest-series": "lerna exec -- \"bash ../../script.sh\"",
-    "jest-requireable": "jest --projects=./packages/requireable --coverage --no-cache --runInBand",
+    "jest-requireable": "results -i -- jest --projects=./packages/requireable --coverage --no-cache --runInBand --detectOpenHandles",
     "postjest": "here --cleanCoverage",
     "monorepo-dep-lint": "monorepo-dep-lint -f",
     "shebang-check": "lerna exec -- results -- shebang-check",
