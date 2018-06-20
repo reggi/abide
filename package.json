@@ -13,7 +13,7 @@
     "babel:watch": "NODE_ENV=production lerna exec --parallel -- npm run babel:watch",
     "build": "npm run babel",
     "depcheck": "lerna exec -- results -di -- depcheck ./ --ignores 'jest,standard,babel-eslint,babel-cli,babel-jest'",
-    "jest": "jest --coverage --runInBand",
+    "jest": "jest --coverage --no-cache --runInBand",
     "jest-series": "lerna exec -- \"bash ../../script.sh\"",
     "jest-requireable": "results -i -- jest --projects=./packages/requireable --coverage --no-cache --runInBand --detectOpenHandles",
     "cleanup": "here --cleanCoverage",
