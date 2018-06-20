@@ -39,7 +39,7 @@ pipeline {
         }
         stage('jest') {
             steps {
-                sh 'npm run jest'
+                sh 'npm run jest-series'
             }
         }
     }
