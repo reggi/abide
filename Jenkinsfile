@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node'
+            args '-u root:root --memory-reservation=800m --memory=900m --memory-swap=0'
+        }
+    }
     stages {
         stage('setup') {
             steps {
