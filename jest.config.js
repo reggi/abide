@@ -1,4 +1,8 @@
 module.exports = {
+  'coverageReporters': [
+    'html',
+    'text'
+  ],
   'collectCoverage': true,
   'coveragePathIgnorePatterns': [
     '<rootDir>/unpublished/.+',
