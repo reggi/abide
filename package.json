@@ -14,7 +14,7 @@
     "build": "npm run babel",
     "cleanup": "here --cleanCoverage",
     "depcheck": "lerna exec -- results -di -- depcheck ./ --ignores 'jest,standard,babel-eslint,babel-cli,babel-jest'",
-    "jest": "jest --clearCache && jest --coverage --no-cache --runInBand --ci",
+    "jest": "jest --clearCache && lerna exec --scope @reggi/monorepo-babel-cli --concurrency 1 -- jest --coverage --no-cache --runInBand --ci",
     "jest-requireable": "results -i -- jest --projects=./packages/requireable --coverage --no-cache --runInBand --detectOpenHandles",
     "jest-target": "lerna exec --scope @reggi/monorepo-babel-cli --concurrency 1 -- jest --no-cache",
     "monorepo-dep-lint": "monorepo-dep-lint -f",
