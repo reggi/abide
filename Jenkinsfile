@@ -22,20 +22,20 @@ pipeline {
                 sh 'npm i'
             }
         }
-        stage('standard') {
-            steps {
-                sh 'npm run standard'
-            }
-        }
-        stage('monorepo-dep-lint') {
-            steps {
-                sh 'npm run monorepo-dep-lint'
-            }
-        }
-        stage('depcheck') {
-            steps {
-                sh 'npm run depcheck'
-            }
+        // stage('standard') {
+        //     steps {
+        //         sh 'npm run standard'
+        //     }
+        // }
+        // stage('monorepo-dep-lint') {
+        //     steps {
+        //         sh 'npm run monorepo-dep-lint'
+        //     }
+        // }
+        // stage('depcheck') {
+        //     steps {
+        //         sh 'npm run depcheck'
+        //     }
         }
         stage('jest') {
             steps {
