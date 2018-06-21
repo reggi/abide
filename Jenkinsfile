@@ -39,7 +39,7 @@ pipeline {
         }
         stage('jest') {
             steps {
-                sh './node_modules/.bin/jest --coverage --runInBand'
+                sh 'npm run jest'
             }
         }
     }
