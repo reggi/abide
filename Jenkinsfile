@@ -36,7 +36,7 @@ pipeline {
         //     steps {
         //         sh 'npm run depcheck'
         //     }
-        }
+        // }
         stage('jest') {
             steps {
                 sh 'npm run jest'
