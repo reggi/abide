@@ -20,15 +20,16 @@ export default commandPlus(module, async ({argv, cwd}) => {
   const silent = design.flags.silent
   if (design.flags.help) return design.help()
   if (design.flags.version) return pkg.version
-  if (design.flags.output) {
-    const {babelConfig} = await lernaRootBabel({workingDir})
-    return babelConfig
-  }
-  if (design.flags.compare) {
-    const result = await lernaRootBabelCompare({workingDir})
-    if (result && silent) return result
-    if (!result && !silent) throw new Error('invalid root babel config')
-    return 'valid babel config'
-  }
-  throw new Error('invalid arguments')
+  return true
+  // if (design.flags.output) {
+  //   const {babelConfig} = await lernaRootBabel({workingDir})
+  //   return babelConfig
+  // }
+  // if (design.flags.compare) {
+  //   const result = await lernaRootBabelCompare({workingDir})
+  //   if (result && silent) return result
+  //   if (!result && !silent) throw new Error('invalid root babel config')
+  //   return 'valid babel config'
+  // }
+  // throw new Error('invalid arguments')
 })
