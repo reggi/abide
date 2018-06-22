@@ -10,6 +10,7 @@ pipeline {
             steps {
                 sh 'node --version'
                 sh 'npm -v'
+                sh "npm cache clean --force"
             }
         }
         stage('checkout') {
