@@ -77,18 +77,17 @@ var commandPlusHandler = function () {
             return _context.abrupt('return', exit(0));
 
           case 20:
-            _context.next = 27;
+            _context.next = 26;
             break;
 
           case 22:
             _context.prev = 22;
             _context.t0 = _context['catch'](1);
 
-            process.stderr.write(`${_context.t0.message}\n`);
-            stderr.write(_context.t0.message + '\n');
+            stderr.write(`${_context.t0.message}\n`);
             return _context.abrupt('return', exit(1));
 
-          case 27:
+          case 26:
           case 'end':
             return _context.stop();
         }
