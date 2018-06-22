@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`monorepo-babel-cli: help 1`] = `
+Array [
+  "
+Usage: monorepo-babel 
+
+  undefined
+
+  Options:
+
+    --output, -o           creates output of merged babel configs
+    --compare, -c          returns error code if does not match root babel
+    --silent, -s           silent output
+    --version, -v          shows the version
+    --help, -h             shows this usage output
+
+",
+]
+`;
