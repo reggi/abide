@@ -1,5 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`monorepo-babel-cli: --output 1`] = `
+Array [
+  Array [
+    "{
+  \\"plugins\\": [
+    \\"transform-object-rest-spread\\",
+    \\"transform-runtime\\",
+    \\"pumpkin-soup\\"
+  ]
+}
+",
+  ],
+]
+`;
+
 exports[`monorepo-babel-cli: help 1`] = `
 Array [
   "
