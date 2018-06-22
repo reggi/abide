@@ -135,10 +135,6 @@ afterEach(async () => {
   mockFs.restore()
 })
 
-test('meowcakes 3', () => {
-  expect(true).toBe(true)
-})
-
 test('monorepo-babel-cli: help', async () => {
   const args = getArgs(['node', './index', '--help'])
   await monorepoBabelCli(args)
