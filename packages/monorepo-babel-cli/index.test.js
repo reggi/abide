@@ -1,10 +1,10 @@
+import mockFs from 'mock-fs'
+import sinon from 'sinon'
+import monorepoBabelCli from './index'
+
 test('meowcakes', () => {
   expect(true).toBe(true)
 })
-
-// import mockFs from 'mock-fs'
-// import sinon from 'sinon'
-// import monorepoBabelCli from './index'
 
 // const getArgs = (argv, workingDir) => ({
 //   argv,
