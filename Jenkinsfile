@@ -70,7 +70,9 @@ pipeline {
         }
         stage('lerna publish') {
             steps {
-                sh 'git checkout master && npm run lerna-publish'
+                withCredentials([sshUserPrivateKey(credentialsId: 'regi', keyFileVariable: 'SSH_KEY')]) {
+                    sh 'git checkout master && git remote -v && && npm run lerna-publish'
+                }
             }
         }
     }
