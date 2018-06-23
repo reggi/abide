@@ -13,6 +13,7 @@
     "babel:watch": "NODE_ENV=production lerna exec --parallel -- npm run babel:watch",
     "build": "npm run babel",
     "depcheck": "lerna exec -- results -di -- depcheck ./ --ignores 'jest,standard,babel-eslint,babel-cli,babel-jest'",
+    "ensure-no-individual-coverage": "lerna exec --concurrency 1 -- rm -rf ./coverage",
     "git-status-porcelain": "here --gitChanges",
     "jest": "jest --no-cache --runInBand --ci || (npm run jest-identify && exit 1)",
     "postjest": "here --cleanCoverage",
@@ -21,7 +22,6 @@
     "monorepo-dep-lint": "monorepo-dep-lint -f",
     "shebang-check": "lerna exec -- results -- shebang-check",
     "sort-package-json": "sort-package-json && lerna exec -- sort-package-json",
-    "ensure-no-individual-coverage": "lerna exec --concurrency 1 -- rm -rf ./coverage",
     "standard": "standard",
     "update": "npm i ./packages/*"
   },
