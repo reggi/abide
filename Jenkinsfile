@@ -68,5 +68,10 @@ pipeline {
                 sh 'npm run git-status-porcelain'
             }
         }
+        stage('lerna publish') {
+            steps {
+                sh 'npm run lerna-publish'
+            }
+        }
     }
 }
