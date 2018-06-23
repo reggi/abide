@@ -70,7 +70,7 @@ pipeline {
         }
         stage('lerna publish') {
             steps {
-                sh 'npm run lerna-publish'
+                sh 'git checkout master && npm run lerna-publish'
             }
         }
     }
