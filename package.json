@@ -8,6 +8,7 @@
   "main": "index.js",
   "scripts": {
     "babel": "NODE_ENV=production lerna exec --parallel --bail=false -- npm run babel",
+    "babel-ci": "NODE_ENV=production lerna exec -- npm run babel",
     "babel-compare": "results -- monorepo-babel-cli --compare",
     "babel:root-config": "node ./packages/monorepo-root-babel-cli/index.build.js --output",
     "babel:watch": "NODE_ENV=production lerna exec --parallel -- npm run babel:watch",

@@ -58,9 +58,9 @@ pipeline {
                 sh 'npm run ensure-no-individual-coverage'
             }
         }
-        stage('babel build') {
+        stage('babel') {
             steps {
-                sh 'npm run build'
+                sh 'npm run babel-ci'
             }
         }
         stage('git-status-porcelain') {
