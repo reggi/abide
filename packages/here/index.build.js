@@ -31,7 +31,8 @@ exports.default = (0, _command2.default)(module, function () {
   var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(_ref) {
     var argv = _ref.argv,
         cwd = _ref.cwd,
-        exit = _ref.exit;
+        exit = _ref.exit,
+        stderr = _ref.stderr;
 
     var shellScript, workingDir, passArgv, cmd, _ref3, code;
 
@@ -43,20 +44,28 @@ exports.default = (0, _command2.default)(module, function () {
             workingDir = cwd();
             passArgv = argv.slice(2).join(' ');
             cmd = `bash ${shellScript} ${passArgv}`;
-            _context.next = 6;
+            _context.prev = 4;
+            _context.next = 7;
             return _execa2.default.shell(cmd, { cwd: workingDir, stdio: 'inherit' });
 
-          case 6:
+          case 7:
             _ref3 = _context.sent;
             code = _ref3.code;
             return _context.abrupt('return', exit(code));
 
-          case 9:
+          case 12:
+            _context.prev = 12;
+            _context.t0 = _context['catch'](4);
+
+            stderr.write(_context.t0.message + '\n');
+            return _context.abrupt('return', exit(1));
+
+          case 16:
           case 'end':
             return _context.stop();
         }
       }
-    }, _callee, undefined);
+    }, _callee, undefined, [[4, 12]]);
   }));
 
   return function (_x) {

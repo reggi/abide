@@ -38,9 +38,29 @@ pipeline {
                 sh 'npm run depcheck'
             }
         }
+        stage('shebang-check') {
+            steps {
+                sh 'npm run shebang-check'
+            }
+        }
+        stage('sort-package-json') {
+            steps {
+                sh "npm run sort-package-json"
+            }
+        }
         stage('jest') {
             steps {
                 sh 'npm run jest'
+            }
+        }
+        stage('ensure-no-individual-coverage') {
+            steps {
+                sh 'npm run ensure-no-individual-coverage'
+            }
+        }
+        stage('git-status-porcelain') {
+            steps {
+                sh 'npm run git-status-porcelain'
             }
         }
     }

@@ -17,7 +17,8 @@ beforeEach(async () => {
     cd scripts
     printf "USAGE='--a (echo hi)'\na () { echo 'hi'; }\n" > 001-a.sh 
     printf "USAGE='--b (echo hi)'\nb () { echo 'hi'; }\n" > 001-b.sh
-    printf "USAGE='--c (echo hi)'\nc () { echo 'hi'; }\n" > 001-c.sh
+    printf "USAGE='--c (echo hi)'\nc () { exit 1; }\n" > 001-c.sh
+    
   `)
 })
 
@@ -33,4 +34,11 @@ test('here', async () => {
   await here(args)
   expect(args.exit.called).toBe(true)
   expect(args.exit.args).toEqual([[0]])
+})
+
+test('here: should exit 1 if exit is called in function', async () => {
+  const args = getArgs(['--c'], __dirname)
+  await here(args)
+  expect(args.exit.called).toBe(true)
+  expect(args.exit.args).toEqual([[1]])
 })
