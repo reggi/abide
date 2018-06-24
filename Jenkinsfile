@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'node'
-            args '-u root:root --memory-reservation=800m --memory=900m --memory-swap=0'
+            args '--memory-reservation=800m --memory=900m --memory-swap=0'
         }
     }
     stages {
@@ -78,6 +78,11 @@ pipeline {
                     }
                 }
             }
+        }
+    }
+    post {
+        always {
+            deleteDir() 
         }
     }
 }
