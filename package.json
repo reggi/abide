@@ -15,6 +15,7 @@
     "build": "npm run babel",
     "depcheck": "lerna exec -- results -di -- depcheck ./ --ignores 'jest,standard,babel-eslint,babel-cli,babel-jest'",
     "ensure-no-individual-coverage": "lerna exec --concurrency 1 -- rm -rf ./coverage",
+    "ensure-no-individual-package-lock": "lerna exec --concurrency 1 -- rm -rf ./package-lock.json",
     "git-status-porcelain": "here --gitChanges",
     "jest": "jest --no-cache --runInBand --ci || (npm run jest-identify && exit 1)",
     "postjest": "here --cleanCoverage",
