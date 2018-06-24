@@ -70,8 +70,12 @@ pipeline {
         }
         stage('lerna publish') {
             steps {
-                sshagent (credentials: ['reggi']) {
-                    sh 'git checkout master && git remote -v && && npm run lerna-publish'
+                withCredentials([sshUserPrivateKey(credentialsId: 'reggi', keyFileVariable: 'GITHUB_KEY')]) {
+                    sh 'echo ssh -i $GITHUB_KEY -l git -o StrictHostKeyChecking=no \\"\\$@\\" > run_ssh.sh'
+                    sh 'chmod +x run_ssh.sh'
+                    withEnv(['GIT_SSH=run_ssh.sh']) {
+                        sh 'npm run lera-publish'
+                    }
                 }
             }
         }
