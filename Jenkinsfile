@@ -15,7 +15,7 @@ pipeline {
         }
         stage('checkout') {
             steps {
-                checkout scm master
+                checkout scm
             }
         }
         stage('dep install') {
