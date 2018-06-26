@@ -74,7 +74,7 @@ pipeline {
                     sh 'echo ssh -i $GITHUB_KEY -l git -o StrictHostKeyChecking=no \\"\\$@\\" > ./run_ssh.sh'
                     sh 'chmod +x ./run_ssh.sh'
                     withEnv(['GIT_SSH=./run_ssh.sh']) {
-                        withNPM(npmrcConfig: 'forNpmRegistry') {
+                        withNPM(npmrcConfig: 'da4e5199-b04b-41b6-a03f-dfbcc344f701') {
                             sh 'git config --global user.email "thomas@reggi.com"'
                             sh 'git config --global user.name "reggi"'
                             sh 'git checkout master'
