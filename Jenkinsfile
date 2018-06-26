@@ -71,11 +71,7 @@ pipeline {
         stage('lerna publish') {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'cb8acd82-3a50-4a94-9d5f-44b04856e6fd', keyFileVariable: 'GITHUB_KEY')]) {
-                    sh 'echo ssh -i $GITHUB_KEY -l git -o StrictHostKeyChecking=no \\"\\$@\\" > run_ssh.sh'
-                    sh 'chmod +x run_ssh.sh'
-                    withEnv(['GIT_SSH=run_ssh.sh']) {
-                        sh 'git checkout master && npm run lerna-publish'
-                    }
+                    sh 'git checkout master && npm run lerna-publish'
                 }
             }
         }
