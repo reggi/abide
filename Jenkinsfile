@@ -20,7 +20,7 @@ pipeline {
         }
         stage('dep install') {
             steps {
-                sh 'npm install --no-save'
+                sh 'npm install --no-save --verbose'
             }
         }
         stage('standard') {
@@ -74,12 +74,13 @@ pipeline {
                     sh 'echo ssh -i $GITHUB_KEY -l git -o StrictHostKeyChecking=no \\"\\$@\\" > ./run_ssh.sh'
                     sh 'chmod +x ./run_ssh.sh'
                     withEnv(['GIT_SSH=./run_ssh.sh']) {
-                        sh 'echo "//registry.npmjs.org/:_authToken=468fc166-abea-41c7-8d84-d0fd83bc761d" > ./.npmrc'
-                        sh 'git config --global user.email "thomas@reggi.com"'
-                        sh 'git config --global user.name "reggi"'
-                        sh 'git checkout master'
-                        sh 'git pull origin master --force'
-                        sh 'npm run lerna-publish'
+                        withNPM(npmrcConfig: 'da4e5199-b04b-41b6-a03f-dfbcc344f701') {
+                            sh 'git config --global user.email "thomas@reggi.com"'
+                            sh 'git config --global user.name "reggi"'
+                            sh 'git checkout master'
+                            sh 'git pull origin master --force'
+                            sh 'npm run lerna-publish'
+                        }
                     }
                 }
             }
