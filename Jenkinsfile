@@ -20,7 +20,7 @@ pipeline {
         }
         stage('dep install') {
             steps {
-                sh 'npm install --no-save'
+                sh 'npm install --no-save --verbose'
             }
         }
         stage('standard') {
