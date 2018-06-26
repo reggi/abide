@@ -74,7 +74,11 @@ pipeline {
                     sh 'echo ssh -i $GITHUB_KEY -l git -o StrictHostKeyChecking=no \\"\\$@\\" > ./run_ssh.sh'
                     sh 'chmod +x ./run_ssh.sh'
                     withEnv(['GIT_SSH=./run_ssh.sh']) {
-                        sh 'git checkout master && git pull origin master --force && npm run lerna-publish'
+                        sh 'git config --global user.email "thomas@reggi.com"'
+                        sh 'git config --global user.name "reggi"'
+                        sh 'git checkout master'
+                        sh 'git pull origin master --force'
+                        sh 'npm run lerna-publish'
                     }
                 }
             }

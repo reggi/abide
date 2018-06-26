@@ -21,7 +21,7 @@
     "postjest": "here --cleanCoverage",
     "jest-identify": "jest --clearCache && lerna exec --concurrency 1 -- jest --no-cache --runInBand --ci",
     "jest-target": "jest --clearCache && lerna exec --scope @reggi/here --concurrency 1 -- jest --no-cache --runInBand --ci",
-    "lerna-publish": "lerna publish --force-publish=* --cd-version=minor --yes",
+    "lerna-publish": "lerna publish --force-publish=* --cd-version=patch --yes",
     "monorepo-dep-lint": "monorepo-dep-lint -f",
     "shebang-check": "lerna exec -- results -- shebang-check",
     "sort-package-json": "sort-package-json && lerna exec -- sort-package-json",
