@@ -81,11 +81,3 @@ pipeline {
         }
     }
 }
-
-
-       chmod 0500 $PVT_KEY_FILE
-        env  |grep SIS  
-        eval `ssh-agent`
-        ssh-add $PVT_KEY_FILE
-        $RUN_CMD
-        kill -s term $SSH_AGENT_PID
