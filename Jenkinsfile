@@ -75,7 +75,8 @@ pipeline {
                     sh 'chmod +x ./run_ssh.sh'
                     withEnv(['GIT_SSH=./run_ssh.sh']) {
                         withNPM(npmrcConfig: 'da4e5199-b04b-41b6-a03f-dfbcc344f701') {
-                            sh 'cp ./.npmrc ~/.npmrc'
+                            sh 'mv ./.npmrc ~/.npmrc'
+                            sh 'npm config set registry https://registry.npmjs.org/'
                             sh 'git config --global user.email "thomas@reggi.com"'
                             sh 'git config --global user.name "reggi"'
                             sh 'git checkout master'
