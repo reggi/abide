@@ -20,7 +20,7 @@ pipeline {
         }
         stage('dep install') {
             steps {
-                sh 'npm install --no-save --verbose'
+                sh 'npm install --no-save'
             }
         }
         stage('standard') {
@@ -77,6 +77,8 @@ pipeline {
                         withNPM(npmrcConfig: 'da4e5199-b04b-41b6-a03f-dfbcc344f701') {
                             sh "rm -rf ~/.npmrc"
                             sh 'mv ./.npmrc ~/.npmrc'
+                            sh 'cat ./.npmrc'
+                            sh 'cat ~/.npmrc'
                             sh 'npm config set registry https://registry.npmjs.com/'
                             sh 'git config --global user.email "thomas@reggi.com"'
                             sh 'git config --global user.name "reggi"'
