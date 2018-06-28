@@ -1,6 +1,6 @@
 {
   "name": "@reggi/gitpkg.traverse-up",
-  "version": "0.0.1",
+  "version": "0.0.14",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {
