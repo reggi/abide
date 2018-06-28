@@ -1,6 +1,6 @@
 {
   "name": "@reggi/monorepo-babel-cli",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "bin": {
