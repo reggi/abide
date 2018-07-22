@@ -13,10 +13,6 @@ This module is designed to reduce an array of functions that return objects, the
 ```js
 import fnReduce from 'journey.fn-reduce'
 
-const expectation = 
-
-const name = expectation.name
-
 const results = fnReduce([
   () => ({name: 'thomas'}),
   () => ({age: '29'}),
@@ -29,6 +25,8 @@ console.log(results()) // => { name: 'Thomas', age: '29', return: 'Thomas29' }
 This also works with a promise in the stack:
 
 ```js
+import fnReduce from 'journey.fn-reduce'
+
 const results = fnReduce([
   () => ({name: 'thomas'}),
   async () => ({age: '29'}),
