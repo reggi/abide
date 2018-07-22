@@ -8,7 +8,7 @@ npm i @reggi/journey.is-promise --save
 
 This module checks if a function is a un-resolved promise and returns `true` and `false`.
 
-```
+```js
 import isPromise from '@reggi/journey.is-promise'
 
 const promA = async () => true
