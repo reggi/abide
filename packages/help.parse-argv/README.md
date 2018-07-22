@@ -1,4 +1,22 @@
-# `help.parse-argv`
+# `@reggi/help.parse-argv`
+
+```
+npm i @reggi/help.parse-argv --save
+```
+
+## Example
+
+Default behavior: 
+
+```js
+import parseArgv from '@reggi/help.parse-argv'
+
+parseArgv('-h') // {'-h': true, '_': []}
+parseArgv('-max') // {'-m': true, '-a': true, '-x': true, '_': []}}
+parseArgv('-max=thomas') // {'-m': true, '-a': true, '-x': true, '_': []}}
+```
+
+## Why
 
 Modular approach to tools like `minimist` takes in `process.argv` returns object of parsed key values based on unix flag conventions.
 
