@@ -4,6 +4,10 @@
 npm i @reggi/help.parse-argv --save
 ```
 
+## Summary
+
+Unopiniotated and modular alternative to [minimist](https://github.com/substack/minimist).
+
 ## Example
 
 Default behavior: 
@@ -18,7 +22,7 @@ parseArgv('-max=thomas') // {'-m': true, '-a': true, '-x': true, '_': []}}
 
 ## Why
 
-Modular approach to tools like `minimist` takes in `process.argv` returns object of parsed key values based on unix flag conventions.
+This is a modular approach to tools like `minimist` takes in `process.argv` returns object of parsed key values based on unix flag conventions.
 
 Other argv parsers are opinionated. For instance does you're application need to handle `-h`, `--h`, `-H`, and `--H` all differently? `minimist` does not allow this level of granularity, and does absorb the original values in a case like this. `help.parse-argv` is different in that it allows ANY possible combination of flag discovery and any convention. The main difference is that rather then returning an object of flags resovled as `{help: "value"}` it includes the dashes `{"--help": "value"}` offering greater control to remove the dashes later.
 
