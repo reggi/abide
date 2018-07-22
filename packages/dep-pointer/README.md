@@ -2,7 +2,7 @@
 
 ## Summary
 
-> This is a two-part-module 
+> This is a two-part-module [@reggi/dep-pointer-cli](https://github.com/reggi/abide/tree/master/packages/dep-pointer-cli).
 
 > This is a CLI tool / Node.js function built to be used with monorepos using [`lerna`](https://github.com/lerna/lerna).
 
