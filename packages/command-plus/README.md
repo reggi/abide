@@ -6,7 +6,7 @@ npm i @reggi/command-plus --save
 
 ## Why
 
-This project is a wrapper around the [`@reggi/command`](https://github.com/reggi/abide/tree/master/packages/command) module that allows functions that return "normal" values to be handled in the console in a consistent way.
+This project is a wrapper around the [`@reggi/command`](https://github.com/reggi/abide/tree/master/packages/command) module that allows functions that return "normal" values to be handled in unix terminal in a consistent way.
 
 * A returned `boolean` of `true` will return with an exit code of `0`
 * A returned `boolean` of `false` will return with an exit code of `1`
