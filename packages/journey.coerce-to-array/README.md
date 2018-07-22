@@ -8,7 +8,7 @@ npm i @reggi/journey.coerce-to-array --save
 
 This module simply coerces any value to an array, if it's an array already it returns the entered value, not nesting it in another array.
 
-```
+```js
 import coerceToArray from '@reggi/journey.coerce-to-array'
 
 coerceToArray(1) // => [1]
