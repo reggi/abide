@@ -28,7 +28,7 @@ console.log(results()) // => { name: 'Thomas', age: '29', return: 'Thomas29' }
 
 This also works with a promise in the stack:
 
-```
+```js
 const results = fnReduce([
   () => ({name: 'thomas'}),
   async () => ({age: '29'}),
