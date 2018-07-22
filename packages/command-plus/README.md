@@ -52,7 +52,7 @@ export default commandPlus(module, async () => {
 import commandPlus from '@reggi/command-plus'
 
 export default commandPlus(module, async () => {
-  return {greeting: 'Hi"} // will be `json` stringified with an exit code `0`
+  return {greeting: 'Hi'} // will be `json` stringified with an exit code `0`
 })
 ```
 
