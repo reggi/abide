@@ -1,6 +1,6 @@
 {
   "name": "@reggi/help",
-  "version": "0.0.94",
+  "version": "0.0.95",
   "description": "Command line interface help string generator and argv parser",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
