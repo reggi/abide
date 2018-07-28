@@ -1,6 +1,6 @@
 {
   "name": "@reggi/requireable-cli",
-  "version": "0.0.114",
+  "version": "0.0.115",
   "description": "Checks if a given local module throws error once required",
   "author": "Thomas Reggi",
   "main": "./index.build.js",

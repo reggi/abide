@@ -1,6 +1,6 @@
 {
   "name": "@reggi/dep-pointer-cli",
-  "version": "0.0.102",
+  "version": "0.0.103",
   "description": "Tool for assigning version from file references",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
