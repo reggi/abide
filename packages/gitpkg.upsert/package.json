@@ -1,6 +1,6 @@
 {
   "name": "@reggi/gitpkg.upsert",
-  "version": "0.0.185",
+  "version": "0.0.186",
   "description": "Appends or updates object based on given query",
   "author": "Thomas Reggi",
   "main": "./index.build.js",

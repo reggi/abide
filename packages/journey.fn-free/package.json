@@ -1,6 +1,6 @@
 {
   "name": "@reggi/journey.fn-free",
-  "version": "0.0.189",
+  "version": "0.0.190",
   "description": "Wraps a function abstrating and preserving  original return value",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
