@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg-plugin-jest",
-  "version": "0.0.59",
+  "version": "0.0.60",
   "description": "Applies jest to a package.json",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
