@@ -1,6 +1,6 @@
 {
   "name": "@reggi/monorepo-dep-lint-cli",
-  "version": "0.0.81",
+  "version": "0.0.82",
   "author": "Thomas Reggi",
   "bin": {
     "monorepo-dep-lint": "./index.build.js"
