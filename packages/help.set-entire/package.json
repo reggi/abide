@@ -1,6 +1,6 @@
 {
   "name": "@reggi/help.set-entire",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "description": "Expand a shallow object with deep keys",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
