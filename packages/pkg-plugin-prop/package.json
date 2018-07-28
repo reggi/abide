@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg-plugin-prop",
-  "version": "0.0.130",
+  "version": "0.0.131",
   "description": "Applies a general key / value to the package.json",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
