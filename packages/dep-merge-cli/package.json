@@ -1,6 +1,6 @@
 {
   "name": "@reggi/dep-merge-cli",
-  "version": "0.0.59",
+  "version": "0.0.60",
   "description": "Merges devDeps into deps for a given package.json",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
