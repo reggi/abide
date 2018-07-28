@@ -1,6 +1,6 @@
 {
   "name": "replace-cli",
-  "version": "1.0.120",
+  "version": "1.0.121",
   "description": "Replace piped data using javascript regex",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
