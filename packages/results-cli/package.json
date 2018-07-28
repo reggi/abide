@@ -1,6 +1,6 @@
 {
   "name": "results-cli",
-  "version": "0.0.55",
+  "version": "0.0.56",
   "description": "Clear output of exit codes for a given command",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
