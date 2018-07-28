@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg.prop-overwrite",
-  "version": "0.0.93",
+  "version": "0.0.94",
   "description": "Shallow spread two objects together with direction",
   "author": "Thomas Reggi",
   "main": "./index.build.js",

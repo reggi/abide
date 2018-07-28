@@ -1,6 +1,6 @@
 {
   "name": "@reggi/command-plus",
-  "version": "0.0.84",
+  "version": "0.0.85",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {
