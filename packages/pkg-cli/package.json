@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg-cli",
-  "version": "0.0.140",
+  "version": "0.0.141",
   "description": "Plugin based package.json generation",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
