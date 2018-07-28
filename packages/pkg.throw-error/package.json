@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg.throw-error",
-  "version": "0.0.131",
+  "version": "0.0.132",
   "description": "Single line function for \"throw new Error\"",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
