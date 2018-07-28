@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg-plugin-name-dir",
-  "version": "0.0.69",
+  "version": "0.0.70",
   "description": "Applies the directory to the package.json name",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
