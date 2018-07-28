@@ -288,7 +288,6 @@ var depPointer = exports.depPointer = function () {
         _ref15$savePrefix = _ref15.savePrefix,
         savePrefix = _ref15$savePrefix === undefined ? '' : _ref15$savePrefix,
         all = _ref15.all,
-        changed = _ref15.changed,
         packageName = _ref15.packageName,
         _ref15$backupLocal = _ref15.backupLocal,
         backupLocal = _ref15$backupLocal === undefined ? true : _ref15$backupLocal,
@@ -301,7 +300,7 @@ var depPointer = exports.depPointer = function () {
       while (1) {
         switch (_context8.prev = _context8.next) {
           case 0:
-            if (!(!all && !changed && !packageName)) {
+            if (!(!all && !packageName)) {
               _context8.next = 4;
               break;
             }
@@ -313,7 +312,7 @@ var depPointer = exports.depPointer = function () {
             packageName = _context8.sent;
 
           case 4:
-            if (!(!all && !changed && !packageName)) {
+            if (!(!all && !packageName)) {
               _context8.next = 6;
               break;
             }
