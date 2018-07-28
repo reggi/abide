@@ -1,6 +1,6 @@
 {
   "name": "@reggi/dep-merge",
-  "version": "0.0.168",
+  "version": "0.0.169",
   "description": "Merges devDeps into deps",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
