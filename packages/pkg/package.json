@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg",
-  "version": "0.0.131",
+  "version": "0.0.132",
   "description": "Plugin based package.json generation",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
