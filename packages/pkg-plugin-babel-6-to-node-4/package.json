@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg-plugin-babel-6-to-node-4",
-  "version": "0.0.165",
+  "version": "0.0.166",
   "description": "Applies babel 6 to a given package.json",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
