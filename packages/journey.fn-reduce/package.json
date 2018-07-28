@@ -1,6 +1,6 @@
 {
   "name": "@reggi/journey.fn-reduce",
-  "version": "0.0.58",
+  "version": "0.0.59",
   "description": "Reduce a series of functions that return objects to one obect",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
