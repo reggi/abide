@@ -1,6 +1,6 @@
 {
   "name": "@reggi/journey.coerce-to-plain-object",
-  "version": "0.0.54",
+  "version": "0.0.55",
   "description": "Convert variable to empty object or preserve provided",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
