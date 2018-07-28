@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg-plugin-cobalt",
-  "version": "0.0.151",
+  "version": "0.0.152",
   "description": "Suite of pkg-plugins arbitrarily designated cobalt",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
