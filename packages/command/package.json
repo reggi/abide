@@ -1,6 +1,6 @@
 {
   "name": "@reggi/command",
-  "version": "0.0.107",
+  "version": "0.0.108",
   "description": "Wrapper for functions dependent on global process variable",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
