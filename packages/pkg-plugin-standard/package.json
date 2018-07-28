@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg-plugin-standard",
-  "version": "0.0.188",
+  "version": "0.0.189",
   "description": "Applies standard to package.json",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
