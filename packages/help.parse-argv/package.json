@@ -1,6 +1,6 @@
 {
   "name": "@reggi/help.parse-argv",
-  "version": "0.0.45",
+  "version": "0.0.46",
   "description": "Modular unopinionated process.argv parser",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
