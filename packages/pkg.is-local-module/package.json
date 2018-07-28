@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg.is-local-module",
-  "version": "0.0.104",
+  "version": "0.0.105",
   "description": "Checks if a string is a local module using regex",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
