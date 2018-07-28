@@ -70,9 +70,9 @@ export const packageHandler = async ({updates, packageName}, callback) => {
   }
 }
 
-export const depPointer = async ({workingDir, savePrefix = '', all, changed, packageName, backupLocal = true, useLocal = false}) => {
-  if (!all && !changed && !packageName) packageName = await packageJsonInWorkingDir({workingDir})
-  if (!all && !changed && !packageName) throw new Error('nothing specific to change')
+export const depPointer = async ({workingDir, savePrefix = '', all, packageName, backupLocal = true, useLocal = false}) => {
+  if (!all && !packageName) packageName = await packageJsonInWorkingDir({workingDir})
+  if (!all && !packageName) throw new Error('nothing specific to change')
   const config = await lernaConfig({workingDir})
   const {updates, packageGraph} = await lernaPackages({config, forcePublish: (all || packageName)})
   if (useLocal) {

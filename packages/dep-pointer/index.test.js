@@ -66,15 +66,6 @@ test('depPointer: updateAll', async () => {
   expect(pkgFour.dependencies['module-one']).toEqual('1.0.0')
 })
 
-test('depPointer: updateChanged, odd behavior', async () => {
-  const workingDir = path.join(__dirname, 'examples')
-  await depPointer({workingDir, changed: true})
-  const c = await fs.readJson(path.join(workingDir, 'packages/module-three/package.json'))
-  expect(c.dependencies['module-one']).toEqual('file:../module-one')
-  const d = await fs.readJson(path.join(workingDir, 'packages/module-four/package.json'))
-  expect(d.dependencies['module-one']).toEqual('file:../module-one')
-})
-
 test('depPointer: no package specified ', async () => {
   const workingDir = path.join(__dirname, 'examples/package')
   try {
