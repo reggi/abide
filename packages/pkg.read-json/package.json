@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg.read-json",
-  "version": "0.0.82",
+  "version": "0.0.83",
   "description": "Contigent json file system reader",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
