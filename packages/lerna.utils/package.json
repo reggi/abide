@@ -1,6 +1,6 @@
 {
   "name": "@reggi/lerna.utils",
-  "version": "0.0.15",
+  "version": "0.0.183",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {
