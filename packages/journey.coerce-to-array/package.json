@@ -1,6 +1,6 @@
 {
   "name": "@reggi/journey.coerce-to-array",
-  "version": "0.0.174",
+  "version": "0.0.175",
   "description": "Coerce a string to an array",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
