@@ -1,6 +1,6 @@
 {
   "name": "@reggi/subrepo",
-  "version": "0.0.42",
+  "version": "0.0.43",
   "description": "Creates a repo with commits & files from another repo subdirectory",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
