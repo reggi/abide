@@ -1,6 +1,6 @@
 {
   "name": "@reggi/here",
-  "version": "0.0.121",
+  "version": "0.0.122",
   "description": "",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
