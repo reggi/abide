@@ -1,6 +1,6 @@
 {
   "name": "@reggi/help.string-argv",
-  "version": "0.0.162",
+  "version": "0.0.163",
   "description": "Convert a string of argv input to array",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
