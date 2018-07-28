@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg.pretty-json",
-  "version": "0.0.40",
+  "version": "0.0.41",
   "description": "JSON.stringify with indentation",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
