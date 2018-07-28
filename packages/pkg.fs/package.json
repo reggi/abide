@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg.fs",
-  "version": "0.0.77",
+  "version": "0.0.78",
   "description": "Promise wrapper for node fs",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
