@@ -1,6 +1,6 @@
 {
   "name": "reggi-cli",
-  "version": "0.0.132",
+  "version": "0.0.133",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "bin": {
