@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg-plugin-name-scope",
-  "version": "0.0.82",
+  "version": "0.0.83",
   "description": "Applies a scope to the package.json name",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
