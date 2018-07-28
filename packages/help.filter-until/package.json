@@ -1,6 +1,6 @@
 {
   "name": "@reggi/help.filter-until",
-  "version": "0.0.29",
+  "version": "0.0.30",
   "description": "Filter an array until a match is made",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
