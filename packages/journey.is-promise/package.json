@@ -1,6 +1,6 @@
 {
   "name": "@reggi/journey.is-promise",
-  "version": "0.0.147",
+  "version": "0.0.148",
   "description": "Check if a variable is a promise",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
