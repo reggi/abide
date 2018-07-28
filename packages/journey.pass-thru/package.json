@@ -1,6 +1,6 @@
 {
   "name": "@reggi/journey.pass-thru",
-  "version": "0.0.147",
+  "version": "0.0.148",
   "description": "Executes a given function disreguards return value returns provded arguments",
   "author": "Thomas Reggi",
   "main": "./index.build.js",
