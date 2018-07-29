@@ -2,11 +2,18 @@
   "name": "@reggi/pkg.file-exists",
   "version": "0.0.192",
   "description": "Checks if file exists using lstat does not throw",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reggi/pkg.file-exists"
+  },
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
+    "build": "npm run babel",
+    "jest": "jest",
+    "jest:coverage": "jest --coverage",
     "standard": "standard",
     "test": "jest --coverage",
     "test:result": "npm run test --silent &>/dev/null || echo $?"
@@ -57,15 +64,15 @@
     "access": "public"
   },
   "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "index.build.js"
+    ],
     "globals": [
       "expect",
       "test",
       "beforeEach",
       "afterEach"
-    ],
-    "parser": "babel-eslint",
-    "ignore": [
-      "index.build.js"
     ]
   }
 }

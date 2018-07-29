@@ -32,6 +32,10 @@ var _pkgPluginSort = require('@reggi/pkg-plugin-sort');
 
 var _pkgPluginSort2 = _interopRequireDefault(_pkgPluginSort);
 
+var _pkgPluginRepo = require('@reggi/pkg-plugin-repo');
+
+var _pkgPluginRepo2 = _interopRequireDefault(_pkgPluginRepo);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = [[_pkgPluginProp2.default, {
@@ -41,4 +45,4 @@ exports.default = [[_pkgPluginProp2.default, {
   'publishConfig': {
     'access': 'public'
   }
-}], _pkgPluginNameDir2.default, [_pkgPluginNameScope2.default, '@reggi'], _pkgPluginBabel6ToNode2.default, [_pkgPluginJest2.default, { 'addBabelJest': true, 'hunderedPercent': true }], [_pkgPluginStandard2.default, { 'jest': true, 'babel': true, 'ignore': '*.build.js' }], [_pkgPluginProp2.default, { 'scripts.test': 'npm run standard && npm run jest' }], [_pkgPluginProp2.default, { 'scripts.build': 'npm run babel' }], _pkgPluginSort2.default];
+}], _pkgPluginNameDir2.default, [_pkgPluginNameScope2.default, '@reggi'], _pkgPluginBabel6ToNode2.default, [_pkgPluginJest2.default, { 'addBabelJest': true, 'hunderedPercent': true }], [_pkgPluginStandard2.default, { 'jest': true, 'babel': true, 'ignore': '*.build.js' }], [_pkgPluginProp2.default, { 'scripts.test': 'npm run standard && npm run jest' }], [_pkgPluginProp2.default, { 'scripts.build': 'npm run babel' }], [_pkgPluginRepo2.default, { 'type': 'git', 'prefix': 'https://github.com/reggi/' }], _pkgPluginSort2.default];

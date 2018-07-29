@@ -2,6 +2,10 @@
   "name": "@reggi/subrepo",
   "version": "0.0.185",
   "description": "Creates a repo with commits & files from another repo subdirectory",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reggi/subrepo"
+  },
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {

@@ -1,6 +1,10 @@
 {
   "name": "@reggi/monorepo-babel-cli",
   "version": "0.0.183",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reggi/monorepo-babel-cli"
+  },
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "bin": {

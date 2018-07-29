@@ -1,6 +1,10 @@
 {
   "name": "@reggi/gitpkg.traverse-up",
   "version": "0.0.183",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reggi/gitpkg.traverse-up"
+  },
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {

@@ -1,6 +1,10 @@
 {
   "name": "@reggi/lerna.paths",
   "version": "0.0.183",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reggi/lerna.paths"
+  },
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {

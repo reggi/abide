@@ -30,9 +30,9 @@ exports.default = function () {
     './lib/index.js': 'babel ./src --out-dir ./lib',
     './dist/index.js': 'babel ./src --out-dir ./dist'
   };
-  var babelScriptbasedOnBin = pkg.bin && typeof pkg.bin === 'string' && basedOnFile[pkg.bin] ? basedOnFile[pkg.bin] : false;
+  var babelScriptBasedOnBin = pkg.bin && typeof pkg.bin === 'string' && basedOnFile[pkg.bin] ? basedOnFile[pkg.bin] : false;
   var babelScriptBasedOnMain = pkg.main && basedOnFile[pkg.main] ? basedOnFile[pkg.main] : false;
-  var babel = babelScriptBasedOnMain || babelScriptbasedOnBin;
+  var babel = babelScriptBasedOnMain || babelScriptBasedOnBin;
   if (!babel) throw new Error('pkg-plugin-babel no main or bin found ');
   return _extends({}, pkg, {
     scripts: (0, _pkg2.default)(overwrite, (0, _lodash.get)(pkg, 'scripts', {}), {

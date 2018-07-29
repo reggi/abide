@@ -2,6 +2,10 @@
   "name": "@reggi/pkgprop-cli",
   "version": "0.0.184",
   "description": "Allows for editing a given package property",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reggi/pkgprop-cli"
+  },
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "bin": {

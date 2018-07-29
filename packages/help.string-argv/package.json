@@ -2,11 +2,18 @@
   "name": "@reggi/help.string-argv",
   "version": "0.0.193",
   "description": "Convert a string of argv input to array",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reggi/help.string-argv"
+  },
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
+    "build": "npm run babel",
+    "jest": "jest",
+    "jest:coverage": "jest --coverage",
     "standard": "standard",
     "test": "jest --coverage",
     "test:result": "npm run test --silent &>/dev/null || echo $?"
@@ -44,6 +51,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",

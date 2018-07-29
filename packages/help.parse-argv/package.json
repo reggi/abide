@@ -2,11 +2,18 @@
   "name": "@reggi/help.parse-argv",
   "version": "0.0.193",
   "description": "Modular unopinionated process.argv parser",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reggi/help.parse-argv"
+  },
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
+    "build": "npm run babel",
+    "jest": "jest",
+    "jest:coverage": "jest --coverage",
     "standard": "standard",
     "test": "jest --coverage",
     "test:result": "npm run test --silent &>/dev/null || echo $?"
@@ -40,12 +47,15 @@
   "dependencies": {
     "@reggi/help.filter-until": "file:../help.filter-until",
     "@reggi/help.set-entire": "file:../help.set-entire",
+    "babel-runtime": "^6.26.0",
     "lodash": "^4.17.10"
   },
   "devDependencies": {
     "@reggi/help.string-argv": "file:../help.string-argv",
     "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "bluebird": "^3.5.1",
     "jest": "^23.1.0",

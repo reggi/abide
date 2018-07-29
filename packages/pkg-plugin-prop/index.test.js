@@ -23,3 +23,18 @@ test('pluginProp: empty opt', () => {
     existing: true
   })
 })
+
+test('pluginProp: no-overwrite', () => {
+  const pkg = {
+    existing: true
+  }
+  const result = pluginProp({
+    pkg,
+    opt: {
+      existing: false
+    }
+  })
+  expect(result).toEqual({
+    existing: true
+  })
+})

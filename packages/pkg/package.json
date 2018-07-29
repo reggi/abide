@@ -2,11 +2,18 @@
   "name": "@reggi/pkg",
   "version": "0.0.189",
   "description": "Plugin based package.json generation",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reggi/pkg"
+  },
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
+    "build": "npm run babel",
+    "jest": "jest",
+    "jest:coverage": "jest --coverage",
     "standard": "standard",
     "test": "jest --coverage",
     "test:result": "npm run test --silent &>/dev/null || echo $?"
@@ -67,6 +74,10 @@
     "access": "public"
   },
   "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "index.build.js"
+    ],
     "globals": [
       "beforeAll",
       "afterAll",
@@ -76,10 +87,6 @@
       "afterEach",
       "it",
       "jest"
-    ],
-    "parser": "babel-eslint",
-    "ignore": [
-      "index.build.js"
     ]
   }
 }

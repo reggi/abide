@@ -2,6 +2,10 @@
   "name": "@reggi/dep-pointer-cli",
   "version": "0.0.184",
   "description": "Tool for assigning version from file references",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reggi/dep-pointer-cli"
+  },
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "bin": {

@@ -1,6 +1,10 @@
 {
   "name": "@reggi/command-plus",
   "version": "0.0.183",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reggi/command-plus"
+  },
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {

@@ -1,6 +1,10 @@
 {
-  "name": "reggi-cli",
+  "name": "@reggi/reggi-cli",
   "version": "0.0.186",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reggi/reggi-cli"
+  },
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "bin": {
@@ -51,6 +55,7 @@
     "@reggi/pkgprop-cli": "file:../pkgprop-cli",
     "@reggi/requireable-cli": "file:../requireable-cli",
     "@reggi/subrepo-cli": "file:../subrepo-cli",
+    "babel-runtime": "^6.26.0",
     "lodash": "^4.17.10",
     "replace-cli": "file:../replace-cli",
     "results-cli": "file:../results-cli"

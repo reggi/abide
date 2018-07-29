@@ -2,12 +2,18 @@
   "name": "@reggi/requireable",
   "version": "0.0.193",
   "description": "Checks if a given local module throws error once required",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reggi/requireable"
+  },
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
+    "build": "npm run babel",
     "jest": "BABEL_ENV=test jest --coverage",
+    "jest:coverage": "jest --coverage",
     "standard": "standard",
     "test": "npm run standard && npm run jest"
   },
@@ -49,6 +55,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
@@ -59,6 +66,7 @@
     "access": "public"
   },
   "standard": {
+    "parser": "babel-eslint",
     "ignore": [
       "*.build.js"
     ],

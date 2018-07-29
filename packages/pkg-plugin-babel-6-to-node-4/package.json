@@ -2,11 +2,18 @@
   "name": "@reggi/pkg-plugin-babel-6-to-node-4",
   "version": "0.0.192",
   "description": "Applies babel 6 to a given package.json",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reggi/pkg-plugin-babel-6-to-node-4"
+  },
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
+    "build": "npm run babel",
+    "jest": "jest",
+    "jest:coverage": "jest --coverage",
     "standard": "standard",
     "test": "jest --coverage",
     "test:result": "npm run test --silent &>/dev/null || echo $?"
@@ -39,6 +46,7 @@
   },
   "dependencies": {
     "@reggi/pkg.prop-overwrite": "file:../pkg.prop-overwrite",
+    "babel-runtime": "^6.26.0",
     "lodash": "^4.17.10"
   },
   "devDependencies": {
@@ -46,6 +54,7 @@
     "babel-eslint": "^8.2.3",
     "babel-jest": "^22.4.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "jest": "^23.1.0",
     "standard": "^11.0.0"
@@ -54,15 +63,15 @@
     "access": "public"
   },
   "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "index.build.js"
+    ],
     "globals": [
       "expect",
       "test",
       "beforeEach",
       "afterEach"
-    ],
-    "parser": "babel-eslint",
-    "ignore": [
-      "index.build.js"
     ]
   }
 }

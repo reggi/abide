@@ -72,7 +72,11 @@
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -105,6 +109,7 @@ import babel from '@reggi/pkg-plugin-babel-6-to-node-4'
 import jest from '@reggi/pkg-plugin-jest'
 import standard from '@reggi/pkg-plugin-standard'
 import sort from '@reggi/pkg-plugin-sort'
+import repo from '@reggi/pkg-plugin-repo'
 &nbsp;
 export default [
   [prop, {
@@ -122,6 +127,7 @@ export default [
   [standard, {'jest': true, 'babel': true, 'ignore': '*.build.js'}],
   [prop, {'scripts.test': 'npm run standard &amp;&amp; npm run jest'}],
   [prop, {'scripts.build': 'npm run babel'}],
+  [repo, {'type': 'git', 'prefix': 'https://github.com/reggi/'}],
   sort
 ]
 &nbsp;</pre></td></tr>

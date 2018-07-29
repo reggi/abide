@@ -2,6 +2,10 @@
   "name": "@reggi/command",
   "version": "0.0.192",
   "description": "Wrapper for functions dependent on global process variable",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reggi/command"
+  },
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {
@@ -40,6 +44,9 @@
       }
     }
   },
+  "dependencies": {
+    "babel-runtime": "^6.26.0"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.3",
@@ -54,6 +61,7 @@
     "access": "public"
   },
   "standard": {
+    "parser": "babel-eslint",
     "ignore": [
       "*.build.js"
     ],

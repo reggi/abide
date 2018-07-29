@@ -1,7 +1,11 @@
 {
-  "name": "results-cli",
+  "name": "@reggi/results-cli",
   "version": "0.0.192",
   "description": "Clear output of exit codes for a given command",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reggi/results-cli"
+  },
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "bin": {

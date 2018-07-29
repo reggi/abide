@@ -1,6 +1,10 @@
 {
   "name": "@reggi/shebang-check-cli",
   "version": "0.0.183",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reggi/shebang-check-cli"
+  },
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "bin": {

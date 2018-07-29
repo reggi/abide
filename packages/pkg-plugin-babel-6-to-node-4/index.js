@@ -7,9 +7,9 @@ export default ({pkg = {}, overwrite = false, opt = {}} = {}) => {
     './lib/index.js': 'babel ./src --out-dir ./lib',
     './dist/index.js': 'babel ./src --out-dir ./dist'
   }
-  const babelScriptbasedOnBin = (pkg.bin && typeof pkg.bin === 'string' && basedOnFile[pkg.bin]) ? basedOnFile[pkg.bin] : false
+  const babelScriptBasedOnBin = (pkg.bin && typeof pkg.bin === 'string' && basedOnFile[pkg.bin]) ? basedOnFile[pkg.bin] : false
   const babelScriptBasedOnMain = (pkg.main && basedOnFile[pkg.main]) ? basedOnFile[pkg.main] : false
-  const babel = babelScriptBasedOnMain || babelScriptbasedOnBin
+  const babel = babelScriptBasedOnMain || babelScriptBasedOnBin
   if (!babel) throw new Error('pkg-plugin-babel no main or bin found ')
   return {
     ...pkg,

@@ -2,6 +2,10 @@
   "name": "@reggi/dep-merge-cli",
   "version": "0.0.189",
   "description": "Merges devDeps into deps for a given package.json",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reggi/dep-merge-cli"
+  },
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "bin": {

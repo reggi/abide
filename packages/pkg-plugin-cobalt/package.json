@@ -2,11 +2,18 @@
   "name": "@reggi/pkg-plugin-cobalt",
   "version": "0.0.192",
   "description": "Suite of pkg-plugins arbitrarily designated cobalt",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reggi/pkg-plugin-cobalt"
+  },
   "author": "Thomas Reggi",
   "main": "./index.build.js",
   "scripts": {
     "babel": "babel ./index.js --out-file ./index.build.js",
     "babel:watch": "npm run babel -- --watch",
+    "build": "npm run babel",
+    "jest": "jest",
+    "jest:coverage": "jest --coverage",
     "standard": "standard",
     "test": "jest --coverage",
     "test:result": "npm run test --silent &>/dev/null || echo $?"
@@ -43,14 +50,17 @@
     "@reggi/pkg-plugin-name-dir": "file:../pkg-plugin-name-dir",
     "@reggi/pkg-plugin-name-scope": "file:../pkg-plugin-name-scope",
     "@reggi/pkg-plugin-prop": "file:../pkg-plugin-prop",
+    "@reggi/pkg-plugin-repo": "file:../pkg-plugin-repo",
     "@reggi/pkg-plugin-sort": "file:../pkg-plugin-sort",
-    "@reggi/pkg-plugin-standard": "file:../pkg-plugin-standard"
+    "@reggi/pkg-plugin-standard": "file:../pkg-plugin-standard",
+    "babel-runtime": "^6.26.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.3",
     "babel-jest": "^22.4.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "jest": "^23.1.0",
     "standard": "^11.0.0"
@@ -59,15 +69,15 @@
     "access": "public"
   },
   "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "index.build.js"
+    ],
     "globals": [
       "expect",
       "test",
       "beforeEach",
       "afterEach"
-    ],
-    "parser": "babel-eslint",
-    "ignore": [
-      "index.build.js"
     ]
   }
 }
