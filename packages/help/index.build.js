@@ -5,9 +5,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.program = exports.Program = exports.defaultSpecifier = exports.template = exports.pad = exports.rename = exports.assign = exports.choices = exports.parseFlagOption = undefined;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _extends2 = require('babel-runtime/helpers/extends');
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
 
 var _lodash = require('lodash');
 
@@ -15,7 +23,7 @@ var _help = require('@reggi/help.parse-argv');
 
 var _journey = require('@reggi/journey');
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var parseFlagOption = exports.parseFlagOption = (0, _journey.journey)(function (flagsOption) {
   return [function () {
@@ -127,7 +135,7 @@ var defaultSpecifier = exports.defaultSpecifier = function defaultSpecifier(_ref
 
 var Program = function () {
   function Program() {
-    _classCallCheck(this, Program);
+    (0, _classCallCheck3.default)(this, Program);
 
     this.options = [];
     this._usage = '';
@@ -136,7 +144,7 @@ var Program = function () {
     return this;
   }
 
-  _createClass(Program, [{
+  (0, _createClass3.default)(Program, [{
     key: 'help',
     value: function help() {
       var _name = this._name,
@@ -180,15 +188,15 @@ var Program = function () {
       // get options in shape for specifiers
       var options = this.options;
       options = (0, _lodash.map)(options, function (option) {
-        return _extends({}, option, parseFlagOption(option.flagString));
+        return (0, _extends3.default)({}, option, parseFlagOption(option.flagString));
       });
       options = (0, _lodash.flattenDeep)((0, _lodash.map)(options, function (option) {
         return (0, _lodash.map)(option.flags, function (flag) {
-          return _extends({ flag }, option);
+          return (0, _extends3.default)({ flag }, option);
         });
       }));
       options = (0, _lodash.map)(options, function (option) {
-        return _extends({}, option, defaultSpecifier(option));
+        return (0, _extends3.default)({}, option, defaultSpecifier(option));
       });
 
       var specifiers = (0, _lodash.chain)(options).filter(function (option) {
@@ -211,7 +219,7 @@ var Program = function () {
 
       // apply modifiers
       var modifierValues = (0, _lodash.chain)(options).map(function (option) {
-        return _extends({}, option, { value: (0, _lodash.get)(flags, option.flag, undefined) });
+        return (0, _extends3.default)({}, option, { value: (0, _lodash.get)(flags, option.flag, undefined) });
       }).map(function (option) {
         var modifier = option.modifier,
             required = option.required,
@@ -226,7 +234,7 @@ var Program = function () {
           return modifier({ value, flag, required, optional, desc });
         } else if ((0, _lodash.isArray)(modifier)) {
           return (0, _lodash.reduce)(modifier, function (acq, fn) {
-            return _extends({}, acq, fn({ value, flag, required, optional, desc }));
+            return (0, _extends3.default)({}, acq, fn({ value, flag, required, optional, desc }));
           }, {});
         }
         return false;
@@ -235,11 +243,10 @@ var Program = function () {
       }).thru(_help.mergeProperties).value();
       this.parsed = flags;
       this.modifiers = modifierValues;
-      this.flags = _extends({}, flags, modifierValues);
+      this.flags = (0, _extends3.default)({}, flags, modifierValues);
       return this;
     }
   }]);
-
   return Program;
 }();
 

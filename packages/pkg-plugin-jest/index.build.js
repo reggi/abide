@@ -5,7 +5,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.hunderedPercent = undefined;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+
+var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
 
 var _lodash = require('lodash');
 
@@ -18,8 +24,6 @@ var _pkg = require('@reggi/pkg.prop-overwrite');
 var _pkg2 = _interopRequireDefault(_pkg);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var hunderedPercent = exports.hunderedPercent = function hunderedPercent() {
   return {
@@ -41,14 +45,14 @@ exports.default = function (_ref) {
       pkg = _ref.pkg,
       opt = _ref.opt;
 
-  return _extends({}, pkg, {
+  return (0, _extends3.default)({}, pkg, {
     scripts: (0, _pkg2.default)(overwrite, (0, _lodash.get)(pkg, 'scripts', {}), {
       'jest': 'jest',
       'jest:coverage': 'jest --coverage'
     }),
-    devDependencies: (0, _pkg2.default)(overwrite, (0, _lodash.get)(pkg, 'devDependencies', {}), _extends({}, opt.babel ? { 'babel-jest': '^22.4.1' } : {}, {
+    devDependencies: (0, _pkg2.default)(overwrite, (0, _lodash.get)(pkg, 'devDependencies', {}), (0, _extends3.default)({}, opt.babel ? { 'babel-jest': '^22.4.1' } : {}, {
       'jest': '^22.4.2'
     })),
-    jest: (0, _pkg2.default)(overwrite, (0, _lodash.get)(pkg, 'jest', {}), _extends({}, opt.hunderedPercent ? hunderedPercent(opt.forceCoverageMatch) : {}, opt.forceCoverageMatch ? { 'forceCoverageMatch': [].concat(_toConsumableArray((0, _lodash.get)(pkg, 'jest.forceCoverageMatch', {})), _toConsumableArray((0, _journey2.default)(opt.forceCoverageMatch))) } : {}))
+    jest: (0, _pkg2.default)(overwrite, (0, _lodash.get)(pkg, 'jest', {}), (0, _extends3.default)({}, opt.hunderedPercent ? hunderedPercent(opt.forceCoverageMatch) : {}, opt.forceCoverageMatch ? { 'forceCoverageMatch': [].concat((0, _toConsumableArray3.default)((0, _lodash.get)(pkg, 'jest.forceCoverageMatch', {})), (0, _toConsumableArray3.default)((0, _journey2.default)(opt.forceCoverageMatch))) } : {}))
   });
 };

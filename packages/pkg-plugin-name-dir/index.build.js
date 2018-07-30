@@ -4,7 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
 
 var _lodash = require('lodash');
 
@@ -26,7 +28,7 @@ exports.default = function (_ref) {
       _ref$opt = _ref.opt,
       opt = _ref$opt === undefined ? {} : _ref$opt,
       wd = _ref.wd;
-  return _extends({}, pkg, {
+  return (0, _extends3.default)({}, pkg, {
     name: name(opt, wd)
   });
 };

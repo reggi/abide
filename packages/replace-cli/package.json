@@ -22,7 +22,8 @@
   },
   "babel": {
     "plugins": [
-      "transform-object-rest-spread"
+      "transform-object-rest-spread",
+      "transform-runtime"
     ],
     "presets": [
       [

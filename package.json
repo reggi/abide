@@ -13,7 +13,7 @@
     "babel:root-config": "node ./packages/monorepo-root-babel-cli/index.build.js --output",
     "babel:watch": "NODE_ENV=production lerna exec --parallel -- npm run babel:watch",
     "build": "npm run babel",
-    "depcheck": "lerna exec -- results -di -- depcheck ./ --ignores 'jest,standard,babel-eslint,babel-cli,babel-jest'",
+    "depcheck": "lerna exec -- results -di -- depcheck ./ --ignores 'jest,standard,babel-eslint,babel-cli,babel-jest,babel-runtime'",
     "ensure-no-individual-coverage": "lerna exec --concurrency 1 -- rm -rf ./coverage",
     "ensure-no-individual-package-lock": "lerna exec --concurrency 1 -- rm -rf ./package-lock.json",
     "git-status-porcelain": "here --gitChanges",

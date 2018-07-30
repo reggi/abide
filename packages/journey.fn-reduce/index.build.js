@@ -5,7 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fnReduce = undefined;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
 
 var _journey = require('@reggi/journey.coerce-to-plain-object');
 
@@ -30,7 +32,7 @@ var fnReduce = exports.fnReduce = function fnReduce(fns) {
       return cleanResult.apply(null, hookResult(acq, result));
     };
     var cleanResult = function cleanResult(acq, result) {
-      return _extends({}, (0, _journey2.default)(acq), (0, _journey2.default)(result));
+      return (0, _extends3.default)({}, (0, _journey2.default)(acq), (0, _journey2.default)(result));
     };
     var hookResult = function hookResult(acq, result) {
       return (0, _journey4.default)(hook, acq, result);

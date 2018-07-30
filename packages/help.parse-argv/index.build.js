@@ -4,6 +4,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.parseArgv = exports.defaultModifiers = exports.mergeProperties = exports.untouched = exports.applyModifiers = exports.applySpecifier = exports.coerceToString = exports.Undefined = exports.touchObj = exports.modifiers = exports._modifiers = exports.assignRest = exports.assignNo = exports.assignSpread = exports.assignUntil = exports.assignNext = exports.assignEqual = exports.assignBoolean = exports.isChild = exports.isDoubleDashNoFlag = exports.isDoubleDashFlag = exports.isMultiDashFlag = exports.isOnlyDashFlag = exports.isDashFlag = exports.isAnyDash = exports.matchCheck = exports.doubleDashNoKeyPrefix = exports.childKey = exports.child = exports.anyDash = exports.onlyDash = exports.doubleDashNo = exports.doubleDash = exports.multiDash = exports.dash = undefined;
+
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
 exports.groupByIncProp = groupByIncProp;
 
 var _lodash = require('lodash');
@@ -17,8 +22,6 @@ var _help3 = require('@reggi/help.set-entire');
 var _help4 = _interopRequireDefault(_help3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var dash = exports.dash = /^-(\w+)/;
 var multiDash = exports.multiDash = /^-(\w\w+)/;
@@ -210,7 +213,7 @@ var touchObj = exports.touchObj = function touchObj(arr) {
 };
 
 var Undefined = exports.Undefined = function Undefined() {
-  _classCallCheck(this, Undefined);
+  (0, _classCallCheck3.default)(this, Undefined);
 };
 
 var coerceToString = exports.coerceToString = function coerceToString(val) {
