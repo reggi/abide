@@ -15,14 +15,14 @@ export const lernaConfig = async ({workingDir}) => {
   return config
 }
 
-export const lernaPackages = async ({config, forcePublish}) => {
+export const lernaPackages = async ({config}) => {
   const lerna = new Lerna(config)
   const {rootPath, packageConfigs} = lerna
   const packages = await collectPackages(rootPath, packageConfigs)
   const packageGraph = new PackageGraph(packages)
   const logger = log.newGroup('depPointer')
   const execOpts = {cwd: rootPath}
-  const options = (forcePublish) ? {'forcePublish': '*'} : {}
+  const options = {'forcePublish': '*'}
   const updates = collectUpdates({
     filteredPackages: packages,
     packageGraph,
