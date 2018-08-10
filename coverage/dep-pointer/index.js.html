@@ -22,12 +22,12 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>56/56</span>
+        <span class='fraction'>55/55</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">95.24% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>20/21</span>
+        <span class='fraction'>19/19</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>52/52</span>
+        <span class='fraction'>51/51</span>
       </div>
     </div>
     <p class="quiet">
@@ -135,17 +135,7 @@
 <a name='L87'></a><a href='#L87'>87</a>
 <a name='L88'></a><a href='#L88'>88</a>
 <a name='L89'></a><a href='#L89'>89</a>
-<a name='L90'></a><a href='#L90'>90</a>
-<a name='L91'></a><a href='#L91'>91</a>
-<a name='L92'></a><a href='#L92'>92</a>
-<a name='L93'></a><a href='#L93'>93</a>
-<a name='L94'></a><a href='#L94'>94</a>
-<a name='L95'></a><a href='#L95'>95</a>
-<a name='L96'></a><a href='#L96'>96</a>
-<a name='L97'></a><a href='#L97'>97</a>
-<a name='L98'></a><a href='#L98'>98</a>
-<a name='L99'></a><a href='#L99'>99</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L90'></a><a href='#L90'>90</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -169,14 +159,6 @@
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -251,7 +233,6 @@ import Lerna from '@lerna/project'
 import collectPackages from '@lerna/collect-packages'
 import PackageGraph from '@lerna/package-graph'
 import collectUpdates from '@lerna/collect-updates'
-import log from 'npmlog'
 &nbsp;
 export const lernaConfig = async ({workingDir}) =&gt; {
   const traverseUpDefaults = {findPathPattern: 'lerna.json', findTypePattren: 'file'}
@@ -259,22 +240,14 @@ export const lernaConfig = async ({workingDir}) =&gt; {
   return config
 }
 &nbsp;
-export const lernaPackages = async ({config, forcePublish}) =&gt; {
+export const lernaPackages = async ({config}) =&gt; {
   const lerna = new Lerna(config)
   const {rootPath, packageConfigs} = lerna
-  const packages = await collectPackages(rootPath, packageConfigs)
-  const packageGraph = new PackageGraph(packages)
-  const logger = log.newGroup('depPointer')
+  const filteredPackages = await collectPackages(rootPath, packageConfigs)
+  const packageGraph = new PackageGraph(filteredPackages)
   const execOpts = {cwd: rootPath}
-  const options = (forcePublish) ? {'forcePublish': '*'} : <span class="branch-1 cbranch-no" title="branch not covered" >{}</span>
-  const updates = collectUpdates({
-    filteredPackages: packages,
-    packageGraph,
-    rootPath,
-    options,
-    logger,
-    execOpts
-  })
+  const commandOptions = {'forcePublish': '*'}
+  const updates = collectUpdates(filteredPackages, packageGraph, execOpts, commandOptions)
   return {updates, packageGraph}
 }
 &nbsp;
