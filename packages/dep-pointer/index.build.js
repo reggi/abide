@@ -59,10 +59,6 @@ var _collectUpdates = require('@lerna/collect-updates');
 
 var _collectUpdates2 = _interopRequireDefault(_collectUpdates);
 
-var _npmlog = require('npmlog');
-
-var _npmlog2 = _interopRequireDefault(_npmlog);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var lernaConfig = exports.lernaConfig = function () {
@@ -96,9 +92,8 @@ var lernaConfig = exports.lernaConfig = function () {
 
 var lernaPackages = exports.lernaPackages = function () {
   var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(_ref3) {
-    var config = _ref3.config,
-        forcePublish = _ref3.forcePublish;
-    var lerna, rootPath, packageConfigs, packages, packageGraph, logger, execOpts, options, updates;
+    var config = _ref3.config;
+    var lerna, rootPath, packageConfigs, filteredPackages, packageGraph, execOpts, commandOptions, updates;
     return _regenerator2.default.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
@@ -109,22 +104,14 @@ var lernaPackages = exports.lernaPackages = function () {
             return (0, _collectPackages2.default)(rootPath, packageConfigs);
 
           case 4:
-            packages = _context2.sent;
-            packageGraph = new _packageGraph2.default(packages);
-            logger = _npmlog2.default.newGroup('depPointer');
+            filteredPackages = _context2.sent;
+            packageGraph = new _packageGraph2.default(filteredPackages);
             execOpts = { cwd: rootPath };
-            options = forcePublish ? { 'forcePublish': '*' } : {};
-            updates = (0, _collectUpdates2.default)({
-              filteredPackages: packages,
-              packageGraph,
-              rootPath,
-              options,
-              logger,
-              execOpts
-            });
+            commandOptions = { 'forcePublish': '*' };
+            updates = (0, _collectUpdates2.default)(filteredPackages, packageGraph, execOpts, commandOptions);
             return _context2.abrupt('return', { updates, packageGraph });
 
-          case 11:
+          case 10:
           case 'end':
             return _context2.stop();
         }
