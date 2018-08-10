@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg-plugin-cobalt",
-  "version": "0.0.192",
+  "version": "0.0.193",
   "description": "Suite of pkg-plugins arbitrarily designated cobalt",
   "repository": {
     "type": "git",

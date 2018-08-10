@@ -1,6 +1,6 @@
 {
   "name": "@reggi/journey.coerce-to-plain-object",
-  "version": "0.0.193",
+  "version": "0.0.194",
   "description": "Convert variable to empty object or preserve provided",
   "repository": {
     "type": "git",

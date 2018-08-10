@@ -1,6 +1,6 @@
 {
   "name": "@reggi/help.parse-argv",
-  "version": "0.0.193",
+  "version": "0.0.194",
   "description": "Modular unopinionated process.argv parser",
   "repository": {
     "type": "git",

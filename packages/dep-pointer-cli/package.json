@@ -1,6 +1,6 @@
 {
   "name": "@reggi/dep-pointer-cli",
-  "version": "0.0.184",
+  "version": "0.0.185",
   "description": "Tool for assigning version from file references",
   "repository": {
     "type": "git",

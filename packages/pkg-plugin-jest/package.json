@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg-plugin-jest",
-  "version": "0.0.192",
+  "version": "0.0.193",
   "description": "Applies jest to a package.json",
   "repository": {
     "type": "git",

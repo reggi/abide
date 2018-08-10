@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg.throw-error",
-  "version": "0.0.192",
+  "version": "0.0.193",
   "description": "Single line function for \"throw new Error\"",
   "repository": {
     "type": "git",

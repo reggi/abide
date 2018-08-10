@@ -1,6 +1,6 @@
 {
   "name": "@reggi/subrepo",
-  "version": "0.0.185",
+  "version": "0.0.186",
   "description": "Creates a repo with commits & files from another repo subdirectory",
   "repository": {
     "type": "git",

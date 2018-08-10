@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg.read-json",
-  "version": "0.0.191",
+  "version": "0.0.192",
   "description": "Contigent json file system reader",
   "repository": {
     "type": "git",

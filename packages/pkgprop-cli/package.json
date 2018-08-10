@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkgprop-cli",
-  "version": "0.0.184",
+  "version": "0.0.185",
   "description": "Allows for editing a given package property",
   "repository": {
     "type": "git",

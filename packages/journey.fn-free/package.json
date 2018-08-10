@@ -1,6 +1,6 @@
 {
   "name": "@reggi/journey.fn-free",
-  "version": "0.0.192",
+  "version": "0.0.193",
   "description": "Wraps a function abstrating and preserving  original return value",
   "repository": {
     "type": "git",

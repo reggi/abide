@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg-plugin-babel-7-to-node-4",
-  "version": "0.0.192",
+  "version": "0.0.193",
   "description": "Applies babel 7 to a given package.json",
   "repository": {
     "type": "git",

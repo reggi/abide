@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg.json-parse",
-  "version": "0.0.204",
+  "version": "0.0.205",
   "description": "JSON.parse wrapped in a try / catch returns false if error",
   "repository": {
     "type": "git",

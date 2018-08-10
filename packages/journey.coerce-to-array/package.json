@@ -1,6 +1,6 @@
 {
   "name": "@reggi/journey.coerce-to-array",
-  "version": "0.0.193",
+  "version": "0.0.194",
   "description": "Coerce a string to an array",
   "repository": {
     "type": "git",

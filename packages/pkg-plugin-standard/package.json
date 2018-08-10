@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg-plugin-standard",
-  "version": "0.0.192",
+  "version": "0.0.193",
   "description": "Applies standard to package.json",
   "repository": {
     "type": "git",

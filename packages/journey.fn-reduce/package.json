@@ -1,6 +1,6 @@
 {
   "name": "@reggi/journey.fn-reduce",
-  "version": "0.0.192",
+  "version": "0.0.193",
   "description": "Reduce a series of functions that return objects to one obect",
   "repository": {
     "type": "git",

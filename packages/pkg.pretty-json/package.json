@@ -1,6 +1,6 @@
 {
   "name": "@reggi/pkg.pretty-json",
-  "version": "0.0.192",
+  "version": "0.0.193",
   "description": "JSON.stringify with indentation",
   "repository": {
     "type": "git",

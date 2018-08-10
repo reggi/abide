@@ -1,6 +1,6 @@
 {
   "name": "@reggi/dep-merge-cli",
-  "version": "0.0.189",
+  "version": "0.0.190",
   "description": "Merges devDeps into deps for a given package.json",
   "repository": {
     "type": "git",

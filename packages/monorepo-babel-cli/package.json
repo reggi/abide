@@ -1,6 +1,6 @@
 {
   "name": "@reggi/monorepo-babel-cli",
-  "version": "0.0.183",
+  "version": "0.0.184",
   "repository": {
     "type": "git",
     "url": "https://github.com/reggi/monorepo-babel-cli"

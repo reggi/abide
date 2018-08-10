@@ -1,6 +1,6 @@
 {
   "name": "@reggi/journey.pass-thru",
-  "version": "0.0.192",
+  "version": "0.0.193",
   "description": "Executes a given function disreguards return value returns provded arguments",
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 {
   "name": "@reggi/help",
-  "version": "0.0.192",
+  "version": "0.0.193",
   "description": "Command line interface help string generator and argv parser",
   "repository": {
     "type": "git",

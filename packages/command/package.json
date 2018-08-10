@@ -1,6 +1,6 @@
 {
   "name": "@reggi/command",
-  "version": "0.0.192",
+  "version": "0.0.193",
   "description": "Wrapper for functions dependent on global process variable",
   "repository": {
     "type": "git",
