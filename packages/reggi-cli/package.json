@@ -1,5 +1,5 @@
 {
-  "name": "@reggi/reggi-cli",
+  "name": "reggi-cli",
   "version": "0.0.186",
   "repository": {
     "type": "git",

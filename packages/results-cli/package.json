@@ -1,5 +1,5 @@
 {
-  "name": "@reggi/results-cli",
+  "name": "results-cli",
   "version": "0.0.192",
   "description": "Clear output of exit codes for a given command",
   "repository": {

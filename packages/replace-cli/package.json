@@ -1,5 +1,5 @@
 {
-  "name": "@reggi/replace-cli",
+  "name": "replace-cli",
   "version": "1.0.192",
   "description": "Replace piped data using javascript regex",
   "repository": {
