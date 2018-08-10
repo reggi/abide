@@ -7,7 +7,6 @@ import Lerna from '@lerna/project'
 import collectPackages from '@lerna/collect-packages'
 import PackageGraph from '@lerna/package-graph'
 import collectUpdates from '@lerna/collect-updates'
-import log from 'npmlog'
 
 export const lernaConfig = async ({workingDir}) => {
   const traverseUpDefaults = {findPathPattern: 'lerna.json', findTypePattren: 'file'}
@@ -18,19 +17,11 @@ export const lernaConfig = async ({workingDir}) => {
 export const lernaPackages = async ({config}) => {
   const lerna = new Lerna(config)
   const {rootPath, packageConfigs} = lerna
-  const packages = await collectPackages(rootPath, packageConfigs)
-  const packageGraph = new PackageGraph(packages)
-  const logger = log.newGroup('depPointer')
+  const filteredPackages = await collectPackages(rootPath, packageConfigs)
+  const packageGraph = new PackageGraph(filteredPackages)
   const execOpts = {cwd: rootPath}
-  const options = {'forcePublish': '*'}
-  const updates = collectUpdates({
-    filteredPackages: packages,
-    packageGraph,
-    rootPath,
-    options,
-    logger,
-    execOpts
-  })
+  const commandOptions = {'forcePublish': '*'}
+  const updates = collectUpdates(filteredPackages, packageGraph, execOpts, commandOptions)
   return {updates, packageGraph}
 }
 
